@@ -26,9 +26,9 @@ Usage
 
 * Bookmark the following code. Once in a Dubtrack.fm community, run the bookmark.
 
-[Dub X Website](http://dubx.net) **or** `javascript:(function(){$.getScript('xxxxxxxxxxx');}());`
+[Dub X Website](http://dubx.net) **or** `javascript:(function(){$.getScript('https://rawgit.com/sinfulBA/DubX-Script/master/beta.js');}());`
 
-* If this does not work, go to `https://puu.sh/kl79I.js` and copy paste its content into your console (accessible in chrome by pressing f12) when on Dubtrack.fm in a community.
+* If this does not work, go to `https://rawgit.com/sinfulBA/DubX-Script/master/beta.js` and copy paste its content into your console (accessible in chrome by pressing f12) when on Dubtrack.fm in a community.
 
 -----------------
 Features
