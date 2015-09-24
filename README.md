@@ -51,6 +51,13 @@ Translations
 **None so far**
 
 -----------------
+Thanks To
+---
+- thedark1337 for helping with questions regarding coding.
+- Igor for helping with questions regarding coding.
+- Kris for alpha testing the script in it's early stages and reporting bugs.
+
+-----------------
 Copyright
 ---
 
