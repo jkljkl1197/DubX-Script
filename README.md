@@ -27,10 +27,9 @@ Usage
 * Bookmark the following code from the [Dub X Website](http://dubx.net) or the script below. Once in a Dubtrack.fm community, run the bookmark.
 
 ```
-`javascript:(function(){$.getScript('https://rawgit.com/sinfulBA/DubX-Script/master/beta.js');}());`
+javascript:(function(){$.getScript('https://rawgit.com/sinfulBA/DubX-Script/master/beta.js');}());
 ```
 
----
 * If this does not work, go to `https://rawgit.com/sinfulBA/DubX-Script/master/beta.js` and copy paste its content into your console (accessible in chrome by pressing f12) when on Dubtrack.fm in a community.
 
 -----------------
