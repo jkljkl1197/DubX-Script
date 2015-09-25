@@ -14,11 +14,6 @@ IMPORTANT
 
 __Updates (Version 0.2.6)__
 
-- Added Autovote
-- Added Fullscreen Video
-- Added Work Mode
-- Added Bug Report
-- Added Javascript Re-Running Stop
 - Added Split Chat
 - Added Feature Request
 
@@ -45,6 +40,8 @@ Features
 - Staff (helps differentiate staff members from normal users)
 - Work Mode (no video or chat)
 - Bug Report (report bugs to the developers)
+- Split Chat (easily see the difference in chat blocks)
+- Feature Request (send feature requests to the developers)
 
 -----------------
 Translations
