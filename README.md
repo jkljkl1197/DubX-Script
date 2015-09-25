@@ -12,13 +12,15 @@ Developers
 IMPORTANT
 ---
 
-__Updates (Version 0.1.2)__
+__Updates (Version 0.2.6)__
 
 - Added Autovote
 - Added Fullscreen Video
 - Added Work Mode
 - Added Bug Report
 - Added Javascript Re-Running Stop
+- Added Split Chat
+- Added Feature Request
 
 -----------------
 Usage
