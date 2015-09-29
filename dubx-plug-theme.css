@@ -364,7 +364,7 @@ ul.avatar-list li.downdub {
 ​
 /* DubX Menu */
 .relateX {
-    border-left-color: 6px solid rgba(170, 116, 254, 1) !important;
+    border-left: 6px solid rgba(170, 116, 254, 0.75) !important;
 }
 .liY .option {
     color: #AA74FE !important;
