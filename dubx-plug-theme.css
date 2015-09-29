@@ -335,15 +335,6 @@ ul.avatar-list li.downdub {
 #results_video_api .playlist_info .playlist_filter {
     border: 1px #202020 solid;
 }
-#chat .chat_tools {
-	background: #AA74FE;
-}
-#avatar .avatar_tools {
-	background: #AA74FE;
-}
-#player-controller .left ul.remove-if-banned.remove-if-iframe.display-block> li {
-	background: #AA74FE;
-}
 ​
 	/* Video Previews */
 .player .ui-slider-range {
