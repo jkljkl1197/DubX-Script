@@ -14,8 +14,10 @@ IMPORTANT
 
 __Updates (Version 0.2.6)__
 
-- Added Split Chat
-- Added Feature Request
+- Added Hide Background
+- Added Chat Only
+- Added Custom CSS
+- Added Custom Background
 
 -----------------
 Usage
@@ -42,6 +44,10 @@ Features
 - Bug Report (report bugs to the developers)
 - Split Chat (easily see the difference in chat blocks)
 - Feature Request (send feature requests to the developers)
+- Custom CSS
+- Chat Only
+- Custom Background
+- Hide Background
 
 -----------------
 Translations
