@@ -225,7 +225,7 @@ ul.avatar-list li.updub {
 }
 ul.avatar-list li.downdub {
 /*    border: 1px solid #FF3535;*/
-    border: 1px solid #DC42A5;
+    border: 1px solid #AA74FE;
 }
 ​
 /* Profile Page */
@@ -335,6 +335,15 @@ ul.avatar-list li.downdub {
 #results_video_api .playlist_info .playlist_filter {
     border: 1px #202020 solid;
 }
+#chat .chat_tools {
+	background: #AA74FE;
+}
+#avatar .avatar_tools {
+	background: #AA74FE;
+}
+#player-controller .left ul.remove-if-banned.remove-if-iframe.display-block> li {
+	background: #AA74FE;
+}
 ​
 	/* Video Previews */
 .player .ui-slider-range {
@@ -364,7 +373,7 @@ ul.avatar-list li.downdub {
 ​
 /* DubX Menu */
 .relateX {
-    border-left: 6px solid rgba(170, 116, 254, 0.75) !important;
+    border-left-color: 6px solid rgba(170, 116, 254, 1) !important;
 }
 .liY .option {
     color: #AA74FE !important;
