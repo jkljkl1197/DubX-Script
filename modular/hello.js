@@ -1,9 +1,9 @@
 //Hello.JS
 var community = location.pathname.replace(/^\/|\/$/g, '')
-if (community === "join/nightblue3") {
+if (community === "join/nightblue3" || "join/dubx" || "lobby" || "#") {
 	if(!autoDubX) {
 		var autoDubX = true;
-			alert('Sorry, but Dub X has been restricted in this community. For more information, please contact the developers of the script. (AutodubX is still available. Just click on the button to activate it.)');
+			alert('Sorry, but Dub X has either been restricted in this lobby or community. For more information, please contact the developers of the script. (AutodubX is still available. Just click on the button to activate it.)');
 			var autoDub = '<li><button class="dub" style="font-size: 1em;height: 32px;margin-right: 16px;border-radius: 0.1875em;">Autodub</button></li>'; 
 			var parentDub = document.querySelector('.user-header-menu');
 			$(parentDub).prepend(autoDub);
