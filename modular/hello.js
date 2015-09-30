@@ -1,6 +1,6 @@
 //Hello.JS
 var community = location.pathname.replace(/^\/|\/$/g, '')
-if (community === "join/nightblue3" || "lobby") {
+if (community === "join/nightblue3") {
 	if(!autoDubX) {
 		var autoDubX = true;
 			alert('Sorry, but Dub X has either been restricted in this lobby or community. For more information, please contact the developers of the script. (AutodubX is still available. Just click on the button to activate it.)');
