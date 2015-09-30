@@ -7,19 +7,19 @@ function optionWork() {
         $('#main-room').hide();
         disableFullscreen();
         isOn = "on";
-        $('.fY .isOption').replaceWith('<span class="isOption isOn">ON</span>');
+        $('.fY .isOnOff i').replaceWith('<i class="fi-x"></i>');
     } else {
         isWork = false;
         $('#main-room').show();
         isOn = "off";
-        $('.fY .isOption').replaceWith('<span class="isOption isOff">OFF</span>');
+        $('.fY .isOnOff i').replaceWith('<i class="fi-x"></i>');
     }
 };
 function disableWork() {
     isWork = true;
     $('#main-room').show();
     isOn = "on";
-    $('.fY .isOption').replaceWith('<span class="isOption isOn">OFF</span>');
+    $('.fY .isOnOff i').replaceWith('<i class="fi-x"></i>');
 };
 $('.fY').click(optionWork);
 $('.user-info-button').click(disableWork);

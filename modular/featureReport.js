@@ -23,7 +23,7 @@ $('.requestGo').click(requestSlack);
 
 $('.requestGo').click(function() {
     $('.featureRequest').remove();
-    $('.iY .isOption').replaceWith('<span class="isOption isOff">THANKS</span>');
+    $('.iY .isOnOff i').replaceWith('<i class="fi-check"></i>');
 });
 $('.requestCancel').click(function() {
     $('.featureRequest').hide();

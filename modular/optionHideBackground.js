@@ -6,12 +6,12 @@ function isBackgroundToggle() {
             isBackground = true
             isOn = "on";
             $('.backstretch').addClass('hideElement')
-            $('.lY .isOption').replaceWith('<span class="isOption isOn">ON</span>');
+            $('.lY .isOnOff i').replaceWith('<i class="fi-check"></i>');
         } else {
             isBackground = false
             isOn = "off";
             $('.backstretch').removeClass('hideElement');
-            $('.lY .isOption').replaceWith('<span class="isOption isOn">OFF</span>');
+            $('.lY .isOnOff i').replaceWith('<i class="fi-x"></i>');
         }
 };			
 $('.lY').click(isBackgroundToggle);

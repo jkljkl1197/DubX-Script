@@ -10,12 +10,12 @@ function optionAutovote() {
             $('.dubup').click();
         };
         $('.currentSong').bind("DOMSubtreeModified", advanceVote);
-        $('.aY .isOption').replaceWith('<span class="isOption isOn">ON</span>');
+        $('.aY .isOnOff i').replaceWith('<i class="fi-check"></i>');
     } else {
         isAutovote = false;
         isOn = "off";
         $('.currentSong').off();
-        $('.aY .isOption').replaceWith('<span class="isOption isOff">OFF</span>');
+        $('.aY .isOnOff i').replaceWith('<i class="fi-x"></i>');
     }
 };
 $('.aY').click(optionAutovote);

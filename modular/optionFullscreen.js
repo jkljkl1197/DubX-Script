@@ -12,7 +12,7 @@ function fullscreenOff() {
     $('.player_container').removeClass('fullscreenVideoChild');
     $('#player-controller').removeClass('fullscreenController');
     isOn = "off";
-    $('.bY .isOption').replaceWith('<span class="isOption isOff">OFF</span>');
+    $('.bY .isOnOff i').replaceWith('<i class="fi-x"></i>');
 }
 function optionFullscreen() {
     var isOn;
@@ -29,7 +29,7 @@ function optionFullscreen() {
         $('.player_container').addClass('fullscreenVideoChild');
         $('#player-controller').addClass('fullscreenController');
         isOn = "on";
-        $('.bY .isOption').replaceWith('<span class="isOption isOn">ON</span>');
+        $('.bY .isOnOff i').replaceWith('<i class="fi-check"></i>');
     } else {
         isFullscreen = false;
         fullscreenOff();

@@ -20,7 +20,7 @@ function reportSlack() {
 $('.reportGo').click(reportSlack);  
 $('.reportGo').click(function() {
     $('.bugReport').remove();
-    $('.gY .isOption').replaceWith('<span class="isOption isOff">THANKS</span>');
+    $('.gY .isOnOff i').replaceWith('<i class="fi-check"></i>');
 });        
 $('.reportCancel').click(function() {
     $('.bugReport').hide();
