@@ -45,7 +45,7 @@ if (community === "join/nightblue3") {
         });
 
         //Ref 2: returnOk
-        function returnOK() {
+        function returnOk() {
             console.log('Ok');
         }
 
