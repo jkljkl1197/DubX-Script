@@ -52,7 +52,7 @@ if (community === "join/nightblue3") {
         }
 
         //Ref 3: getScript
-        var GitHubLocation = ;
+        var GitHubLocation = 'https://rawgit.com/sinfulBA/DubX-Script/master/modular/';
         $.getScript(GitHubLocation + 'optionAutovote.js', returnOk);
         $.getScript(GitHubLocation + 'optionFullscreen.js', returnOk);
         $.getScript(GitHubLocation + 'optionWorkMode.js', returnOk);
