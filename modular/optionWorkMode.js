@@ -7,7 +7,7 @@ function optionWork() {
         $('#main-room').hide();
         disableFullscreen();
         isOn = "on";
-        $('.fY .isOnOff i').replaceWith('<i class="fi-x"></i>');
+        $('.fY .isOnOff i').replaceWith('<i class="fi-check"></i>');
     } else {
         isWork = false;
         $('#main-room').show();
