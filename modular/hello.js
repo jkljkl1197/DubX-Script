@@ -54,7 +54,7 @@ if (community === "join/nightblue3") {
         $.getScript(GitHubLocation + 'optionAutovote.js', returnOk);
         $.getScript(GitHubLocation + 'optionFullscreen.js', returnOk);
         $.getScript(GitHubLocation + 'optionWorkMode.js', returnOk);
-        $.getScript(GitHubLocation + 'bigReport.js', returnOk);
+        $.getScript(GitHubLocation + 'bugReport.js', returnOk);
         $.getScript(GitHubLocation + 'optionSplitChat.js', returnOk);
         $.getScript(GitHubLocation + 'featureReport.js', returnOk);
         $.getScript(GitHubLocation + 'optionVideoChatToggle.js', returnOk);
