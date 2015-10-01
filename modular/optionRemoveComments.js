@@ -1,14 +1,1 @@
-//optionRemoveComments.js
-var isCommentsToggle = false;		
-function removeComments() {
-    var isOn
-        if (!isCommentsToggle) {
-            isCommentsToggle = true
-            $('#room-comments').addClass('hideElement')
-        } else {
-            isCommentsToggle = false
-            $('#room-comments').removeClass('hideElement');
-        }
-
-};
-$('.videoCommentsToggle').click(removeComments);
+var _0xe9ab=["\x68\x69\x64\x65\x45\x6C\x65\x6D\x65\x6E\x74","\x61\x64\x64\x43\x6C\x61\x73\x73","\x23\x72\x6F\x6F\x6D\x2D\x63\x6F\x6D\x6D\x65\x6E\x74\x73","\x72\x65\x6D\x6F\x76\x65\x43\x6C\x61\x73\x73","\x63\x6C\x69\x63\x6B","\x2E\x76\x69\x64\x65\x6F\x43\x6F\x6D\x6D\x65\x6E\x74\x73\x54\x6F\x67\x67\x6C\x65"];var isCommentsToggle=false;function removeComments(){var _0xe19cx3;if(!isCommentsToggle){isCommentsToggle=true;$(_0xe9ab[2])[_0xe9ab[1]](_0xe9ab[0]);}else {isCommentsToggle=false;$(_0xe9ab[2])[_0xe9ab[3]](_0xe9ab[0]);};}$(_0xe9ab[5])[_0xe9ab[4]](removeComments);
