@@ -1,14 +1,1 @@
-//optionVideoChatToggle.js
-var isChatToggle = false;
-function removeChat() {
-    var isOn
-        if (!isChatToggle) {
-            isChatToggle = true
-            $('#dubtrack-video-realtime .toggle_videos').addClass('hideElement');
-        } else {
-            isChatToggle = false
-            $('#dubtrack-video-realtime .toggle_videos').removeClass('hideElement');
-        }
-
-};
-$('.videoChatToggle').click(removeChat);
+var _0x2549=["\x68\x69\x64\x65\x45\x6C\x65\x6D\x65\x6E\x74","\x61\x64\x64\x43\x6C\x61\x73\x73","\x23\x64\x75\x62\x74\x72\x61\x63\x6B\x2D\x76\x69\x64\x65\x6F\x2D\x72\x65\x61\x6C\x74\x69\x6D\x65\x20\x2E\x74\x6F\x67\x67\x6C\x65\x5F\x76\x69\x64\x65\x6F\x73","\x72\x65\x6D\x6F\x76\x65\x43\x6C\x61\x73\x73","\x63\x6C\x69\x63\x6B","\x2E\x76\x69\x64\x65\x6F\x43\x68\x61\x74\x54\x6F\x67\x67\x6C\x65"];var isChatToggle=false;function removeChat(){var _0xe461x3;if(!isChatToggle){isChatToggle=true;$(_0x2549[2])[_0x2549[1]](_0x2549[0]);}else {isChatToggle=false;$(_0x2549[2])[_0x2549[3]](_0x2549[0]);};}$(_0x2549[5])[_0x2549[4]](removeChat);
