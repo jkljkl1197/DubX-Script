@@ -5,7 +5,7 @@ function optionSplitChat() {
         if (!isSplitChat) {
             isSplitChat = true
             isOn = "on";
-            $('body').append('<style class="splitChatClass">.chat-main li:nth-child(even){background:#181818;box-shadow:-8px 0px 0px 0px #181818;width:100%;}.chat-main li:nth-child(even) .ChatDelete{right: 1.5em !important;}</style>');
+            $('body').append('<style class="splitChatClass">.chat-main li:nth-child(even){background:#181818;box-shadow:-8px 0px 0px 0px #181818;width:100%;}.chat-main li:nth-child(even) .ChatDelete{right: 1.7em !important;}</style>');
             $('.hY .isOnOff i').replaceWith('<i class="fi-check"></i>');
         } else {
             isSplitChat = false
