@@ -5,7 +5,7 @@
 
 
 -------------
-Developers
+Our Team
 ---
  - [TerminallyChill](https://github.com/JBader89) __(Hoster/Developer)__
  - [sinful](https://github.com/sinfulBA) __(Owner/Developer)__
