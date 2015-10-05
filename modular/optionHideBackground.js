@@ -1,1 +1,26 @@
-var _0x20ba=["\x6F\x6E","\x68\x69\x64\x65\x45\x6C\x65\x6D\x65\x6E\x74","\x61\x64\x64\x43\x6C\x61\x73\x73","\x2E\x62\x61\x63\x6B\x73\x74\x72\x65\x74\x63\x68","\x2E\x75\x73\x65\x72\x43\x75\x73\x74\x6F\x6D\x42","\x69\x73\x42\x61\x63\x6B\x67\x72\x6F\x75\x6E\x64","\x74\x72\x75\x65","\x73\x65\x74\x49\x74\x65\x6D","\x3C\x69\x20\x63\x6C\x61\x73\x73\x3D\x22\x66\x69\x2D\x63\x68\x65\x63\x6B\x22\x3E\x3C\x2F\x69\x3E","\x72\x65\x70\x6C\x61\x63\x65\x57\x69\x74\x68","\x2E\x6C\x59\x20\x2E\x69\x73\x4F\x6E\x4F\x66\x66\x20\x69","\x6F\x66\x66","\x72\x65\x6D\x6F\x76\x65\x43\x6C\x61\x73\x73","\x66\x61\x6C\x73\x65","\x3C\x69\x20\x63\x6C\x61\x73\x73\x3D\x22\x66\x69\x2D\x78\x22\x3E\x3C\x2F\x69\x3E","\x67\x65\x74\x49\x74\x65\x6D","\x63\x6C\x69\x63\x6B","\x2E\x6C\x59"];var isBackground=false;function isBackgroundToggle(){var _0x2ebfx3;if(!isBackground){isBackground=true;_0x2ebfx3=_0x20ba[0];$(_0x20ba[3])[_0x20ba[2]](_0x20ba[1]);$(_0x20ba[4])[_0x20ba[2]](_0x20ba[1]);localStorage[_0x20ba[7]](_0x20ba[5],_0x20ba[6]);$(_0x20ba[10])[_0x20ba[9]](_0x20ba[8]);}else {isBackground=false;_0x2ebfx3=_0x20ba[11];$(_0x20ba[3])[_0x20ba[12]](_0x20ba[1]);$(_0x20ba[4])[_0x20ba[12]](_0x20ba[1]);localStorage[_0x20ba[7]](_0x20ba[5],_0x20ba[13]);$(_0x20ba[10])[_0x20ba[9]](_0x20ba[14]);};}if(localStorage[_0x20ba[15]](_0x20ba[5])===_0x20ba[6]){isBackgroundToggle()};$(_0x20ba[17])[_0x20ba[16]](isBackgroundToggle);
+//optionHideBackground.js
+var isBackground = false;
+function isBackgroundToggle() {
+    var isOn
+        if (!isBackground) {
+            isBackground = true;
+            isOn = "on";
+            $('.backstretch').addClass('hideElement');
+            $('.userCustomB').addClass('hideElement');
+            localStorage.setItem('isBackground','true');
+            $('.lY .isOnOff i').replaceWith('<i class="fi-check"></i>');
+        } else {
+            isBackground = false
+            isOn = "off";
+            $('.backstretch').removeClass('hideElement');
+            $('.userCustomB').removeClass('hideElement');
+            localStorage.setItem('isBackground','false');
+            $('.lY .isOnOff i').replaceWith('<i class="fi-x"></i>');
+        }
+};
+
+if (localStorage.getItem('isBackground') === 'true') {
+    isBackgroundToggle();
+};
+
+$('.lY').click(isBackgroundToggle);
