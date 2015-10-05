@@ -1,1 +1,58 @@
-var _0xbda7=["\x73\x68\x6F\x77","\x23\x72\x6F\x6F\x6D\x2D\x63\x6F\x6D\x6D\x65\x6E\x74\x73","\x66\x75\x6C\x6C\x73\x63\x72\x65\x65\x6E\x46\x69\x78","\x72\x65\x6D\x6F\x76\x65\x43\x6C\x61\x73\x73","\x2E\x6D\x61\x69\x6E\x2D\x70\x61\x67\x65\x2D\x63\x6F\x6E\x74\x61\x69\x6E\x65\x72","\x66\x75\x6C\x6C\x73\x63\x72\x65\x65\x6E\x50\x61\x72\x65\x6E\x74","\x23\x6D\x61\x69\x6E\x2D\x72\x6F\x6F\x6D","\x66\x75\x6C\x6C\x73\x63\x72\x65\x65\x6E\x4C\x65\x66\x74","\x2E\x6C\x65\x66\x74\x5F\x73\x65\x63\x74\x69\x6F\x6E","\x66\x75\x6C\x6C\x73\x63\x72\x65\x65\x6E\x52\x69\x67\x68\x74","\x2E\x72\x69\x67\x68\x74\x5F\x73\x65\x63\x74\x69\x6F\x6E","\x66\x75\x6C\x6C\x73\x63\x72\x65\x65\x6E\x43\x68\x61\x74","\x23\x63\x68\x61\x74","\x66\x75\x6C\x6C\x73\x63\x72\x65\x65\x6E\x43\x68\x61\x74\x43\x68\x69\x6C\x64","\x2E\x63\x68\x61\x74\x2D\x6D\x65\x73\x73\x61\x67\x65\x73","\x66\x75\x6C\x6C\x73\x63\x72\x65\x65\x6E\x56\x69\x64\x65\x6F","\x23\x6D\x61\x69\x6E\x5F\x70\x6C\x61\x79\x65\x72","\x66\x75\x6C\x6C\x73\x63\x72\x65\x65\x6E\x56\x69\x64\x65\x6F\x43\x68\x69\x6C\x64","\x2E\x70\x6C\x61\x79\x65\x72\x5F\x63\x6F\x6E\x74\x61\x69\x6E\x65\x72","\x66\x75\x6C\x6C\x73\x63\x72\x65\x65\x6E\x43\x6F\x6E\x74\x72\x6F\x6C\x6C\x65\x72","\x23\x70\x6C\x61\x79\x65\x72\x2D\x63\x6F\x6E\x74\x72\x6F\x6C\x6C\x65\x72","\x6F\x66\x66","\x69\x73\x46\x75\x6C\x6C\x73\x63\x72\x65\x65\x6E","\x66\x61\x6C\x73\x65","\x73\x65\x74\x49\x74\x65\x6D","\x3C\x69\x20\x63\x6C\x61\x73\x73\x3D\x22\x66\x69\x2D\x78\x22\x3E\x3C\x2F\x69\x3E","\x72\x65\x70\x6C\x61\x63\x65\x57\x69\x74\x68","\x2E\x62\x59\x20\x2E\x69\x73\x4F\x6E\x4F\x66\x66\x20\x69","\x68\x69\x64\x65","\x61\x64\x64\x43\x6C\x61\x73\x73","\x6F\x6E","\x74\x72\x75\x65","\x3C\x69\x20\x63\x6C\x61\x73\x73\x3D\x22\x66\x69\x2D\x63\x68\x65\x63\x6B\x22\x3E\x3C\x2F\x69\x3E","\x67\x65\x74\x49\x74\x65\x6D","\x63\x6C\x69\x63\x6B","\x2E\x62\x59","\x2E\x75\x73\x65\x72\x2D\x69\x6E\x66\x6F\x2D\x62\x75\x74\x74\x6F\x6E","\x72\x65\x73\x69\x7A\x65","\x77\x69\x64\x74\x68","\x4F\x6B","\x6C\x6F\x67","\x61\x64\x64\x45\x76\x65\x6E\x74\x4C\x69\x73\x74\x65\x6E\x65\x72"];var isFullscreen=false;function fullscreenOff(){$(_0xbda7[1])[_0xbda7[0]]();$(_0xbda7[4])[_0xbda7[3]](_0xbda7[2]);$(_0xbda7[6])[_0xbda7[3]](_0xbda7[5]);$(_0xbda7[8])[_0xbda7[3]](_0xbda7[7]);$(_0xbda7[10])[_0xbda7[3]](_0xbda7[9]);$(_0xbda7[12])[_0xbda7[3]](_0xbda7[11]);$(_0xbda7[14])[_0xbda7[3]](_0xbda7[13]);$(_0xbda7[16])[_0xbda7[3]](_0xbda7[15]);$(_0xbda7[18])[_0xbda7[3]](_0xbda7[17]);$(_0xbda7[20])[_0xbda7[3]](_0xbda7[19]);isOn=_0xbda7[21];localStorage[_0xbda7[24]](_0xbda7[22],_0xbda7[23]);$(_0xbda7[27])[_0xbda7[26]](_0xbda7[25]);}function optionFullscreen(){var _0x95d3x4;if(!isFullscreen){isFullscreen=true;$(_0xbda7[1])[_0xbda7[28]]();$(_0xbda7[4])[_0xbda7[29]](_0xbda7[2]);$(_0xbda7[6])[_0xbda7[29]](_0xbda7[5]);$(_0xbda7[8])[_0xbda7[29]](_0xbda7[7]);$(_0xbda7[10])[_0xbda7[29]](_0xbda7[9]);$(_0xbda7[12])[_0xbda7[29]](_0xbda7[11]);$(_0xbda7[14])[_0xbda7[29]](_0xbda7[13]);$(_0xbda7[16])[_0xbda7[29]](_0xbda7[15]);$(_0xbda7[18])[_0xbda7[29]](_0xbda7[17]);$(_0xbda7[20])[_0xbda7[29]](_0xbda7[19]);_0x95d3x4=_0xbda7[30];localStorage[_0xbda7[24]](_0xbda7[22],_0xbda7[31]);$(_0xbda7[27])[_0xbda7[26]](_0xbda7[32]);}else {isFullscreen=false;fullscreenOff();};}if(localStorage[_0xbda7[33]](_0xbda7[22])===_0xbda7[31]){optionFullscreen()};$(_0xbda7[35])[_0xbda7[34]](optionFullscreen);function disableFullscreen(){isFullscreen=false;fullscreenOff();}$(_0xbda7[36])[_0xbda7[34]](disableFullscreen);window[_0xbda7[41]](_0xbda7[37],function(){var _0x95d3x6=$(window)[_0xbda7[38]]();if(_0x95d3x6<=1185){disableFullscreen()}else {console[_0xbda7[40]](_0xbda7[39])};},true);
+//optionFullscreen.js
+var isFullscreen = false;
+function fullscreenOff() {
+    $('#room-comments').show();
+    $('.main-page-container').removeClass('fullscreenFix');
+    $('#main-room').removeClass('fullscreenParent');
+    $('.left_section').removeClass('fullscreenLeft');
+    $('.right_section').removeClass('fullscreenRight');
+    $('#chat').removeClass('fullscreenChat');
+    $('.chat-messages').removeClass('fullscreenChatChild');
+    $('#main_player').removeClass('fullscreenVideo');
+    $('.player_container').removeClass('fullscreenVideoChild');
+    $('#player-controller').removeClass('fullscreenController');
+    isOn = "off";
+    localStorage.setItem('isFullscreen','false');
+    $('.bY .isOnOff i').replaceWith('<i class="fi-x"></i>');
+}
+function optionFullscreen() {
+    var isOn;
+    if (!isFullscreen) {
+        isFullscreen = true;
+        $('#room-comments').hide();
+        $('.main-page-container').addClass('fullscreenFix');
+        $('#main-room').addClass('fullscreenParent');
+        $('.left_section').addClass('fullscreenLeft');
+        $('.right_section').addClass('fullscreenRight');
+        $('#chat').addClass('fullscreenChat');
+        $('.chat-messages').addClass('fullscreenChatChild');
+        $('#main_player').addClass('fullscreenVideo');
+        $('.player_container').addClass('fullscreenVideoChild');
+        $('#player-controller').addClass('fullscreenController');
+        isOn = "on";
+        localStorage.setItem('isFullscreen','true');
+        $('.bY .isOnOff i').replaceWith('<i class="fi-check"></i>');
+    } else {
+        isFullscreen = false;
+        fullscreenOff();
+    };
+};
+
+if (localStorage.getItem('isFullscreen') === 'true') {
+    optionFullscreen();
+};
+
+$('.bY').click(optionFullscreen);        
+function disableFullscreen() {
+    isFullscreen = false;
+    fullscreenOff();
+};
+$('.user-info-button').click(disableFullscreen);
+window.addEventListener("resize", function(){
+    var windowWidth = $(window).width();
+    if (windowWidth <= 1185) {
+        disableFullscreen();
+    } else {
+        console.log('Ok');
+    }
+}, true);
