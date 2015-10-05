@@ -11,7 +11,7 @@ Developers
  - [sinful](https://github.com/sinfulBA) __(Owner/Developer)__
  - [Swordling](https://github.com/swordling) __(Owner/Developer)__
  - [Kris](https://github.com/PossiblyKris) __(Helper/Developer)__
- - [Al3366](https://github.com/PossiblyKris) __(Helper/Extension Manager)__
+ - [Al3366] __(Helper/Extension Manager)__
 
 -----------------
 IMPORTANT
