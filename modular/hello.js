@@ -40,7 +40,7 @@ setTimeout(function(){
 		$.getScript(GitHubLocation + 'optionAutorespond.js', returnOk);
 
 		//Ref 4: chatLog
-		function chatLog(e){var a=new Dubtrack.View.chatLoadingItem;a.$el.text(e).appendTo(Dubtrack.room.chat._messagesEl)}chatLog('Running DubX V .1.0 - Spaghetti Regretti?');
+		function chatLog(e){var a=new Dubtrack.View.chatLoadingItem;a.$el.text(e).appendTo(Dubtrack.room.chat._messagesEl)}chatLog('Running DubX V.1.0 - Spaghetti Regretti?');
 
 		//Ref 5: BPM
 		$.getScript('https://rawgit.com/sinfulBA/DubX-Script/master/BPM/bpm-resources.js',returnOk);
