@@ -1,23 +1,28 @@
 # Dub X (source)
 - A simple script/extension for Dubtrack.fm
 
+[Like us on Twitter!](https://facebook.com/DubXScript)
+[Like us on Facebook!](https://twitter.com/DubXScript)
+
+
 -------------
 Developers
 ---
  - [TerminallyChill](https://github.com/JBader89) __(Hoster/Developer)__
  - [sinful](https://github.com/sinfulBA) __(Owner/Developer)__
  - [Swordling](https://github.com/swordling) __(Owner/Developer)__
+ - [Kris](https://github.com/PossiblyKris) __(Helper/Developer)__
+ - [Al3366](https://github.com/PossiblyKris) __(Helper/Extension Manager)__
 
 -----------------
 IMPORTANT
 ---
 
-__Updates (Version 0.2.6)__
+__Updates (Version 1.0.0 - Spaghetti!)__
 
-- Added Hide Background
-- Added Chat Only
-- Added Custom CSS
-- Added Custom Background
+- Added localStorage
+- No more obfuscated code! We're out of beta!
+- Added Facebook & Twitter links!
 
 -----------------
 Usage
@@ -43,7 +48,6 @@ Features
 - Work Mode (no video or chat)
 - Bug Report (report bugs to the developers)
 - Split Chat (easily see the difference in chat blocks)
-- Feature Request (send feature requests to the developers)
 - Custom CSS
 - Chat Only
 - Custom Background
@@ -66,8 +70,8 @@ Thanks To
 Copyright
 ---
 
-**Copyright 2015 -- sinful, Swordling, and TerminallyChill**
+**Copyright 2015 -- sinful and Swordling**
 
-Modifications (including forks) of the code to fit personal needs are *not* allowed for any reason without the original authors's consent.
+Forks of the codes are allowed, so please send in pull requests and anything you think might benefit the script and the site!
 
 This software is not for profit, any extension, or unauthorised person providing this software is not authorised to be in a position of any monetary gain from this use of this software. Any and all money gained under the use of the software (which includes donations) must be passed on to the original author.
