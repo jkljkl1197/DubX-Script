@@ -1,7 +1,7 @@
 # Dub X (source)
 - A simple script/extension for Dubtrack.fm
 
-[Like us on Twitter](https://facebook.com/DubXScript) and [like us on Facebook!](https://twitter.com/DubXScript)
+[Like us on Twitter](https://twitter.com/DubXScript) and [like us on Facebook!](https://facebook.com/DubXScript)
 
 
 -------------
