@@ -1,1 +1,25 @@
-var _0x1778=["\x6D\x65\x73\x73\x61\x67\x65","\x75\x73\x65\x72\x6E\x61\x6D\x65","\x67\x65\x74","\x73\x65\x73\x73\x69\x6F\x6E","\x40","\x69\x6E\x64\x65\x78\x4F\x66","\x49\x20\x61\x6D\x20\x41\x46\x4B\x20\x61\x74\x20\x74\x68\x65\x20\x6D\x6F\x6D\x65\x6E\x74\x2E","\x76\x61\x6C","\x23\x63\x68\x61\x74\x2D\x74\x78\x74\x2D\x6D\x65\x73\x73\x61\x67\x65","\x73\x65\x6E\x64\x4D\x65\x73\x73\x61\x67\x65","\x63\x68\x61\x74","\x72\x6F\x6F\x6D","\x6F\x6E","\x72\x65\x61\x6C\x74\x69\x6D\x65\x3A\x63\x68\x61\x74\x2D\x6D\x65\x73\x73\x61\x67\x65","\x62\x69\x6E\x64","\x45\x76\x65\x6E\x74\x73","\x3C\x69\x20\x63\x6C\x61\x73\x73\x3D\x22\x66\x69\x2D\x63\x68\x65\x63\x6B\x22\x3E\x3C\x2F\x69\x3E","\x72\x65\x70\x6C\x61\x63\x65\x57\x69\x74\x68","\x2E\x6E\x59\x20\x2E\x69\x73\x4F\x6E\x4F\x66\x66\x20\x69","\x6F\x66\x66","\x75\x6E\x62\x69\x6E\x64","\x3C\x69\x20\x63\x6C\x61\x73\x73\x3D\x22\x66\x69\x2D\x78\x22\x3E\x3C\x2F\x69\x3E","\x63\x6C\x69\x63\x6B","\x2E\x6E\x59"];var isAutorespond=false;function realtimeChat(_0x6c26x3){var _0x6c26x4=_0x6c26x3[_0x1778[0]];var _0x6c26x5=Dubtrack[_0x1778[3]][_0x1778[2]](_0x1778[1]);if(_0x6c26x4[_0x1778[5]](_0x1778[4]+_0x6c26x5)> -1){$(_0x1778[8])[_0x1778[7]](_0x1778[6]);Dubtrack[_0x1778[11]][_0x1778[10]][_0x1778[9]]();};}function optionAutorespond(){var _0x6c26x7;if(!isAutorespond){isAutorespond=true;_0x6c26x7=_0x1778[12];Dubtrack[_0x1778[15]][_0x1778[14]](_0x1778[13],realtimeChat);$(_0x1778[18])[_0x1778[17]](_0x1778[16]);}else {isAutorespond=false;_0x6c26x7=_0x1778[19];Dubtrack[_0x1778[15]][_0x1778[20]](_0x1778[13],realtimeChat);$(_0x1778[18])[_0x1778[17]](_0x1778[21]);};}$(_0x1778[23])[_0x1778[22]](optionAutorespond);
+//optionAutorespond.js
+var isAutorespond = false;
+function realtimeChat(data) {
+    var realtimeContent = data.message;
+    var isUserAfk = Dubtrack.session.get('username');
+    if (realtimeContent.indexOf('@'+isUserAfk) >-1) {
+        $('#chat-txt-message').val('I am AFK at the moment.');
+        Dubtrack.room.chat.sendMessage();
+    }
+}
+function optionAutorespond() {
+    var isOn
+        if (!isAutorespond) {
+            isAutorespond = true
+            isOn = "on";
+            Dubtrack.Events.bind('realtime:chat-message',realtimeChat);
+            $('.nY .isOnOff i').replaceWith('<i class="fi-check"></i>');
+        } else {
+            isAutorespond = false
+            isOn = "off";
+            Dubtrack.Events.unbind('realtime:chat-message',realtimeChat);
+            $('.nY .isOnOff i').replaceWith('<i class="fi-x"></i>');
+        }
+};
+$('.nY').click(optionAutorespond);
