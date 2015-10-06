@@ -17,7 +17,7 @@ Our Team
 IMPORTANT
 ---
 
-__Updates (Version 1.0.0 - Spaghetti!)__
+__Updates (Version 01.00.01 - Spaghetti!)__
 
 - Added localStorage
 - No more obfuscated code! We're out of beta!
@@ -27,7 +27,7 @@ __Updates (Version 1.0.0 - Spaghetti!)__
 Usage
 ---
 
-* Bookmark the following code from the [Dub X Website](http://dubx.net) or the script below. Once in a Dubtrack.fm community, run the bookmark.
+* Bookmark the following code from the [Dub X Website](http://dubx.net) or the script below. Once in a Dubtrack.fm community, run the bookmark. We also have a Google Chrome extension [here](https://chrome.google.com/webstore/detail/dubx/oceofndagjnpebjmknefoelcpcnpcedm/related?utm_source=chrome-app-launcher-info-dialog)
 
 ```
 javascript:(function(){$.getScript('https://rawgit.com/sinfulBA/DubX-Script/master/beta.js');}());
