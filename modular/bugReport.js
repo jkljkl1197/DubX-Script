@@ -9,7 +9,7 @@ function reportSlack() {
     var valUserID = Dubtrack.realtime.dtPubNub.get_uuid(' + valUser + ');
     var valReport = $('.reportY').val();
     var valLocation = location.href;
-    var isReport = '*Username:* ' + valUser + '*  |  *' + '*ID:* ' + valUserID + '*  |  *' + '*Report:* ' + valReport + '  |  `' + '*Location:* ' + valLocation + '`';
+    var isReport = '*Username:* ' + valUser + '  |  ' + '*ID:* ' + valUserID + '  |  ' + '*Report:* ' + valReport + '  |  `' + '*Location:* ' + valLocation + '`';
     $.ajax({
         type: 'POST',
         url: 'https://hooks.slack.com/services/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',
