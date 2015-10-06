@@ -7,7 +7,7 @@ $('.gY').click(showReport);
 function reportSlack() {
     var valUser = $('.userY').val();
     var valReport = $('.reportY').val();
-	var valLocation = console.log("https://dubtrack.fm" + location.pathname);
+	var valLocation = "https://dubtrack.fm" + location.pathname;
     var isReport = '*' + valUser + ':* ' + valReport + ' `(' + valLocation + ')`';
     $.ajax({
         type: 'POST',
