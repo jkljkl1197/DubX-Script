@@ -38,6 +38,7 @@ if(!dubX){
 			$.getScript(GitHubLocation + 'optionHideBackground.js', returnOk);
 			$.getScript(GitHubLocation + 'userBackground.js', returnOk);
 			$.getScript(GitHubLocation + 'optionAutorespond.js', returnOk);
+            $.getScript(GitHubLocation + 'optionOnBeforeUnload.js', returnOk);
 
 			//Ref 4: chatLog
 			function chatLog(e){var a=new Dubtrack.View.chatLoadingItem;a.$el.text(e).appendTo(Dubtrack.room.chat._messagesEl)}chatLog('Running DubX V.01.00.19');
@@ -54,4 +55,3 @@ if(!dubX){
 } else {
 	Dubtrack.room.chat.sendMessage();alert('Dub X is already running!');
 };
-
