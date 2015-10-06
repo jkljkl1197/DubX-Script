@@ -5,17 +5,15 @@ function optionOnBeforeUnload() {
         if (!isOnBeforeUnload) {
             isOnBeforeUnload = true
             isOn = "on";
-            $(window).bind('beforeunload', function(){
-                return 'Are you sure you want to leave?';
-            });
+            window.onbeforeunload = function(e) {
+                return 'You sure about that?';
+            };
             localStorage.setItem('isOnBeforeUnload','true');
             $('.oY .isOnOff i').replaceWith('<i class="fi-check"></i>');
         } else {
             isOnBeforeUnload = false
             isOn = "off";
-            $(window).unbind('beforeunload', function(){
-                return 'Are you sure you want to leave?';
-            });
+            window.onbeforeunload = null;
             localStorage.setItem('isOnBeforeUnload','false');
             $('.oY .isOnOff i').replaceWith('<i class="fi-x"></i>');
         }
