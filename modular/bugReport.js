@@ -7,8 +7,7 @@ $('.gY').click(showReport);
 function reportSlack() {
     var valUser = $('.userY').val();
     var valReport = $('.reportY').val();
-    var valLocation = ("https://dubtrack.fm" + location.pathname)
-    var isReport = valUser + ': ' + valReport + ' ' + (valLocation)
+    var isReport = valUser + ': ' + valReport;
     $.ajax({
         type: 'POST',
         url: 'https://hooks.slack.com/services/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',
@@ -28,4 +27,3 @@ $('.reportCancel').click(function() {
     $('.userY').val('');
     $('.reportY').val('');
 });
-
