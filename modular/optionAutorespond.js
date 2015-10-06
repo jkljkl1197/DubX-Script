@@ -1,5 +1,6 @@
 //optionAutorespond.js
 var isAutorespond = false;
+var sendAutorespond = true;
 function realtimeChat(data) {
     var realtimeContent = data.message;
     var isUserAfk = Dubtrack.session.get('username');
@@ -10,16 +11,22 @@ function realtimeChat(data) {
 }
 function optionAutorespond() {
     var isOn
-        if (!isAutorespond) {
-            isAutorespond = true
-            isOn = "on";
+    if (!isAutorespond) {
+        isAutorespond = true
+        isOn = "on";
+        if (sendAutorespond) {
             Dubtrack.Events.bind('realtime:chat-message',realtimeChat);
             $('.nY .isOnOff i').replaceWith('<i class="fi-check"></i>');
-        } else {
-            isAutorespond = false
-            isOn = "off";
-            Dubtrack.Events.unbind('realtime:chat-message',realtimeChat);
-            $('.nY .isOnOff i').replaceWith('<i class="fi-x"></i>');
         }
+        sendAutorespond = false;
+        setTimeout (function(){
+            sendAutorespond = true;
+        }, 30 * 1000);
+    } else {
+        isAutorespond = false
+        isOn = "off";
+        Dubtrack.Events.unbind('realtime:chat-message',realtimeChat);
+        $('.nY .isOnOff i').replaceWith('<i class="fi-x"></i>');
+    }
 };
 $('.nY').click(optionAutorespond);
