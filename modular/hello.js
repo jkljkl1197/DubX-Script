@@ -43,16 +43,8 @@ if(!dubX){
 
 			//Ref 4: chatLog
 			function chatLog(e){var a=new Dubtrack.View.chatLoadingItem;a.$el.text(e).appendTo(Dubtrack.room.chat._messagesEl)}chatLog('Running DubX V.01.00.21');
-
-			//Ref 5: BPM
-			$.getScript('https://rawgit.com/sinfulBA/DubX-Script/master/BPM/bpm-resources.js',returnOk);
-			$('head').append('<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/BPM/bpmotes.css">');
-			$('head').append('<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/BPM/emote-classes.css">');
-			$('head').append('<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/BPM/extracss-pure.css">');
-			$('head').append('<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/BPM/extracss-webkit.css">');
-			$('head').append('<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/BPM/gif-animotes.css">');
 		
-		}, 1000);
+}, 1000);
 } else {
 	Dubtrack.room.chat.sendMessage();alert('Dub X is already running!');
 };
