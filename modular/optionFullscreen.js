@@ -53,6 +53,7 @@ window.addEventListener("resize", function(){
     if (windowWidth <= 1185) {
         disableFullscreen();
     } else {
-        console.log('Ok');
+        //do nothing
+        return false;
     }
 }, true);
