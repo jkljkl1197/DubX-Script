@@ -241,25 +241,25 @@ ul.avatar-list li.mod:after, ul.avatar-list li.creator:after, ul.avatar-list li.
     color: #AA74FE;
 }
 ul.avatar-list li.updub {
-	border: 1px solid #90AD2F
+	border: 1px solid #90AD2F;
 }
 #user_popover .global-actions a {
-	background: #A16EF1
+	background: #A16EF1;
 }
 #user_popover .actions a input {
-	border-bottom: 1px solid #f0f
+	border-bottom: 1px solid #A16EF1;
 }
 #user_popover .actions a {
     color: #FFF;
     background: #000000;
-	outline: 1px solid #A16EF1
+	outline: 1px solid #A16EF1;
 }
 #user_popover {
     background: #111;
     border: 1px solid #AA74FE;
 }
 ul.avatar-list li.updub {
-    border: 1px solid #AA74FE;
+    border: 1px solid #90AD2F;
 }
 ul.avatar-list li.downdub {
 /*    border: 1px solid #FF3535;*/
