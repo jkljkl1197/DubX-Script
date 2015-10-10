@@ -215,7 +215,7 @@ button:hover {
     opacity: 1;
 }
 #chat .chat-container ul.chat-main li .activity-row .text span.username-handle {
-    color: #90AD2F;
+    color: #FFDD6F;
     opacity: 1;
 }
 #chat .chat-container ul.chat-main li:hover>.stream-item-content .chatDelete, 
