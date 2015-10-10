@@ -243,6 +243,9 @@ ul.avatar-list li.mod:after, ul.avatar-list li.creator:after, ul.avatar-list li.
 #user_popover .global-actions a {
 	background: #A16EF1
 }
+#user_popover .actions a input {
+	border-bottom: 1px solid #f0f
+}
 #user_popover .actions a {
     color: #FFF;
     background: #000000;
