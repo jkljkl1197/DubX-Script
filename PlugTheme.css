@@ -240,6 +240,9 @@ ul.avatar-list li.mod:after, ul.avatar-list li.creator:after, ul.avatar-list li.
     opacity: 0.95;
     color: #000;
 }
+ul.avatar-list li.updub {
+	border: 1px solid #90AD2F
+}
 #user_popover .global-actions a {
 	background: #A16EF1
 }
