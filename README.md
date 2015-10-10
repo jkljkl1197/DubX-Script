@@ -35,9 +35,11 @@ javascript:(function(){$.getScript('https://rawgit.com/sinfulBA/DubX-Script/mast
 
 * If this does not work, go to `https://rawgit.com/sinfulBA/DubX-Script/master/beta.js` and copy paste its content into your console (accessible in chrome by pressing f12) when on Dubtrack.fm in a community.
 
+-----------------
+Custom CSS
 ---
 
-* There is also a custom CSS sheet that is plug.dj themed made by Kris if you would like to use it. Paste `https://rawgit.com/sinfulBA/DubX-Script/master/beta.js` in the Custom CSS option in Dub X, then click 'Okay' 
+* plug.dj theme made by Kris. Paste `https://rawgit.com/sinfulBA/DubX-Script/master/beta.js` in the Custom CSS option in Dub X, then click 'Okay' 
 
 -----------------
 Features
