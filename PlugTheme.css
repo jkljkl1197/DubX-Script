@@ -201,6 +201,9 @@ button:hover {
     color: #AA74FE;
     opacity: 0.75;
 }
+#chat .chat-container ul.chat-main li.chat-system-loading {
+	color: #835BC2;
+}
 #chat .chat-container ul.chat-main li.system {
     color: #C42E3B;
     opacity: 1;
