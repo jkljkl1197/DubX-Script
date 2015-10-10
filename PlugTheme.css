@@ -288,7 +288,8 @@ ul.avatar-list li.downdub {
     border: 5px solid #AA74FE;
 }
 #profileMainSection .profileView .infoProfile button.message.unfollow {
-    background: #C42E3B;
+	color: #ccc;
+    background: #333;
 }
 #profileMainSection .profileView .infoProfile h2 .check_username_info.error {
     color: #C42E3B;
