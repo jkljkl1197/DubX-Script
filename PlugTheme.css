@@ -27,6 +27,9 @@ a:hover, a:visited {
     background: #000;
     border: 2px solid #AA74FE;
 }
+#roomFormUpdate, #roomInfoModal {
+	border: 2px solid #AA74FE;
+}
 #header-global .user-info .user-header-menu li.user-messages span.message-counter {
     background: #AA74FE;
 }
@@ -192,10 +195,16 @@ button:hover {
     background: #AA74FE;
     color: #000;
 }
+#chat .chat-container ul.chat-main li.chat-welcome-message {
+	color: #FFFEFF;
+}
 #chat .chat-container .pusher-chat-widget-input button {
     color: #000;
     background: #AA74FE;
     opacity: 0.75;
+}
+#chat .chat-container ul.chat-main li.chat-welcome-message a {
+	color: #AA74FE;
 }
 #chat .chat-container .pusher-chat-widget-input .icon-camera {
     color: #AA74FE;
