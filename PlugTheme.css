@@ -220,10 +220,22 @@ button:hover {
 #chat .chat-container ul.chat-main li.system-error {
     color: #C42E3B;
 }
-#chat .chat-container ul.chat-main li .activity-row .text p a.username, 
+#chat .chat-container ul.chat-main li .activity-row .text p a.username,
 #chat .chat-container ul.chat-main li .activity-row .text p a.username:hover, 
 #chat .chat-container ul.chat-main li .activity-row .text p a.username:visited {
-    color: #AA74FE;
+    color: #9C9C9C;
+    opacity: 1;
+}
+#chat .chat-container ul.chat-main li .activity-row .text p a.username .isMod {
+	color: #AA74FE !important;
+	opacity: 1;
+}
+#chat .chat-container ul.chat-main li .activity-row .text p a.username .isAdmin {
+	color: #00FFFF !important;
+	opacity: 1;
+}
+#chat .chat-container ul.chat-main li .activity-row .text p a.username-handle {
+    color: #FFDD6F !important;
     opacity: 1;
 }
 #chat .chat-container ul.chat-main li .activity-row .text span.username-handle {
@@ -232,7 +244,7 @@ button:hover {
 }
 #chat .chat-container ul.chat-main li:hover>.stream-item-content .chatDelete, 
 #chat .chat-container ul.chat-main li .stream-item-content:focus>.chatDelete {
-    color: #835BC2 !important;
+    color: #AA74FE !important;
     opacity: 0.75;
     font-size: 0.65em;
 }
