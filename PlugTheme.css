@@ -223,7 +223,7 @@ button:hover {
 #chat .chat-container ul.chat-main li .activity-row .text p a.username,
 #chat .chat-container ul.chat-main li .activity-row .text p a.username:hover, 
 #chat .chat-container ul.chat-main li .activity-row .text p a.username:visited {
-    color: #9C9C9C;
+    color: #AA74FE;
     opacity: 1;
 }
 #chat .chat-container ul.chat-main li .activity-row .text p a.username .isMod {
