@@ -20,7 +20,6 @@ if(!dubX){
 
 			//Ref 2: returnOk
 			function returnOk() {
-				console.log('Ok');
 			}
             
 			//Ref 3: getScript
