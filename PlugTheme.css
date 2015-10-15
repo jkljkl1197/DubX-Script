@@ -342,13 +342,17 @@ ul.avatar-list li.downdub {
     opacity: 0.75;
 }
 #browser .sidebar #room-lock-queue {
-	background: #AA74FE;
+	background: #AA74FE !important;
 }
 #browser .sidebar #room-lock-queue.locked {
-	background: #AA74FE;
+	background: #AA74FE !important;
 }
 #browser .pause-queue-browser-bth {
-	color: #AA74FE;
+	color: #AA74FE !important;
+}
+#browser .clear-queue-browser-bth, 
+#browser .pause-queue-browser-bth {
+	outline: #AA74FE !important;
 }
 #browser .create-playlist span {
     color: #000;
