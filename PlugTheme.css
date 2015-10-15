@@ -372,6 +372,10 @@ ul.avatar-list li.downdub {
     background: #111;
     opacity: 0.85;
 }
+#browser .content-videos ul.browserPlaylistItems>li.selected {
+	outline: 1px solid #AA74FE;
+	border-bottom: 1px solid #AA74FE;
+}
 #browser .content-videos ul.browserPlaylistItems>li span.timeDisplay {
     color: #000;
     background: #AA74FE;
