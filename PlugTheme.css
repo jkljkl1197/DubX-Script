@@ -341,6 +341,15 @@ ul.avatar-list li.downdub {
     outline-color: #AA74FE;
     opacity: 0.75;
 }
+#browser .sidebar #room-lock-queue {
+	background: #AA74FE;
+}
+#browser .sidebar #room-lock-queue.locked {
+	background: #AA74FE;
+}
+#browser .pause-queue-browser-bth {
+	color: #AA74FE;
+}
 #browser .create-playlist span {
     color: #000;
     background: #AA74FE;
