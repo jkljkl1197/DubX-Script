@@ -196,7 +196,7 @@ button:hover {
     color: #000;
 }
 #chat .chat-container ul.chat-main li.chat-welcome-message {
-	color: #FFFEFF;
+	color: #AA74FE;
 }
 #chat .chat-container .pusher-chat-widget-input button {
     color: #000;
@@ -204,7 +204,7 @@ button:hover {
     opacity: 0.75;
 }
 #chat .chat-container ul.chat-main li.chat-welcome-message a {
-	color: #AA74FE;
+	color: #FFFEFF;
 }
 #chat .chat-container .pusher-chat-widget-input .icon-camera {
     color: #AA74FE;
@@ -266,6 +266,9 @@ ul.avatar-list li.mod:after, ul.avatar-list li.co-owner:after, ul.avatar-list li
 }
 ul.avatar-list li.updub {
 	border: 1px solid #90AD2F;
+}
+ul.avatar-list li p.username{
+	color: #AA74FE;
 }
 #user_popover .global-actions a {
 	background: #A16EF1;
