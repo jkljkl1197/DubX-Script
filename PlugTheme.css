@@ -274,11 +274,15 @@ button:hover {
     opacity: 0.73;
     transition: left 0.0s ease-in 0.0s;
 }
+ul.avatar-list li.currentDJ:after {
+    color: #FF00FF !important;
+    opacity: 0.95;
+}
 ul.avatar-list li p.username {
     color: #868489;
 }
 ul.avatar-list li.admin:after {
-    color: #00b5e6 !important;
+    color: #00b5e6;
 }
 ul.avatar-list li.creator:after,
 ul.avatar-list li.co-owner:after,
@@ -286,14 +290,10 @@ ul.avatar-list li.manager:after,
 ul.avatar-list li.mod:after,
 ul.avatar-list li.vip:after,
 ul.avatar-list li.resident-dj:after {
-    color: #AA74FE !important;
-}
-ul.avatar-list li.currentDJ:after {
-    color: #FF00FF !important;
-    opacity: 0.95;
+    color: #AA74FE;
 }
 ul.avatar-list li.admin p {
-	color: #00b5e6 !important;
+	color: #00b5e6;
 }
 ul.avatar-list li.currentDJ p {
 	color: #FF00FF !important;
@@ -304,7 +304,7 @@ ul.avatar-list li.manager p,
 ul.avatar-list li.mod p,
 ul.avatar-list li.vip p,
 ul.avatar-list li.resident-dj p {
-    color: #AA74FE !important;
+    color: #AA74FE;
 }
 ul.avatar-list li.updub {
 	border: 1px solid #90AD2F;
