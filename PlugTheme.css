@@ -240,8 +240,9 @@ button:hover {
 	opacity: 1;
 }
 #chat .chat-container ul.chat-main li .activity-row .text p a.username-handle {
-    color: #FFDD6F !important;
+    color: #f0f !important;
     opacity: 1;
+    font-weight: 500;
 }
 #chat .chat-container ul.chat-main li .activity-row .text span.username-handle {
     color: #CCC;
