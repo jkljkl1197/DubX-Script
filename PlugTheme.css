@@ -209,6 +209,7 @@ button:hover {
 }
 #chat .chat-container ul.chat-main li.chat-welcome-message {
 	color: #FFFFFF;
+	font-size: .8em;
 }
 #chat .chat-container .pusher-chat-widget-input button {
     color: #000;
