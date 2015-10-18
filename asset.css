@@ -215,3 +215,17 @@
     font-size: 8px;
     text-transform: uppercase;
 }
+.user-swordling, .user-sinful {
+    color: #89BE6C;
+}
+.user-swordling p.dubs:after, .user-sinful p.dubs:after {
+    content: " - DUBX DEVELOPER";
+    font-weight: 700;
+    color: #89BE6C;
+}
+.user-swordling p.username, .user-sinful p.username {
+    color: #89BE6C !important;
+}
+.user-swordling p.dubs, .user-sinful p.dubs {
+    color: #89BE6C !important;
+}
