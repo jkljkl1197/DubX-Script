@@ -179,3 +179,11 @@
 	font-size: 14px;
 	 margin-top: .5em;
 }
+.split{
+	background:#181818;
+	box-shadow:-8px 0px 0px 0px #181818;
+	width:100%;
+}
+.splitfix{
+	right: 1.7em !important;
+}
