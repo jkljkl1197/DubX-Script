@@ -572,6 +572,9 @@ if (!isOpen) {
     if (localStorage.getItem('communitycss') === 'true') {
         communityCSS();
     };
+    
+    //Ref 4: chatLog
+    function chatLog(e){var a=new Dubtrack.View.chatLoadingItem;a.$el.text(e).appendTo(Dubtrack.room.chat._messagesEl)}chatLog('Running DubX V.02.00.00');
       
 } else {
     function onErr(error) {
