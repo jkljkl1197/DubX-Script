@@ -194,9 +194,6 @@ button:hover {
 }
 
 /* Chat box */
-section#chat{
-	background: rgba(17, 17, 17, 0.75);
-}
 #chat .chat_tools .room-user-counter {
     background: #AA74FE !important;
     color: #000;
