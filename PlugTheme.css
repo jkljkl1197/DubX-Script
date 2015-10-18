@@ -1,8 +1,9 @@
 /*
     Custom CSS for Dubtrack.fm
     Plug theme and UI improvements
-    Made by @Kris | Edited by sinful
-    https://www.dubtrack.fm/kris
+    Made by @kris | Edited by @sinful
+    https://dubtrack.fm/kris
+    https://dubtrack.fm/sinful
 */
 #main-loading {
     background: #AA74FE;
@@ -131,6 +132,9 @@ a:hover, a:visited {
     color: #000;
     background: #AA74FE;
     opacity: 0.75;
+}
+#main_player .player_container .placeholder h5 span {
+	color: #AA74FE;
 }
 #main_player .player_container {
     height: 25.45em;
