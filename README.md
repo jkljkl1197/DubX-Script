@@ -11,23 +11,23 @@ Our Team
  - [sinful](https://github.com/sinfulBA) __(Owner/Developer)__
  - [Swordling](https://github.com/swordling) __(Owner/Developer)__
  - [Kris](https://github.com/PossiblyKris) __(Helper/Developer)__
- - Al3366 __(Helper/Extension Manager)__
+ - [Al3366](https://github.com/Al3366) __(Helper/Extension Manager)__
 
 -----------------
 IMPORTANT
 ---
 
-__Updates (Version 01.00.01 - Spaghetti!)__
+__Updates (Version 02.00.00 - The cake is a LIE!)__
 
-- Added localStorage
-- No more obfuscated code! We're out of beta!
+- Re-optimized code
+- Added Community CSS
 - Added Facebook & Twitter links!
 
 -----------------
 Usage
 ---
 
-* Bookmark the following code from the [Dub X Website](http://dubx.net) or the script below. Once in a Dubtrack.fm community, run the bookmark. We also have a Google Chrome extension [here](https://chrome.google.com/webstore/detail/dubx/oceofndagjnpebjmknefoelcpcnpcedm/related?utm_source=chrome-app-launcher-info-dialog)
+* Bookmark the following code from the [Dub X Website](https://dubx.net) or the script below. Once in a Dubtrack.fm community, run the bookmark. We also have a Google Chrome extension [here](https://chrome.google.com/webstore/detail/dubx/oceofndagjnpebjmknefoelcpcnpcedm/related?utm_source=chrome-app-launcher-info-dialog)
 
 ```
 javascript:(function(){$.getScript('https://rawgit.com/sinfulBA/DubX-Script/master/beta.js');}());
@@ -39,7 +39,7 @@ javascript:(function(){$.getScript('https://rawgit.com/sinfulBA/DubX-Script/mast
 Custom CSS
 ---
 
-* plug.dj theme made by Kris. Paste `https://rawgit.com/sinfulBA/DubX-Script/master/beta.js` in the Custom CSS option in Dub X, then click 'Okay' 
+* plug.dj theme made by Kris and edited by sinful. Paste `https://rawgit.com/sinfulBA/DubX-Script/master/PlugTheme.css` in the Custom CSS option in Dub X, then click 'Okay' 
 
 -----------------
 Features
@@ -57,6 +57,9 @@ Features
 - Chat Only
 - Custom Background
 - Hide Background
+- Community CSS
+- Prompt before refreshing page
+- Autorespond
 
 -----------------
 Translations
@@ -69,7 +72,6 @@ Thanks To
 ---
 - thedark1337 - for helping with questions regarding coding.
 - Igor - for helping with questions regarding coding.
-- Kris - for alpha testing the script in it's early stages and reporting bugs.
 
 -----------------
 LICENSE
