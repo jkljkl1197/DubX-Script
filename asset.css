@@ -143,6 +143,7 @@
 .onErr .container .content p {
 	margin: 0;
     padding-bottom: 16px;
+    font-size: 14px;
 }
 .onErr .container .content .input {
 	width: 100%;
