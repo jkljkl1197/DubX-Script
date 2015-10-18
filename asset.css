@@ -211,7 +211,6 @@
 #chat .chat-container ul.chat-main li.user-551d295433cd73030089d184 .activity-row .text p a.username:hover:before,
 #chat .chat-container ul.chat-main li.user-53f7c199892b010200a98809 .activity-row .text p a.username:hover:before {
     content: "DubX";
-    text-transform: uppercase;
     font-weight: 700;
     font-family: proxima-nova,sans-serif;
     font-size: 8px;
