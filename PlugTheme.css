@@ -140,6 +140,7 @@ a:hover, a:visited {
 #main_player .player_container .refresh-el {
     background: #AA74FE;
     opacity: 0.75;
+    display: none;
 }
 #main_player .player_container .videoquality-el {
     background: #AA74FE;
@@ -148,6 +149,7 @@ a:hover, a:visited {
 #main_player .player_container .hideVideo-el {
     background: #AA74FE;
     opacity: 0.75;
+    display: none;
 }
 #main_player .player_container .error-el {
     background: #AA74FE;
