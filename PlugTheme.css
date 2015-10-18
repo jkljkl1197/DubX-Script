@@ -507,6 +507,9 @@ ul.avatar-list li.downdub {
 .optionSwordful .titleClass .istitle {
     color: #AA74FE !important;
 }
+.onErr .container .control .confirm {
+	background: #AA74FE;
+}
 .BSSControl .storeBSSClass,
 .RSSControl .storeRSSClass,
 .reportControl .reportGo,
