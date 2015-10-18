@@ -121,7 +121,7 @@ a:hover, a:visited {
     color: #AA74FE;
 }
 #main_player:after {
-    background: #AA74FE;
+    background: #181818;
     opacity: 0.75;
 }
 .loading {
@@ -190,7 +190,7 @@ button:hover {
 
 /* Chat box */
 #chat .chat_tools .room-user-counter {
-    background: #AA74FE;
+    background: #AA74FE !important;
     color: #000;
     opacity: 0.73;
 }
