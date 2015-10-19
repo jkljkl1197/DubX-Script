@@ -243,12 +243,12 @@
 .user-swordling p.dubs:after, .user-sinful p.dubs:after {
     content: " - DUBX DEVELOPER";
     font-weight: 700;
-    color: #89BE6C;
+    color: #89BE6C !important;
 }
 .user-kris p.dubs:after {
     content: " - DUBX ASSISTANT";
     font-weight: 700;
-    color: #519CD7;
+    color: #519CD7 !important;
 }
 .user-swordling p.username, .user-sinful p.username {
     color: #89BE6C !important;
