@@ -187,14 +187,23 @@
 .splitfix {
     right: 1.7em !important;
 }
+
+/* Custom CSS for ranks & special users */
+#chat .chat-container ul.chat-main li.user-551d295433cd73030089d184 .activity-row .text p a.username:hover:before,
+#chat .chat-container ul.chat-main li.user-53f7c199892b010200a98809 .activity-row .text p a.username:hover:before,
+#chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username:hover:before,
+#chat .chat-container ul.chat-main li.user-5607c12b8c2ecf0300b4233b .activity-row .text p a.username:hover:before {
+    content: "DubX";
+    font-weight: 700;
+    font-family: proxima-nova,sans-serif;
+    font-size: 8px;
+    text-transform: uppercase;
+}
+
+/* Owners */
 #chat .chat-container ul.chat-main li.user-551d295433cd73030089d184 .activity-row .text p a.username,
 #chat .chat-container ul.chat-main li.user-53f7c199892b010200a98809 .activity-row .text p a.username {
     color: #89BE6C !important;
-    font-weight: 500;
-    text-shadow: 0px 0px 1px #000;
-}
-#chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username {
-    color: #519CD7 !important;
     font-weight: 500;
     text-shadow: 0px 0px 1px #000;
 }
@@ -212,6 +221,27 @@
     text-decoration: inherit;
     margin-right: 5px;
 }
+.user-swordling, .user-sinful {
+    color: #89BE6C;
+}
+.user-swordling p.dubs:after, .user-sinful p.dubs:after {
+    content: " - DUBX DEVELOPER";
+    font-weight: 700;
+    color: #89BE6C !important;
+}
+.user-swordling p.username, .user-sinful p.username {
+    color: #89BE6C !important;
+}
+.user-swordling p.dubs, .user-sinful p.dubs {
+    color: #999 !important;
+}
+
+/* Assistants */
+#chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username {
+    color: #519CD7 !important;
+    font-weight: 500;
+    text-shadow: 0px 0px 1px #000;
+}
 #chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username:before {
     content: "\f1ee";
     font-family: "foundation-icons";
@@ -225,40 +255,51 @@
     text-decoration: inherit;
     margin-right: 5px;
 }
-#chat .chat-container ul.chat-main li.user-551d295433cd73030089d184 .activity-row .text p a.username:hover:before,
-#chat .chat-container ul.chat-main li.user-53f7c199892b010200a98809 .activity-row .text p a.username:hover:before,
-#chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username:hover:before {
-    content: "DubX";
-    font-weight: 700;
-    font-family: proxima-nova,sans-serif;
-    font-size: 8px;
-    text-transform: uppercase;
-}
-.user-swordling, .user-sinful {
-    color: #89BE6C;
-}
 .user-kris {
     color: #519CD7;
-}
-.user-swordling p.dubs:after, .user-sinful p.dubs:after {
-    content: " - DUBX DEVELOPER";
-    font-weight: 700;
-    color: #89BE6C !important;
 }
 .user-kris p.dubs:after {
     content: " - DUBX ASSISTANT";
     font-weight: 700;
     color: #519CD7 !important;
 }
-.user-swordling p.username, .user-sinful p.username {
-    color: #89BE6C !important;
-}
 .user-kris p.username {
     color: #519CD7 !important;
 }
-.user-swordling p.dubs, .user-sinful p.dubs {
+.user-kris p.dubs {
     color: #999 !important;
 }
-.user-kris p.dubs {
+
+/* Special users */
+#chat .chat-container ul.chat-main li.user-5607c12b8c2ecf0300b4233b .activity-row .text p a.username {
+    color: #FFD904 !important;
+    font-weight: 500;
+    text-shadow: 0px 0px 1px #000;
+}
+#chat .chat-container ul.chat-main li.user-5607c12b8c2ecf0300b4233b .activity-row .text p a.username:before {
+    content: "\f17b";
+    font-family: "foundation-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    text-decoration: inherit;
+    margin-right: 5px;
+}
+.user-fi {
+    color: #FFD904;
+}
+.user-fi p.dubs:after {
+    content: " - DUBX VIP";
+    font-weight: 700;
+    color: #FFD904 !important;
+}
+.user-fi p.username {
+    color: #FFD904 !important;
+}
+.user-fi p.dubs {
     color: #999 !important;
 }
