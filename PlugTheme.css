@@ -306,6 +306,14 @@ ul.avatar-list li.vip p,
 ul.avatar-list li.resident-dj p {
     color: #AA74FE;
 }
+ul.avatar-list li.creator p.dubs,
+ul.avatar-list li.co-owner p,
+ul.avatar-list li.manager p,
+ul.avatar-list li.mod p,
+ul.avatar-list li.vip p,
+ul.avatar-list li.resident-dj p {
+	color: #999;
+}
 ul.avatar-list li.updub {
 	border: 1px solid #90AD2F;
 }
