@@ -256,6 +256,9 @@
 .user-kris p.username {
     color: #519CD7 !important;
 }
-.user-swordling p.dubs, .user-sinful p.dubs, .user-kris p.dubs {
+.user-swordling p.dubs, .user-sinful p.dubs {
     color: #999 !important;
+}
+.user-kris p.dubs {
+    color: #519CD7 !important;
 }
