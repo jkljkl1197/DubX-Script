@@ -314,7 +314,7 @@ ul.avatar-list li.mod p.dubs,
 ul.avatar-list li.vip p.dubs,
 ul.avatar-list li.resident-dj p.dubs
 ul.avatar-list li.currentDJ p.dubs {
-	color: #999;
+	color: #999 !important;
 }
 ul.avatar-list li.admin p.dubs:after,
 ul.avatar-list li.creator p.dubs:after,
@@ -324,7 +324,7 @@ ul.avatar-list li.mod p.dubs:after,
 ul.avatar-list li.vip p.dubs:after,
 ul.avatar-list li.resident-dj p.dubs:after
 ul.avatar-list li.currentDJ p.dubs:after {
-	color: #999;
+	color: #999 !important;
 }
 ul.avatar-list li.updub {
 	border: 1px solid #90AD2F;
