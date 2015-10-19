@@ -306,20 +306,24 @@ ul.avatar-list li.vip p,
 ul.avatar-list li.resident-dj p {
     color: #AA74FE;
 }
+ul.avatar-list li.admin p.dubs,
 ul.avatar-list li.creator p.dubs,
-ul.avatar-list li.co-owner p,
-ul.avatar-list li.manager p,
-ul.avatar-list li.mod p,
-ul.avatar-list li.vip p,
-ul.avatar-list li.resident-dj p {
+ul.avatar-list li.co-owner p.dubs,
+ul.avatar-list li.manager p.dubs,
+ul.avatar-list li.mod p.dubs,
+ul.avatar-list li.vip p.dubs,
+ul.avatar-list li.resident-dj p.dubs
+ul.avatar-list li.currentDJ p.dubs {
 	color: #999;
 }
+ul.avatar-list li.admin p.dubs:after,
 ul.avatar-list li.creator p.dubs:after,
-ul.avatar-list li.co-owner p:after,
-ul.avatar-list li.manager p:after,
-ul.avatar-list li.mod p:after,
-ul.avatar-list li.vip p:after,
-ul.avatar-list li.resident-dj p.dubs:after {
+ul.avatar-list li.co-owner p.dubs:after,
+ul.avatar-list li.manager p.dubs:after,
+ul.avatar-list li.mod p.dubs:after,
+ul.avatar-list li.vip p.dubs:after,
+ul.avatar-list li.resident-dj p.dubs:after
+ul.avatar-list li.currentDJ p.dubs:after {
 	color: #999;
 }
 ul.avatar-list li.updub {
