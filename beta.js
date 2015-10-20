@@ -45,6 +45,7 @@ Choice of Law
 
 This license is governed by the Laws of Norway. Disputes shall be settled by Oslo City Court.
 */
+
 //Hello.js
 if (!isOpen) {
     var isOpen = true;
@@ -56,7 +57,7 @@ if (!isOpen) {
     function toggleControls() {
         $('.isSwordful').slideToggle("fast");
     }
-
+    
     //Ref 2: User Interface
     function hello() {
         var li = '<li><button onclick="toggleControls();" class="relate" style="font-size: 1em;height: 32px;margin-right: 16px;border-radius: 0.1875em;">DUB X</button></li>';
@@ -64,119 +65,119 @@ if (!isOpen) {
             '<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css">',
             '<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/asset.css">',
             '<div class="isSwordful">',
-            '<div class="verSwordful">',
-            '<p class="Javaling">DubX Settings</p>',
-            '<p class="Javaful">Version 02.00.00 - The Cake is a LIE!</p>',
-            '</div>',
-            '<ul class="optionSwordful">',
-            '<li class="optionClass">',
-            '<p class="Optionling" style="margin: 0;">Greetings, <span class="isUser"></span></p>',
-            '</li>',
-            '<li class="titleClass">',
-            '<p class="istitle">Standard</p>',
-            '</li>',
-            '<li onclick="optionAutovote();" class="optionClass autovote">',
-            '<p class="isOnOff"><i class="fi-x"></i></p>',
-            '<p class="Optionling">Autovote</p>',
-            '</li>',
-            '<li onclick="optionFullscreen();" class="optionClass fullscreen">',
-            '<p class="isOnOff"><i class="fi-x"></i></p>',
-            '<p class="Optionling">Fullscreen</p>',
-            '</li>',
-            '<li onclick="optionWork();" class="optionClass work">',
-            '<p class="isOnOff"><i class="fi-x"></i></p>',
-            '<p class="Optionling">Work Mode</p>',
-            '</li>',
-            '<li onclick="optionSplitChat();" class="optionClass splitchat">',
-            '<p class="isOnOff"><i class="fi-x"></i></p>',
-            '<p class="Optionling">Split Chat</p>',
-            '</li>',
-            '<li onclick="optionChat();" class="optionClass showchat">',
-            '<p class="isOnOff"><i class="fi-x"></i></p>',
-            '<p class="Optionling">Chat Only</p>',
-            '</li>',
-            '<li onclick="isBackgroundToggle();" class="optionClass removestretch">',
-            '<p class="isOnOff"><i class="fi-x"></i></p>',
-            '<p class="Optionling">Hide Background</p>',
-            '</li>',
-            '<li onclick="optionAutorespond();" class="optionClass afk">',
-            '<p class="isOnOff"><i class="fi-x"></i></p>',
-            '<p class="Optionling">AFK Auto-Respond</p>',
-            '</li>',
-            '<li onclick="optionOnBeforeUnload();" class="optionClass onbeforeunload">',
-            '<p class="isOnOff"><i class="fi-x"></i></p>',
-            '<p class="Optionling">Warn On Navigation</p>',
-            '</li>',
-            '<li onclick="communityCSS();" class="optionClass communitycss">',
-            '<p class="isOnOff"><i class="fi-x"></i></p>',
-            '<p class="Optionling">Community CSS</p>',
-            '</li>',
-            '<li onclick="plugTheme();" class="optionClass plugtheme">',
-            '<p class="isOnOff"><i class="fi-x"></i></p>',
-            '<p class="Optionling">Plug CSS Theme</p>',
-            '</li>',
-            '<li class="titleClass">',
-            '<p class="istitle">Support</p>',
-            '</li>',
-            '<li class="optionClass support">',
-            '<a href="https://docs.google.com/document/d/1IhVn4fUA4Qd4TJCX6jmrp10ztVVn6pn8MT5Va69HiEM/edit?usp=drivesdk" target="_blank" style="color: white;">',
-            '<p class="isOnOff"><i class="fi-paint-bucket"></i></p>',
-            '<p class="Optionling">How-to: Community CSS</p>',
-            '</a>',
-            '</li>',
-            '<li class="titleClass">',
-            '<p class="istitle">Contact</p>',
-            '</li>',
-            '<li onclick="showReport();" class="optionClass report">',
-            '<p class="isOnOff"><i class="fi-comments"></i></p>',
-            '<p class="Optionling">Bug Report</p>',
-            '</li>',
-            '<li class="titleClass">',
-            '<p class="istitle">Customize</p>',
-            '</li>',
-            '<li onclick="openCSS();" class="optionClass custominput">',
-            '<p class="isOnOff"><i class="fi-unlink"></i></p>',
-            '<p class="Optionling">Custom CSS</p>',
-            '</li>',
-            '<li onclick="openCustom();" class="optionClass customupload">',
-            '<p class="isOnOff"><i class="fi-unlink"></i></p>',
-            '<p class="Optionling">Custom Background</p>',
-            '</li>',
-            '<li class="titleClass">',
-            '<p class="istitle">Disabled</p>',
-            '</li>',
-            '<li class="optionClass request">',
-            '<p class="isOnOff"><i class="fi-prohibited"></i></p>',
-            '<p class="Optionling">Feature Request</p>',
-            '</li>',
-            '<li class="titleClass">',
-            '<p class="istitle">Social</p>',
-            '</li>',
-            '<li class="optionClass facebook">',
-            '<a href="https://www.facebook.com/DubXScript" target="_blank" style="color: white;">',
-            '<p class="isOnOff"><i class="fi-social-facebook"></i></p>',
-            '<p class="Optionling">Like Us on Facebook</p>',
-            '</a>',
-            '</li>',
-            '<li class="optionClass twitter">',
-            '<a href="https://twitter.com/DubXScript" target="_blank" style="color: white;">',
-            '<p class="isOnOff"><i class="fi-social-twitter"></i></p>',
-            '<p class="Optionling">Follow Us on Twitter</p>',
-            '</a>',
-            '</li>',
-            '<li class="optionClass github">',
-            '<a href="https://github.com/sinfulBA/DubX-Script" target="_blank" style="color: white;">',
-            '<p class="isOnOff"><i class="fi-social-github"></i></p>',
-            '<p class="Optionling">Fork Us on Github</p>',
-            '</a>',
-            '</li>',
-            '<li class="optionClass website">',
-            '<a href="https://dubx.net" target="_blank" style="color: white;">',
-            '<p class="isOnOff"><i class="fi-web"></i></p>',
-            '<p class="Optionling">Check out our Website</p>',
-            '</a>',
-            '</li>',
-            '</ul>',
+                '<div class="verSwordful">',
+                    '<p class="Javaling">DubX Settings</p>',
+                    '<p class="Javaful">Version 02.00.00 - The Cake is a LIE!</p>',
+                '</div>',
+                '<ul class="optionSwordful">',
+                    '<li class="optionClass">',
+                        '<p class="Optionling" style="margin: 0;">Greetings, <span class="isUser"></span></p>',
+                    '</li>',
+                    '<li class="titleClass">',
+                        '<p class="istitle">Standard</p>',
+                    '</li>',
+                    '<li onclick="optionAutovote();" class="optionClass autovote">',
+                        '<p class="isOnOff"><i class="fi-x"></i></p>',
+                        '<p class="Optionling">Autovote</p>',
+                    '</li>',
+                    '<li onclick="optionFullscreen();" class="optionClass fullscreen">',
+                        '<p class="isOnOff"><i class="fi-x"></i></p>',
+                        '<p class="Optionling">Fullscreen</p>',
+                    '</li>',
+                    '<li onclick="optionWork();" class="optionClass work">',
+                        '<p class="isOnOff"><i class="fi-x"></i></p>',
+                        '<p class="Optionling">Work Mode</p>',
+                    '</li>',
+                    '<li onclick="optionSplitChat();" class="optionClass splitchat">',
+                        '<p class="isOnOff"><i class="fi-x"></i></p>',
+                        '<p class="Optionling">Split Chat</p>',
+                    '</li>',
+                    '<li onclick="optionChat();" class="optionClass showchat">',
+                        '<p class="isOnOff"><i class="fi-x"></i></p>',
+                        '<p class="Optionling">Chat Only</p>',
+                    '</li>',
+                    '<li onclick="isBackgroundToggle();" class="optionClass removestretch">',
+                        '<p class="isOnOff"><i class="fi-x"></i></p>',
+                        '<p class="Optionling">Hide Background</p>',
+                    '</li>',
+                    '<li onclick="optionAutorespond();" class="optionClass afk">',
+                        '<p class="isOnOff"><i class="fi-x"></i></p>',
+                        '<p class="Optionling">AFK Auto-Respond</p>',
+                    '</li>',
+                    '<li onclick="optionOnBeforeUnload();" class="optionClass onbeforeunload">',
+                        '<p class="isOnOff"><i class="fi-x"></i></p>',
+                        '<p class="Optionling">Prompt On Before Unload</p>',
+                    '</li>',
+                    '<li onclick="communityCSS();" class="optionClass communitycss">',
+                        '<p class="isOnOff"><i class="fi-x"></i></p>',
+                        '<p class="Optionling">Community CSS</p>',
+                    '</li>',
+                    '<li onclick="plugTheme();" class="optionClass plugtheme">',
+                        '<p class="isOnOff"><i class="fi-x"></i></p>',
+                        '<p class="Optionling">Plug Theme</p>',
+                    '</li>',
+                    '<li class="titleClass">',
+                        '<p class="istitle">Support</p>',
+                    '</li>',
+                    '<li class="optionClass support">',
+                        '<a href="https://docs.google.com/document/d/1IhVn4fUA4Qd4TJCX6jmrp10ztVVn6pn8MT5Va69HiEM/edit?usp=drivesdk" target="_blank" style="color: white;">',
+                            '<p class="isOnOff"><i class="fi-paint-bucket"></i></p>',
+                            '<p class="Optionling">How-to: Community CSS</p>',
+                        '</a>',
+                    '</li>',
+                    '<li class="titleClass">',
+                        '<p class="istitle">Contact</p>',
+                    '</li>',
+                    '<li onclick="showReport();" class="optionClass report">',
+                        '<p class="isOnOff"><i class="fi-comments"></i></p>',
+                        '<p class="Optionling">Bug Report</p>',
+                    '</li>',
+                    '<li class="titleClass">',
+                        '<p class="istitle">Customize</p>',
+                    '</li>',
+                    '<li onclick="openCSS();" class="optionClass custominput">',
+                        '<p class="isOnOff"><i class="fi-unlink"></i></p>',
+                        '<p class="Optionling">Custom CSS</p>',
+                    '</li>',
+                    '<li onclick="openCustom();" class="optionClass customupload">',
+                        '<p class="isOnOff"><i class="fi-unlink"></i></p>',
+                        '<p class="Optionling">Custom Background</p>',
+                    '</li>',
+                    '<li class="titleClass">',
+                        '<p class="istitle">Disabled</p>',
+                    '</li>',
+                    '<li class="optionClass request">',
+                        '<p class="isOnOff"><i class="fi-prohibited"></i></p>',
+                        '<p class="Optionling">Feature Request</p>',
+                    '</li>',
+                    '<li class="titleClass">',
+                        '<p class="istitle">Social</p>',
+                    '</li>',
+                    '<li class="optionClass facebook">',
+                        '<a href="https://www.facebook.com/DubXScript" target="_blank" style="color: white;">',
+                            '<p class="isOnOff"><i class="fi-social-facebook"></i></p>',
+                            '<p class="Optionling">Like Us on Facebook</p>',
+                        '</a>',
+                    '</li>',
+                    '<li class="optionClass twitter">',
+                        '<a href="https://twitter.com/DubXScript" target="_blank" style="color: white;">',
+                            '<p class="isOnOff"><i class="fi-social-twitter"></i></p>',
+                            '<p class="Optionling">Follow Us on Twitter</p>',
+                        '</a>',
+                    '</li>',
+                    '<li class="optionClass github">',
+                        '<a href="https://github.com/sinfulBA/DubX-Script" target="_blank" style="color: white;">',
+                            '<p class="isOnOff"><i class="fi-social-github"></i></p>',
+                            '<p class="Optionling">Fork Us on Github</p>',
+                        '</a>',
+                    '</li>',
+                    '<li class="optionClass website">',
+                        '<a href="https://dubx.net" target="_blank" style="color: white;">',
+                            '<p class="isOnOff"><i class="fi-web"></i></p>',
+                            '<p class="Optionling">Check out our Website</p>',
+                        '</a>',
+                    '</li>',
+                '</ul>',
             '</div>'
         ].join('');
         var top = document.querySelector('.user-header-menu')
@@ -188,32 +189,33 @@ if (!isOpen) {
     hello();
     
     //Ref 3: Options
-
+    
     //Ref 3.1: Input Function
-    function input(title, content, placeholder, confirm) {
+    function input(title,content,placeholder,confirm) {
         var onErr = [
             '<div class="onErr">',
-            '<div class="container">',
-            '<div class="title">',
-            '<h1>' + title + '</h1>',
-            '</div>',
-            '<div class="content">',
-            '<p>' + content + '</p>',
-            '<textarea class="input" type="text" placeholder="' + placeholder + '"></textarea>',
-            '</div>',
-            '<div class="control">',
-            '<div class="cancel">',
-            '<p>Cancel</p>',
-            '</div>',
-            '<div class="' + confirm + ' confirm">',
-            '<p>Okay</p>',
-            '</div>',
-            '</div>',
-            '</div>',
+                '<div class="container">',
+                    '<div class="title">',
+                        '<h1>'+title+'</h1>',
+                    '</div>',
+                    '<div class="content">',
+                        '<p>'+content+'</p>',
+                        '<textarea class="input" type="text" placeholder="'+placeholder+'"></textarea>',
+                    '</div>',
+                    '<div class="control">',
+                        '<div class="cancel">',
+                            '<p>Cancel</p>',
+                        '</div>',
+                        '<div class="'+confirm+' confirm">',
+                            '<p>Okay</p>',
+                        '</div>',
+                    '</div>',
+                '</div>',
             '</div>'
         ].join('');
         $('body').prepend(onErr);
     }
+    
     //Ref 3.2: Global Functions
     function toggleOptionOn(selector) {
         $(selector + ' .isOnOff i').replaceWith('<i class="fi-check"></i>');
@@ -224,7 +226,7 @@ if (!isOpen) {
     function closeErr() {
         $('.onErr').remove();
     }
-
+    
     //Ref 3.3: optionAutovote
     var isAutovote = false;
     function optionAutovote() {
@@ -238,44 +240,44 @@ if (!isOpen) {
                 woot.click();
             };
             Dubtrack.Events.bind('realtime:room_playlist-update', advanceVote);
-            localStorage.setItem('isAutovote', 'true');
+            localStorage.setItem('isAutovote','true');
             toggleOptionOn('.autovote');
         } else {
             isAutovote = false;
             isOn = "off";
             Dubtrack.Events.unbind('realtime:room_playlist-update', advanceVote);
-            localStorage.setItem('isAutovote', 'false');
+            localStorage.setItem('isAutovote','false');
             toggleOptionOff('.autovote');
         };
     };
     if (localStorage.getItem('isAutovote') === 'true') {
         optionAutovote();
     };
-
+    
     //Ref 3.4: optionSplitChat
     var isSplitChat = false;
     function optionSplitChat() {
         var isOn
-        if (!isSplitChat) {
-            isSplitChat = true
-            isOn = "on";
-            $('.chat-main li:nth-child(even)').addClass('split');
-            $('.chat-main li:nth-child(even) .chatDelete').addClass('splitfix');
-            localStorage.setItem('isSplitChat', 'true');
-            toggleOptionOn('.splitchat');
-        } else {
-            isSplitChat = false
-            isOn = "off";
-            $('.chat-main li:nth-child(even)').removeClass('split');
-            $('.chat-main li:nth-child(even) .chatDelete').removeClass('splitfix');
-            localStorage.setItem('isSplitChat', 'false');
-            toggleOptionOff('.splitchat');
-        }
+            if (!isSplitChat) {
+                isSplitChat = true
+                isOn = "on";
+                $('.chat-main li:nth-child(even)').addClass('split');
+                $('.chat-main li:nth-child(even) .chatDelete').addClass('splitfix');
+                localStorage.setItem('isSplitChat','true');
+                toggleOptionOn('.splitchat');
+            } else {
+                isSplitChat = false
+                isOn = "off";
+                $('.chat-main li:nth-child(even)').removeClass('split');
+                $('.chat-main li:nth-child(even) .chatDelete').removeClass('splitfix');
+                localStorage.setItem('isSplitChat','false');
+                toggleOptionOff('.splitchat');
+            }
     };
     if (localStorage.getItem('isSplitChat') === 'true') {
         optionSplitChat();
     };
-
+    
     //Ref 3.5: boothDuration
     $('.player_sharing').append('<span class="durationRemaining"></span>');
     function boothDuration() {
@@ -290,7 +292,7 @@ if (!isOpen) {
         };
     };
     Dubtrack.Events.bind('realtime:room_playlist-update', boothDuration);
-
+    
     //Ref 3.6 : bugReport
     function reportPost() {
         var user = Dubtrack.session.get('username');
@@ -316,11 +318,11 @@ if (!isOpen) {
         $('.onErr').remove();
     };
     function showReport() {
-        input('Bug Report:', 'Report:', 'Please give a detailed description of the bug.', 'confirm-for36', 'cancel');
+        input('Bug Report:','Report:','Please give a detailed description of the bug.','confirm-for36','cancel');
         $('.confirm-for36').click(postreport);
         $('.cancel').click(cancelreport);
     };
-
+        
     //Ref 3.7: optionFullscreen 
     var isFullscreen = false;
     function fullscreenOff() {
@@ -336,7 +338,7 @@ if (!isOpen) {
         $('#player-controller').removeClass('fullscreenController');
         isFullscreen = false;
         isOn = "off";
-        localStorage.setItem('isFullscreen', 'false');
+        localStorage.setItem('isFullscreen','false');
         toggleOptionOff('.fullscreen');
     };
     function optionFullscreen() {
@@ -354,7 +356,7 @@ if (!isOpen) {
             $('.player_container').addClass('fullscreenVideoChild');
             $('#player-controller').addClass('fullscreenController');
             isOn = "on";
-            localStorage.setItem('isFullscreen', 'true');
+            localStorage.setItem('isFullscreen','true');
             toggleOptionOn('.fullscreen');
         } else {
             fullscreenOff();
@@ -364,46 +366,45 @@ if (!isOpen) {
         optionFullscreen();
     };
     $('.user-info-button').click(fullscreenOff);
-    window.addEventListener("resize", function() {
+    window.addEventListener("resize", function(){
         var windowWidth = $(window).width();
         if (windowWidth <= 1185) {
             fullscreenOff();
         };
     }, true);
-
+        
     //Ref 3.8: optionHideBackground
     var isBackground = false;
-
     function isBackgroundToggle() {
         var isOn
-        if (!isBackground) {
-            isBackground = true;
-            isOn = "on";
-            $('.backstretch').hide();
-            $('.userCustomB').hide();
-            localStorage.setItem('isBackground', 'true');
-            toggleOptionOn('.removestretch');
-        } else {
-            isBackground = false
-            isOn = "off";
-            $('.backstretch').show();
-            $('.userCustomB').show();
-            localStorage.setItem('isBackground', 'false');
-            toggleOptionOff('.removestretch');
-        }
+            if (!isBackground) {
+                isBackground = true;
+                isOn = "on";
+                $('.backstretch').hide();
+                $('.userCustomB').hide();
+                localStorage.setItem('isBackground','true');
+                toggleOptionOn('.removestretch');
+            } else {
+                isBackground = false
+                isOn = "off";
+                $('.backstretch').show();
+                $('.userCustomB').show();
+                localStorage.setItem('isBackground','false');
+                toggleOptionOff('.removestretch');
+            }
     };
     if (localStorage.getItem('isBackground') === 'true') {
         isBackgroundToggle();
     };
-
+    
     //Ref 3.9: optionWorkMode
     var isWork = false;
     function disableWork() {
         isWork = false;
-        $('#main-room').show();
-        isOn = "off";
-        localStorage.setItem('isWork', 'false');
-        toggleOptionOff('.work');
+            $('#main-room').show();
+            isOn = "off";
+            localStorage.setItem('isWork','false');
+            toggleOptionOff('.work');
     };
     function optionWork() {
         var isOn;
@@ -412,7 +413,7 @@ if (!isOpen) {
             $('#main-room').hide();
             fullscreenOff();
             isOn = "on";
-            localStorage.setItem('isWork', 'true');
+            localStorage.setItem('isWork','true');
             toggleOptionOn('.work');
         } else {
             disableWork();
@@ -422,96 +423,96 @@ if (!isOpen) {
         optionWork();
     };
     $('.user-info-button').click(disableWork);
-
+    
     //Ref 3.10: optionOnBeforeUnload
     var isOnBeforeUnload = false;
     function optionOnBeforeUnload() {
         var isOn
-        if (!isOnBeforeUnload) {
-            isOnBeforeUnload = true
-            isOn = "on";
-            window.onbeforeunload = function(e) {
-                return 'You sure about that?';
-            };
-            localStorage.setItem('isOnBeforeUnload', 'true');
-            toggleOptionOn('.onbeforeunload');
-        } else {
-            isOnBeforeUnload = false
-            isOn = "off";
-            window.onbeforeunload = null;
-            localStorage.setItem('isOnBeforeUnload', 'false');
-            toggleOptionOff('.onbeforeunload');
-        }
+            if (!isOnBeforeUnload) {
+                isOnBeforeUnload = true
+                isOn = "on";
+                window.onbeforeunload = function(e) {
+                    return 'You sure about that?';
+                };
+                localStorage.setItem('isOnBeforeUnload','true');
+                toggleOptionOn('.onbeforeunload');
+            } else {
+                isOnBeforeUnload = false
+                isOn = "off";
+                window.onbeforeunload = null;
+                localStorage.setItem('isOnBeforeUnload','false');
+                toggleOptionOff('.onbeforeunload');
+            }
     };
     if (localStorage.getItem('isOnBeforeUnload') === 'true') {
         optionOnBeforeUnload();
     };
-
+    
     //Ref 3.11: AFK-Autorespond
     var isAutorespond = false;
     var sendAutorespond = true;
     function realtimeChat(data) {
         var realtimeContent = data.message;
         var isUserAfk = Dubtrack.session.get('username');
-        if (realtimeContent.indexOf('@' + isUserAfk) > -1) {
+        if (realtimeContent.indexOf('@'+isUserAfk) >-1) {
             if (sendAutorespond) {
                 $('#chat-txt-message').val('I am AFK at the moment.');
                 Dubtrack.room.chat.sendMessage();
                 sendAutorespond = false;
-                setTimeout(function() {
+                setTimeout (function() {
                     sendAutorespond = true;
                 }, 30 * 1000);
             }
         }
     }
-
     function optionAutorespond() {
         var isOn;
-        if (!isAutorespond) {
-            isAutorespond = true;
-            isOn = "on";
-            Dubtrack.Events.bind('realtime:chat-message', realtimeChat);
-            toggleOptionOn('.afk');
-        } else {
-            isAutorespond = false;
-            isOn = "off";
-            Dubtrack.Events.unbind('realtime:chat-message', realtimeChat);
-            toggleOptionOff('.afk');
-        }
+            if (!isAutorespond) {
+                isAutorespond = true;
+                isOn = "on";
+                Dubtrack.Events.bind('realtime:chat-message', realtimeChat);
+                toggleOptionOn('.afk');
+            } else {
+                isAutorespond = false;
+                isOn = "off";
+                Dubtrack.Events.unbind('realtime:chat-message', realtimeChat);
+                toggleOptionOff('.afk');
+            }
     };
-
+    
     //Ref 3.12: Chat Only
     var isChat = false;
     function optionChat() {
         var isOn
-        if (!isChat) {
-            isChat = true
-            isOn = "on";
-            $('body').append('<style class="isChat">.left_section {display: none !important;}.right_section {width: 428.4px !important;margin: 0 auto !important;right: initial !important;position: relative !important;float: inherit !important;}</style>');
-            localStorage.setItem('isChat', 'true');
-            toggleOptionOn('.showchat');
-        } else {
-            isChat = false
-            isOn = "off";
-            $('.isChat').remove();
-            localStorage.setItem('isChat', 'false');
-            toggleOptionOff('.showchat');
-        }
+            if (!isChat) {
+                isChat = true
+                isOn = "on";
+                $('body').append('<style class="isChat">.left_section {display: none !important;}.right_section {width: 428.4px !important;margin: 0 auto !important;right: initial !important;position: relative !important;float: inherit !important;}</style>');
+                localStorage.setItem('isChat','true');
+                toggleOptionOn('.showchat');
+            } else {
+                isChat = false
+                isOn = "off";
+                $('.isChat').remove();
+                localStorage.setItem('isChat','false');
+                toggleOptionOff('.showchat');
+            }
     };
     if (localStorage.getItem('isChat') === 'true') {
         optionChat();
     };
+    
     //Ref 3.13: Custom CSS
     function openCSS() {
-        var current_css_file = 'Current file: ' + localStorage.getItem('userCSS');
-        input('Link a .CSS file:', current_css_file, 'https://example.com/example.css', 'confirm-for313');
+        var current_css_file = 'Current file: '+localStorage.getItem('userCSS');
+        input('Link a .CSS file:',current_css_file,'https://example.com/example.css','confirm-for313');
         $('.confirm-for313').click(importCSS);
         $('.cancel').click(closeErr);
     };
     function importCSS() {
         $('.customCSS').remove();
         var userCSS = $('.input').val();
-        localStorage.setItem('userCSS', userCSS);
+        localStorage.setItem('userCSS',userCSS);
         $('head').append('<link class="customCSS" href="' + userCSS + '" rel="stylesheet" type="text/css">');
         $('.onErr').remove();
     };
@@ -522,16 +523,16 @@ if (!isOpen) {
         };
     };
     $('document').ready(loadCSS);
-
+    
     //Ref 3.14: Custom Background
     function openCustom() {
-        input('Link an image file:', 'It is recommended a .jpg file is used', 'https://example.com/example.jpg', 'confirm-for314');
+        input('Link an image file:','It is recommended a .jpg file is used','https://example.com/example.jpg','confirm-for314');
         $('.confirm-for314').click(importCustom);
         $('.cancel').click(closeErr);
     }
     function importCustom() {
         var userCustom = $('.input').val();
-        localStorage.setItem('userCustom', userCustom);
+        localStorage.setItem('userCustom',userCustom);
         $('.userCustomB').remove();
         $('body').append('<div class="userCustomB" style="width: 100vw;height: 100vh;z-index: -999998;position: fixed; background: url(' + userCustom + ');background-size: cover;top: 0;"></div>');
         $('.onErr').remove();
@@ -543,7 +544,7 @@ if (!isOpen) {
         }
     }
     $('document').ready(loadCustom);
-
+    
     //Ref 3.15: Community CSS
     var isCommunityCSS = false;
     function communityCSS() {
@@ -554,34 +555,34 @@ if (!isOpen) {
             var user_location_url = Dubtrack.room.model.get('roomUrl');
             $.ajax({
                 type: 'GET',
-                url: 'https://api.dubtrack.fm/room/' + user_location_url,
+                url: 'https://api.dubtrack.fm/room/'+user_location_url,
             }).done(function(data) {
                 var info = data.data.description;
                 var expression = /(@dubx=)(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
                 var url = info.match(expression);
                 var append = url[0].split('@dubx=');
-                $('head').append('<link class="importcommunitycss" href="' + append[1] + '" rel="stylesheet" type="text/css">');
+                $('head').append('<link class="importcommunitycss" href="'+append[1]+'" rel="stylesheet" type="text/css">');
             });
-            localStorage.setItem('communitycss', 'true');
-            toggleOptionOn('.communitycss');
-            if (plugTheme = true) {
-                disablePlugTheme();
+            if (isPlugTheme === true) {
+                plugTheme();
             }
+            localStorage.setItem('communitycss','true');
+            toggleOptionOn('.communitycss');
         } else {
             isCommunityCSS = false;
             isOn = "off";
-            function disableCommunityCSS() {
-                $('.importcommunitycss').remove();
-                localStorage.setItem('communitycss', 'false');
-                toggleOptionOff('.communitycss');
-            }
+            $('.importcommunitycss').remove();
+            localStorage.setItem('communitycss','false');
+            toggleOptionOff('.communitycss');
         };
     };
     if (localStorage.getItem('communitycss') === 'true') {
         communityCSS();
     };
+    
     //Ref 3.16: Plug CSS Theme
     var isPlugTheme = false;
+
     function plugTheme() {
         var isOn;
         if (!isPlugTheme) {
@@ -590,56 +591,51 @@ if (!isOpen) {
             $('head').append('<link class="enableplugtheme" href="https://rawgit.com/sinfulBA/DubX-Script/master/PlugTheme.css" rel="stylesheet" type="text/css">');
             localStorage.setItem('plugtheme', 'true');
             toggleOptionOn('.plugtheme');
-            if (communityCSS = true) {
-                disableCommunityCSS();
+            if (isCommunityCSS === true) {
+                communityCSS();
             }
         } else {
             isPlugTheme = false;
             isOn = "off";
-            function disablePlugTheme() {
-                $('.enableplugtheme').remove();
-                localStorage.setItem('plugtheme', 'false');
-                toggleOptionOff('.plugtheme');
-            }
+            $('.enableplugtheme').remove();
+            localStorage.setItem('plugtheme', 'false');
+            toggleOptionOff('.plugtheme');
         };
     };
     if (localStorage.getItem('plugtheme') === 'true') {
         plugTheme();
     };
-
+    
     //Ref 4: chatLog
-    function chatLog(e) {
-        var a = new Dubtrack.View.chatLoadingItem;
-        a.$el.text(e).appendTo(Dubtrack.room.chat._messagesEl)
-    }
-    chatLog('Running DubX V.02.00.00');
+    function chatLog(e){var a=new Dubtrack.View.chatLoadingItem;a.$el.text(e).appendTo(Dubtrack.room.chat._messagesEl)}chatLog('Running DubX V.02.00.00');
 
+      
 } else {
     function onErr(error) {
         var onErr = [
             '<div class="onErr">',
-            '<div class="container">',
-            '<div class="title">',
-            '<h1>Oh noes:</h1>',
-            '</div>',
-            '<div class="content">',
-            '<p>' + error + '</p>',
-            '</div>',
-            '<div class="control">',
-            '<div class="cancel">',
-            '<p>Cancel</p>',
-            '</div>',
-            '<div class="confirm confirm-err">',
-            '<p>Okay</p>',
-            '</div>',
-            '</div>',
-            '</div>',
+                '<div class="container">',
+                    '<div class="title">',
+                        '<h1>Oh noes:</h1>',
+                    '</div>',
+                    '<div class="content">',
+                        '<p>'+error+'</p>',
+                    '</div>',
+                    '<div class="control">',
+                        '<div class="cancel">',
+                            '<p>Cancel</p>',
+                        '</div>',
+                        '<div class="confirm confirm-err">',
+                            '<p>Okay</p>',
+                        '</div>',
+                    '</div>',
+                '</div>',
             '</div>'
         ].join('');
         var filecontent = document.querySelector('body')
         $(filecontent).prepend(onErr);
     };
-    onErr('Oh no! Error 69: Extension is already open.');
+	onErr('Oh noes! E001: Extension is open twice.');
     $('.cancel').click(closeErr);
     $('.confirm-err').click(closeErr);
 };
