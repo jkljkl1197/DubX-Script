@@ -244,7 +244,7 @@ button:hover {
 	opacity: 1;
 }
 #chat .chat-container ul.chat-main li .activity-row .text p a.username .isAdmin {
-	color: #00b5e6 !important;
+	color: #00FFFF !important;
 	opacity: 1;
 }
 #chat .chat-container ul.chat-main li .activity-row .text p a.username-handle {
@@ -282,7 +282,7 @@ ul.avatar-list li p.username {
     color: #868489;
 }
 ul.avatar-list li.admin:after {
-    color: #00b5e6 !important;
+    color: #00FFFF !important;
 }
 ul.avatar-list li.creator:after,
 ul.avatar-list li.co-owner:after,
@@ -296,7 +296,7 @@ ul.avatar-list li.currentDJ p {
 	color: #FF00FF !important;
 }
 ul.avatar-list li.admin p {
-	color: #00b5e6 !important;
+	color: #00FFFF !important;
 }
 ul.avatar-list li.creator p,
 ul.avatar-list li.co-owner p,
