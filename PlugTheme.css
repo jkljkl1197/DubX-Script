@@ -239,6 +239,7 @@ button:hover {
     color: #AA74FE;
     opacity: 1;
 }
+/*
 #chat .chat-container ul.chat-main li .activity-row .text p a.username .isMod {
 	color: #C42E3B;
 	opacity: 1;
@@ -247,6 +248,7 @@ button:hover {
 	color: #00FFFF !important;
 	opacity: 1;
 }
+*/
 #chat .chat-container ul.chat-main li .activity-row .text p a.username-handle {
     color: #FFDD6F !important;
     opacity: 1;
