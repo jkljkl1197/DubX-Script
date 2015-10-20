@@ -221,8 +221,7 @@
     text-decoration: inherit;
     margin-right: 5px;
 }
-.user-swordling, .resident-dj.user-swordling:after, .vip.user-swordling:after, .mod.user-swordling:after, .manager.user-swordling:after, .co-owner.user-swordling:after, .creator.user-swordling:after,
-.user-sinful, .resident-dj.user-sinful:after, .vip.user-sinful:after, .mod.user-sinful:after, .manager.user-sinful:after, .co-owner.user-sinful:after, .creator.user-sinful:after {
+.user-swordling, .user-sinful {
     color: #89BE6C;
 }
 .user-swordling p.dubs:after, .user-sinful p.dubs:after {
