@@ -306,7 +306,7 @@ ul.avatar-list li.manager p,
 ul.avatar-list li.mod p,
 ul.avatar-list li.vip p,
 ul.avatar-list li.resident-dj p {
-	color: #AA74FE !important;
+	color: #AA74FE;
 }
 ul.avatar-list li.currentDJ p {
     color: #FF00FF !important;
