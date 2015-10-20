@@ -53,7 +53,6 @@ if (!isOpen) {
         var user = Dubtrack.session.get('username');
         $('.isUser').text(user);
     }
-
     function toggleControls() {
         $('.isSwordful').slideToggle("fast");
     }
@@ -187,7 +186,7 @@ if (!isOpen) {
         helloUser();
     }
     hello();
-
+    
     //Ref 3: Options
 
     //Ref 3.1: Input Function
@@ -215,23 +214,19 @@ if (!isOpen) {
         ].join('');
         $('body').prepend(onErr);
     }
-
     //Ref 3.2: Global Functions
     function toggleOptionOn(selector) {
         $(selector + ' .isOnOff i').replaceWith('<i class="fi-check"></i>');
     }
-
     function toggleOptionOff(selector) {
         $(selector + ' .isOnOff i').replaceWith('<i class="fi-x"></i>');
     }
-
     function closeErr() {
         $('.onErr').remove();
     }
 
     //Ref 3.3: optionAutovote
     var isAutovote = false;
-
     function optionAutovote() {
         var isOn;
         if (!isAutovote) {
@@ -239,7 +234,6 @@ if (!isOpen) {
             isOn = "on";
             var woot = document.querySelector('.dubup');
             woot.click();
-
             function advanceVote() {
                 woot.click();
             };
@@ -260,7 +254,6 @@ if (!isOpen) {
 
     //Ref 3.4: optionSplitChat
     var isSplitChat = false;
-
     function optionSplitChat() {
         var isOn
         if (!isSplitChat) {
@@ -285,7 +278,6 @@ if (!isOpen) {
 
     //Ref 3.5: boothDuration
     $('.player_sharing').append('<span class="durationRemaining"></span>');
-
     function boothDuration() {
         var time = 4;
         var currentTimeMinStr = $('#player-controller div.left ul li.infoContainer.display-block div.currentTime span.min').text();
@@ -315,17 +307,14 @@ if (!isOpen) {
             console.log(msg);
         });
     };
-
     function postreport() {
         reportPost();
         $('.onErr').remove();
         toggleOptionOn('.report');
     };
-
     function cancelreport() {
         $('.onErr').remove();
     };
-
     function showReport() {
         input('Bug Report:', 'Report:', 'Please give a detailed description of the bug.', 'confirm-for36', 'cancel');
         $('.confirm-for36').click(postreport);
@@ -334,7 +323,6 @@ if (!isOpen) {
 
     //Ref 3.7: optionFullscreen 
     var isFullscreen = false;
-
     function fullscreenOff() {
         $('#room-comments').show();
         $('.main-page-container').removeClass('fullscreenFix');
@@ -351,7 +339,6 @@ if (!isOpen) {
         localStorage.setItem('isFullscreen', 'false');
         toggleOptionOff('.fullscreen');
     };
-
     function optionFullscreen() {
         var isOn;
         if (!isFullscreen) {
@@ -411,7 +398,6 @@ if (!isOpen) {
 
     //Ref 3.9: optionWorkMode
     var isWork = false;
-
     function disableWork() {
         isWork = false;
         $('#main-room').show();
@@ -419,7 +405,6 @@ if (!isOpen) {
         localStorage.setItem('isWork', 'false');
         toggleOptionOff('.work');
     };
-
     function optionWork() {
         var isOn;
         if (!isWork) {
@@ -440,7 +425,6 @@ if (!isOpen) {
 
     //Ref 3.10: optionOnBeforeUnload
     var isOnBeforeUnload = false;
-
     function optionOnBeforeUnload() {
         var isOn
         if (!isOnBeforeUnload) {
@@ -466,7 +450,6 @@ if (!isOpen) {
     //Ref 3.11: AFK-Autorespond
     var isAutorespond = false;
     var sendAutorespond = true;
-
     function realtimeChat(data) {
         var realtimeContent = data.message;
         var isUserAfk = Dubtrack.session.get('username');
@@ -499,7 +482,6 @@ if (!isOpen) {
 
     //Ref 3.12: Chat Only
     var isChat = false;
-
     function optionChat() {
         var isOn
         if (!isChat) {
@@ -519,7 +501,6 @@ if (!isOpen) {
     if (localStorage.getItem('isChat') === 'true') {
         optionChat();
     };
-
     //Ref 3.13: Custom CSS
     function openCSS() {
         var current_css_file = 'Current file: ' + localStorage.getItem('userCSS');
@@ -527,7 +508,6 @@ if (!isOpen) {
         $('.confirm-for313').click(importCSS);
         $('.cancel').click(closeErr);
     };
-
     function importCSS() {
         $('.customCSS').remove();
         var userCSS = $('.input').val();
@@ -535,7 +515,6 @@ if (!isOpen) {
         $('head').append('<link class="customCSS" href="' + userCSS + '" rel="stylesheet" type="text/css">');
         $('.onErr').remove();
     };
-
     function loadCSS() {
         if (localStorage.getItem('userCSS') !== null) {
             var userlocalCSS = localStorage.getItem('userCSS');
@@ -550,7 +529,6 @@ if (!isOpen) {
         $('.confirm-for314').click(importCustom);
         $('.cancel').click(closeErr);
     }
-
     function importCustom() {
         var userCustom = $('.input').val();
         localStorage.setItem('userCustom', userCustom);
@@ -558,7 +536,6 @@ if (!isOpen) {
         $('body').append('<div class="userCustomB" style="width: 100vw;height: 100vh;z-index: -999998;position: fixed; background: url(' + userCustom + ');background-size: cover;top: 0;"></div>');
         $('.onErr').remove();
     }
-
     function loadCustom() {
         if (localStorage.getItem('userCustom') !== null) {
             var userloadCustom = localStorage.getItem('userCustom');
@@ -569,7 +546,6 @@ if (!isOpen) {
 
     //Ref 3.15: Community CSS
     var isCommunityCSS = false;
-
     function communityCSS() {
         var isOn;
         if (!isCommunityCSS) {
@@ -592,12 +568,12 @@ if (!isOpen) {
                 disablePlugTheme();
             }
         } else {
+            isCommunityCSS = false;
+            isOn = "off";
             function disableCommunityCSS() {
-               isCommunityCSS = false;
-                isOn = "off";
                 $('.importcommunitycss').remove();
                 localStorage.setItem('communitycss', 'false');
-                toggleOptionOff('.communitycss'); 
+                toggleOptionOff('.communitycss');
             }
         };
     };
@@ -606,7 +582,6 @@ if (!isOpen) {
     };
     //Ref 3.16: Plug CSS Theme
     var isPlugTheme = false;
-
     function plugTheme() {
         var isOn;
         if (!isPlugTheme) {
@@ -619,9 +594,9 @@ if (!isOpen) {
                 disableCommunityCSS();
             }
         } else {
-            function disablePlugTheme(){
-                isPlugTheme = false;
-                isOn = "off";
+            isPlugTheme = false;
+            isOn = "off";
+            function disablePlugTheme() {
                 $('.enableplugtheme').remove();
                 localStorage.setItem('plugtheme', 'false');
                 toggleOptionOff('.plugtheme');
