@@ -258,7 +258,7 @@
 .user-kris {
     color: #519CD7;
 }
-.user-kris p {
+.user-kris ul.avatar-list li p {
     color: #519CD7;
 }
 .user-kris p.dubs:after {
@@ -295,7 +295,7 @@
 .user-fi {
     color: #FFD904;
 }
-.user-fi p {
+.user-fi ul.avatar-list li p {
     color: #FFD904;
 }
 .user-fi p.dubs:after {
