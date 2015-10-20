@@ -565,9 +565,9 @@ if (!isOpen) {
             });
             localStorage.setItem('communitycss','true');
             toggleOptionOn('.communitycss');
-			$('.enableplugtheme').remove();
-            localStorage.setItem('plugtheme','false');
-            toggleOptionOff('.plugtheme');
+			if (communityCSS = true){
+				plugTheme();
+			}
         } else {
             isCommunityCSS = false;
             isOn = "off";
@@ -589,9 +589,9 @@ if (!isOpen) {
 			$('head').append('<link class="enableplugtheme" href="https://rawgit.com/sinfulBA/DubX-Script/master/PlugTheme.css" rel="stylesheet" type="text/css">');
             localStorage.setItem('plugtheme','true');
             toggleOptionOn('.plugtheme');
-			$('.importcommunitycss').remove();
-            localStorage.setItem('communitycss','false');
-            toggleOptionOff('.communitycss');
+			if (plugTheme = true){
+				communityCSS();
+			}
         } else {
             isPlugTheme = false;
             isOn = "off";
