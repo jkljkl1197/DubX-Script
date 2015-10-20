@@ -230,7 +230,7 @@
     color: #89BE6C !important;
 }
 .user-swordling p.dubs:hover:after, .user-sinful p.dubs:hover:after {
-    content: " - OWNER";
+    content: " - DUBX OWNER";
     font-weight: 700;
     color: #89BE6C !important;
 }
@@ -244,7 +244,7 @@
 /* Contributors */
 #chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username {
     color: #519CD7 !important;
-    font-weight: 500;
+    font-weight: 600;
     text-shadow: 0px 0px 1px #000;
 }
 #chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username:before {
@@ -263,8 +263,8 @@
 .user-kris {
     color: #519CD7;
 }
-.user-kris p.dubs:after {
-    content: " - DUBX ASSISTANT";
+.user-kris p.dubs:hover:after {
+    content: " - DUBX CONTRIBUTOR";
     font-weight: 700;
     color: #519CD7 !important;
 }
@@ -299,6 +299,11 @@
 }
 .user-fi p.dubs:after {
     content: " - DUBX VIP";
+    font-weight: 700;
+    color: #FFD904 !important;
+}
+.user-fi p.dubs:hover:after {
+    content: " - DUBX (FOR SPECIAL USERS)";
     font-weight: 700;
     color: #FFD904 !important;
 }
