@@ -240,11 +240,11 @@ button:hover {
     opacity: 1;
 }
 #chat .chat-container ul.chat-main li .activity-row .text p a.username .isMod {
-	color: #AA74FE !important;
+	color: #AA74FE;
 	opacity: 1;
 }
 #chat .chat-container ul.chat-main li .activity-row .text p a.username .isAdmin {
-	color: #00FFFF !important;
+	color: #00b5e6 !important;
 	opacity: 1;
 }
 #chat .chat-container ul.chat-main li .activity-row .text p a.username-handle {
