@@ -324,7 +324,7 @@ ul.avatar-list li.currentDJ p.dubs {
 }
 ul.avatar-list li.updub {
 	border: 1px solid #000000;
-	box-shadow: ;
+	box-shadow: inset 4px 0px 0px 0px #90AD2F;
 }
 ul.avatar-list li.downdub {
 	border: 1px solid #000000;
