@@ -239,14 +239,16 @@ button:hover {
     color: #AA74FE;
     opacity: 1;
 }
+/*
 #chat .chat-container ul.chat-main li .activity-row .text p a.username .isMod {
-	color: #AA74FE !important;
+	color: #C42E3B;
 	opacity: 1;
 }
 #chat .chat-container ul.chat-main li .activity-row .text p a.username .isAdmin {
 	color: #00FFFF !important;
 	opacity: 1;
 }
+*/
 #chat .chat-container ul.chat-main li .activity-row .text p a.username-handle {
     color: #FFDD6F !important;
     opacity: 1;
@@ -274,15 +276,14 @@ button:hover {
     opacity: 0.73;
     transition: left 0.0s ease-in 0.0s;
 }
-ul.avatar-list li.currentDJ:after {
-    color: #FF00FF !important;
-    opacity: 0.95;
+ul.avatar-list li p {
+	color: #CCC;
 }
 ul.avatar-list li p.username {
     color: #868489;
 }
 ul.avatar-list li.admin:after {
-    color: #00b5e6;
+    color: #00FFFF !important;
 }
 ul.avatar-list li.creator:after,
 ul.avatar-list li.co-owner:after,
@@ -292,11 +293,12 @@ ul.avatar-list li.vip:after,
 ul.avatar-list li.resident-dj:after {
     color: #AA74FE;
 }
-ul.avatar-list li.currentDJ p {
-	color: #FF00FF !important;
+ul.avatar-list li.currentDJ:after {
+    color: #FF00FF !important;
+    opacity: 0.95;
 }
 ul.avatar-list li.admin p {
-	color: #00b5e6;
+	color: #00FFFF !important;
 }
 ul.avatar-list li.creator p,
 ul.avatar-list li.co-owner p,
@@ -304,7 +306,11 @@ ul.avatar-list li.manager p,
 ul.avatar-list li.mod p,
 ul.avatar-list li.vip p,
 ul.avatar-list li.resident-dj p {
-    color: #AA74FE;
+	color: #AA74FE;
+}
+ul.avatar-list li.currentDJ p {
+    color: #FF00FF !important;
+    opacity: 0.95;
 }
 ul.avatar-list li.admin p.dubs,
 ul.avatar-list li.creator p.dubs,
@@ -316,18 +322,13 @@ ul.avatar-list li.resident-dj p.dubs,
 ul.avatar-list li.currentDJ p.dubs {
 	color: #999 !important;
 }
-ul.avatar-list li.admin p.dubs:after,
-ul.avatar-list li.creator p.dubs:after,
-ul.avatar-list li.co-owner p.dubs:after,
-ul.avatar-list li.manager p.dubs:after,
-ul.avatar-list li.mod p.dubs:after,
-ul.avatar-list li.vip p.dubs:after,
-ul.avatar-list li.resident-dj p.dubs:after,
-ul.avatar-list li.currentDJ p.dubs:after {
-	color: #999 !important;
-}
 ul.avatar-list li.updub {
-	border: 1px solid #90AD2F;
+	border: 1px solid #000000;
+	box-shadow: inset 4px 0px 0px 0px #90AD2F;
+}
+ul.avatar-list li.downdub {
+	border: 1px solid #000000;
+	box-shadow: inset 4px 0px 0px 0px #C42E3B;
 }
 #user_popover .global-actions a {
 	background: #A16EF1;
@@ -343,13 +344,6 @@ ul.avatar-list li.updub {
 #user_popover {
     background: #111;
     border: 1px solid #AA74FE;
-}
-ul.avatar-list li.updub {
-    border: 1px solid #90AD2F;
-}
-ul.avatar-list li.downdub {
-/*    border: 1px solid #FF3535;*/
-    border: 1px solid #C42E3B;
 }
 
 /* Profile Page */

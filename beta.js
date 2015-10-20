@@ -106,11 +106,15 @@ if (!isOpen) {
                     '</li>',
                     '<li onclick="optionOnBeforeUnload();" class="optionClass onbeforeunload">',
                         '<p class="isOnOff"><i class="fi-x"></i></p>',
-                        '<p class="Optionling">Prevent Accidental Navigation</p>',
+                        '<p class="Optionling">Warn On Navigation</p>',
                     '</li>',
                     '<li onclick="communityCSS();" class="optionClass communitycss">',
                         '<p class="isOnOff"><i class="fi-x"></i></p>',
                         '<p class="Optionling">Community CSS</p>',
+                    '</li>',
+                    '<li onclick="plugTheme();" class="optionClass plugtheme">',
+                        '<p class="isOnOff"><i class="fi-x"></i></p>',
+                        '<p class="Optionling">Plug Theme</p>',
                     '</li>',
                     '<li class="titleClass">',
                         '<p class="istitle">Support</p>',
@@ -559,6 +563,9 @@ if (!isOpen) {
                 var append = url[0].split('@dubx=');
                 $('head').append('<link class="importcommunitycss" href="'+append[1]+'" rel="stylesheet" type="text/css">');
             });
+            if (isPlugTheme === true) {
+                plugTheme();
+            }
             localStorage.setItem('communitycss','true');
             toggleOptionOn('.communitycss');
         } else {
@@ -573,8 +580,35 @@ if (!isOpen) {
         communityCSS();
     };
     
+    //Ref 3.16: Plug CSS Theme
+    var isPlugTheme = false;
+
+    function plugTheme() {
+        var isOn;
+        if (!isPlugTheme) {
+            isPlugTheme = true;
+            isOn = "on";
+            $('head').append('<link class="enableplugtheme" href="https://rawgit.com/sinfulBA/DubX-Script/master/PlugTheme.css" rel="stylesheet" type="text/css">');
+            localStorage.setItem('plugtheme', 'true');
+            toggleOptionOn('.plugtheme');
+            if (isCommunityCSS === true) {
+                communityCSS();
+            }
+        } else {
+            isPlugTheme = false;
+            isOn = "off";
+            $('.enableplugtheme').remove();
+            localStorage.setItem('plugtheme', 'false');
+            toggleOptionOff('.plugtheme');
+        };
+    };
+    if (localStorage.getItem('plugtheme') === 'true') {
+        plugTheme();
+    };
+    
     //Ref 4: chatLog
     function chatLog(e){var a=new Dubtrack.View.chatLoadingItem;a.$el.text(e).appendTo(Dubtrack.room.chat._messagesEl)}chatLog('Running DubX V.02.00.00');
+
       
 } else {
     function onErr(error) {
