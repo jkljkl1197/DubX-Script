@@ -588,7 +588,7 @@ if (!isOpen) {
             });
             localStorage.setItem('communitycss', 'true');
             toggleOptionOn('.communitycss');
-            if (communityCSS = true) {
+            if (isPlugTheme = true) {
                 communityCSS();
             }
         } else {
@@ -613,7 +613,7 @@ if (!isOpen) {
             $('head').append('<link class="enableplugtheme" href="https://rawgit.com/sinfulBA/DubX-Script/master/PlugTheme.css" rel="stylesheet" type="text/css">');
             localStorage.setItem('plugtheme', 'true');
             toggleOptionOn('.plugtheme');
-            if (plugTheme = true) {
+            if (isCommunityCSS = true) {
                 plugTheme();
             }
         } else {
