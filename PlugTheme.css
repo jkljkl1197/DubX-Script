@@ -277,7 +277,7 @@ button:hover {
     transition: left 0.0s ease-in 0.0s;
 }
 ul.avatar-list li p {
-	color: #CCC;
+	color: #CCC !important;
 }
 ul.avatar-list li p.username {
     color: #868489;
