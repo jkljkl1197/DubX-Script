@@ -589,14 +589,16 @@ if (!isOpen) {
             localStorage.setItem('communitycss', 'true');
             toggleOptionOn('.communitycss');
             if (plugTheme = true) {
-                plugTheme();
+                disableCommunityCSS();
             }
         } else {
-            isCommunityCSS = false;
-            isOn = "off";
-            $('.importcommunitycss').remove();
-            localStorage.setItem('communitycss', 'false');
-            toggleOptionOff('.communitycss');
+            function disableCommunityCSS() {
+               isCommunityCSS = false;
+                isOn = "off";
+                $('.importcommunitycss').remove();
+                localStorage.setItem('communitycss', 'false');
+                toggleOptionOff('.communitycss'); 
+            }
         };
     };
     if (localStorage.getItem('communitycss') === 'true') {
@@ -614,14 +616,16 @@ if (!isOpen) {
             localStorage.setItem('plugtheme', 'true');
             toggleOptionOn('.plugtheme');
             if (communityCSS = true) {
-                communityCSS();
+                disablePlugTheme();
             }
         } else {
-            isPlugTheme = false;
-            isOn = "off";
-            $('.enableplugtheme').remove();
-            localStorage.setItem('plugtheme', 'false');
-            toggleOptionOff('.plugtheme');
+            function disablePlugTheme(){
+                isPlugTheme = false;
+                isOn = "off";
+                $('.enableplugtheme').remove();
+                localStorage.setItem('plugtheme', 'false');
+                toggleOptionOff('.plugtheme');
+            }
         };
     };
     if (localStorage.getItem('plugtheme') === 'true') {
