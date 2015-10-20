@@ -106,7 +106,7 @@ if (!isOpen) {
                     '</li>',
                     '<li onclick="optionOnBeforeUnload();" class="optionClass onbeforeunload">',
                         '<p class="isOnOff"><i class="fi-x"></i></p>',
-                        '<p class="Optionling">Prompt On Before Unload</p>',
+                        '<p class="Optionling">Warn On Navigation</p>',
                     '</li>',
                     '<li onclick="communityCSS();" class="optionClass communitycss">',
                         '<p class="isOnOff"><i class="fi-x"></i></p>',
