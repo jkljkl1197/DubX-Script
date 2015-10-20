@@ -589,7 +589,7 @@ if (!isOpen) {
             localStorage.setItem('communitycss', 'true');
             toggleOptionOn('.communitycss');
             if (plugTheme = true) {
-                disableCommunityCSS();
+                disablePlugTheme();
             }
         } else {
             function disableCommunityCSS() {
@@ -616,7 +616,7 @@ if (!isOpen) {
             localStorage.setItem('plugtheme', 'true');
             toggleOptionOn('.plugtheme');
             if (communityCSS = true) {
-                disablePlugTheme();
+                disableCommunityCSS();
             }
         } else {
             function disablePlugTheme(){
