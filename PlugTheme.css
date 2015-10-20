@@ -323,7 +323,12 @@ ul.avatar-list li.currentDJ p.dubs {
 	color: #999 !important;
 }
 ul.avatar-list li.updub {
-	border: 1px solid #90AD2F;
+	border: 1px solid #000000;
+	box-shadow: ;
+}
+ul.avatar-list li.downdub {
+	border: 1px solid #000000;
+	box-shadow: inset 4px 0px 0px 0px #C42E3B;
 }
 #user_popover .global-actions a {
 	background: #A16EF1;
@@ -339,13 +344,6 @@ ul.avatar-list li.updub {
 #user_popover {
     background: #111;
     border: 1px solid #AA74FE;
-}
-ul.avatar-list li.updub {
-    border: 1px solid #90AD2F;
-}
-ul.avatar-list li.downdub {
-/*    border: 1px solid #FF3535;*/
-    border: 1px solid #C42E3B;
 }
 
 /* Profile Page */
