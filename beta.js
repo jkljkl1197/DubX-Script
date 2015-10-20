@@ -112,6 +112,10 @@ if (!isOpen) {
                         '<p class="isOnOff"><i class="fi-x"></i></p>',
                         '<p class="Optionling">Community CSS</p>',
                     '</li>',
+                    '<li onclick="plugTheme();" class="optionClass plugtheme">',
+                        '<p class="isOnOff"><i class="fi-x"></i></p>',
+                        '<p class="Optionling">Plug CSS Theme</p>',
+                    '</li>',
                     '<li class="titleClass">',
                         '<p class="istitle">Support</p>',
                     '</li>',
@@ -571,6 +575,27 @@ if (!isOpen) {
     };
     if (localStorage.getItem('communitycss') === 'true') {
         communityCSS();
+    };
+    //Ref 3.16: Plug CSS Theme
+    var isPlugTheme = false;
+    function plugTheme() {
+        var isOn;
+        if (!isPlugTheme) {
+            isPlugTheme = true;
+            isOn = "on";
+			$('head').append('<link class="enableplugtheme" href="https://rawgit.com/sinfulBA/DubX-Script/master/PlugTheme.css" rel="stylesheet" type="text/css">');
+            localStorage.setItem('plugtheme','true');
+            toggleOptionOn('.plugtheme');
+        } else {
+            isPlugTheme = false;
+            isOn = "off";
+            $('.enableplugtheme').remove();
+            localStorage.setItem('plugtheme','false');
+            toggleOptionOff('.plugtheme');
+        };
+    };
+    if (localStorage.getItem('plugtheme') === 'true') {
+        plugTheme();
     };
     
     //Ref 4: chatLog
