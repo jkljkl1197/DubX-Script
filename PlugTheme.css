@@ -277,7 +277,7 @@ button:hover {
     transition: left 0.0s ease-in 0.0s;
 }
 ul.avatar-list li p {
-	color: #CCC !important;
+	color: #CCC;
 }
 ul.avatar-list li p.username {
     color: #868489;
@@ -306,7 +306,7 @@ ul.avatar-list li.manager p,
 ul.avatar-list li.mod p,
 ul.avatar-list li.vip p,
 ul.avatar-list li.resident-dj p {
-	color: #AA74FE;
+	color: #AA74FE !important;
 }
 ul.avatar-list li.currentDJ p {
     color: #FF00FF !important;
