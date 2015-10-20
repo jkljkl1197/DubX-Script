@@ -258,9 +258,6 @@
 .user-kris {
     color: #519CD7;
 }
-.user-kris ul.avatar-list li p {
-    color: #519CD7;
-}
 .user-kris p.dubs:after {
     content: " - DUBX ASSISTANT";
     font-weight: 700;
@@ -293,9 +290,6 @@
     margin-right: 5px;
 }
 .user-fi {
-    color: #FFD904;
-}
-.user-fi ul.avatar-list li p {
     color: #FFD904;
 }
 .user-fi p.dubs:after {
