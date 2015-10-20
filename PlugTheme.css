@@ -276,7 +276,18 @@ button:hover {
     opacity: 0.73;
     transition: left 0.0s ease-in 0.0s;
 }
-ul.avatar-list li.currentDJ:after {
+ul.avatar-list li.admin {
+    color: #00FFFF !important;
+}
+ul.avatar-list li.creator,
+ul.avatar-list li.co-owner,
+ul.avatar-list li.manager,
+ul.avatar-list li.mod,
+ul.avatar-list li.vip,
+ul.avatar-list li.resident-dj {
+    color: #AA74FE;
+}
+ul.avatar-list li.currentDJ {
     color: #FF00FF !important;
     opacity: 0.95;
 }
@@ -293,6 +304,10 @@ ul.avatar-list li.mod:after,
 ul.avatar-list li.vip:after,
 ul.avatar-list li.resident-dj:after {
     color: #AA74FE;
+}
+ul.avatar-list li.currentDJ:after {
+    color: #FF00FF !important;
+    opacity: 0.95;
 }
 ul.avatar-list li.admin p,
 ul.avatar-list li.creator p,
