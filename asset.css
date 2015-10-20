@@ -221,7 +221,7 @@
     text-decoration: inherit;
     margin-right: 5px;
 }
-.user-swordling, .user-sinful {
+.user-swordling, .user-sinful, ul.avatar-list .user-sinful li.vip {
     color: #89BE6C;
 }
 .user-swordling p.dubs:after, .user-sinful p.dubs:after {
