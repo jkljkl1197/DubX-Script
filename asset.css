@@ -229,6 +229,11 @@
     font-weight: 700;
     color: #89BE6C !important;
 }
+.user-swordling p.dubs:hover:after, .user-sinful p.dubs:hover:after {
+    content: " - OWNER";
+    font-weight: 700;
+    color: #89BE6C !important;
+}
 .user-swordling p.username, .user-sinful p.username {
     color: #89BE6C !important;
 }
@@ -236,7 +241,7 @@
     color: #999 !important;
 }
 
-/* Assistants */
+/* Contributors */
 #chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username {
     color: #519CD7 !important;
     font-weight: 500;
