@@ -229,7 +229,7 @@
     font-weight: 700;
     color: #89BE6C !important;
 }
-.user-swordling p.dubs:hover:after, .user-sinful p.dubs:hover:after {
+.user-swordling:hover p.dubs:after, .user-sinful:hover p.dubs:after {
     content: " - DUBX OWNER";
     font-weight: 700;
     color: #89BE6C !important;
@@ -263,7 +263,7 @@
 .user-kris {
     color: #519CD7;
 }
-.user-kris p.dubs:hover:after {
+.user-kris:hover p.dubs:after {
     content: " - DUBX CONTRIBUTOR";
     font-weight: 700;
     color: #519CD7 !important;
@@ -302,8 +302,8 @@
     font-weight: 700;
     color: #FFD904 !important;
 }
-.user-fi p.dubs:hover:after {
-    content: " - DUBX (FOR SPECIAL USERS)";
+.user-fi:hover p.dubs:after {
+    content: " - (FOR SPECIAL USERS)";
     font-weight: 700;
     color: #FFD904 !important;
 }
