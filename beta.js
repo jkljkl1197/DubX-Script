@@ -67,7 +67,7 @@ if (!isOpen) {
             '<div class="isSwordful">',
                 '<div class="verSwordful">',
                     '<p class="Javaling">DubX Settings</p>',
-                    '<p class="Javaful">Version 02.15.20 - Cool h`whip.. no no, its cool whip.</p>',
+                    '<p class="Javaful">Version 02.15.20 - Cool h`whip.. no no, its cool whip. Thats what I said, cool h`whip.</p>',
                 '</div>',
                 '<ul class="optionSwordful">',
                     '<li class="optionClass">',
