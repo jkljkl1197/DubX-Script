@@ -196,8 +196,7 @@
     content: "DubX";
     font-weight: 700;
     font-family: proxima-nova,sans-serif;
-    font-size: 8px;
-    text-transform: uppercase;
+    font-size: 10px;
 }
 
 /* Owners */
@@ -412,11 +411,10 @@ ul.avatar-list li.currentDJ .user-fi:after,
 #chat .chat-container ul.chat-main li.user-52d24bff4cf9670200000515 .activity-row .text p a.username:hover:before,
 #chat .chat-container ul.chat-main li.user-52c8efcf37e22b0200000008 .activity-row .text p a.username:hover:before,
 #chat .chat-container ul.chat-main li.user-52c8254ca7b7260200000001 .activity-row .text p a.username:hover:before {
-    content: "admin";
+    content: "Admin";
     font-weight: 700;
     font-family: proxima-nova,sans-serif;
-    font-size: 8px;
-    text-transform: uppercase;
+    font-size: 10px;
 }
 #chat .chat-container ul.chat-main li.user-52c821781e2b1fd945000001 .activity-row .text p a.username,
 #chat .chat-container ul.chat-main li.user-52c8ef6037e22b0200000005 .activity-row .text p a.username,
