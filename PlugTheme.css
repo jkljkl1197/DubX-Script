@@ -249,7 +249,7 @@ button:hover {
 	opacity: 1;
 }
 */
-#chat .chat-container ul.chat-main li .activity-row .text p a.username-handle {
+#chat .chat-container ul.chat-main li .activity-row .text span.username-handle {
     color: #FFDD6F !important;
     opacity: 1;
     font-weight: 500;
@@ -282,9 +282,6 @@ ul.avatar-list li p {
 ul.avatar-list li p.username {
     color: #868489;
 }
-ul.avatar-list li.admin:after {
-    color: #00FFFF !important;
-}
 ul.avatar-list li.creator:after,
 ul.avatar-list li.co-owner:after,
 ul.avatar-list li.manager:after,
@@ -296,9 +293,6 @@ ul.avatar-list li.resident-dj:after {
 ul.avatar-list li.currentDJ:after {
     color: #FF00FF !important;
     opacity: 0.95;
-}
-ul.avatar-list li.admin p {
-	color: #00FFFF !important;
 }
 ul.avatar-list li.creator p,
 ul.avatar-list li.co-owner p,
