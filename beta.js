@@ -67,7 +67,7 @@ if (!isOpen) {
             '<div class="isSwordful">',
                 '<div class="verSwordful">',
                     '<p class="Javaling">DubX Settings</p>',
-                    '<p class="Javaful">Version 02.00.00 - The Cake is a LIE!</p>',
+                    '<p class="Javaful">Version 02.15.20 - "Cool h'whip".. no no, it's "cool whip".</p>',
                 '</div>',
                 '<ul class="optionSwordful">',
                     '<li class="optionClass">',
@@ -607,7 +607,7 @@ if (!isOpen) {
     };
     
     //Ref 4: chatLog
-    function chatLog(e){var a=new Dubtrack.View.chatLoadingItem;a.$el.text(e).appendTo(Dubtrack.room.chat._messagesEl)}chatLog('Running DubX V.02.00.00');
+    function chatLog(e){var a=new Dubtrack.View.chatLoadingItem;a.$el.text(e).appendTo(Dubtrack.room.chat._messagesEl)}chatLog('Running DubX V.02.15.20');
 
       
 } else {
@@ -635,7 +635,7 @@ if (!isOpen) {
         var filecontent = document.querySelector('body')
         $(filecontent).prepend(onErr);
     };
-	onErr('Oh noes! E001: Extension is open twice.');
+	onErr('Oh no! Error 69: Extension is already open.');
     $('.cancel').click(closeErr);
     $('.confirm-err').click(closeErr);
 };
