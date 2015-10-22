@@ -189,6 +189,11 @@
 }
 
 /* Custom CSS for ranks & special users */
+#chat .chat-container ul.chat-main li.user-551d295433cd73030089d184 .activity-row .text span.username-handle {
+	color: #89BE6C !important;
+	font-weight: 500;
+	text-shadow: 0px 0px 1px #000;
+}
 #chat .chat-container ul.chat-main li.user-551d295433cd73030089d184 .activity-row .text p a.username:hover:before,
 #chat .chat-container ul.chat-main li.user-53f7c199892b010200a98809 .activity-row .text p a.username:hover:before,
 #chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username:hover:before,
@@ -421,7 +426,7 @@ ul.avatar-list li.currentDJ .user-fi:after,
 #chat .chat-container ul.chat-main li.user-52d24bff4cf9670200000515 .activity-row .text p a.username,
 #chat .chat-container ul.chat-main li.user-52c8efcf37e22b0200000008 .activity-row .text p a.username,
 #chat .chat-container ul.chat-main li.user-52c8254ca7b7260200000001 .activity-row .text p a.username {
-    color: #00FF00 !important;
+    color: #42A5DC ;
     font-weight: 500;
     text-shadow: 0px 0px 1px #000;
 }
@@ -443,11 +448,11 @@ ul.avatar-list li.currentDJ .user-fi:after,
     margin-right: 5px;
 }
 ul.avatar-list li.admin:after {
-    color: #00FF00 !important;
+    color: #42A5DC ;
 }
 ul.avatar-list li.admin p {
-	color: #00FF00 !important;
+	color: #42A5DC ;
 }
 ul.avatar-list li.admin p.dubs {
-    color: #999 !important;
+    color: #999;
 }
