@@ -263,6 +263,15 @@ button:hover {
     opacity: 0.75;
     font-size: 0.65em;
 }
+#chat .chat-container ul.chat-main li.user-52c821781e2b1fd945000001 .activity-row .text p a.username,
+#chat .chat-container ul.chat-main li.user-52c8ef6037e22b0200000005 .activity-row .text p a.username,
+#chat .chat-container ul.chat-main li.user-52d24bff4cf9670200000515 .activity-row .text p a.username,
+#chat .chat-container ul.chat-main li.user-52c8efcf37e22b0200000008 .activity-row .text p a.username,
+#chat .chat-container ul.chat-main li.user-52c8254ca7b7260200000001 .activity-row .text p a.username {
+    color: #42A5DC !important;
+    font-weight: 600;
+    text-shadow: 0px 0px 1px #000;
+}
 
 /* User tab */
 #main-room #mobile-room-menu a span.info-counter {
