@@ -71,7 +71,7 @@ if (!DubX.isOpen) {
             '<div class="isSwordful">',
                 '<div class="verSwordful">',
                     '<p class="Javaling">DubX Settings</p>',
-                    '<p class="Javaful">Version 02.00.00 - The Cake is a LIE!</p>',
+                    '<p class="Javaful">Version 02.15.20 - Cool h`whip.. no no, its cool whip. Thats what I said, cool h`whip.</p>',
                 '</div>',
                 '<ul class="optionSwordful">',
                     '<li class="optionClass">',
@@ -613,12 +613,7 @@ if (!DubX.isOpen) {
     }
     
     //Ref 4: chatLog
-    DubX.chatLog = function(e){
-        var a=new Dubtrack.View.chatLoadingItem();
-        a.$el.text(e).appendTo(Dubtrack.room.chat._messagesEl);
-    };
-    DubX.chatLog('Running DubX V.02.00.00');
-
+    function chatLog(e){var a=new Dubtrack.View.chatLoadingItem;a.$el.text(e).appendTo(Dubtrack.room.chat._messagesEl)}chatLog('Running DubX V.02.15.20');
       
 } else {
     DubX.onErr = function(error) {
@@ -645,7 +640,7 @@ if (!DubX.isOpen) {
         var filecontent = document.querySelector('body');
         $(filecontent).prepend(onErr);
     };
-	DubX.onErr('Oh noes! E001: Extension is open twice.');
+	DubX.onErr('Oh no! Error 69: Extension is already open.');
     $('.cancel').click(DubX.closeErr);
     $('.confirm-err').click(DubX.closeErr);
 }
