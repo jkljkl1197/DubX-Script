@@ -451,7 +451,7 @@ ul.avatar-list li.admin:after {
     color: #42A5DC !important;
 }
 ul.avatar-list li.admin p {
-	color: #42A5DC !important;
+	color: #42A5DC;
 }
 ul.avatar-list li.admin p.dubs {
     color: #999;
