@@ -249,8 +249,11 @@ button:hover {
 	opacity: 1;
 }
 */
-#chat .chat-container ul.chat-main li .activity-row .text span.username-handle {
+#chat .chat-container ul.chat-main li .activity-row .text span.username-handle[style="color: rgba(255, 0, 255, 0.8);"] {
     color: #FFDD6F !important;
+}
+#chat .chat-container ul.chat-main li .activity-row .text span.username-handle {
+    color: #CCC !important;
     opacity: 1;
     font-weight: 500;
 }
