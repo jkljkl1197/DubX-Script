@@ -448,7 +448,7 @@ ul.avatar-list li.currentDJ .user-fi:after,
     margin-right: 5px;
 }
 ul.avatar-list li.admin:after {
-    color: #FF7E00 !important;
+    color: #FF7E00;
 }
 ul.avatar-list li.admin p {
 	color: #FF7E00;
