@@ -284,7 +284,7 @@ ul.avatar-list li p.username {
 }
 ul.avatar-list li.admin:after {
     color: #42A5DC !important;
-    opacity: 0.95;
+    opacity: 1;
 }
 ul.avatar-list li.creator:after,
 ul.avatar-list li.co-owner:after,
@@ -300,7 +300,7 @@ ul.avatar-list li.currentDJ:after {
 }
 ul.avatar-list li.admin p {
     color: #42A5DC !important;
-    opacity: 0.95;
+    opacity: 1;
 }
 ul.avatar-list li.creator p,
 ul.avatar-list li.co-owner p,
