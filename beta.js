@@ -234,10 +234,9 @@ if (!isOpen) {
         if (!isAutovote) {
             isAutovote = true;
             isOn = "on";
-            var woot = document.querySelector('.dubup');
-            woot.click();
+            $('.dubup').click();
             function advanceVote() {
-                woot.click();
+                $('.dubup').click();
             };
             Dubtrack.Events.bind('realtime:room_playlist-update', advanceVote);
             localStorage.setItem('isAutovote','true');
