@@ -65,9 +65,11 @@ if (!DubX.isOpen) {
     //Ref 2: User Interface
     DubX.hello = function() {
         var li = '<li><button onclick="DubX.toggleControls();" class="relate" style="font-size: 1em;height: 32px;margin-right: 16px;border-radius: 0.1875em;">DUB X</button></li>';
-        var html = [
+        var css = [
             '<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css">',
-            '<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/asset.css">',
+            '<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/asset.css">'
+        ].join('');
+        var html = [
             '<div class="isSwordful">',
                 '<div class="verSwordful">',
                     '<p class="Javaling">DubX Settings</p>',
@@ -184,10 +186,9 @@ if (!DubX.isOpen) {
                 '</ul>',
             '</div>'
         ].join('');
-        var top = document.querySelector('.user-header-menu');
-        var content = document.querySelector('body');
-        $(top).prepend(li);
-        $(content).prepend(html);
+        $('head').append(css);
+        $('.user-header-menu').prepend(li);
+        $(document.body).prepend(html);
         DubX.helloUser();
     };
     DubX.hello();
@@ -196,7 +197,7 @@ if (!DubX.isOpen) {
     
     //Ref 3.1: Input Function
     DubX.input = function(title,content,placeholder,confirm) {
-        var onErr = [
+        var inputHtml = [
             '<div class="onErr">',
                 '<div class="container">',
                     '<div class="title">',
@@ -217,7 +218,7 @@ if (!DubX.isOpen) {
                 '</div>',
             '</div>'
         ].join('');
-        $('body').prepend(onErr);
+        $('body').prepend(inputHtml);
     };
     
     //Ref 3.2: Global Functions

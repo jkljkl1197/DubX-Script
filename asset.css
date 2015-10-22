@@ -20,7 +20,7 @@
 .fullscreenLeft {
     width: calc(98.9vw - 428px) !important;
     float: left !important;
-    height: calc(99.2vh - 88px) !important
+    height: calc(99.2vh - 88px) !important;
 }
 .fullscreenRight {
     right: 0 !important;
