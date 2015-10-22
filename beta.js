@@ -236,14 +236,13 @@ if (!DubX.isOpen) {
     DubX.isAutovote = false;
     DubX.optionAutovote = function() {
         var isOn;
-        var woot = document.querySelector('.dubup');
-        function advanceVote() {
-            woot.click();
-        }
         if (!DubX.isAutovote) {
             DubX.isAutovote = true;
             isOn = "on";
-            woot.click();
+            $('.dubup').click();
+            function advanceVote() {
+                $('.dubup').click();
+            }
             Dubtrack.Events.bind('realtime:room_playlist-update', advanceVote);
             localStorage.setItem('isAutovote','true');
             DubX.toggleOptionOn('.autovote');
