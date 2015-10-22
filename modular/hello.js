@@ -1,62 +1,63 @@
 /*
-  THE Q PUBLIC LICENSE version 1.0
+    THE Q PUBLIC LICENSE version 1.0
 
-  Copyright (C) 1999-2005 Trolltech AS, Norway. 
-  Everyone is permitted to copy and distribute this license document.
+    Copyright (C) 1999-2005 Trolltech AS, Norway. 
+    Everyone is permitted to copy and distribute this license document.
 
-  The intent of this license is to establish freedom to share and change the software regulated by this license under the open source model.
+    The intent of this license is to establish freedom to share and change the software regulated by this license under the open source model.
 
-  This license applies to any software containing a notice placed by the copyright holder saying that it may be distributed under the terms of the Q Public License version 1.0. Such software is herein referred to as the Software. This license covers modification and distribution of the Software, use of third-party application programs based on the Software, and development of free software which uses the Software.
+    This license applies to any software containing a notice placed by the copyright holder saying that it may be distributed under the terms of the Q Public License version 1.0. Such software is herein referred to as the Software. This license covers modification and distribution of the Software, use of third-party application programs based on the Software, and development of free software which uses the Software.
 
-  Granted Rights
+    Granted Rights
 
-  1. You are granted the non-exclusive rights set forth in this license provided you agree to and comply with any and all conditions in this license. Whole or partial distribution of the Software, or software items that link with the Software, in any form signifies acceptance of this license.
+    1. You are granted the non-exclusive rights set forth in this license provided you agree to and comply with any and all conditions in this license. Whole or partial distribution of the Software, or software items that link with the Software, in any form signifies acceptance of this license.
 
-  2. You may copy and distribute the Software in unmodified form provided that the entire package, including - but not restricted to - copyright, trademark notices and disclaimers, as released by the initial developer of the Software, is distributed.
+    2. You may copy and distribute the Software in unmodified form provided that the entire package, including - but not restricted to - copyright, trademark notices and disclaimers, as released by the initial developer of the Software, is distributed.
 
-  3. You may make modifications to the Software and distribute your modifications, in a form that is separate from the Software, such as patches. The following restrictions apply to modifications:
+    3. You may make modifications to the Software and distribute your modifications, in a form that is separate from the Software, such as patches. The following restrictions apply to modifications:
 
-  a. Modifications must not alter or remove any copyright notices in the Software. 
-  b. When modifications to the Software are released under this license, a non-exclusive royalty-free right is granted to the initial developer of the Software to distribute your modification in future versions of the Software provided such versions remain available under these terms in addition to any other license(s) of the initial developer.
+    a. Modifications must not alter or remove any copyright notices in the Software. 
+    b. When modifications to the Software are released under this license, a non-exclusive royalty-free right is granted to the initial developer of the Software to distribute your modification in future versions of the Software provided such versions remain available under these terms in addition to any other license(s) of the initial developer.
 
-  4. You may distribute machine-executable forms of the Software or machine-executable forms of modified versions of the Software, provided that you meet these restrictions:
+    4. You may distribute machine-executable forms of the Software or machine-executable forms of modified versions of the Software, provided that you meet these restrictions:
 
-  a. You must include this license document in the distribution. 
-  b. You must ensure that all recipients of the machine-executable forms are also able to receive the complete machine-readable source code to the distributed Software, including all modifications, without any charge beyond the costs of data transfer, and place prominent notices in the distribution explaining this. 
-  c. You must ensure that all modifications included in the machine-executable forms are available under the terms of this license.
+    a. You must include this license document in the distribution. 
+    b. You must ensure that all recipients of the machine-executable forms are also able to receive the complete machine-readable source code to the distributed Software, including all modifications, without any charge beyond the costs of data transfer, and place prominent notices in the distribution explaining this. 
+    c. You must ensure that all modifications included in the machine-executable forms are available under the terms of this license.
 
-  5. You may use the original or modified versions of the Software to compile, link and run application programs legally developed by you or by others.
+    5. You may use the original or modified versions of the Software to compile, link and run application programs legally developed by you or by others.
 
-  6. You may develop application programs, reusable components and other software items that link with the original or modified versions of the Software. These items, when distributed, are subject to the following requirements:
+    6. You may develop application programs, reusable components and other software items that link with the original or modified versions of the Software. These items, when distributed, are subject to the following requirements:
 
-  a. You must ensure that all recipients of machine-executable forms of these items are also able to receive and use the complete machine-readable source code to the items without any charge beyond the costs of data transfer. 
-  b. You must explicitly license all recipients of your items to use and re-distribute original and modified versions of the items in both machine-executable and source code forms. The recipients must be able to do so without any charges whatsoever, and they must be able to re-distribute to anyone they choose. 
-  c. If the items are not available to the general public, and the initial developer of the Software requests a copy of the items, then you must supply one.
+    a. You must ensure that all recipients of machine-executable forms of these items are also able to receive and use the complete machine-readable source code to the items without any charge beyond the costs of data transfer. 
+    b. You must explicitly license all recipients of your items to use and re-distribute original and modified versions of the items in both machine-executable and source code forms. The recipients must be able to do so without any charges whatsoever, and they must be able to re-distribute to anyone they choose. 
+    c. If the items are not available to the general public, and the initial developer of the Software requests a copy of the items, then you must supply one.
 
-  Limitations of Liability
+    Limitations of Liability
 
-  In no event shall the initial developers or copyright holders be liable for any damages whatsoever, including - but not restricted to - lost revenue or profits or other direct, indirect, special, incidental or consequential damages, even if they have been advised of the possibility of such damages, except to the extent invariable law, if any, provides otherwise.
+    In no event shall the initial developers or copyright holders be liable for any damages whatsoever, including - but not restricted to - lost revenue or profits or other direct, indirect, special, incidental or consequential damages, even if they have been advised of the possibility of such damages, except to the extent invariable law, if any, provides otherwise.
 
-  No Warranty
+    No Warranty
 
-  The Software and this license document are provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+    The Software and this license document are provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 
-  Choice of Law
+    Choice of Law
 
-  This license is governed by the Laws of Norway. Disputes shall be settled by Oslo City Court.
+    This license is governed by the Laws of Norway. Disputes shall be settled by Oslo City Court.
 */
 
 //Hello.js
-var DubX = {}; // Object to namespace this plugin
+/* global Dubtrack */ // for jshint
+var DubX = DubX || {}; // Object to namespace this plugin
 
 if (!DubX.isOpen) {
     DubX.isOpen = true;
+
     //Ref 1: User Interface Functions
     DubX.helloUser = function() {
         var user = Dubtrack.session.get('username');
         $('.isUser').text(user);
     };
-
     DubX.toggleControls = function() {
         $('.isSwordful').slideToggle("fast");
     };
@@ -64,13 +65,15 @@ if (!DubX.isOpen) {
     //Ref 2: User Interface
     DubX.hello = function() {
         var li = '<li><button onclick="DubX.toggleControls();" class="relate" style="font-size: 1em;height: 32px;margin-right: 16px;border-radius: 0.1875em;">DUB X</button></li>';
-        var html = [
+        var css = [
             '<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css">',
-            '<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/asset.css">',
+            '<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/asset.css">'
+        ].join('');
+        var html = [
             '<div class="isSwordful">',
                 '<div class="verSwordful">',
                     '<p class="Javaling">DubX Settings</p>',
-                    '<p class="Javaful">Version 02.00.00 - The Cake is a LIE!</p>',
+                    '<p class="Javaful">Version 02.15.20 - Cool h`whip.. no no, its cool whip. Thats what I said, cool h`whip.</p>',
                 '</div>',
                 '<ul class="optionSwordful">',
                     '<li class="optionClass">',
@@ -109,11 +112,15 @@ if (!DubX.isOpen) {
                     '</li>',
                     '<li onclick="DubX.optionOnBeforeUnload();" class="optionClass onbeforeunload">',
                         '<p class="isOnOff"><i class="fi-x"></i></p>',
-                        '<p class="Optionling">Prompt On Before Unload</p>',
+                        '<p class="Optionling">Warn On Navigation</p>',
                     '</li>',
                     '<li onclick="DubX.communityCSS();" class="optionClass communitycss">',
                         '<p class="isOnOff"><i class="fi-x"></i></p>',
                         '<p class="Optionling">Community CSS</p>',
+                    '</li>',
+                    '<li onclick="DubX.plugTheme();" class="optionClass plugtheme">',
+                        '<p class="isOnOff"><i class="fi-x"></i></p>',
+                        '<p class="Optionling">Plug Theme</p>',
                     '</li>',
                     '<li class="titleClass">',
                         '<p class="istitle">Support</p>',
@@ -179,20 +186,18 @@ if (!DubX.isOpen) {
                 '</ul>',
             '</div>'
         ].join('');
-        var top = document.querySelector('.user-header-menu')
-        var content = document.querySelector('body')
-        $(top).prepend(li)
-        $(content).prepend(html)
+        $('head').append(css);
+        $('.user-header-menu').prepend(li);
+        $(document.body).prepend(html);
         DubX.helloUser();
     };
-
     DubX.hello();
     
     //Ref 3: Options
     
     //Ref 3.1: Input Function
     DubX.input = function(title,content,placeholder,confirm) {
-        var onErr = [
+        var inputHtml = [
             '<div class="onErr">',
                 '<div class="container">',
                     '<div class="title">',
@@ -213,33 +218,31 @@ if (!DubX.isOpen) {
                 '</div>',
             '</div>'
         ].join('');
-        $('body').prepend(DubX.onErr);
+        $('body').prepend(inputHtml);
     };
     
     //Ref 3.2: Global Functions
     DubX.toggleOptionOn = function(selector) {
         $(selector + ' .isOnOff i').replaceWith('<i class="fi-check"></i>');
     };
-
     DubX.toggleOptionOff = function(selector) {
         $(selector + ' .isOnOff i').replaceWith('<i class="fi-x"></i>');
-    }
+    };
     DubX.closeErr = function() {
         $('.onErr').remove();
-    }
+    };
     
-    //Ref 3.3: DubX.optionAutovote
+    //Ref 3.3: optionAutovote
     DubX.isAutovote = false;
     DubX.optionAutovote = function() {
         var isOn;
         if (!DubX.isAutovote) {
             DubX.isAutovote = true;
             isOn = "on";
-            var woot = document.querySelector('.dubup');
-            woot.click();
+            $('.dubup').click();
             function advanceVote() {
-                woot.click();
-            };
+                $('.dubup').click();
+            }
             Dubtrack.Events.bind('realtime:room_playlist-update', advanceVote);
             localStorage.setItem('isAutovote','true');
             DubX.toggleOptionOn('.autovote');
@@ -249,25 +252,25 @@ if (!DubX.isOpen) {
             Dubtrack.Events.unbind('realtime:room_playlist-update', advanceVote);
             localStorage.setItem('isAutovote','false');
             DubX.toggleOptionOff('.autovote');
-        };
+        }
     };
     if (localStorage.getItem('isAutovote') === 'true') {
         DubX.optionAutovote();
-    };
+    }
     
     //Ref 3.4: optionSplitChat
     DubX.isSplitChat = false;
     DubX.optionSplitChat = function() {
-        var isOn
+        var isOn;
             if (!DubX.isSplitChat) {
-                DubX.isSplitChat = true
+                DubX.isSplitChat = true;
                 isOn = "on";
                 $('.chat-main li:nth-child(even)').addClass('split');
                 $('.chat-main li:nth-child(even) .chatDelete').addClass('splitfix');
                 localStorage.setItem('isSplitChat','true');
                 DubX.toggleOptionOn('.splitchat');
             } else {
-                DubX.isSplitChat = false
+                DubX.isSplitChat = false;
                 isOn = "off";
                 $('.chat-main li:nth-child(even)').removeClass('split');
                 $('.chat-main li:nth-child(even) .chatDelete').removeClass('splitfix');
@@ -277,7 +280,7 @@ if (!DubX.isOpen) {
     };
     if (localStorage.getItem('isSplitChat') === 'true') {
         DubX.optionSplitChat();
-    };
+    }
     
     //Ref 3.5: boothDuration
     $('.player_sharing').append('<span class="durationRemaining"></span>');
@@ -290,7 +293,7 @@ if (!DubX.isOpen) {
         var boothDurationLeft = (boothDurationInt * time - time) + currentTimeMinInt;
         if (boothDurationLeft >= 0) {
             $('.durationRemaining').replaceWith('<span class="durationRemaining">You will be on the booth in approximately ' + boothDurationLeft + ' minutes.</span>');
-        };
+        }
     };
     Dubtrack.Events.bind('realtime:room_playlist-update', DubX.boothDuration);
     
@@ -319,7 +322,7 @@ if (!DubX.isOpen) {
         $('.onErr').remove();
     };
     DubX.showReport = function() {
-        input('Bug Report:','Report:','Please give a detailed description of the bug.','confirm-for36','cancel');
+        DubX.input('Bug Report:','Report:','Please give a detailed description of the bug.','confirm-for36','cancel');
         $('.confirm-for36').click(DubX.postreport);
         $('.cancel').click(DubX.cancelreport);
     };
@@ -339,11 +342,10 @@ if (!DubX.isOpen) {
         $('.player_container').removeClass('fullscreenVideoChild');
         $('#player-controller').removeClass('fullscreenController');
         DubX.isFullscreen = false;
-        isOn = "off";  // what does this do???
+        isOn = "off";
         localStorage.setItem('isFullscreen','false');
         DubX.toggleOptionOff('.fullscreen');
     };
-
     DubX.optionFullscreen = function() {
         var isOn;
         if (!DubX.isFullscreen) {
@@ -363,23 +365,23 @@ if (!DubX.isOpen) {
             DubX.toggleOptionOn('.fullscreen');
         } else {
             DubX.fullscreenOff();
-        };
+        }
     };
     if (localStorage.getItem('isFullscreen') === 'true') {
         DubX.optionFullscreen();
-    };
+    }
     $('.user-info-button').click(DubX.fullscreenOff);
     window.addEventListener("resize", function(){
         var windowWidth = $(window).width();
         if (windowWidth <= 1185) {
             DubX.fullscreenOff();
-        };
+        }
     }, true);
         
     //Ref 3.8: optionHideBackground
     DubX.isBackground = false;
     DubX.isBackgroundToggle = function() {
-        var isOn
+        var isOn;
             if (!DubX.isBackground) {
                 DubX.isBackground = true;
                 isOn = "on";
@@ -388,7 +390,7 @@ if (!DubX.isOpen) {
                 localStorage.setItem('isBackground','true');
                 DubX.toggleOptionOn('.removestretch');
             } else {
-                DubX.isBackground = false
+                DubX.isBackground = false;
                 isOn = "off";
                 $('.backstretch').show();
                 $('.userCustomB').show();
@@ -398,11 +400,12 @@ if (!DubX.isOpen) {
     };
     if (localStorage.getItem('isBackground') === 'true') {
         DubX.isBackgroundToggle();
-    };
+    }
     
     //Ref 3.9: optionWorkMode
     DubX.isWork = false;
-    DubX.disableWork = function () {
+    DubX.disableWork = function() {
+        var isOn;
         DubX.isWork = false;
             $('#main-room').show();
             isOn = "off";
@@ -424,15 +427,15 @@ if (!DubX.isOpen) {
     };
     if (localStorage.getItem('isWork') === 'true') {
         DubX.optionWork();
-    };
+    }
     $('.user-info-button').click(DubX.disableWork);
     
     //Ref 3.10: optionOnBeforeUnload
     DubX.isOnBeforeUnload = false;
     DubX.optionOnBeforeUnload = function() {
-        var isOn
+        var isOn;
             if (!DubX.isOnBeforeUnload) {
-                DubX.isOnBeforeUnload = true
+                DubX.isOnBeforeUnload = true;
                 isOn = "on";
                 window.onbeforeunload = function(e) {
                     return 'You sure about that?';
@@ -440,7 +443,7 @@ if (!DubX.isOpen) {
                 localStorage.setItem('isOnBeforeUnload','true');
                 DubX.toggleOptionOn('.onbeforeunload');
             } else {
-                DubX.isOnBeforeUnload = false
+                DubX.isOnBeforeUnload = false;
                 isOn = "off";
                 window.onbeforeunload = null;
                 localStorage.setItem('isOnBeforeUnload','false');
@@ -449,7 +452,7 @@ if (!DubX.isOpen) {
     };
     if (localStorage.getItem('isOnBeforeUnload') === 'true') {
         DubX.optionOnBeforeUnload();
-    };
+    }
     
     //Ref 3.11: AFK-Autorespond
     DubX.isAutorespond = false;
@@ -467,7 +470,7 @@ if (!DubX.isOpen) {
                 }, 30 * 1000);
             }
         }
-    }
+    };
     DubX.optionAutorespond = function() {
         var isOn;
             if (!DubX.isAutorespond) {
@@ -486,15 +489,15 @@ if (!DubX.isOpen) {
     //Ref 3.12: Chat Only
     DubX.isChat = false;
     DubX.optionChat = function() {
-        var isOn
+        var isOn;
             if (!DubX.isChat) {
-                DubX.isChat = true
+                DubX.isChat = true;
                 isOn = "on";
                 $('body').append('<style class="isChat">.left_section {display: none !important;}.right_section {width: 428.4px !important;margin: 0 auto !important;right: initial !important;position: relative !important;float: inherit !important;}</style>');
                 localStorage.setItem('isChat','true');
                 DubX.toggleOptionOn('.showchat');
             } else {
-                DubX.isChat = false
+                DubX.isChat = false;
                 isOn = "off";
                 $('.isChat').remove();
                 localStorage.setItem('isChat','false');
@@ -503,7 +506,7 @@ if (!DubX.isOpen) {
     };
     if (localStorage.getItem('isChat') === 'true') {
         DubX.optionChat();
-    };
+    }
     
     //Ref 3.13: Custom CSS
     DubX.openCSS = function() {
@@ -523,7 +526,7 @@ if (!DubX.isOpen) {
         if (localStorage.getItem('userCSS') !== null) {
             var userlocalCSS = localStorage.getItem('userCSS');
             $('head').append('<link class="customCSS" href="' + userlocalCSS + '" rel="stylesheet" type="text/css">');
-        };
+        }
     };
     $('document').ready(DubX.loadCSS);
     
@@ -532,20 +535,20 @@ if (!DubX.isOpen) {
         DubX.input('Link an image file:','It is recommended a .jpg file is used','https://example.com/example.jpg','confirm-for314');
         $('.confirm-for314').click(DubX.importCustom);
         $('.cancel').click(DubX.closeErr);
-    }
+    };
     DubX.importCustom = function() {
         var userCustom = $('.input').val();
         localStorage.setItem('userCustom',userCustom);
         $('.userCustomB').remove();
         $('body').append('<div class="userCustomB" style="width: 100vw;height: 100vh;z-index: -999998;position: fixed; background: url(' + userCustom + ');background-size: cover;top: 0;"></div>');
         $('.onErr').remove();
-    }
+    };
     DubX.loadCustom = function() {
         if (localStorage.getItem('userCustom') !== null) {
             var userloadCustom = localStorage.getItem('userCustom');
             $('body').append('<div class="userCustomB" style="width: 100vw;height: 100vh;z-index: -999998;position: fixed; background: url(' + userloadCustom + ');background-size: cover;top: 0;"></div>');
         }
-    }
+    };
     $('document').ready(DubX.loadCustom);
     
     //Ref 3.15: Community CSS
@@ -561,11 +564,14 @@ if (!DubX.isOpen) {
                 url: 'https://api.dubtrack.fm/room/'+user_location_url,
             }).done(function(data) {
                 var info = data.data.description;
-                var expression = /(@dubx=)(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
+                var expression = /(@dubx=)(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
                 var url = info.match(expression);
                 var append = url[0].split('@dubx=');
                 $('head').append('<link class="importcommunitycss" href="'+append[1]+'" rel="stylesheet" type="text/css">');
             });
+            if (DubX.isPlugTheme === true) {
+                DubX.plugTheme();
+            }
             localStorage.setItem('communitycss','true');
             DubX.toggleOptionOn('.communitycss');
         } else {
@@ -574,15 +580,40 @@ if (!DubX.isOpen) {
             $('.importcommunitycss').remove();
             localStorage.setItem('communitycss','false');
             DubX.toggleOptionOff('.communitycss');
-        };
+        }
     };
     if (localStorage.getItem('communitycss') === 'true') {
         DubX.communityCSS();
+    }
+    
+    //Ref 3.16: Plug CSS Theme
+    DubX.isPlugTheme = false;
+
+    DubX.plugTheme = function() {
+        var isOn;
+        if (!DubX.isPlugTheme) {
+            DubX.isPlugTheme = true;
+            isOn = "on";
+            $('head').append('<link class="enableplugtheme" href="https://rawgit.com/sinfulBA/DubX-Script/master/PlugTheme.css" rel="stylesheet" type="text/css">');
+            localStorage.setItem('plugtheme', 'true');
+            DubX.toggleOptionOn('.plugtheme');
+            if (DubX.isCommunityCSS === true) {
+                DubX.communityCSS();
+            }
+        } else {
+            DubX.isPlugTheme = false;
+            isOn = "off";
+            $('.enableplugtheme').remove();
+            localStorage.setItem('plugtheme', 'false');
+            DubX.toggleOptionOff('.plugtheme');
+        }
     };
+    if (localStorage.getItem('plugtheme') === 'true') {
+        DubX.plugTheme();
+    }
     
     //Ref 4: chatLog
-    DubX.chatLog = function(e){var a=new Dubtrack.View.chatLoadingItem;a.$el.text(e).appendTo(Dubtrack.room.chat._messagesEl);};
-    DubX.chatLog('Running DubX V.02.00.00');
+    function chatLog(e){var a=new Dubtrack.View.chatLoadingItem;a.$el.text(e).appendTo(Dubtrack.room.chat._messagesEl)}chatLog('Running DubX V.02.15.20');
       
 } else {
     DubX.onErr = function(error) {
@@ -606,10 +637,10 @@ if (!DubX.isOpen) {
                 '</div>',
             '</div>'
         ].join('');
-        var filecontent = document.querySelector('body')
-        $(filecontent).prepend(DubX.onErr);
+        var filecontent = document.querySelector('body');
+        $(filecontent).prepend(onErr);
     };
-	DubX.onErr('Oh noes! E001: Extension is open twice.');
+    DubX.onErr('Oh no! Error 69: Extension is already open.');
     $('.cancel').click(DubX.closeErr);
     $('.confirm-err').click(DubX.closeErr);
-};
+}
