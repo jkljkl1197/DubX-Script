@@ -266,21 +266,24 @@ function wait(){
 		DubX.isSplitChat = false;
 		DubX.optionSplitChat = function() {
 			var isOn;
-				if (!DubX.isSplitChat) {
-					DubX.isSplitChat = true;
-					isOn = "on";
-					$('.chat-main li:nth-child(even)').addClass('split');
-					$('.chat-main li:nth-child(even) .chatDelete').addClass('splitfix');
-					localStorage.setItem('isSplitChat','true');
-					DubX.toggleOptionOn('.splitchat');
-				} else {
-					DubX.isSplitChat = false;
-					isOn = "off";
-					$('.chat-main li:nth-child(even)').removeClass('split');
-					$('.chat-main li:nth-child(even) .chatDelete').removeClass('splitfix');
-					localStorage.setItem('isSplitChat','false');
-					DubX.toggleOptionOff('.splitchat');
+				function waitSplit(){
+					if (!DubX.isSplitChat) {
+						DubX.isSplitChat = true;
+						isOn = "on";
+						$('.chat-main li:nth-child(even)').addClass('split');
+						$('.chat-main li:nth-child(even) .chatDelete').addClass('splitfix');
+						localStorage.setItem('isSplitChat','true');
+						DubX.toggleOptionOn('.splitchat');
+					} else {
+						DubX.isSplitChat = false;
+						isOn = "off";
+						$('.chat-main li:nth-child(even)').removeClass('split');
+						$('.chat-main li:nth-child(even) .chatDelete').removeClass('splitfix');
+						localStorage.setItem('isSplitChat','false');
+						DubX.toggleOptionOff('.splitchat');
+					}
 				}
+				setTimeout(waitSplit, 1500);
 		};
 		if (localStorage.getItem('isSplitChat') === 'true') {
 			DubX.optionSplitChat();
