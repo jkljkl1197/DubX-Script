@@ -283,7 +283,7 @@ function wait(){
 						DubX.toggleOptionOff('.splitchat');
 					}
 				}
-				setTimeout(waitSplit, 1500);
+				setTimeout(waitSplit, 3500);
 		};
 		if (localStorage.getItem('isSplitChat') === 'true') {
 			DubX.optionSplitChat();
