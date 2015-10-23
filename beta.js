@@ -54,11 +54,11 @@ if (!DubX.isOpen) {
             '<div class="isSwordful">',
                 '<div class="verSwordful">',
                     '<p class="Javaling">DubX Settings</p>',
-                    '<p class="Javaful">Version 02.15.20 - Cool h`whip.. no no, its cool whip. Thats what I said, cool h`whip.</p>',
+                    '<p class="Javaful">Version 02.15.30 - *Tips le fedora* M`lady, would you like some doritos and moutain dew?</p>',
                 '</div>',
                 '<ul class="optionSwordful">',
                     '<li class="optionClass">',
-                        '<p class="Optionling" style="margin: 0;">Greetings, <span class="isUser"></span></p>',
+                        '<p class="Optionling" style="margin: 0;">Aloha, <span class="isUser">!</span></p>',
                     '</li>',
                     '<li class="titleClass">',
                         '<p class="istitle">Standard</p>',
@@ -594,7 +594,7 @@ if (!DubX.isOpen) {
     }
     
     //Ref 4: chatLog
-    function chatLog(e){var a=new Dubtrack.View.chatLoadingItem;a.$el.text(e).appendTo(Dubtrack.room.chat._messagesEl)}chatLog('Running DubX V.02.15.20');
+    function chatLog(e){var a=new Dubtrack.View.chatLoadingItem;a.$el.text(e).appendTo(Dubtrack.room.chat._messagesEl)}chatLog('Running DubX V.02.15.30');
       
 } else {
     DubX.onErr = function(error) {
