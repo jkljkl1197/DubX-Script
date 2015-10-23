@@ -266,8 +266,7 @@ function wait(){
 		DubX.isSplitChat = false;
 		DubX.optionSplitChat = function() {
 			var isOn;
-				function waitSplit(){
-					if (!DubX.isSplitChat) {
+				if (!DubX.isSplitChat) {
 						DubX.isSplitChat = true;
 						isOn = "on";
 						$('.chat-main li:nth-child(even)').addClass('split');
@@ -282,8 +281,7 @@ function wait(){
 						localStorage.setItem('isSplitChat','false');
 						DubX.toggleOptionOff('.splitchat');
 					}
-				}
-				setTimeout(waitSplit, 3500);
+				}	
 		};
 		if (localStorage.getItem('isSplitChat') === 'true') {
 			DubX.optionSplitChat();
@@ -653,4 +651,4 @@ function wait(){
 	}
 };
 setTimeout(chatLog('Loading DubX Settings & CSS'), 1500);
-setTimeout(wait, 2000);
+setTimeout(wait, 3000);
