@@ -257,6 +257,8 @@ button:hover {
     opacity: 1;
     font-weight: 500;
 }
+#chat .chat-container ul.chat-main li:focus .chatDelete,
+#chat .chat-container ul.chat-main li:hover .chatDelete,
 #chat .chat-container ul.chat-main li:hover>.stream-item-content .chatDelete, 
 #chat .chat-container ul.chat-main li .stream-item-content:focus>.chatDelete {
     color: #AA74FE !important;

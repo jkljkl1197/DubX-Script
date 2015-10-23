@@ -92,6 +92,11 @@
     margin: 0 0 0 1em;
     font-size: 16px;
 }
+.isSwordful .optionSwordful .Optionful {
+    display: inline;
+    margin: 0 0 0 1em;
+    font-size: 13px;
+}
 .isSwordful .optionSwordful .optionClass {
     background: #111;
     padding: 6px 27px 6px 27px;
