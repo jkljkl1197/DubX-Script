@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.00.03 - I Want Candy!';
+    var our_version = '03.00.04 - Sugar Daddy';
     //Ref 1: Variables
     var options = {
         let_autovote: false,
@@ -170,7 +170,7 @@ if (!hello_run) {
                             '</a>',
                         '</li>',
                         '<li class="optionClass">',
-                            '<p class="Optionful" style="margin: 0;">Dub X currently has 717 users!</p>',
+                            '<p class="Optionful" style="margin: 0;">Dub X currently has 741 users!</p>',
                         '</li>',
                     '</ul>',
                 '</div>'
