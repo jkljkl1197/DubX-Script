@@ -70,7 +70,7 @@ if (!hello_run) {
                     '</div>',
                     '<ul class="optionSwordful">',
                         '<li class="optionClass">',
-                            '<p class="Optionling" style="margin: 0;">Greetings, <span class="isUser"></span></p>',
+                            '<p class="Optionling" style="margin: 0;">Aloha, <span class="isUser"></span>!</p>',
                         '</li>',
                         '<li class="titleClass">',
                             '<p class="istitle">Standard</p>',
