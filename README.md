@@ -12,16 +12,17 @@ Our Team
  - [Swordling](https://github.com/swordling) __(Owner/Developer)__
  - [Kris](https://github.com/PossiblyKris) __(Helper/Developer)__
  - [Al3366](https://github.com/Al3366) __(Helper/Extension Manager)__
+ - [Ciscog](https://github.com/FranciscoG) __(Helper/Developer)__
 
 -----------------
 IMPORTANT
 ---
 
-__Updates (Version 02.00.00 - The cake is a LIE!)__
+__Updates (Version 02.15.30 - Sushi)__
 
-- Re-optimized code
-- Added Community CSS
-- Added Facebook & Twitter links!
+- Added Plug Theme
+- Working on bug issues
+- Namespaced the plug-in
 
 -----------------
 Usage
@@ -39,7 +40,7 @@ javascript:(function(){$.getScript('https://rawgit.com/sinfulBA/DubX-Script/mast
 Custom CSS
 ---
 
-* plug.dj theme made by Kris and edited by sinful. Paste `https://rawgit.com/sinfulBA/DubX-Script/master/PlugTheme.css` in the Custom CSS option in Dub X, then click 'Okay' 
+* plug.dj theme made by Kris and edited by sinful. Paste `https://rawgit.com/sinfulBA/DubX-Script/master/themes/PlugTheme.css` in the Custom CSS option in Dub X, then click 'Okay' 
 
 -----------------
 Features
@@ -60,6 +61,7 @@ Features
 - Community CSS
 - Prompt before refreshing page
 - Autorespond
+- Plug CSS Theme
 
 -----------------
 Translations
