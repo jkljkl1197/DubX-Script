@@ -156,7 +156,7 @@ if (!hello_run) {
                         '</li>',
                         '<li class="optionClass website">',
                             '<a href="https://dubx.net" target="_blank" style="color: white;">',
-                                '<p class="isOnOff"><i class="fi-web"></i></p>',
+                                '<p class="isOnOff"><i class="fi-link"></i></p>',
                                 '<p class="Optionling">Check out our Website</p>',
                             '</a>',
                         '</li>',
