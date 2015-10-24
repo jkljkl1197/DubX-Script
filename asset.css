@@ -350,9 +350,11 @@ ul.avatar-list li.mod.user-kris:after,
 ul.avatar-list li.vip.user-kris:after,
 ul.avatar-list li.resident-dj.user-kris:after,
 ul.avatar-list li.currentDJ .user-kris:after,
-.user-kris,
-.user-kris p.username {
+.user-kris {
     color: #519CD7;
+}
+.user-kris p.username {
+	color: #519CD7;
 }
 
 /* Special users */
