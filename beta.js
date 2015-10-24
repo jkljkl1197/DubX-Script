@@ -575,7 +575,7 @@ if (!DubX.isOpen) {
         if (!DubX.isPlugTheme) {
             DubX.isPlugTheme = true;
             isOn = "on";
-            $('head').append('<link class="enableplugtheme" href="https://rawgit.com/sinfulBA/DubX-Script/master/PlugTheme.css" rel="stylesheet" type="text/css">');
+            $('head').append('<link class="enableplugtheme" href="https://rawgit.com/sinfulBA/DubX-Script/master/themes/PlugTheme.css" rel="stylesheet" type="text/css">');
             localStorage.setItem('plugtheme', 'true');
             DubX.toggleOptionOn('.plugtheme');
             if (DubX.isCommunityCSS === true) {
