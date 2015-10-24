@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.00.01 - I Want Candy!';
+    var our_version = '03.00.03 - I Want Candy!';
     //Ref 1: Variables
     var options = {
         let_autovote: false,
@@ -158,6 +158,18 @@ if (!hello_run) {
                             '<a href="https://dubx.net" target="_blank" style="color: white;">',
                                 '<p class="isOnOff"><i class="fi-web"></i></p>',
                                 '<p class="Optionling">Check out our Website</p>',
+                            '</a>',
+                        '</li>',
+                        '<li class="optionClass webstore">',
+                            '<a href="https://dubx.net" target="_blank" style="color: white;">',
+                                '<p class="isOnOff"><i class="fi-social-google-plus"></i></p>',
+                                '<p class="Optionling">Chrome Extension</p>',
+                            '</a>',
+                        '</li>',
+                        '<li class="optionClass users">',
+                            '<a href="https://dubx.net" target="_blank" style="color: white;">',
+                                '<p class="isOnOff"><i class="fi-torsos-all"></i></p>',
+                                '<p class="Optionling">We\'ve got 711 Users!</p>',
                             '</a>',
                         '</li>',
                     '</ul>',
