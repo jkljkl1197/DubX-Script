@@ -230,8 +230,8 @@
     text-decoration: inherit;
     margin-right: 5px;
 }
-ul.avatar-list li.creator.user-sinful p.dubs:after,
-ul.avatar-list li.creator.user-swordling p.dubs:after,
+ul.avatar-list li.creator-co-owner.user-sinful p.dubs:after,
+ul.avatar-list li.creator-co-owner.user-swordling p.dubs:after,
 ul.avatar-list li.co-owner.user-sinful p.dubs:after,
 ul.avatar-list li.co-owner.user-swordling p.dubs:after,
 ul.avatar-list li.manager.user-sinful p.dubs:after,
@@ -241,9 +241,7 @@ ul.avatar-list li.mod.user-swordling p.dubs:after,
 ul.avatar-list li.vip.user-sinful p.dubs:after,
 ul.avatar-list li.vip.user-swordling p.dubs:after,
 ul.avatar-list li.resident-dj.user-sinful p.dubs:after,
-ul.avatar-list li.resident-dj.user-swordling p.dubs:after,
-ul.avatar-list li.vip.user-sinful p.dubs:after,
-ul.avatar-list li.vip.user-swordling p.dubs:after {
+ul.avatar-list li.resident-dj.user-swordling p.dubs:after {
     content: "";
     font-weight: 700 !important;
     color: #89BE6C !important;
@@ -254,8 +252,8 @@ ul.avatar-list li.user-swordling p.dubs:after {
     font-weight: 700 !important;
     color: #89BE6C !important;
 }
-ul.avatar-list li.creator.user-sinful:hover:after,
-ul.avatar-list li.creator.user-swordling:hover:after,
+ul.avatar-list li.creator-co-owner.user-sinful:hover:after,
+ul.avatar-list li.creator-co-owner.user-swordling:hover:after,
 ul.avatar-list li.co-owner.user-sinful:hover:after,
 ul.avatar-list li.co-owner.user-swordling:hover:after,
 ul.avatar-list li.manager.user-sinful:hover:after,
@@ -275,8 +273,8 @@ ul.avatar-list .user-swordling:hover:after {
     font-weight: 700 !important;
     color: #89BE6C !important;
 }
-ul.avatar-list li.creator.user-sinful:after,
-ul.avatar-list li.creator.user-swordling:after,
+ul.avatar-list li.creator-co-owner.user-sinful:after,
+ul.avatar-list li.creator-co-owner.user-swordling:after,
 ul.avatar-list li.co-owner.user-sinful:after,
 ul.avatar-list li.co-owner.user-swordling:after,
 ul.avatar-list li.manager.user-sinful:after,
@@ -313,7 +311,7 @@ ul.avatar-list li.currentDJ .user-swordling:after,
     text-decoration: inherit;
     margin-right: 5px;
 }
-ul.avatar-list li.creator.user-kris p.dubs:after,
+ul.avatar-list li.creator-co-owner.user-kris p.dubs:after,
 ul.avatar-list li.co-owner.user-kris p.dubs:after,
 ul.avatar-list li.manager.user-kris p.dubs:after,
 ul.avatar-list li.mod.user-kris p.dubs:after,
@@ -329,7 +327,7 @@ ul.avatar-list li.user-kris p.dubs:after {
     font-weight: 700 !important;
     color: #519CD7;
 }
-ul.avatar-list li.creator.user-kris:hover:after,
+ul.avatar-list li.creator-co-owner.user-kris:hover:after,
 ul.avatar-list li.co-owner.user-kris:hover:after,
 ul.avatar-list li.manager.user-kris:hover:after,
 ul.avatar-list li.mod.user-kris:hover:after,
@@ -343,7 +341,7 @@ ul.avatar-list .user-kris:hover:after {
     font-weight: 700 !important;
     color: #519CD7;
 }
-ul.avatar-list li.creator.user-kris:after,
+ul.avatar-list li.creator-co-owner.user-kris:after,
 ul.avatar-list li.co-owner.user-kris:after,
 ul.avatar-list li.manager.user-kris:after,
 ul.avatar-list li.mod.user-kris:after,
@@ -376,7 +374,7 @@ ul.avatar-list li.currentDJ .user-kris:after,
     text-decoration: inherit;
     margin-right: 5px;
 }
-ul.avatar-list li.creator.user-fi p.dubs:after,
+ul.avatar-list li.creator-co-owner.user-fi p.dubs:after,
 ul.avatar-list li.co-owner.user-fi p.dubs:after,
 ul.avatar-list li.manager.user-fi p.dubs:after,
 ul.avatar-list li.mod.user-fi p.dubs:after,
@@ -392,7 +390,7 @@ ul.avatar-list li.user-fi p.dubs:after {
     font-weight: 700 !important;
     color: #FFD904 !important;
 }
-ul.avatar-list li.creator.user-fi:hover:after,
+ul.avatar-list li.creator-co-owner.user-fi:hover:after,
 ul.avatar-list li.co-owner.user-fi:hover:after,
 ul.avatar-list li.manager.user-fi:hover:after,
 ul.avatar-list li.mod.user-fi:hover:after,
@@ -406,7 +404,7 @@ ul.avatar-list .user-fi:hover:after {
     font-weight: 700 !important;
     color: #FFD904 !important;
 }
-ul.avatar-list li.creator.user-fi:after,
+ul.avatar-list li.creator-co-owner.user-fi:after,
 ul.avatar-list li.co-owner.user-fi:after,
 ul.avatar-list li.manager.user-fi:after,
 ul.avatar-list li.mod.user-fi:after,
