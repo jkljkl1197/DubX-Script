@@ -450,7 +450,7 @@ if (!hello_run) {
             if (!options.let_nicole) {
                 options.let_nicole = true;
                 isOn = 'on';
-                $('head').append('<link class="nicole_css" href="https://rawgit.com/sinfulBA/DubX-Script/master/PlugTheme.css" rel="stylesheet" type="text/css">');
+                $('head').append('<link class="nicole_css" href="https://rawgit.com/sinfulBA/DubX-Script/master/themes/PlugTheme.css" rel="stylesheet" type="text/css">');
                 hello.option('nicole', 'true');
                 hello.on('.nicole');
                 if (options.let_css === true) {
