@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.00.00 - Maple Syrup';
+    var our_version = '03.00.01 - I Want Candy!';
     //Ref 1: Variables
     var options = {
         let_autovote: false,
