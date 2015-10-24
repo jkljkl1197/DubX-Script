@@ -354,7 +354,7 @@ ul.avatar-list li.currentDJ .user-kris:after,
     color: #519CD7;
 }
 .user-kris p.username {
-	color: #519CD7;
+	color: #519CD7 !important;
 }
 
 /* Special users */
