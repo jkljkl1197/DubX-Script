@@ -337,7 +337,7 @@ ul.avatar-list li.vip.user-kris:hover:after,
 ul.avatar-list li.resident-dj.user-kris:hover:after {
     content: "- DUBX CONTRIBUTOR";
     font-weight: 700 !important;
-    color: #519CD7 !important;
+    color: #519CD7;
 }
 ul.avatar-list .user-kris:hover:after {
     font-weight: 700 !important;
