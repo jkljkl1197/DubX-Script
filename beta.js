@@ -437,6 +437,9 @@ if (!hello_run) {
                 });
                 hello.option('css_world','true');
                 hello.on('.css');
+                if (options.let_css === true) {
+                    hello.nicole();
+                }
             } else {
                 options.let_css = false;
                 isOn = 'off';
