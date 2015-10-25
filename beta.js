@@ -523,6 +523,15 @@ if (!hello_run) {
     $('document').ready(hello.css_run);
     $('document').ready(hello.medium_load);
     
+     // Ref 5:
+-    $('.chat-main').on('DOMNodeInserted', function(e) {
+-        var itemEl = $(e.target);
+-        if(itemEl.prop('tagName').toLowerCase() !== 'li' || itemEl.attr('class').substring(0, 'user-'.length) !== 'user-') return;
+-        var user = Dubtrack.room.users.collection.findWhere({userid: itemEl.attr('class').split(/-| /)[1]});
+-        var role = !user.get('roleid') ? 'default' : Dubtrack.helpers.isDubtrackAdmin(user.get('userid')) ? 'admin' : user.get('roleid').type;
+-        itemEl.addClass('is' + (role.charAt(0).toUpperCase() + role.slice(1)));
+-    });
+    
     
 } else {
     function onErr(error) {
