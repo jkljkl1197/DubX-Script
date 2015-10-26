@@ -223,12 +223,16 @@ ul.avatar-list li.currentDJ .user-sinful:after, ul.avatar-list li.currentDJ .use
 }
 
 /* Contributors */
-#chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username {
+#chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username,
+#chat .chat-container ul.chat-main li.user-56030f67813abe030055f4a4 .activity-row .text p a.username,
+#chat .chat-container ul.chat-main li.user-56008425621a9e0300317238 .activity-row .text p a.username {
     color: #519CD7;
     font-weight: 700;
     text-shadow: 0px 0px 1px #000;
 }
-#chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username:before {
+#chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username:before,
+#chat .chat-container ul.chat-main li.user-56030f67813abe030055f4a4 .activity-row .text p a.username:before,
+#chat .chat-container ul.chat-main li.user-56008425621a9e0300317238 .activity-row .text p a.username:before {
     content: "\f1ee";
     font-family: "foundation-icons";
     font-style: normal;
@@ -241,19 +245,22 @@ ul.avatar-list li.currentDJ .user-sinful:after, ul.avatar-list li.currentDJ .use
     text-decoration: inherit;
     margin-right: 5px;
 }
-ul.avatar-list li.user-kris p.dubs:before {
+ul.avatar-list li.user-kris p.dubs:before,
+ul.avatar-list li.user-al3366 p.dubs:before,
+ul.avatar-list li.user-ciscog p.dubs:before {
     content: "DubX Contributor  -  ";
     font-weight: 700 !important;
     color: #519CD7;
 }
-ul.avatar-list li.co-owner.user-kris:after,
-ul.avatar-list li.creator.user-kris:after,
-ul.avatar-list li.manager.user-kris:after,
-ul.avatar-list li.mod.user-kris:after,
-ul.avatar-list li.vip.user-kris:after,
-ul.avatar-list li.resident-dj.user-kris:after,
-ul.avatar-list li.currentDJ .user-kris:after,
-.user-kris, .user-kris p.username {
+ul.avatar-list li.co-owner.user-kris:after, ul.avatar-list li.co-owner.user-al3366  :after, ul.avatar-list li.co-owner.user-ciscog:after,
+ul.avatar-list li.creator.user-kris:after, ul.avatar-list li.creator.user-al3366  :after, ul.avatar-list li.creator.user-ciscog:after,
+ul.avatar-list li.manager.user-kris:after, ul.avatar-list li.manager.user-al3366  :after, ul.avatar-list li.manager.user-ciscog:after,
+ul.avatar-list li.mod.user-kris:after, ul.avatar-list li.mod.user-al3366  :after, ul.avatar-list li.mod.user-ciscog:after,
+ul.avatar-list li.vip.user-kris:after, ul.avatar-list li.vip.user-al3366  :after, ul.avatar-list li.vip.user-ciscog:after,
+ul.avatar-list li.resident-dj.user-kris:after, ul.avatar-list li.resident-dj.user-al3366  :after, ul.avatar-list li.resident-dj.user-ciscog:after,
+ul.avatar-list li.currentDJ .user-kris:after, ul.avatar-list li.currentDJ .user-al3366  :after, ul.avatar-list li.currentDJ .user-ciscog:after,
+.user-kris, .user-al3366, .user-ciscog,
+.user-kris p.username, .user-al3366 p.username, .user-ciscog p.username {
     color: #519CD7;
 }
 #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-kris p.username, #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-kris p.username:after,
@@ -261,7 +268,19 @@ ul.avatar-list li.currentDJ .user-kris:after,
 #main_avatar_room #main-user-list-room #avatar-list li.manager.user-kris p.username, #main_avatar_room #main-user-list-room #avatar-list li.manager.user-kris p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.mod.user-kris p.username, #main_avatar_room #main-user-list-room #avatar-list li.mod.user-kris p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-kris p.username, #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-kris p.username:after,
-#main_avatar_room #main-user-list-room #avatar-list li.vip.user-kris p.username, #main_avatar_room #main-user-list-room #avatar-list li.vip.user-kris p.username:after {
+#main_avatar_room #main-user-list-room #avatar-list li.vip.user-kris p.username, #main_avatar_room #main-user-list-room #avatar-list li.vip.user-kris p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-al3366 p.username, #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-al3366 p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.creator.user-al3366 p.username, #main_avatar_room #main-user-list-room #avatar-list li.creator.user-al3366 p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.manager.user-al3366 p.username, #main_avatar_room #main-user-list-room #avatar-list li.manager.user-al3366 p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.mod.user-al3366 p.username, #main_avatar_room #main-user-list-room #avatar-list li.mod.user-al3366 p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-al3366 p.username, #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-al3366 p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.vip.user-al3366 p.username, #main_avatar_room #main-user-list-room #avatar-list li.vip.user-al3366 p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-ciscog p.username, #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-ciscog p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.creator.user-ciscog p.username, #main_avatar_room #main-user-list-room #avatar-list li.creator.user-ciscog p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.manager.user-ciscog p.username, #main_avatar_room #main-user-list-room #avatar-list li.manager.user-ciscog p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.mod.user-ciscog p.username, #main_avatar_room #main-user-list-room #avatar-list li.mod.user-ciscog p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-ciscog p.username, #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-ciscog p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.vip.user-ciscog p.username, #main_avatar_room #main-user-list-room #avatar-list li.vip.user-ciscog p.username:after {
 	color: #519CD7;
 }
 
