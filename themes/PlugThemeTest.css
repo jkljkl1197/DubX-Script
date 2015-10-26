@@ -8,20 +8,20 @@
 
 /* Main Menu (left) */
 #main-menu-left a.room-active-link {
-    color: #AA74FE;
+	color: #AA74FE;
     box-shadow: inset 4px 0px 0px 0px #AA74FE
 }
 
 /* Main Menu (right) */
 #header-global .header-right-navigation .user-info span,
 [class*=" icon-"], [class^=icon-] {
-    color: #AA74FE;
+	color: #AA74FE;
 }
 
 /* Top Header */
 a, a:active, a:focus, a:hover,
 #header-global .header-left-navigation a.room-active-link.active-room .icon-chevron, #header-global .header-left-navigation a.room-active-link.active-room .icon-chevron:hover {
-    color: #AA74FE;
+	color: #AA74FE;
 }
 
 /* Bottom Header */
@@ -29,7 +29,7 @@ a, a:active, a:focus, a:hover,
 	background: #AA74FE;
 }
 span.currentSong, .currentTime, span.min, span.sec {
-    color: #AA74FE;
+	color: #AA74FE;
 }
 .icon-play:before, .icon-playlist:before, .icon-history:before, .icon-heart:before {
 	color: #AA74FE;
@@ -165,34 +165,34 @@ span.usernameContainer, .followers-counter,
 }
 #profileMainSection .profileView .infoProfile .edit-btn, #profileMainSection .profileView .infoProfile .follow-btn {
 	color: #AA74FE;
-    border: 2px solid #AA74FE;
+	border: 2px solid #AA74FE;
 }
 
 /* Special CSS Settings */
 
 /** Contributors **/
 #chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username {
-    color: #D7519C !important;
+	color: #D7519C !important;
     font-weight: 700;
     text-shadow: 0px 0px 1px #000;
 }
 #chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username:before {
-    content: "\f1ee";
+	content: "\f1ee";
     font-family: "foundation-icons";
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
     text-transform: none;
     line-height: 1;
-    -webkit-font-smoothing: antialiased;
+    webkit-font-smoothing: antialiased;
     display: inline-block;
     text-decoration: inherit;
     margin-right: 5px;
 }
 ul.avatar-list li.user-kris p.dubs:before {
-    content: "DubX Contributor  -  ";
-    font-weight: 700 !important;
-    color: #D7519C !important;
+	content: "DubX Contributor  -  ";
+	font-weight: 700 !important;
+	color: #D7519C !important;
 }
 ul.avatar-list li.creator-co-owner.user-kris:after,
 ul.avatar-list li.co-owner.user-kris:after,
@@ -202,5 +202,19 @@ ul.avatar-list li.vip.user-kris:after,
 ul.avatar-list li.resident-dj.user-kris:after,
 ul.avatar-list li.currentDJ .user-kris:after,
 .user-kris, .user-kris p.username {
-    color: #D7519C !important;
+	color: #D7519C !important;
+}
+#main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-kris p.username,
+#main_avatar_room #main-user-list-room #avatar-list li.creator.user-kris p.username,
+#main_avatar_room #main-user-list-room #avatar-list li.manager.user-kris p.username,
+#main_avatar_room #main-user-list-room #avatar-list li.mod.user-kris p.username,
+#main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-kris p.username,
+#main_avatar_room #main-user-list-room #avatar-list li.vip.user-kris p.username,
+#main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-kris p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.creator.user-kris p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.manager.user-kris p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.mod.user-kris p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-kris p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.vip.user-kris p.username:after {
+	color: #D7519C !important;
 }
