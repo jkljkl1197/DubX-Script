@@ -91,6 +91,9 @@ span.name,
 #room-list #container-room-list .room-item .roomImage .join {
 	background: #AA74FE;
 }
+#warning {
+	background: #AA74FE;
+}
 
 /* Video Player */
 #main_player {
