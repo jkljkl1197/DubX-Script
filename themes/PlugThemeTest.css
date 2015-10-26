@@ -38,10 +38,10 @@ a, a:active, a:focus, a:hover,
 
 /* DubX Menu */
 .for_content_off {
-	color: #DDDDDD;
+	color: #DDDDDD !important;
 }
 .for_content_version, .for_content_p {
-	color: #AA74FE;
+	color: #AA74FE !important;
 }
 
 /* Bottom Header */
@@ -78,6 +78,11 @@ span.name,
 	color: #AA74FE;
 }
 #room-list #container-room-list .room-item .roomImage .join {
+	background: #AA74FE;
+}
+
+/* Video Player */
+#main_player #custom_iframe_embed_error, #main_player .playbtn-el {
 	background: #AA74FE;
 }
 
