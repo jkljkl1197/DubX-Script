@@ -245,7 +245,7 @@ if (!hello_run) {
                 hello.off('.split_chat');
             }
         },
-        eta: function() {
+        /* eta: function() {
             var time = 4;
             var current_time = parseInt($('#player-controller div.left ul li.infoContainer.display-block div.currentTime span.min').text());
             var booth_duration = parseInt(Dubtrack.room.player.queueInfo.text());
@@ -253,7 +253,7 @@ if (!hello_run) {
             if (booth_time >= 0) {
                 $('.duration').replaceWith('<span class="duration">You will be on the booth in approximately '+booth_time+' minutes.</span>');
             };
-        },
+        }, */
         report_content: function() {
             var content = $('.input').val();
             var user = Dubtrack.session.get('username');
