@@ -34,14 +34,14 @@ span.currentSong, .currentTime, span.min, span.sec {
 #player-controller .right ul li .dubup.voted {
 	background: #90AD2F;
 }
-#player-controller .right ul li .dubup:hover span, #player-controller .right ul li .dubup .dub-counter {
+#player-controller .right ul li .dubup .icon-arrow-up, #player-controller .right ul li .dubup .dub-counter {
 	color: #90AD2F;
 }
 .icon-downvote:before,
 #player-controller .right ul li .dubdown.voted {
 	background: #C42E3B;
 }
-#player-controller .right ul li .dubdown:hover span, #player-controller .right ul li .dubdown .dub-counter {
+#player-controller .right ul li .dubdown .icon-arrow-down, #player-controller .right ul li .dubdown .dub-counter {
 	color: #C42E3B;
 }
 
