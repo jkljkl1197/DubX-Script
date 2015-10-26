@@ -84,12 +84,12 @@ span.name,
 }
 
 /** Moderators **/
-#main_avatar_room #main-user-list-room #avatar-list li.co-owner p.username:after,
-#main_avatar_room #main-user-list-room #avatar-list li.creator p.username:after,
-#main_avatar_room #main-user-list-room #avatar-list li.manager p.username:after,
-#main_avatar_room #main-user-list-room #avatar-list li.mod p.username:after,
-#main_avatar_room #main-user-list-room #avatar-list li.resident-dj p.username:after,
-#main_avatar_room #main-user-list-room #avatar-list li.vip p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.co-owner p.username,
+#main_avatar_room #main-user-list-room #avatar-list li.creator p.username,
+#main_avatar_room #main-user-list-room #avatar-list li.manager p.username,
+#main_avatar_room #main-user-list-room #avatar-list li.mod p.username,
+#main_avatar_room #main-user-list-room #avatar-list li.resident-dj p.username,
+#main_avatar_room #main-user-list-room #avatar-list li.vip p.username,
 #main_avatar_room #main-user-list-room #avatar-list li.co-owner p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.creator p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.manager p.username:after,
@@ -123,9 +123,6 @@ span.name,
 }
 #browser .browser-content .browser-content-main .sidebar #playlists-scroll .playlist-style li.selected {
 	background: #fff;
-}
-.icon-play:before, .icon-playlist:before, .icon-history:before {
-	color: #666;
 }
 #browser .browser-content .browser-content-main .nano .content-videos #results_video_api .history-item .description .dubs-display,
 #browser .browser-content .browser-content-main .nano .content-videos #results_video_api .history-item .description .playedby,
