@@ -80,6 +80,9 @@ span.name,
 #chat .chat-container .chat-messages .chat-main li .activity-row .text a.username {
 	color: #AA74FE;
 }
+#chat .chat-container ul.chat-main li .activity-row .text span.username-handle[style="color: rgba(255, 0, 255, 0.8);"] {
+    color: #FFDD6F !important;
+}
 
 /* User List */
 
