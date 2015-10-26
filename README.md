@@ -18,11 +18,9 @@ Our Team
 IMPORTANT
 ---
 
-__Updates (Version 03.00.10 - Sushi)__
+__Updates (Version 03.00.50)__
 
-- Added Plug Theme
-- Working on bug issues
-- Namespaced the plug-in
+- Updated for the new Dubtrack UI
 
 -----------------
 Usage
