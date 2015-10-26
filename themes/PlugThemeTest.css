@@ -31,7 +31,7 @@ a, a:active, a:focus, a:hover,
 span.currentSong, .currentTime, span.min, span.sec {
     color: #AA74FE;
 }
-.icon-heart:before {
+.icon-play:before, .icon-playlist:before, .icon-history:before, .icon-heart:before {
 	color: #AA74FE;
 }
 #player-controller .right ul li .dubup.voted {
@@ -68,18 +68,61 @@ span.name,
 }
 
 /* Chat */
-#chat .chat_tools span:hover,
-#chat .chat-options .chat-option-buttons span.active i, #chat .chat-options .chat-option-buttons span:hover {
+#chat .chat_tools span:hover {
 	color: #AA74FE;
 }
 #chat .chat_tools span:after {
 	border-color: #AA74FE;
 }
 
+/* User List */
+
+/** Admin **/
+#main_avatar_room #main-user-list-room #avatar-list li.admin p.username,
+#main_avatar_room #main-user-list-room #avatar-list li.admin p.username:after {
+	color: #42A5DC;
+}
+
+/** Moderators **/
+#main_avatar_room #main-user-list-room #avatar-list li.co-owner p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.creator p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.manager p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.mod p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.resident-dj p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.vip p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.co-owner p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.creator p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.manager p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.mod p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.resident-dj p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.vip p.username:after {
+	color: #AA74FE;
+}
+
+/** Current DJ **/
+#main_avatar_room #main-user-list-room #avatar-list li.currentDJ p.username,
+#main_avatar_room #main-user-list-room #avatar-list li.currentDJ p.username:after {
+	color: #0FF;
+}
+
+/** Users **/
+#main_avatar_room #main-user-list-room #avatar-list li:after p.username,
+#main_avatar_room #main-user-list-room #avatar-list li:after p.username:after {
+	color: #878C8E;
+}
+
+/* Settings */
+#chat .chat-options .chat-option-buttons span.active i, #chat .chat-options .chat-option-buttons span:hover {
+	color: #AA74FE;
+}
+
 /* Queue */
 #browser .browser-content .browser-content-header .close-browser,
-#browser .browser-content .browser-content-main .sidebar #playlists-scroll .playlist-style li.selected, #browser .browser-content .browser-content-main .nano .loading {
+#browser .browser-content .browser-content-main .nano .loading {
 	background: #AA74FE;
+}
+#browser .browser-content .browser-content-main .sidebar #playlists-scroll .playlist-style li.selected {
+	background: #fff;
 }
 .icon-play:before, .icon-playlist:before, .icon-history:before {
 	color: #666;
