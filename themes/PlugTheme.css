@@ -63,6 +63,9 @@ a, a:active, a:focus, a:hover,
 #player-controller .right ul li .dubdown .icon-arrow-down, #player-controller .right ul li .dubdown .dub-counter {
 	color: #C42E3B;
 }
+#player-controller .left ul li.imgEl, #player-controller .left ul li.infoContainer .infoContainerInner, #player-controller .left, #player-controller .right {
+	background: #1A1A1A;
+}
 
 /* Add to Playlist */
 #addToPlaylistFloatContainer .playlist-list-action li:hover {
@@ -82,6 +85,10 @@ span.name,
 }
 
 /* Video Player */
+#main_player {
+	background: rgba(26,26,26,0.98);
+	border-radius: 0.4rem;
+}
 #main_player #custom_iframe_embed_error, #main_player .playbtn-el {
 	background: #AA74FE;
 }
@@ -89,14 +96,30 @@ span.name,
 /* Video Buttons (top) */
 #main_player .player_header span.active {
 	background: #AA74FE;
+	color: #1A1818;
+	font-weight: 600;
+}
+#main_player .player_header span {
+	border-radius: 0.4rem;
+	background: #1A1A1A;
+	font-weight: 500;
+	color: #FFF;
 }
 
 /* Video Buttons (bottom) */
+#main_player .play-song-link {
+	background: rgba(26,26,26,0.98);
+	border-radius: 0.4rem;
+}
 #main_player .player_sharing .player-controller-container .volume-controller-container #volume-div .ui-slider-range-min {
 	background: #AA74FE;
 }
 
 /* Chat */
+#main-room .right_section, #profileMainSection {
+	background: rgba(26,26,26,0.98);
+	border-radius: 0.4rem;
+}
 #chat .chat_tools span:hover {
 	color: #AA74FE;
 }
@@ -111,6 +134,9 @@ span.name,
 }
 #chat .chat-container ul.chat-main li .activity-row .text span.username-handle[style="color: rgba(255, 0, 255, 0.8);"] {
     color: #FFDD6F !important;
+}
+#chat .chat-container .chat-messages .chat-main li.chat-system-loading, #chat .chat-container .chat-messages .chat-main li.chat-welcome-message, #chat .chat-container .chat-messages .chat-main li.system, #chat .chat-container .chat-messages .chat-main li.system-error {
+	font-size: 14px;
 }
 
 /* User List */
