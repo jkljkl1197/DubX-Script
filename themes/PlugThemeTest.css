@@ -7,25 +7,39 @@
 */
 
 /* Main Menu (left) */
-#main-menu-left a:hover {
-    color: #AA74FE;
-}
-#main-menu-left a.room-active-link {
+#main-menu-left a:hover, #main-menu-left a.room-active-link {
     color: #AA74FE;
 }
 
-/* Header */
-a {
+/* Main Menu (right) */
+#header-global .header-right-navigation .user-info span,
+[class*=" icon-"], [class^=icon-] {
     color: #AA74FE;
 }
-a:active, a:focus, a:hover {
-    color: #42A5DC;
+
+/* Top Header */
+a, a:active, a:focus, a:hover,
+#header-global .header-left-navigation a.room-active-link.active-room .icon-chevron, #header-global .header-left-navigation a.room-active-link.active-room .icon-chevron:hover {
+    color: #AA74FE;
+}
+
+/* Bottom Header */
+span.currentSong, span.currentTime {
+    color: #AA74FE;
 }
 
 /* Lobby */
-span.name {
+span.name,
+#room-list #container-room-list .room-item .current-song, #room-list #container-room-list .room-item .roomImage .join {
     color: #AA74FE;
 }
-#room-list #container-room-list .room-item .current-song {
+
+/* User */
+span.usernameContainer, .followers-counter,
+#profileMainSection .profileView .header .pictureContainer .updatePictureGif {
     color: #AA74FE;
+}
+#profileMainSection .profileView .infoProfile .edit-btn, #profileMainSection .profileView .infoProfile .follow-btn {
+    color: #AA74FE;
+    border: 2px solid #AA74FE;
 }
