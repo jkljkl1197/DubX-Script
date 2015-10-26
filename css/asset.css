@@ -191,8 +191,8 @@
     text-decoration: inherit;
     margin-right: 5px;
 }
-ul.avatar-list li.user-sinful p.dubs:after,
-ul.avatar-list li.user-swordling p.dubs:after {
+ul.avatar-list li.user-sinful p.dubs:before,
+ul.avatar-list li.user-swordling p.dubs:before {
     content: "DubX Developer  -  ";
     font-weight: 700 !important;
     color: #89BE6C !important;
