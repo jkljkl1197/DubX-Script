@@ -65,7 +65,7 @@ if (!hello_run) {
                 '<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/asset.css">',
                 '<div class="for_content">',
                     '<span class="for_content_ver">DubX Settings</span>',
-                    '<span class="for_content_version">03.50.00 - I have a sweet-tooth.</span>',
+                    '<span class="for_content_version">03.00.50</span>',
                     '<ul class="for_content_ul">',
                         '<li class="for_content_li">',
                             '<p class="for_content_c">Standard</p>',
