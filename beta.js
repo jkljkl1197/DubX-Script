@@ -62,7 +62,7 @@ if (!hello_run) {
             var li = '<li><button onclick="hello.slide();" class="relate" style="font-size: 1em;height: 32px;margin-right: 16px;border-radius: 0.1875em;">DUBX</button></li>';
             var html = [
                 '<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css">',
-                '<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/asset.css">',
+                '<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/asset.css">',
                 '<div class="isSwordful">',
                     '<div class="verSwordful">',
                         '<p class="Javaling">DubX Settings</p>',
