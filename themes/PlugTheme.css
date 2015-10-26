@@ -134,7 +134,6 @@ a:hover, a:visited {
 	color: #AA74FE;
 }
 #main_player .player_container {
-    height: 25.45em;
     background-image: url(https://raw.githubusercontent.com/PossiblyKris/DubtrackCSS/master/assets/bykris.png);
 }
 #main_player .player_container .skip-el {
@@ -195,10 +194,19 @@ button:hover {
 }
 
 /* Chat box */
+#chat .chat_tools span:hover {
+	color: #AA74FE !important;
+}
+#chat .chat_tools span:after {
+	border: 1px solid #AA74FE !important;
+}
 #chat .chat_tools .room-user-counter {
-    background: #AA74FE !important;
-    color: #000;
-    opacity: 0.73;
+    color: #878c8e !important;
+    opacity: 1;
+}
+#chat .chat_tools .room-user-counter:hover {
+    color: #AA74FE !important;
+    opacity: 1;
 }
 #chat #new-messages-counter {
     background: #AA74FE;
