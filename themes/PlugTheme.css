@@ -120,6 +120,9 @@ a:hover, a:visited {
     color: #AA74FE;
     font-weight: bold;
 }
+#private-messages .main-message-list ul.message-list li.message-item.new-message:before, #private-messages .message-details ul.message-list li.message-item.new-message:before {
+	background: #AA74FE;
+}
 
 /* Video box */
 #main_player{
