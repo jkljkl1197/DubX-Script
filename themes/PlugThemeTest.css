@@ -9,7 +9,7 @@
 /* Main Menu (left) */
 #main-menu-left a.room-active-link {
     color: #AA74FE;
-    inset 4px 0px 0px 0px #AA74FE
+    box-shadow: inset 4px 0px 0px 0px #AA74FE
 }
 
 /* Main Menu (right) */
@@ -81,7 +81,21 @@ span.name,
 #browser .browser-content .browser-content-main .sidebar #playlists-scroll .playlist-style li.selected, #browser .browser-content .browser-content-main .nano .loading {
 	background: #AA74FE;
 }
-browser .browser-content .browser-content-main .nano .content-videos #results_video_api .queue-item .description .preview,
+.icon-play:before, .icon-playlist:before, .icon-history:before {
+	color: #666;
+}
+#browser .browser-content .browser-content-main .nano .content-videos #results_video_api .history-item .description .dubs-display,
+#browser .browser-content .browser-content-main .nano .content-videos #results_video_api .history-item .description .playedby,
+#browser .browser-content .browser-content-main .nano .content-videos #results_video_api .history-item .description .preview,
+#browser .browser-content .browser-content-main .nano .content-videos #results_video_api .playlist-item .description .dubs-display,
+#browser .browser-content .browser-content-main .nano .content-videos #results_video_api .playlist-item .description .playedby,
+#browser .browser-content .browser-content-main .nano .content-videos #results_video_api .playlist-item .description .preview,
+#browser .browser-content .browser-content-main .nano .content-videos #results_video_api .queue-item .description .dubs-display,
+#browser .browser-content .browser-content-main .nano .content-videos #results_video_api .queue-item .description .playedby,
+#browser .browser-content .browser-content-main .nano .content-videos #results_video_api .queue-item .description .preview,
+#browser .browser-content .browser-content-main .nano .content-videos #results_video_api .search-item .description .dubs-display,
+#browser .browser-content .browser-content-main .nano .content-videos #results_video_api .search-item .description .playedby,
+#browser .browser-content .browser-content-main .nano .content-videos #results_video_api .search-item .description .preview,
 #browser .browser-content .browser-content-main .sidebar .create-playlist .create-playlist-display span {
 	color: #AA74FE;
 }
