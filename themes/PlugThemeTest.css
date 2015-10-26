@@ -150,12 +150,14 @@ span.name,
 
 /** Upvote/Downvote **/
 ul.avatar-list li.updub {
-	border: 1px solid #000000;
-	box-shadow: inset 4px 0px 0px 0px #90AD2F;
+	background: rgba(144,173,47,0.2);
+	padding-left: 5px;
+	padding-right: 5px;
 }
 ul.avatar-list li.downdub {
-	border: 1px solid #000000;
-	box-shadow: inset 4px 0px 0px 0px #C42E3B;
+	background: rgba(196,46,59,0.2);
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 /* Settings */
