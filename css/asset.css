@@ -357,30 +357,30 @@ ul.avatar-list li.admin p {
 /* Fix for no separation? */
 /** Admin **/
 #main_avatar_room #main-user-list-room #avatar-list li.admin p.username:after {
-	content: "|  Admin";
+	content: "-  Admin";
 }
 
 /** Moderators **/
 #main_avatar_room #main-user-list-room #avatar-list li.co-owner p.username:after {
-	content: "|  Co-owner";
+	content: "-  Co-owner";
 }
 #main_avatar_room #main-user-list-room #avatar-list li.creator p.username:after {
-	content: "|  Creator";
+	content: "-  Creator";
 }
 #main_avatar_room #main-user-list-room #avatar-list li.manager p.username:after {
-	content: "|  Manager";
+	content: "-  Manager";
 }
 #main_avatar_room #main-user-list-room #avatar-list li.mod p.username:after {
-	content: "|  Mod";
+	content: "-  Mod";
 }
 #main_avatar_room #main-user-list-room #avatar-list li.resident-dj p.username:after {
-	content: "|  Resident DJ";
+	content: "-  Resident DJ";
 }
 #main_avatar_room #main-user-list-room #avatar-list li.vip p.username:after {
-	content: "|  VIP";
+	content: "-  VIP";
 }
 
 /** Current DJ **/
 #main_avatar_room #main-user-list-room #avatar-list li.currentDJ p.username:after {
-	content: "|  DJ";
+	content: "-  DJ" !important;
 }
