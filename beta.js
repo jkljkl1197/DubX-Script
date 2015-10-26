@@ -260,7 +260,7 @@ if (!hello_run) {
             var booth_time = (booth_duration * time - time) + current_time;
             if (booth_time >= 0) {
                 $('.duration').replaceWith('<span class="duration">You will be on the booth in approximately '+booth_time+' minutes.</span>');
-            };
+            }
         },
         report_content: function() {
             var content = $('.input').val();
@@ -520,10 +520,7 @@ if (!hello_run) {
     if (localStorage.getItem('nicole') === 'true') {
         hello.nicole();
     }
-    $('document').ready(hello.css_run);
-    $('document').ready(hello.medium_load);
     $('document').ready(function(){
-        console.log('helloJS docready running');
         hello.css_run();
         hello.medium_load();
     });
@@ -561,7 +558,7 @@ if (!hello_run) {
             '</div>'
         ].join('');
         $('body').prepend(onErr);
-    };
+    }
 	onErr('Oh no! Error 69: Extension is already open.');
     $('.cancel').click(hello.closeErr);
     $('.confirm-err').click(hello.closeErr);
