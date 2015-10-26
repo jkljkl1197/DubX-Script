@@ -150,6 +150,16 @@ span.name,
 	color: #878C8E;
 }
 
+/** Upvote/Downvote **/
+ul.avatar-list li.updub {
+	border: 1px solid #000000;
+	box-shadow: inset 4px 0px 0px 0px #90AD2F;
+}
+ul.avatar-list li.downdub {
+	border: 1px solid #000000;
+	box-shadow: inset 4px 0px 0px 0px #C42E3B;
+}
+
 /* Settings */
 #chat .chat-options .chat-option-buttons span.active i, #chat .chat-options .chat-option-buttons span:hover {
 	color: #AA74FE;
