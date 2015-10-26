@@ -144,10 +144,20 @@ span.name,
 }
 
 /** Users **/
-#main_avatar_room #main-user-list-room #avatar-list li:after p,
-#main_avatar_room #main-user-list-room #avatar-list li:after p.username,
-#main_avatar_room #main-user-list-room #avatar-list li:after p.username:after {
-	color: #878C8E;
+#main_avatar_room #main-user-list-room #avatar-list li p {
+	color: #AAAAAA;
+}
+
+/** Upvote/Downvote **/
+ul.avatar-list li.updub {
+	background: rgba(144,173,47,0.2);
+	padding-left: 5px;
+	padding-right: 5px;
+}
+ul.avatar-list li.downdub {
+	background: rgba(196,46,59,0.2);
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 /* Settings */
@@ -210,9 +220,15 @@ span.usernameContainer, .followers-counter,
 	height 101%;
 	background: #AA74FE;
 }
-#user_popover {
+#user_popover .actions, #user_popover .global-actions, #user_popover {
 	background: #AA74FE;
 	opacity: .95;
+}
+#user_popover .global-actions a, #user_popover .usercontent header .dubs, #user_popover .usercontent header h3 {
+	color: #393A39;
+}
+#user_popover .global-actions a {
+	outline: 2px solid #393A39;
 }
 
 /* Special CSS Settings */
