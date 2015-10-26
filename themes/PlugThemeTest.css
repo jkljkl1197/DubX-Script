@@ -151,14 +151,20 @@ span.name,
 }
 
 /** Upvote/Downvote **/
-ul.avatar-list li.updub {
+#main_avatar_room #main-user-list-room #avatar-list li p.dubs li.updub {
+	color: #90AD2F;
+}
+#main_avatar_room #main-user-list-room #avatar-list li p.dubs li.downdub {
+	color: #C42E3B;
+}
+/* ul.avatar-list li.updub {
 	border: 1px solid #000000;
 	box-shadow: inset 4px 0px 0px 0px #90AD2F;
 }
 ul.avatar-list li.downdub {
 	border: 1px solid #000000;
 	box-shadow: inset 4px 0px 0px 0px #C42E3B;
-}
+} */
 
 /* Settings */
 #chat .chat-options .chat-option-buttons span.active i, #chat .chat-options .chat-option-buttons span:hover {
