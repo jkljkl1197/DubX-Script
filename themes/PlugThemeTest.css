@@ -1,1 +1,31 @@
+/*
+    Custom CSS for Dubtrack.fm
+    Plug Theme and UI improvements
+    Originally made by @kris | Redone by @sinful
+    https://dubtrack.fm/kris
+    https://dubtrack.fm/sinful
+*/
 
+/* Main Menu (left) */
+#main-menu-left a:hover {
+    color: #AA74FE;
+}
+#main-menu-left a.room-active-link {
+    color: #AA74FE;
+}
+
+/* Header */
+a {
+    color: #AA74FE;
+}
+a:active, a:focus, a:hover {
+    color: #42A5DC;
+}
+
+/* Lobby */
+span.name {
+    color: #AA74FE;
+}
+#room-list #container-room-list .room-item .current-song {
+    color: #AA74FE;
+}
