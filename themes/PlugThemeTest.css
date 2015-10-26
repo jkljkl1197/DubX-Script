@@ -106,6 +106,7 @@ span.name,
 }
 
 /** Users **/
+#main_avatar_room #main-user-list-room #avatar-list li:after p,
 #main_avatar_room #main-user-list-room #avatar-list li:after p.username,
 #main_avatar_room #main-user-list-room #avatar-list li:after p.username:after {
 	color: #878C8E;
@@ -165,4 +166,41 @@ span.usernameContainer, .followers-counter,
 #profileMainSection .profileView .infoProfile .edit-btn, #profileMainSection .profileView .infoProfile .follow-btn {
 	color: #AA74FE;
     border: 2px solid #AA74FE;
+}
+
+/* Special CSS Settings */
+
+/** Contributors **/
+#chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username {
+    color: #D7519C;
+    font-weight: 700;
+    text-shadow: 0px 0px 1px #000;
+}
+#chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username:before {
+    content: "\f1ee";
+    font-family: "foundation-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    text-decoration: inherit;
+    margin-right: 5px;
+}
+ul.avatar-list li.user-kris p.dubs:before {
+    content: "DubX Contributor  -  ";
+    font-weight: 700 !important;
+    color: #D7519C;
+}
+ul.avatar-list li.creator-co-owner.user-kris:after,
+ul.avatar-list li.co-owner.user-kris:after,
+ul.avatar-list li.manager.user-kris:after,
+ul.avatar-list li.mod.user-kris:after,
+ul.avatar-list li.vip.user-kris:after,
+ul.avatar-list li.resident-dj.user-kris:after,
+ul.avatar-list li.currentDJ .user-kris:after,
+.user-kris, .user-kris p.username {
+    color: #D7519C;
 }
