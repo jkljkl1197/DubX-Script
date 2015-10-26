@@ -149,13 +149,13 @@ span.name,
 }
 
 /** Upvote/Downvote **/
-ul.avatar-list:before li.updub {
-	content: "+ ";
-	color: #90AD2F;
+ul.avatar-list li.updub {
+	border: 1px solid #000000;
+	box-shadow: inset 4px 0px 0px 0px #90AD2F;
 }
-ul.avatar-list:before li.downdub {
-	content: "- ";
-	color: #C42E3B;
+ul.avatar-list li.downdub {
+	border: 1px solid #000000;
+	box-shadow: inset 4px 0px 0px 0px #C42E3B;
 }
 
 /* Settings */
