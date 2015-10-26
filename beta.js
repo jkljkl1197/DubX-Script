@@ -55,128 +55,120 @@ if (!hello_run) {
             $('.isUser').text(Dubtrack.session.get('username'));
         },
         slide: function() {
-            $('.isSwordful').slideToggle('fast');
+            $('.for_content').slideToggle('fast');
         },
         //Ref 2.2: Initialize
         initialize: function() {
-            var li = '<li><button onclick="hello.slide();" class="relate" style="font-size: 1em;height: 32px;margin-right: 16px;border-radius: 0.1875em;">DUBX</button></li>';
+            var li = '<div class="for" onclick="hello.slide();"><img src="https://rawgit.com/sinfulBA/DubX-Script/master/params.svg" alt=""></div>';
             var html = [
                 '<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css">',
-                '<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/asset.css">',
-                '<div class="isSwordful">',
-                    '<div class="verSwordful">',
-                        '<p class="Javaling">DubX Settings</p>',
-                        '<p class="Javaful">Version '+our_version+' - Apologies! You will need to restore options.</p>',
-                    '</div>',
-                    '<ul class="optionSwordful">',
-                        '<li class="optionClass">',
-                            '<p class="Optionling" style="margin: 0;">Aloha, <span class="isUser"></span>!</p>',
+                '',
+                '<div class="for_content">',
+                    '<span class="for_content_ver">DubX Settings</span>',
+                    '<span class="for_content_version">03.00.09</span>',
+                    '<ul class="for_content_ul">',
+                        '<li class="for_content_li">',
+                            '<p class="for_content_c">Standard</p>',
                         '</li>',
-                        '<li class="titleClass">',
-                            '<p class="istitle">Standard</p>',
+                        '<li onclick="hello.autovote();" class="for_content_li for_content_feature autovote">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Autovote</p>',
                         '</li>',
-                        '<li onclick="hello.autovote();" class="optionClass autovote">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Autovote</p>',
+                        '<li onclick="hello.wide_video();" class="for_content_li for_content_feature wide_video">',
+                            '<p class="for_content_off"><i class="fi-alert"></i></p>',
+                            '<p class="for_content_p">Fullscreen</p>',
                         '</li>',
-                        '<li onclick="hello.wide_video();" class="optionClass wide_video">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Fullscreen</p>',
+                        '<li onclick="hello.work();" class="for_content_li for_content_feature work">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Work Mode</p>',
                         '</li>',
-                        '<li onclick="hello.work();" class="optionClass work">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Work Mode</p>',
+                        '<li onclick="hello.split_chat();" class="for_content_li for_content_feature split_chat">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Split Chat</p>',
                         '</li>',
-                        '<li onclick="hello.split_chat();" class="optionClass split_chat">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Split Chat</p>',
+                        '<li onclick="hello.chat_window();" class="for_content_li for_content_feature chat_window">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Chat Only</p>',
                         '</li>',
-                        '<li onclick="hello.chat_window();" class="optionClass chat_window">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Chat Only</p>',
+                        '<li onclick="hello.medium_disable();" class="for_content_li for_content_feature medium_disable">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Hide Background</p>',
                         '</li>',
-                        '<li onclick="hello.medium_disable();" class="optionClass medium_disable">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Hide Background</p>',
+                        '<li onclick="hello.afk();" class="for_content_li for_content_feature afk">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">AFK Autorespond</p>',
                         '</li>',
-                        '<li onclick="hello.afk();" class="optionClass afk">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">AFK Auto-Respond</p>',
+                        '<li onclick="hello.warn_redirect();" class="for_content_li for_content_feature warn_redirect">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Warn On Navigation</p>',
                         '</li>',
-                        '<li onclick="hello.warn_redirect();" class="optionClass warn_redirect">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Warn On Navigation</p>',
+                        '<li onclick="hello.css_for_the_world();" class="for_content_li for_content_feature css">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Room CSS</p>',
                         '</li>',
-                        '<li onclick="hello.css_for_the_world();" class="optionClass css">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Community CSS</p>',
+                        '<li onclick="hello.nicole();" class="for_content_li for_content_feature nicole">',
+                            '<p class="for_content_off"><i class="fi-alert"></i></p>',
+                            '<p class="for_content_p">Plug.dj Theme</p>',
                         '</li>',
-                        '<li onclick="hello.nicole();" class="optionClass nicole">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Plug Theme</p>',
+                        '<li class="for_content_li">',
+                            '<p class="for_content_c">Contact</p>',
                         '</li>',
-                        '<li class="titleClass">',
-                            '<p class="istitle">Contact</p>',
+                        '<li onclick="hello.report_modal();" class="for_content_li for_content_feature report">',
+                            '<p class="for_content_off"><i class="fi-comments"></i></p>',
+                            '<p class="for_content_p">Bug Report</p>',
                         '</li>',
-                        '<li onclick="hello.report_modal();" class="optionClass report">',
-                            '<p class="isOnOff"><i class="fi-comments"></i></p>',
-                            '<p class="Optionling">Bug Report</p>',
+                        '<li class="for_content_li">',
+                            '<p class="for_content_c">Customize</p>',
                         '</li>',
-                        '<li class="titleClass">',
-                            '<p class="istitle">Customize</p>',
+                        '<li onclick="hello.css_modal();" class="for_content_li for_content_feature">',
+                            '<p class="for_content_off"><i class="fi-unlink"></i></p>',
+                            '<p class="for_content_p">Custom CSS</p>',
                         '</li>',
-                        '<li onclick="hello.css_modal();" class="optionClass">',
-                            '<p class="isOnOff"><i class="fi-unlink"></i></p>',
-                            '<p class="Optionling">Custom CSS</p>',
+                        '<li onclick="hello.medium_modal();" class="for_content_li for_content_feature">',
+                            '<p class="for_content_off"><i class="fi-unlink"></i></p>',
+                            '<p class="for_content_p">Custom Background</p>',
                         '</li>',
-                        '<li onclick="hello.medium_modal();" class="optionClass">',
-                            '<p class="isOnOff"><i class="fi-unlink"></i></p>',
-                            '<p class="Optionling">Custom Background</p>',
+                        '<li class="for_content_li">',
+                            '<p class="for_content_c">Social</p>',
                         '</li>',
-                        '<li class="titleClass">',
-                            '<p class="istitle">Social</p>',
-                        '</li>',
-                        '<li class="optionClass facebook">',
-                            '<a href="https://www.facebook.com/DubXScript" target="_blank" style="color: white;">',
-                                '<p class="isOnOff"><i class="fi-social-facebook"></i></p>',
-                                '<p class="Optionling">Like Us on Facebook</p>',
+                        '<li class="for_content_li for_content_feature">',
+                            '<a href="https://www.facebook.com/DubXScript" target="_blank" style="color: #878c8e;">',
+                                '<p class="for_content_off"><i class="fi-social-facebook"></i></p>',
+                                '<p class="for_content_p">Like Us on Facebook</p>',
                             '</a>',
                         '</li>',
-                        '<li class="optionClass twitter">',
-                            '<a href="https://twitter.com/DubXScript" target="_blank" style="color: white;">',
-                                '<p class="isOnOff"><i class="fi-social-twitter"></i></p>',
-                                '<p class="Optionling">Follow Us on Twitter</p>',
+                        '<li class="for_content_li for_content_feature">',
+                            '<a href="https://twitter.com/DubXScript" target="_blank" style="color: #878c8e;">',
+                                '<p class="for_content_off"><i class="fi-social-twitter"></i></p>',
+                                '<p class="for_content_p">Follow Us on Twitter</p>',
                             '</a>',
                         '</li>',
-                        '<li class="optionClass github">',
-                            '<a href="https://github.com/sinfulBA/DubX-Script" target="_blank" style="color: white;">',
-                                '<p class="isOnOff"><i class="fi-social-github"></i></p>',
-                                '<p class="Optionling">Fork Us on Github</p>',
+                        '<li class="for_content_li for_content_feature">',
+                            '<a href="https://github.com/sinfulBA/DubX-Script" target="_blank" style="color: #878c8e;">',
+                                '<p class="for_content_off"><i class="fi-social-github"></i></p>',
+                                '<p class="for_content_p">Fork Us on Github</p>',
                             '</a>',
                         '</li>',
-                        '<li class="optionClass website">',
-                            '<a href="https://dubx.net" target="_blank" style="color: white;">',
-                                '<p class="isOnOff"><i class="fi-link"></i></p>',
-                                '<p class="Optionling">Check out our Website</p>',
+                        '<li class="for_content_li for_content_feature">',
+                            '<a href="https://www.dubx.net" target="_blank" style="color: #878c8e;">',
+                                '<p class="for_content_off"><i class="fi-link"></i></p>',
+                                '<p class="for_content_p">Our Website</p>',
                             '</a>',
                         '</li>',
-                        '<li class="titleClass">',
-                            '<p class="istitle">Our Extension</p>',
+                        '<li class="for_content_li">',
+                            '<p class="for_content_c">Chrome Extension</p>',
                         '</li>',
-                        '<li class="optionClass webstore">',
-                            '<a href="https://chrome.google.com/webstore/detail/dubx/oceofndagjnpebjmknefoelcpcnpcedm/reviews" target="_blank" style="color: white;">',
-                                '<p class="isOnOff"><i class="fi-like"></i></p>',
-                                '<p class="Optionling">Give Us a Rating</p>',
+                        '<li class="for_content_li for_content_feature">',
+                            '<a href="https://chrome.google.com/webstore/detail/dubx/oceofndagjnpebjmknefoelcpcnpcedm/reviews" target="_blank" style="color: #878c8e;">',
+                                '<p class="for_content_off"><i class="fi-like"></i></p>',
+                                '<p class="for_content_p">Give Us a Rating</p>',
                             '</a>',
-                        '</li>',
-                        '<li class="optionClass">',
-                        	'<p class="Optionful" style="margin: 0;">Dub X currently has 764 users!</p>',
                         '</li>',
                     '</ul>',
                 '</div>'
             ].join('');
-            $('.user-header-menu').prepend(li);
-            $('body').prepend(html);
+            $('.header-right-navigation').append(li);
+            $('body').append(html);
         },
         //Ref 2.3.1: Input
         input: function(title,content,placeholder,confirm) {
@@ -204,10 +196,10 @@ if (!hello_run) {
             $('body').prepend(onErr);
         },
         on: function(selector) {
-            $(selector + ' .isOnOff i').replaceWith('<i class="fi-check"></i>');
+            $(selector + ' .for_content_off i').replaceWith('<i class="fi-check"></i>');
         },
         off: function(selector) {
-            $(selector + ' .isOnOff i').replaceWith('<i class="fi-x"></i>');
+            $(selector + ' .for_content_off i').replaceWith('<i class="fi-x"></i>');
         },
         closeErr: function() {
             $('.onErr').remove();
@@ -379,12 +371,12 @@ if (!hello_run) {
             if (!options.let_afk) {
                 options.let_afk = true;
                 isOn = 'on';
-                Dubtrack.Events.bind("realtime:chat-message", hello.afk_chat_respond);
+                Dubtrack.Events.bind("realtime:chat-message", this.afk_chat_respond);
                 hello.on('.afk');
             } else {
                 options.let_afk = false;
                 isOn = 'off';
-                Dubtrack.Events.unbind("realtime:chat-message", hello.afk_chat_respond);
+                Dubtrack.Events.unbind("realtime:chat-message", this.afk_chat_respond);
                 hello.off('.afk');
             }
         },
@@ -523,14 +515,9 @@ if (!hello_run) {
     $('document').ready(hello.css_run);
     $('document').ready(hello.medium_load);
     
-     // Ref 5:
-	$('.chat-main').on('DOMNodeInserted', function(e) {
-		var itemEl = $(e.target);
-		if(itemEl.prop('tagName').toLowerCase() !== 'li' || itemEl.attr('class').substring(0, 'user-'.length) !== 'user-') return;
-		var user = Dubtrack.room.users.collection.findWhere({userid: itemEl.attr('class').split(/-| /)[1]});
-		var role = !user.get('roleid') ? 'default' : Dubtrack.helpers.isDubtrackAdmin(user.get('userid')) ? 'admin' : user.get('roleid').type;
-		itemEl.addClass('is' + (role.charAt(0).toUpperCase() + role.slice(1)));
-	});
+    $('.for').click(function() {
+        $('.for_content').show();
+    });
     
     
 } else {
