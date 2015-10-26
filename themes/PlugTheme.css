@@ -37,6 +37,9 @@ a, a:active, a:focus, a:hover,
 }
 
 /* DubX Menu */
+.for_content {
+	color: #1A1A1A
+}
 .for_content_off {
 	color: #DDDDDD !important;
 }
@@ -91,7 +94,7 @@ span.name,
 
 /* Video Player */
 #main_player {
-	background: rgba(26,26,26,0.98);
+	background: rgba(8,8,8,0.78);
 	border-radius: 0.4rem;
 }
 #main_player #custom_iframe_embed_error, #main_player .playbtn-el {
@@ -101,19 +104,19 @@ span.name,
 /* Video Buttons (top) */
 #main_player .player_header span.active {
 	background: #AA74FE;
-	color: #1A1818;
+	color: #000000;
 	font-weight: 600;
 }
 #main_player .player_header span {
 	border-radius: 0.4rem;
-	background: #1A1A1A;
+	background: rgba(8,8,8,0.78);
 	font-weight: 500;
 	color: #FFF;
 }
 
 /* Video Buttons (bottom) */
 #main_player .play-song-link {
-	background: rgba(26,26,26,0.98);
+	background: rgba(8,8,8,0.78);
 	border-radius: 0.4rem;
 }
 #main_player .player_sharing .player-controller-container .volume-controller-container #volume-div .ui-slider-range-min {
@@ -122,7 +125,7 @@ span.name,
 
 /* Chat */
 #main-room .right_section, #profileMainSection {
-	background: rgba(26,26,26,0.98);
+	background: rgba(8,8,8,0.78);
 	border-radius: 0.4rem;
 }
 #chat .chat_tools span:hover {
