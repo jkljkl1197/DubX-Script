@@ -59,16 +59,48 @@ span.name,
 }
 
 /* Video Buttons (bottom) */
-#main_player .player_sharing .player-controller-container .skip-el, #main_player .player_sharing span, #main_player .play-song-link i{
+#main_player .player_sharing .player-controller-container .volume-controller-container #volume-div .ui-slider-range-min {
+	background: #AA74FE;
+}
+.duration,
+#main_player .play-song-link i {
 	color: #AA74FE;
 }
 
 /* Chat */
-#main-room.display-users-rooms #chat .display-chat, #main-room.display-users-rooms #chat .display-room-users, #main-room.display-chat-settings #chat .display-chat-settings {
+#chat .chat_tools span:hover,
+#chat .chat-options .chat-option-buttons span.active i, #chat .chat-options .chat-option-buttons span:hover {
 	color: #AA74FE;
 }
 #chat .chat_tools span:after {
 	border-color: #AA74FE;
+}
+
+/* Queue */
+#browser .browser-content .browser-content-header .close-browser,
+#browser .browser-content .browser-content-main .sidebar #playlists-scroll .playlist-style li.selected, #browser .browser-content .browser-content-main .nano .loading {
+	background: #AA74FE;
+}
+browser .browser-content .browser-content-main .nano .content-videos #results_video_api .queue-item .description .preview,
+#browser .browser-content .browser-content-main .sidebar .create-playlist .create-playlist-display span {
+	color: #AA74FE;
+}
+#browser .browser-content .browser-content-main .nano .content-videos #results_video_api .queue-item.selected {
+	border: 1px solid #AA74FE;
+}
+
+/* Preview */
+.playerPreview .controlContainer .progressContainer .loaded, .playerPreview .controlContainer .progressContainer .progress,
+.playerPreview .ui-slider-range {
+	background: #AA74FE;
+}
+.playerPreview .ui-slider-handle {
+	background: #fff;
+}
+
+/* Room Info */
+#roomInfoModal .modal-header h3, #roomFormUpdate .mid a, #roomInfoModal .mid a {
+	color: #AA74FE;
 }
 
 /* User */
