@@ -144,27 +144,19 @@ span.name,
 }
 
 /** Users **/
-#main_avatar_room #main-user-list-room #avatar-list li:after p,
-#main_avatar_room #main-user-list-room #avatar-list li:after p.username,
-#main_avatar_room #main-user-list-room #avatar-list li:after p.username:after {
-	color: #878C8E;
+#main_avatar_room #main-user-list-room #avatar-list li p {
+	color: #AAAAAA;
 }
 
 /** Upvote/Downvote **/
-#main_avatar_room #main-user-list-room #avatar-list li p.dubs li.updub {
-	color: #90AD2F;
-}
-#main_avatar_room #main-user-list-room #avatar-list li p.dubs li.downdub {
-	color: #C42E3B;
-}
-/* ul.avatar-list li.updub {
+ul.avatar-list li.updub {
 	border: 1px solid #000000;
 	box-shadow: inset 4px 0px 0px 0px #90AD2F;
 }
 ul.avatar-list li.downdub {
 	border: 1px solid #000000;
 	box-shadow: inset 4px 0px 0px 0px #C42E3B;
-} */
+}
 
 /* Settings */
 #chat .chat-options .chat-option-buttons span.active i, #chat .chat-options .chat-option-buttons span:hover {
@@ -226,9 +218,15 @@ span.usernameContainer, .followers-counter,
 	height 101%;
 	background: #AA74FE;
 }
-#user_popover {
+#user_popover .actions, #user_popover .global-actions, #user_popover {
 	background: #AA74FE;
 	opacity: .95;
+}
+#user_popover .global-actions a, #user_popover .usercontent header .dubs, #user_popover .usercontent header h3 {
+	color: #393A39;
+}
+#user_popover .global-actions a {
+	outline: 2px solid #393A39;
 }
 
 /* Special CSS Settings */
