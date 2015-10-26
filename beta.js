@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.00.09 - I Want Candy!';
+    var our_version = '03.00.10 - Candyland';
     //Ref 1: Variables
     var options = {
         let_autovote: false,
@@ -70,7 +70,7 @@ if (!hello_run) {
                     '</div>',
                     '<ul class="optionSwordful">',
                         '<li class="optionClass">',
-                            '<p class="Optionling" style="margin: 0;">Greetings, <span class="isUser"></span></p>',
+                            '<p class="Optionling" style="margin: 0;">Aloha, <span class="isUser"></span>!</p>',
                         '</li>',
                         '<li class="titleClass">',
                             '<p class="istitle">Standard</p>',
@@ -156,21 +156,21 @@ if (!hello_run) {
                         '</li>',
                         '<li class="optionClass website">',
                             '<a href="https://dubx.net" target="_blank" style="color: white;">',
-                                '<p class="isOnOff"><i class="fi-web"></i></p>',
+                                '<p class="isOnOff"><i class="fi-link"></i></p>',
                                 '<p class="Optionling">Check out our Website</p>',
                             '</a>',
                         '</li>',
+                        '<li class="titleClass">',
+                            '<p class="istitle">Our Extension</p>',
+                        '</li>',
                         '<li class="optionClass webstore">',
-                            '<a href="https://chrome.google.com/webstore/detail/dubx/oceofndagjnpebjmknefoelcpcnpcedm?hl=en" target="_blank" style="color: white;">',
-                                '<p class="isOnOff"><i class="fi-social-google-plus"></i></p>',
-                                '<p class="Optionling">Chrome Extension</p>',
+                            '<a href="https://chrome.google.com/webstore/detail/dubx/oceofndagjnpebjmknefoelcpcnpcedm/reviews" target="_blank" style="color: white;">',
+                                '<p class="isOnOff"><i class="fi-like"></i></p>',
+                                '<p class="Optionling">Give Us a Rating</p>',
                             '</a>',
                         '</li>',
-                        '<li class="optionClass users">',
-                            '<a href="https://chrome.google.com/webstore/detail/dubx/oceofndagjnpebjmknefoelcpcnpcedm?hl=en" target="_blank" style="color: white;">',
-                                '<p class="isOnOff"><i class="fi-torsos-all"></i></p>',
-                                '<p class="Optionling">We\'ve got 711 Users!</p>',
-                            '</a>',
+                        '<li class="optionClass">',
+                        	'<p class="Optionful" style="margin: 0;">Dub X currently has 764 users!</p>',
                         '</li>',
                     '</ul>',
                 '</div>'
@@ -297,7 +297,7 @@ if (!hello_run) {
             if (!options.let_wide_video) {
                 options.let_wide_video = true;
                 isOn = 'on';
-                $('head').prepend('<link class="wide_video_link" rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/wide_video.css">');
+                $('head').prepend('<link class="wide_video_link" rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/wide_video.css">');
                 hello.option('wide_video','true');
                 hello.on('.wide_video');
             } else {
@@ -393,7 +393,7 @@ if (!hello_run) {
             if(!options.let_chat_window) {
                 options.let_chat_window = true;
                 isOn = 'on';
-                $('head').append('<link class="chat_window_link" rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/chat_window.css">');
+                $('head').append('<link class="chat_window_link" rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/chat_window.css">');
                 hello.option('chat_window','true');
                 hello.on('.chat_window');
             } else {
@@ -522,6 +522,15 @@ if (!hello_run) {
     };
     $('document').ready(hello.css_run);
     $('document').ready(hello.medium_load);
+    
+     // Ref 5:
+	$('.chat-main').on('DOMNodeInserted', function(e) {
+		var itemEl = $(e.target);
+		if(itemEl.prop('tagName').toLowerCase() !== 'li' || itemEl.attr('class').substring(0, 'user-'.length) !== 'user-') return;
+		var user = Dubtrack.room.users.collection.findWhere({userid: itemEl.attr('class').split(/-| /)[1]});
+		var role = !user.get('roleid') ? 'default' : Dubtrack.helpers.isDubtrackAdmin(user.get('userid')) ? 'admin' : user.get('roleid').type;
+		itemEl.addClass('is' + (role.charAt(0).toUpperCase() + role.slice(1)));
+	});
     
     
 } else {
