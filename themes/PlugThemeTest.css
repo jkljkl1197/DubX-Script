@@ -24,6 +24,14 @@ a, a:active, a:focus, a:hover,
 	color: #AA74FE;
 }
 
+/* DubX Menu */
+.for_content_off {
+	color: #DDDDDD;
+}
+.for_content_p {
+	color: #AA74FE;
+}
+
 /* Bottom Header */
 #player-controller .left ul li.infoContainer .infoContainerInner .progressBg {
 	background: #AA74FE;
