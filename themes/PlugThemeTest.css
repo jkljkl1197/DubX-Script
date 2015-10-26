@@ -24,8 +24,25 @@ a, a:active, a:focus, a:hover,
 }
 
 /* Bottom Header */
-span.currentSong, span.currentTime {
+span.currentSong, .currentTime, span.min, span.sec {
     color: #AA74FE;
+}
+.icon-heart:before {
+	color: #AA74FE;
+}
+.icon-upvote:before, 
+#player-controller .right ul li .dubup.voted {
+	background: #90AD2F;
+}
+#player-controller .right ul li .dubup:hover span, #player-controller .right ul li .dubup .dub-counter {
+	color: #90AD2F;
+}
+.icon-downvote:before,
+#player-controller .right ul li .dubdown.voted {
+	background: #C42E3B;
+}
+#player-controller .right ul li .dubdown:hover span, #player-controller .right ul li .dubdown .dub-counter {
+	color: #C42E3B;
 }
 
 /* Lobby */
