@@ -495,33 +495,38 @@ if (!hello_run) {
     }, true);
     if (localStorage.getItem('autovote') === 'true') {
         hello.autovote();
-    };
+    }
     if (localStorage.getItem('split_chat') === 'true') {
         hello.split_chat();
-    };
+    }
     if (localStorage.getItem('wide_video') === 'true') {
         hello.wide_video();
-    };
+    }
     if (localStorage.getItem('medium_disable') === 'true') {
         hello.medium_disable();
-    };
+    }
     if (localStorage.getItem('work') === 'true') {
         hello.work();
-    };
+    }
     if (localStorage.getItem('warn_redirect') === 'true') {
         hello.warn_redirect();
-    };
+    }
     if (localStorage.getItem('chat_window') === 'true') {
         hello.chat_window();
-    };
+    }
     if (localStorage.getItem('css_world') === 'true') {
         hello.css_for_the_world();
-    };
+    }
     if (localStorage.getItem('nicole') === 'true') {
         hello.nicole();
-    };
+    }
     $('document').ready(hello.css_run);
     $('document').ready(hello.medium_load);
+    $('document').ready(function(){
+        console.log('helloJS docready running');
+        hello.css_run();
+        hello.medium_load();
+    });
     
      // Ref 5:
 	$('.chat-main').on('DOMNodeInserted', function(e) {
