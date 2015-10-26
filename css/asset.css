@@ -365,7 +365,7 @@ ul.avatar-list li.admin p {
 	content: "-  Co-owner";
 }
 #main_avatar_room #main-user-list-room #avatar-list li.creator p.username:after {
-	content: "-  Creator";
+	content: "-  Creator" !important;
 }
 #main_avatar_room #main-user-list-room #avatar-list li.manager p.username:after {
 	content: "-  Manager";
