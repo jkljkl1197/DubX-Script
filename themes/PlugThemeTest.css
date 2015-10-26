@@ -7,8 +7,9 @@
 */
 
 /* Main Menu (left) */
-#main-menu-left a:hover, #main-menu-left a.room-active-link {
+#main-menu-left a.room-active-link {
     color: #AA74FE;
+    inset 4px 0px 0px 0px #AA74FE
 }
 
 /* Main Menu (right) */
@@ -24,20 +25,21 @@ a, a:active, a:focus, a:hover,
 }
 
 /* Bottom Header */
+#player-controller .left ul li.infoContainer .infoContainerInner .progressBg {
+	background: #AA74FE;
+}
 span.currentSong, .currentTime, span.min, span.sec {
     color: #AA74FE;
 }
 .icon-heart:before {
 	color: #AA74FE;
 }
-.icon-upvote:before, 
 #player-controller .right ul li .dubup.voted {
 	background: #90AD2F;
 }
 #player-controller .right ul li .dubup .icon-arrow-up, #player-controller .right ul li .dubup .dub-counter {
 	color: #90AD2F;
 }
-.icon-downvote:before,
 #player-controller .right ul li .dubdown.voted {
 	background: #C42E3B;
 }
@@ -48,15 +50,33 @@ span.currentSong, .currentTime, span.min, span.sec {
 /* Lobby */
 span.name,
 #room-list #container-room-list .room-item .current-song, #room-list #container-room-list .room-item .roomImage .join {
-    color: #AA74FE;
+	color: #AA74FE;
+}
+
+/* Video Buttons (top) */
+#main_player .player_header span.active {
+	background: #AA74FE;
+}
+
+/* Video Buttons (bottom) */
+#main_player .player_sharing .player-controller-container .skip-el, #main_player .player_sharing span, #main_player .play-song-link i{
+	color: #AA74FE;
+}
+
+/* Chat */
+#main-room.display-users-rooms #chat .display-chat, #main-room.display-users-rooms #chat .display-room-users, #main-room.display-chat-settings #chat .display-chat-settings {
+	color: #AA74FE;
+}
+#chat .chat_tools span:after {
+	border-color: #AA74FE;
 }
 
 /* User */
 span.usernameContainer, .followers-counter,
 #profileMainSection .profileView .header .pictureContainer .updatePictureGif {
-    color: #AA74FE;
+	color: #AA74FE;
 }
 #profileMainSection .profileView .infoProfile .edit-btn, #profileMainSection .profileView .infoProfile .follow-btn {
-    color: #AA74FE;
+	color: #AA74FE;
     border: 2px solid #AA74FE;
 }
