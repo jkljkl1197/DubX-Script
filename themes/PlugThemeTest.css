@@ -204,17 +204,11 @@ ul.avatar-list li.currentDJ .user-kris:after,
 .user-kris, .user-kris p.username {
 	color: #D7519C !important;
 }
-#main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-kris p.username,
-#main_avatar_room #main-user-list-room #avatar-list li.creator.user-kris p.username,
-#main_avatar_room #main-user-list-room #avatar-list li.manager.user-kris p.username,
-#main_avatar_room #main-user-list-room #avatar-list li.mod.user-kris p.username,
-#main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-kris p.username,
-#main_avatar_room #main-user-list-room #avatar-list li.vip.user-kris p.username,
-#main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-kris p.username:after,
-#main_avatar_room #main-user-list-room #avatar-list li.creator.user-kris p.username:after,
-#main_avatar_room #main-user-list-room #avatar-list li.manager.user-kris p.username:after,
-#main_avatar_room #main-user-list-room #avatar-list li.mod.user-kris p.username:after,
-#main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-kris p.username:after,
-#main_avatar_room #main-user-list-room #avatar-list li.vip.user-kris p.username:after {
+#main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-kris p.username, #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-kris p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.creator.user-kris p.username, #main_avatar_room #main-user-list-room #avatar-list li.creator.user-kris p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.manager.user-kris p.username, #main_avatar_room #main-user-list-room #avatar-list li.manager.user-kris p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.mod.user-kris p.username, #main_avatar_room #main-user-list-room #avatar-list li.mod.user-kris p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-kris p.username, #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-kris p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.vip.user-kris p.username, #main_avatar_room #main-user-list-room #avatar-list li.vip.user-kris p.username:after {
 	color: #D7519C !important;
 }
