@@ -93,6 +93,7 @@ span.name,
 }
 #warning {
 	background: #AA74FE;
+	opacity: .90;
 }
 
 /* Video Player */
