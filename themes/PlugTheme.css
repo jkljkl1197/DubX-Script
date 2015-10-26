@@ -13,8 +13,7 @@
 }
 
 /* Main Menu (right) */
-#header-global .header-right-navigation .user-info span,
-[class*=" icon-"], [class^=icon-] {
+#header-global .header-right-navigation .user-info span {
 	color: #AA74FE;
 }
 
@@ -24,6 +23,16 @@ a, a:active, a:focus, a:hover,
 	color: #AA74FE;
 }
 #main-loading {
+	background: #AA74FE;
+}
+
+/* Private Messages */
+#private-messages .main-message-list ul.message-list li.message-item .message-content h3, #private-messages .message-details ul.message-list li.message-item .message-content h3,
+#private-messages .main-message-list .message-header a, #private-messages .message-details .message-header a,
+#private-messages .message-details ul.message-list li.message-item .message-content h3 {
+	color: #AA74FE;
+}
+#private-messages .loading {
 	background: #AA74FE;
 }
 
@@ -39,9 +48,6 @@ a, a:active, a:focus, a:hover,
 #player-controller .left ul li.infoContainer .infoContainerInner .progressBg {
 	background: #AA74FE;
 }
-span.currentSong, .currentTime, span.min, span.sec {
-	color: #AA74FE;
-}
 .icon-play:before, .icon-playlist:before, .icon-history:before, .icon-heart:before {
 	color: #AA74FE;
 }
@@ -56,6 +62,14 @@ span.currentSong, .currentTime, span.min, span.sec {
 }
 #player-controller .right ul li .dubdown .icon-arrow-down, #player-controller .right ul li .dubdown .dub-counter {
 	color: #C42E3B;
+}
+
+/* Add to Playlist */
+#addToPlaylistFloatContainer .playlist-list-action li:hover {
+	color: #AA74FE;
+}
+#addToPlaylistFloatContainer .create-playlist-input .icon-add {
+	background: #AA74FE;
 }
 
 /* Lobby */
@@ -75,10 +89,6 @@ span.name,
 /* Video Buttons (bottom) */
 #main_player .player_sharing .player-controller-container .volume-controller-container #volume-div .ui-slider-range-min {
 	background: #AA74FE;
-}
-.duration,
-#main_player .play-song-link i {
-	color: #AA74FE;
 }
 
 /* Chat */
@@ -173,7 +183,7 @@ span.name,
 	background: #AA74FE;
 }
 .playerPreview .ui-slider-handle {
-	background: #fff;
+	background: #AA74FE;
 }
 
 /* Room Info */
@@ -189,6 +199,15 @@ span.usernameContainer, .followers-counter,
 #profileMainSection .profileView .infoProfile .edit-btn, #profileMainSection .profileView .infoProfile .follow-btn {
 	color: #AA74FE;
 	border: 2px solid #AA74FE;
+}
+#profileMainSection .profileView .header .pictureContainer .updatePictureGif {
+	width: 101%;
+	height 101%;
+	background: #AA74FE;
+}
+#user_popover {
+	background: #AA74FE;
+	opacity: .95;
 }
 
 /* Special CSS Settings */
