@@ -31,7 +31,7 @@ a, a:active, a:focus, a:hover,
 .for_content_off {
 	color: #DDDDDD;
 }
-.for_content_p {
+.for_content_version, .for_content_p {
 	color: #AA74FE;
 }
 
