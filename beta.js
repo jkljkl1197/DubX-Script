@@ -168,7 +168,7 @@ if (!hello_run) {
                 '</div>'
             ].join('');
             $('.header-right-navigation').append(li);
-            $('body').append(html);
+            $('body').prepend(html);
         },
         //Ref 2.3.1: Input
         input: function(title,content,placeholder,confirm) {
