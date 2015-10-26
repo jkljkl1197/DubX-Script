@@ -18,7 +18,7 @@ Our Team
 IMPORTANT
 ---
 
-__Updates (Version 02.15.30 - Sushi)__
+__Updates (Version 03.00.10 - Sushi)__
 
 - Added Plug Theme
 - Working on bug issues
