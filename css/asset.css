@@ -13,6 +13,7 @@
 	top: 56px;
 	overflow-y: scroll;
 	background: #222;
+    z-index: 2147483647;
 }
 .for_content_ver {
 	display: block;
