@@ -12,7 +12,17 @@ a:hover, a:visited {
     color: #AA74FE;
 }
 #warning {
-    background: #AA74FE;
+    color: #CCC;
+	background: rgb(17, 17, 17);
+}
+#warning:after {
+	background: rgba(170,116,254,0);
+	opacity: 1;
+	border: .375em solid #AAA;
+}
+#warning button {
+	color: #CCCCCC;
+	background: #333;
 }
 /* Lobby */
 #container-room-list .room-item .user-count {
@@ -109,6 +119,9 @@ a:hover, a:visited {
 #private-messages .message-details ul.message-list li.message-item .message-content .username-handle {
     color: #AA74FE;
     font-weight: bold;
+}
+#private-messages .main-message-list ul.message-list li.message-item.new-message:before, #private-messages .message-details ul.message-list li.message-item.new-message:before {
+	background: #AA74FE;
 }
 
 /* Video box */
