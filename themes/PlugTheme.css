@@ -113,10 +113,7 @@ a:hover, a:visited {
 
 /* Video box */
 #main_player{
-	padding: 0;
-}
-#main-room .left_section {
-    background: #111;
+	padding: 1rem;
 }
 #main_player .player_sharing {
     background: #181818;
