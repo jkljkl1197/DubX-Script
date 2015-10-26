@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.00.10 - Candyland';
+    var our_version = '03.00.50 - I have a sweet-tooth';
     //Ref 1: Variables
     var options = {
         let_autovote: false,
