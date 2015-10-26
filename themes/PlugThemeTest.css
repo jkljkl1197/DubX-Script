@@ -74,6 +74,9 @@ span.name,
 #chat .chat_tools span:after {
 	border-color: #AA74FE;
 }
+#chat .pusher-chat-widget-input #new-messages-counter {
+	background: #AA74FE;
+}
 
 /* User List */
 
