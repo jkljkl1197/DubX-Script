@@ -62,7 +62,7 @@ if (!hello_run) {
             var li = '<div class="for" onclick="hello.slide();"><img src="https://rawgit.com/sinfulBA/DubX-Script/master/params.svg" alt=""></div>';
             var html = [
                 '<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css">',
-                '',
+                '<link rel-"stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/asset.css">',
                 '<div class="for_content">',
                     '<span class="for_content_ver">DubX Settings</span>',
                     '<span class="for_content_version">03.00.09</span>',
