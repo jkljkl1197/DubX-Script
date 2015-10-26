@@ -172,7 +172,7 @@ span.usernameContainer, .followers-counter,
 
 /** Contributors **/
 #chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username {
-    color: #D7519C;
+    color: #D7519C !important;
     font-weight: 700;
     text-shadow: 0px 0px 1px #000;
 }
@@ -192,7 +192,7 @@ span.usernameContainer, .followers-counter,
 ul.avatar-list li.user-kris p.dubs:before {
     content: "DubX Contributor  -  ";
     font-weight: 700 !important;
-    color: #D7519C;
+    color: #D7519C !important;
 }
 ul.avatar-list li.creator-co-owner.user-kris:after,
 ul.avatar-list li.co-owner.user-kris:after,
@@ -202,5 +202,5 @@ ul.avatar-list li.vip.user-kris:after,
 ul.avatar-list li.resident-dj.user-kris:after,
 ul.avatar-list li.currentDJ .user-kris:after,
 .user-kris, .user-kris p.username {
-    color: #D7519C;
+    color: #D7519C !important;
 }
