@@ -424,8 +424,10 @@ if (!hello_run) {
                 }).done(function(e) {
                     var content = e.data.description;
                     var url = content.match(/(@dubx=)(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/);
-                    var append = url[0].split('@dubx=');
-                    $('head').append('<link class="css_world" href="'+append[1]+'" rel="stylesheet" type="text/css">');
+                    if (url && url[0]) {
+                        var append = url[0].split('@dubx=');
+                        $('head').append('<link class="css_world" href="'+append[1]+'" rel="stylesheet" type="text/css">');
+                    }
                 });
                 hello.option('css_world','true');
                 hello.on('.css');
