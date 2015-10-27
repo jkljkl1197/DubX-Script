@@ -498,8 +498,8 @@ if (!hello_run) {
                 $('#emoji-preview').append(text).show();
             }
             function filterEmoji(str){
+                var re = new RegExp('^' + str.replace(":","") ,"ig");
                 return emojify.emojiNames.filter(function(val){
-                    var re = new RegExp('^' + str.replace(":","") ,"ig");
                     return re.test(val);
                 });
             }
