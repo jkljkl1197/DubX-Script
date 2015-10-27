@@ -19,17 +19,19 @@
         $('#emoji-preview').append(text).show();
     }
     function filterEmoji(str){
-        var finalStr = str.replace(":","").replace("+","\+");
+        var finalStr = str.replace(":","").replace("+","\\+");
         var re = new RegExp('^' + finalStr ,"ig");
         return emojify.emojiNames.filter(function(val){
             return re.test(val);
         });
     }
-    function isGoodKey(x){
+    function isGoodKey(x, shiftKey){
         // https://css-tricks.com/snippets/javascript/javascript-keycodes/
-        // we only want to allow certain keys:  
-        // 0-9 A-Z || 0-9 & plus/minus on the numpad || dash/hyphen
-        return (x >= 48 && x <= 90) || (x >= 96 && x <= 111) || x === 189;
+        var regAlphaNum = x >= 48 && x <= 90;
+        var numPad = x >= 96 && x <= 111;
+        var hyphen = x === 189;
+        var plusSign = x === 187 && shiftKey;
+        return regAlphaNum || numPad || hyphen || plusSign;
     }
     var emojiColon = false;
     var searchStr = "";
@@ -56,8 +58,10 @@
             $('#emoji-preview').empty().hide();
         }
         
-        if (emojiColon && isGoodKey(e.which)) {
-            searchStr += String.fromCharCode(e.which);
+        if (emojiColon && isGoodKey(e.which, e.shiftKey)) {
+            var fixCode = (e.which === 187) ? 43 : e.which; // get correct "+" charCode
+            fixCode = (fixCode === 189) ? 45 : fixCode; // get correct "-" charCode
+            searchStr += String.fromCharCode(fixCode);
             addToHelper(filterEmoji(searchStr));
         }
     });
