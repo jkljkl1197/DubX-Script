@@ -19,48 +19,59 @@
         $('#emoji-preview').append(text).show();
     }
     function filterEmoji(str){
-        var finalStr = str.replace(":","").replace("+","\\+");
+        var finalStr = str.replace(/:;/g,"").replace("+","\\+");
         var re = new RegExp('^' + finalStr ,"ig");
         return emojify.emojiNames.filter(function(val){
             return re.test(val);
         });
     }
+    // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
+     // Damn you browsers for implementing different keycodes.  
+    var isFF = /FireFox/ig.test(navigator.userAgent);
+    var keyMappings = {
+        colon: (isFF) ? 59 : 186,
+        plus: (isFF) ? 61 : 187,
+        minus: (isFF) ? 173 : 189,
+        backspace : 8
+    };
     function isGoodKey(x, shiftKey){
-        // https://css-tricks.com/snippets/javascript/javascript-keycodes/
         var regAlphaNum = x >= 48 && x <= 90;
         var numPad = x >= 96 && x <= 111;
-        var hyphen = x === 189;
-        var plusSign = x === 187 && shiftKey;
+        var hyphen = x === keyMappings.minus;
+        var plusSign = x === keyMappings.plus && shiftKey;
         return regAlphaNum || numPad || hyphen || plusSign;
     }
     var emojiColon = false;
     var searchStr = "";
-    $("#chat-txt-message").keydown(function(e) {
-        var colonKey = e.shiftKey && e.which === 186;
-        var backSpaceKey = e.which === 8;
-
-        if (!emojiColon && colonKey) { // first colon detected
+    $(document.body).on('keydown', "#chat-txt-message", function(e) {
+        var colonKeyPressed = e.shiftKey && e.which === keyMappings.colon;
+        var backSpaceKeyPressed = e.which === keyMappings.backspace;
+        
+        // console.log('key:', e.which, String.fromCharCode(e.which), 'shift:', e.shiftKey );
+        console.log("searchStr= " + searchStr);
+        
+        if (!emojiColon && colonKeyPressed) { // first colon detected
             emojiColon = true;
-        } else if (emojiColon && colonKey) { // closing colon detected
+        } else if (emojiColon && colonKeyPressed) { // closing colon detected
             emojiColon = false; 
             searchStr = "";
             $('#emoji-preview').empty().hide();
         }
 
-        if (backSpaceKey && searchStr.length > 0) {
+        if (backSpaceKeyPressed && searchStr.length > 0) {
             searchStr = searchStr.substring(0, searchStr.length - 1);
             addToHelper(filterEmoji(searchStr));
         }
 
-        if (backSpaceKey && searchStr.length === 0) {
+        if (backSpaceKeyPressed && searchStr.length === 0) {
             // backspace has erased all characters so we reset
             emojiColon = false;
             $('#emoji-preview').empty().hide();
         }
         
         if (emojiColon && isGoodKey(e.which, e.shiftKey)) {
-            var fixCode = (e.which === 187) ? 43 : e.which; // get correct "+" charCode
-            fixCode = (fixCode === 189) ? 45 : fixCode; // get correct "-" charCode
+            var fixCode = (e.which === keyMappings.plus) ? 43 : e.which; // get correct "+" charCode
+            fixCode = (fixCode === keyMappings.minus) ? 45 : fixCode; // get correct "-" charCode
             searchStr += String.fromCharCode(fixCode);
             addToHelper(filterEmoji(searchStr));
         }

@@ -625,18 +625,18 @@
         }
       }
     };
+    
     var re = new RegExp(Object.keys(twitchObject.emotes).join("|"),"g"); 
 
     function makeImage(id){
       return '<img class="emoji" src="//static-cdn.jtvnw.net/emoticons/v1/'+id+'/1.0" />';
     }
-    function replaceText(){
+    function replaceTextWithEmote(){
       var $last = $('.chat-main .text').last();
       var emoted = $last.html().replace(re, function(matched){
         return makeImage(twitchObject.emotes[matched].image_id);
       });
-      console.log(emoted);
       $last.html(emoted);
     }
-    Dubtrack.Events.bind("realtime:chat-message", replaceText);
+    Dubtrack.Events.bind("realtime:chat-message", replaceTextWithEmote);
 })();
