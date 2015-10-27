@@ -625,16 +625,17 @@
         }
       }
     };
-    var re = new RegExp(Object.keys(twitchObject.emotes).join("|"),"gi"); 
+    var re = new RegExp(Object.keys(twitchObject.emotes).join("|"),"g"); 
 
-    function makeImage(id, desc){
-      return '<img class="emoji" alt="'+desc+'" src="//static-cdn.jtvnw.net/emoticons/v1/'+id+'/1.0" />';
+    function makeImage(id){
+      return '<img class="emoji" src="//static-cdn.jtvnw.net/emoticons/v1/'+id+'/1.0" />';
     }
     function replaceText(){
       var $last = $('.chat-main .text').last();
-      var emoted = $last.text().replace(re, function(matched){
-        return makeImage(twitchObject.emotes[matched].image_id, twitchObject.emotes[matched].description);
+      var emoted = $last.html().replace(re, function(matched){
+        return makeImage(twitchObject.emotes[matched].image_id);
       });
+      console.log(emoted);
       $last.html(emoted);
     }
     Dubtrack.Events.bind("realtime:chat-message", replaceText);

@@ -1,11 +1,11 @@
 (function emoji(){
     /* global emojify */
-    $('.pusher-chat-widget-input').prepend('<div id="emoji-preview" style="display: none; border: 1px solid #202020; position: absolute; bottom: 54px"></div>');
+    $('.pusher-chat-widget-input').prepend('<div id="emoji-preview" style="display: none; border: 1px solid #202020; position: absolute; bottom: 54px; background-color:#111;"></div>');
     
     function createImg(name) {
         return [
             '<div style="display:inline-block">',
-                '<img style="width: 1em; height: 1em; display:inline-block" src="'+emojify.defaultConfig.img_dir+'/'+name+'.png" title=":'+name+':" alt=":'+name+':" align="absmiddle" />',
+                '<img style="width: 1em; height: 1em; display:inline-block" src="'+emojify.defaultConfig.img_dir+'/'+encodeURI(name)+'.png" title=":'+name+':" alt=":'+name+':" align="absmiddle" />',
                 '<span style="font-size: 0.8em; display:inline-block; padding-left: 3px;">:' + name + ':, </span>',
             '</div>'
         ].join('');
@@ -31,7 +31,6 @@
     var emojiColon = false;
     var searchStr = "";
     $("#chat-txt-message").keydown(function(e) {
-        console.log('searchStr',searchStr);
         if (!emojiColon && e.shiftKey && e.which === 186) {
             emojiColon = true;
         } else if (emojiColon && e.shiftKey && e.which === 186) {
