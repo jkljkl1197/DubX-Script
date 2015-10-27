@@ -498,33 +498,38 @@ if (!hello_run) {
                 $('#emoji-preview').append(text).show();
             }
             function filterEmoji(str){
-                var re = new RegExp('^' + str.replace(":","") ,"ig");
+                var finalStr = str.replace(":","").replace("+","\+");
+                var re = new RegExp('^' + finalStr ,"ig");
                 return emojify.emojiNames.filter(function(val){
                     return re.test(val);
                 });
             }
             function isGoodKey(x){
-                // 48 - 90  =  0-9 A-Z || 96 - 111 = numpad || 189 = dash
+                // https://css-tricks.com/snippets/javascript/javascript-keycodes/
+                // we only want to allow certain keys:  
+                // 0-9 A-Z || 0-9 & plus/minus on the numpad || dash/hyphen
                 return (x >= 48 && x <= 90) || (x >= 96 && x <= 111) || x === 189;
             }
             var emojiColon = false;
             var searchStr = "";
             $("#chat-txt-message").keydown(function(e) {
-                if (!emojiColon && e.shiftKey && e.which === 186) {
+                var colonKey = e.shiftKey && e.which === 186;
+                var backSpaceKey = e.which === 8;
+
+                if (!emojiColon && colonKey) { // first colon detected
                     emojiColon = true;
-                } else if (emojiColon && e.shiftKey && e.which === 186) {
-                    emojiColon = false;
+                } else if (emojiColon && colonKey) { // closing colon detected
+                    emojiColon = false; 
                     searchStr = "";
                     $('#emoji-preview').empty().hide();
                 }
 
-                if (e.which === 8 && searchStr.length > 0) {
-                    // backspace
+                if (backSpaceKey && searchStr.length > 0) {
                     searchStr = searchStr.substring(0, searchStr.length - 1);
                     addToHelper(filterEmoji(searchStr));
                 }
 
-                if (e.which === 8 && searchStr.length === 0) {
+                if (backSpaceKey && searchStr.length === 0) {
                     // backspace has erased all characters so we reset
                     emojiColon = false;
                     $('#emoji-preview').empty().hide();
