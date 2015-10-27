@@ -533,9 +533,9 @@ if (!hello_run) {
     hello.initialize();
     hello.personalize();
     hello.emojiPreview();
-    setInterval(function() {
-        hello.eta();
-    }, 5000);
+    // setInterval(function() {
+    //     hello.eta();
+    // }, 5000);
     
     //Ref 4: 
     $('.user-info-button').click(hello.wide_video_disable);
