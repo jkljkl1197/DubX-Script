@@ -1,5 +1,5 @@
 (function twitchEmotes(){
-  // because of CORS issues,  I have to embed the JSON (pased) here
+  // because of CORS issues,  I have to embed the JSON here (parsed) 
   // source:  https://twitchemotes.com/apidocs
   var twitchObject = {
       "meta": {
