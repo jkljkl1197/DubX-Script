@@ -22,52 +22,19 @@ function filterEmoji(str){
         return re.test(val);
     });
 }
-// https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
-// Damn you browsers for implementing different keycodes.  
-var isFF = /FireFox/ig.test(navigator.userAgent);
-var keyMappings = {
-    colon: (isFF) ? 59 : 186,
-    plus: (isFF) ? 61 : 187,
-    minus: (isFF) ? 173 : 189,
-    backspace : 8
-};
-function isGoodKey(x, shiftKey){
-    var regAlphaNum = x >= 48 && x <= 90;
-    var numPad = x >= 96 && x <= 111;
-    var hyphen = x === keyMappings.minus;
-    var plusSign = x === keyMappings.plus && shiftKey;
-    return regAlphaNum || numPad || hyphen || plusSign;
-}
-var emojiColon = false;
 var searchStr = "";
-$(document.body).on('keydown', "#chat-txt-message", function(e) {
-    var colonKeyPressed = e.shiftKey && e.which === keyMappings.colon;
-    var backSpaceKeyPressed = e.which === keyMappings.backspace;
-    // console.log('key:', e.which, String.fromCharCode(e.which), 'shift:', e.shiftKey );
+var emojiRegex = new RegExp(":([+\\-a-z0-9]+)$","i");
+$(document.body).on('keyup', "#chat-txt-message", function(e) {
+    var currentText = $('#chat-txt-message').val();
+
+    var filteredEmoji = currentText.replace(emojiRegex, function(matched, p1){
+        searchStr = p1;
+        addToHelper(filterEmoji(p1));
+    });
     
-    if (!emojiColon && colonKeyPressed) { // first colon detected
-        emojiColon = true;
-    } else if (emojiColon && colonKeyPressed) { // closing colon detected
-        emojiColon = false; 
+    if (searchStr.length <= 0 || currentText.charAt(currentText.length - 1) === ":") {
         searchStr = "";
         $('#emoji-preview').empty().hide();
     }
 
-    if (backSpaceKeyPressed && searchStr.length > 0) {
-        searchStr = searchStr.substring(0, searchStr.length - 1);
-        if (searchStr.length > 0) {  addToHelper(filterEmoji(searchStr)); }
-    }
-
-    if (backSpaceKeyPressed && searchStr.length === 0) {
-        // backspace has erased all characters so we reset
-        emojiColon = false;
-        $('#emoji-preview').empty().hide();
-    }
-    
-    if (emojiColon && isGoodKey(e.which, e.shiftKey) && e.which !== keyMappings.colon) {
-        var fixCode = (e.which === keyMappings.plus) ? 43 : e.which; // get correct "+" charCode
-        fixCode = (fixCode === keyMappings.minus) ? 45 : fixCode; // get correct "-" charCode
-        searchStr += String.fromCharCode(fixCode);
-        addToHelper(filterEmoji(searchStr));
-    }
 });
