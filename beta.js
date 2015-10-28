@@ -537,12 +537,10 @@ if (!hello_run) {
             $('.pusher-chat-widget-input').prepend('<div id="emoji-preview" style="display: none; border: 1px solid #202020; position: absolute; bottom: 54px; background-color:#111;"></div>');
 
             function createImg(name) {
-                return [
-                    '<div style="display:inline-block">',
-                        '<img style="width: 1em; height: 1em; display:inline-block" src="'+emojify.defaultConfig.img_dir+'/'+encodeURI(name)+'.png" title=":'+name+':" alt=":'+name+':" align="absmiddle" />',
-                        '<span style="font-size: 0.8em; display:inline-block; padding-left: 3px;">:' + name + ':, </span>',
-                    '</div>'
-                ].join('');
+                return '<div style="display:inline-block">' +
+                    '<img style="width: 1em; height: 1em; display:inline-block" src="'+emojify.defaultConfig.img_dir+'/'+encodeURI(name)+'.png" title=":'+name+':" alt=":'+name+':" align="absmiddle" />' +
+                    '<span style="font-size: 0.8em; display:inline-block; padding-left: 3px;">:' + name + ':, </span>' +
+                '</div>';
             }
             function addToHelper(emojiArray) {
                 $('#emoji-preview').empty();
@@ -592,7 +590,7 @@ if (!hello_run) {
 
                 if (backSpaceKeyPressed && searchStr.length > 0) {
                     searchStr = searchStr.substring(0, searchStr.length - 1);
-                    addToHelper(filterEmoji(searchStr));
+                    if (searchStr.length > 0) {  addToHelper(filterEmoji(searchStr)); }
                 }
 
                 if (backSpaceKeyPressed && searchStr.length === 0) {
