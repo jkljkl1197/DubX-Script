@@ -478,6 +478,25 @@ if (!hello_run) {
                 $('body').append('<div class="medium" style="width: 100vw;height: 100vh;z-index: -999998;position: fixed; background: url('+content+');background-size: cover;top: 0;"></div>');
             }
         },
+        twitchEmotes: function(){
+            // source:  https://twitchemotes.com/apidocs 
+            var GitHubLocation = 'https://rawgit.com/FranciscoG/DubX-Script/dev/js/';
+
+            $.getScript(GitHubLocation + 'twitchemotes.js', function(){
+              var re = new RegExp(Object.keys(twitchObject.emotes).join("|"),"g"); 
+              function makeImage(id){
+                return '<img class="emoji" src="//static-cdn.jtvnw.net/emoticons/v1/'+id+'/1.0" />';
+              }
+              function replaceTextWithEmote(){
+                var $last = $('.chat-main .text').last();
+                var emoted = $last.html().replace(re, function(matched){
+                  return makeImage(twitchObject.emotes[matched].image_id);
+                });
+                $last.html(emoted);
+              }
+              Dubtrack.Events.bind("realtime:chat-message", replaceTextWithEmote);
+            });
+        },
         emojiPreview: function(){
             $('.pusher-chat-widget-input').prepend('<div id="emoji-preview" style="display: none; border: 1px solid #202020; position: absolute; bottom: 54px; background-color:#111;"></div>');
 
@@ -559,6 +578,7 @@ if (!hello_run) {
     hello.initialize();
     hello.personalize();
     hello.emojiPreview();
+    hello.twitchEmotes();
     setInterval(function() {
         hello.eta();
     }, 5000);
