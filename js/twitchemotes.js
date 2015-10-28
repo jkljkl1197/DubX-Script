@@ -626,8 +626,7 @@ window.twitchObject = {
 };
 
 (function(){
-  var key, // new keys
-      keys = Object.keys(window.twitchObject.emotes); // old keys
+  var key, keys = Object.keys(window.twitchObject.emotes);
   var n = keys.length;
   var newobj={};
   while (n--) {

@@ -13,9 +13,9 @@ $.getScript(GitHubLocation + 'twitchemotes.js', function(data){
   function replaceTextWithEmote(){
     var $last = $('.chat-main .text').last();
     var emoted = $last.html().replace(re, function(matched, p1){
-      console.log(matched, p1);
-      if (typeof twitchObject.emotes[p1] !== 'undefined'){
-        return makeImage(twitchObject.emotes[p1].image_id);
+      var key = p1.toLowerCase();
+      if (typeof twitchObject.emotes[key] !== 'undefined'){
+        return makeImage(twitchObject.emotes[key].image_id);
       }
     });
     $last.html(emoted);
