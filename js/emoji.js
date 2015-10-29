@@ -1,27 +1,52 @@
 /* global emojify, Dubtrack, twitchObject */
-$('.pusher-chat-widget-input').prepend('<div id="emoji-preview" style="display: none; border: 1px solid #202020; position: absolute; bottom: 54px; background-color:#111;"></div>');
 
+var getJSON = (function (url) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url);
+    xhr.send();
+    var self = this;
+    xhr.onload = function() {
+        var resp = JSON.parse(xhr.responseText);
+        if (typeof self.doneCB === 'function') { self.doneCB(resp); }
+    }
+    var done = function(cb){
+        self.doneCB = cb;
+    }
+    return { done: done };
+});
+
+getJSON('//twitchemotes.com/api_cache/v2/global.json')
+    .done(function(data){ 
+        console.log(data); 
+    });
+getJSON('//twitchemotes.com/api_cache/v2/subscriber.json')
+    .done(function(data){ 
+        console.log(data); 
+    });
+
+/**************************************************************************/
+
+$('.pusher-chat-widget-input').prepend('<div id="emoji-preview" style="display: none; border: 1px solid #202020; position: absolute; bottom: 54px; background-color:#111;"></div>');
 var emotes = emojify.emojiNames;
 var GitHubLocation = 'https://rawgit.com/FranciscoG/DubX-Script/dev/js/';
-
 $.getScript(GitHubLocation + 'twitchemotes.js', function(){
     emotes = emotes.concat(Object.keys(twitchObject.emotes));
 
     var re = new RegExp(":(" + Object.keys(twitchObject.emotes).join("|") + "):" ,"ig"); 
 
     function makeImage(id){
-     return '<img class="emoji" src="//static-cdn.jtvnw.net/emoticons/v1/'+id+'/1.0" />';
+        return '<img class="emoji" src="//static-cdn.jtvnw.net/emoticons/v1/'+id+'/1.0" />';
     }
 
     function replaceTextWithEmote(){
-     var $last = $('.chat-main .text').last();
-     var emoted = $last.html().replace(re, function(matched, p1){
-       var key = p1.toLowerCase();
-       if (typeof twitchObject.emotes[key] !== 'undefined'){
-         return makeImage(twitchObject.emotes[key].image_id);
-       }
-     });
-     $last.html(emoted);
+        var $last = $('.chat-main .text').last();
+        var emoted = $last.html().replace(re, function(matched, p1){
+            var key = p1.toLowerCase();
+            if (typeof twitchObject.emotes[key] !== 'undefined'){
+                return makeImage(twitchObject.emotes[key].image_id);
+            }
+        });
+        $last.html(emoted);
     }
 
     Dubtrack.Events.bind("realtime:chat-message", replaceTextWithEmote);
@@ -52,7 +77,9 @@ function addToHelper(emojiArray) {
     });
 
     $('#emoji-preview').append(text);
-    $('#emoji-preview .emoji-previews').last().after('<hr style="margin: 4px 0;">');
+    if ($(".twitch-previews").length) {
+        $('#emoji-preview .twitch-previews').first().before('<p>Twitch emotes:</p>');
+    }
     $('#emoji-preview').show();
 }
 function filterEmoji(str){
@@ -69,10 +96,12 @@ $(document.body).on('keyup', "#chat-txt-message", function(e) {
 
     var filteredEmoji = currentText.replace(emojiRegex, function(matched, p1){
         searchStr = p1;
-        addToHelper(filterEmoji(p1));
+        if (searchStr.length >= 2) {
+            addToHelper(filterEmoji(p1));
+        }
     });
     
-    if (e.keyCode === 13 || searchStr.length <= 0 || currentText.charAt(currentText.length - 1) === ":") {
+    if (e.keyCode === 13 || searchStr.length <= 1 || currentText.charAt(currentText.length - 1) === ":") {
         searchStr = "";
         $('#emoji-preview').empty().hide();
     }
