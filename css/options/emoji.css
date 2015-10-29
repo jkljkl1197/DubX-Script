@@ -1,0 +1,33 @@
+/****************************************************
+ * Emoji and Twitch emote section
+ * twitch logo white: http://i.imgur.com/FhzONPQ.png
+ */
+
+#emoji-preview {
+    overflow: auto; 
+    display: none; 
+    border: 1px solid #202020; 
+    position: absolute; 
+    bottom: 54px; 
+    background-color:#111;
+}
+
+#emoji-preview p.preview-title {
+  border-bottom: 1px solid #555;
+}
+#emoji-preview .emoji-previews,
+#emoji-preview .twitch-previews {
+  display: inline-block;
+}
+
+#emoji-preview span {
+  font-size: 0.8em; 
+  display:inline-block; 
+  padding:0 3px;
+}
+
+#emoji-preview img {
+  width: 1em;
+  height: 1em;
+  display:inline-block;
+}
