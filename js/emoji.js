@@ -6,6 +6,7 @@ var options = {
     let_twitch_emote_preview: false // show twitch emote preview while typing
 };
 var hello = {
+    // stubbing so I don't get errors
     on: function(){},
     off: function(){},
     option: function(){},
@@ -218,13 +219,13 @@ var hello = {
         var currentText = $('#chat-txt-message').val();
         var filteredEmoji = currentText.replace(/:([+\\-_a-z0-9]+)$/i, function(matched, p1){
             self.emojiSearchStr = p1;
-            if (self.emojiSearchStr.length >= 2) {
+            if (self.emojiSearchStr.length >= 3) { // change to set character limit
                 self.addToHelper(self.filterEmoji(p1));
             }
         });
         
         if (e.keyCode === 13 || 
-            self.emojiSearchStr.length <= 1 || 
+            self.emojiSearchStr.length <= 2 || // change to set character limit
             currentText.charAt(currentText.length - 1) === ":" || 
             currentText === "")
         {
@@ -255,7 +256,7 @@ var hello = {
 };
 hello.loadTwitchFromApi();
 
-// check localStorage
+// check localStorage and run these if true.  
 hello.optionTwitchEmotes();
 hello.optionTwitchEmotePreview();
 hello.optionEmojiPreview();

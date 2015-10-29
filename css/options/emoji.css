@@ -17,7 +17,7 @@
 }
 #emoji-preview .emoji-previews,
 #emoji-preview .twitch-previews {
-  display: inline-block;
+  display: block;
 }
 
 #emoji-preview span {
