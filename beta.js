@@ -774,7 +774,6 @@ if (!hello_run) {
     //Ref 3:
     hello.initialize();
     hello.personalize();
-    hello.emojiPreview();
     hello.mobileSongTitle();
     hello.loadTwitchFromApi();
 
