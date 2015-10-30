@@ -22,7 +22,7 @@
 #emoji-preview .emoji-previews,
 #emoji-preview .twitch-previews {
   display: block;
-  padding-top: 6px 0;
+  padding-top: 6px 10px;
 }
 
 #emoji-preview .emoji-previews:hover,
