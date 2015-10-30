@@ -639,3 +639,10 @@ ul.avatar-list li.currentDJ .user-kris:after, ul.avatar-list li.currentDJ .user-
 .user-kris p.username, .user-al3366 p.username, .user-ciscog p.username {
     color: #D7519C !important;
 }
+ul.avatar-list li.user-al3366 p, ul.avatar-list li.vip.user-al3366 p, ul.avatar-list li.resident-dj.user-al3366 p, ul.avatar-list li.mod.user-al3366 p, ul.avatar-list li.manager.user-al3366 p, ul.avatar-list li.co-owner.user-al3366 p, ul.avatar-list li.creator.user-al3366 p,
+ul.avatar-list li.user-ciscog p, ul.avatar-list li.vip.user-ciscog p, ul.avatar-list li.resident-dj.user-ciscog p, ul.avatar-list li.mod.user-ciscog p, ul.avatar-list li.manager.user-ciscog p, ul.avatar-list li.co-owner.user-ciscog p, ul.avatar-list li.creator.user-ciscog p,
+ul.avatar-list li.user-al3366 p, ul.avatar-list li.vip.user-al3366 p, ul.avatar-list li.resident-dj.user-al3366 p, ul.avatar-list li.mod.user-al3366 p, ul.avatar-list li.manager.user-al3366 p, ul.avatar-list li.co-owner.user-al3366 p, ul.avatar-list li.creator.user-al3366 p,
+ul.avatar-list li.user-kris p, ul.avatar-list li.vip.user-kris p, ul.avatar-list li.resident-dj.user-kris p, ul.avatar-list li.mod.user-kris p, ul.avatar-list li.manager.user-kris p, ul.avatar-list li.co-owner.user-kris p, ul.avatar-list li.creator.user-kris p {
+    color: #D7519C !important;
+    opacity: 1;
+}
