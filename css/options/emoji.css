@@ -11,17 +11,19 @@
     bottom: 54px; 
     background-color:#111;
     width: 94.5%;
+    height: auto;
     max-height: 0;
+
+    /* thinking of turning it into a UL*/
+    padding: 0;
+    list-style-type: none;
+    margin: 0;
 }
 
-#emoji-preview p.preview-title {
-  border-bottom: 1px solid #555;
-}
-
-#emoji-preview .emoji-previews,
-#emoji-preview .twitch-previews {
+#emoji-preview li {
   display: block;
   padding: 6px 10px;
+  margin: 0;
 }
 
 #emoji-preview .emoji-previews:hover,
@@ -47,7 +49,7 @@
   display:inline-block;
 }
 
-.emoji-grow {
+#emoji-preview.emoji-grow {
   max-height: 63vh;
   -moz-transition: 0.4s;
   -ms-transition: 0.4s;

@@ -129,7 +129,7 @@ var hello = {
      */
     emojiUtils : {
         makePreviewContainer : function(cn){
-            var d = document.createElement('div');
+            var d = document.createElement('li');
             d.className = cn;
             return d; 
         },
@@ -146,7 +146,7 @@ var hello = {
         createTwitchImg : function(id, name, desc) {
             var self = hello.emojiUtils;
             var _src = hello.twitch.template.replace("{image_id}", id);
-            var container = self.makePreviewContainer("twitch-previews");
+            var container = self.makePreviewContainer("preview-container twitch-previews");
             var img = self.makeEmoImage(_src);
             img.title = desc;
             var span = self.makeNameSpan(name);
@@ -156,7 +156,7 @@ var hello = {
         },
         createImg : function(name) {
             var self = hello.emojiUtils;
-            var container = self.makePreviewContainer("emoji-previews");
+            var container = self.makePreviewContainer("preview-container emoji-previews");
             var img = self.makeEmoImage(emojify.defaultConfig.img_dir+'/'+encodeURI(name)+'.png');
             img.title = ':'+name+':'; 
             img.alt = ':'+name+':';
@@ -182,7 +182,7 @@ var hello = {
             });
 
             document.getElementById('emoji-preview').appendChild(frag);
-            $('#emoji-preview').show();
+            $('#emoji-preview').addClass('emoji-grow');
         },
         filterEmoji : function(str){
             var finalStr = str.replace("+","\\+");
@@ -229,15 +229,25 @@ var hello = {
             currentText === "")
         {
             self.emojiSearchStr = "";
-            $('#emoji-preview').empty().hide();
+            $('#emoji-preview').empty().removeClass('emoji-grow');
         }
+    },
+    emojiTwitchInit: function(){
+        // this will only be run once
+        $('head').prepend('<link rel="stylesheet" type="text/css" href="https://rawgit.com/FranciscoG/DubX-Script/dev/css/options/emoji.css">');
+        var emojiPreview = document.createElement('ul');
+        emojiPreview.id = "emoji-preview";
+        $('.pusher-chat-widget-input').prepend(emojiPreview);
+
+        $(document.body).on('click', '.preview-container', function(e){
+            var new_text = $(this).find('span').text();
+            var fixed_text = $("#chat-txt-message").val().replace(":"+hello.emojiUtils.emojiSearchStr, new_text);
+            $("#chat-txt-message").val(fixed_text);
+        });
     },
     optionEmojiPreview: function(){
         if (!$('#emoji-preview').length) {
-            $('head').prepend('<link rel="stylesheet" type="text/css" href="https://rawgit.com/FranciscoG/DubX-Script/dev/css/options/emoji.css">');
-            var emojiPreview = document.createElement('div');
-            emojiPreview.id = "emoji-preview";
-            $('.pusher-chat-widget-input').prepend(emojiPreview);
+            hello.emojiTwitchInit();
         }
 
         if (!options.let_emoji_preview) {
