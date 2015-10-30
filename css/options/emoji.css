@@ -4,7 +4,7 @@
  */
 
 #emoji-preview {
-    overflow: hidden; 
+    overflow: auto; 
     display: block; 
     position: absolute; 
     bottom: 54px; 
