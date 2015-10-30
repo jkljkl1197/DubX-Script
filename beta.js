@@ -783,7 +783,6 @@ if (!hello_run) {
         updateChatInput: function(str){
             var _re = new RegExp(":"+hello.emojiUtils.emojiSearchStr + "$");
             var fixed_text = $("#chat-txt-message").val().replace(_re, str) + " ";
-            $('#emoji-preview').empty().removeClass('emoji-grow');
             $("#chat-txt-message").val(fixed_text);
         },
         emojiTwitchInit: function(){
