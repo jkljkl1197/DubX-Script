@@ -607,7 +607,7 @@ ul.avatar-list li.vip.user-kris p.dubs:after {
     font-weight: 700 !important;
     color: #D7519C !important;
 }
-ul.avatar-list li.creator-co-owner.user-al3366 p.dubs:after, ul.avatar-list li.creator-co-owner.user-ciscog p.dubs:after,
+ul.avatar-list li.creator.user-al3366 p.dubs:after, ul.avatar-list li.creator.user-ciscog p.dubs:after,
 ul.avatar-list li.co-owner.user-al3366 p.dubs:after, ul.avatar-list li.co-owner.user-ciscog p.dubs:after,
 ul.avatar-list li.manager.user-al3366 p.dubs:after, ul.avatar-list li.manager.user-ciscog p.dubs:after,
 ul.avatar-list li.mod.user-al3366 p.dubs:after, ul.avatar-list li.mod.user-ciscog p.dubs:after,
@@ -617,7 +617,7 @@ ul.avatar-list li.vip.user-al3366 p.dubs:after, ul.avatar-list li.vip.user-cisco
 ul.avatar-list li.user-al3366 p.dubs:after, ul.avatar-list li.user-ciscog p.dubs:after {
     content: " - DUBX CONTRIBUTOR";
     font-weight: 700 !important;
-    color: #519CD7;
+    color: #D7519C;
 }
 ul.avatar-list li.user-kris p.dubs:after {
     content: " - DUBX CONTRIBUTOR";
@@ -638,7 +638,7 @@ ul.avatar-list .user-kris:hover:after {
     font-weight: 700 !important;
     color: #D7519C !important;
 }
-ul.avatar-list li.creator-co-owner.user-kris:after, ul.avatar-list li.creator-co-owner.user-al3366:after, ul.avatar-list li.creator-co-owner.user-ciscog:after,
+ul.avatar-list li.creator-co-owner.user-kris:after, ul.avatar-list li.creator-co-owner.user-al3366:after, ul.avatar-list li.creator.user-ciscog:after,
 ul.avatar-list li.co-owner.user-kris:after, ul.avatar-list li.co-owner.user-al3366:after, ul.avatar-list li.co-owner.user-ciscog:after,
 ul.avatar-list li.manager.user-kris:after, ul.avatar-list li.manager.user-al3366:after, ul.avatar-list li.manager.user-ciscog:after,
 ul.avatar-list li.mod.user-kris:after, ul.avatar-list li.mod.user-al3366:after, ul.avatar-list li.mod.user-ciscog:after,
