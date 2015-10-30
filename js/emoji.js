@@ -10,6 +10,7 @@ var hello = {
     on: function(){},
     off: function(){},
     option: function(){},
+    gitRoot: 'https://rawgit.com/FranciscoG/DubX-Script/dev',
 
     // jQuery's getJSON kept returning errors so making my own with promise-like
     // structure and added optional Event to fire when done so can hook in elsewhere
@@ -52,7 +53,7 @@ var hello = {
                         var emoteName = data.channels[channel]['emotes'][i].code;
                         self.twitch.emotes[emoteName.toLowerCase()] = {
                             "image_id" : data.channels[channel]['emotes'][i]["image_id"],
-                            "description" : 'This is a Twitch emote from the subscriber channel: ' + data.channels[channel].title + ' @ ' + data.channels[channel].link
+                            "description" : 'Twitch subscriber emote from ' + data.channels[channel].title + ' @ ' + data.channels[channel].link
                         };
                     }
                 }
@@ -149,6 +150,7 @@ var hello = {
             var span = self.makeNameSpan(name);
             container.appendChild(img);
             container.appendChild(span);
+            container.tabIndex = -1;
             return container;
         },
         createTwitchImg : function(id, name, desc) {
@@ -167,7 +169,6 @@ var hello = {
         addToHelper : function(emojiArray) {
             var self = hello.emojiUtils;
             $('#emoji-preview').empty();
-            var text = "";
             var frag = document.createDocumentFragment();
             var _key;
 
@@ -230,19 +231,68 @@ var hello = {
             self.emojiSearchStr = "";
             $('#emoji-preview').empty().removeClass('emoji-grow');
         }
+         console.log(e.keyCode);
+         // Chrome:  up = 38,  down = 40
+
+         // if input is in focus, emojiPreview has class emoji grow, and up arrow is pressed
+         if ( $(this).is(":focus") &&
+              $('#emoji-preview').hasClass('emoji-grow') &&
+              e.keyCode === 38)
+         {
+             // change focus to emoji-preview
+             $('#emoji-preview li').first().focus();
+             // up/down traverses each element (maybe it mimics tabbing?)
+             // pressing enter takes val and adds it to input
+         }
+    },
+    updateChatInput: function(str){
+        var _re = new RegExp(":"+hello.emojiUtils.emojiSearchStr + "$");
+        var fixed_text = $("#chat-txt-message").val().replace(_re, str);
+        $("#chat-txt-message").val(fixed_text);
     },
     emojiTwitchInit: function(){
         // this will only be run once
-        $('head').prepend('<link rel="stylesheet" type="text/css" href="https://rawgit.com/FranciscoG/DubX-Script/dev/css/options/emoji.css">');
+        $('head').prepend('<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/emoji.css">');
         var emojiPreview = document.createElement('ul');
         emojiPreview.id = "emoji-preview";
         $('.pusher-chat-widget-input').prepend(emojiPreview);
 
         $(document.body).on('click', '.preview-container', function(e){
             var new_text = $(this).find('span').text();
-            var _re = new RegExp(":"+hello.emojiUtils.emojiSearchStr + "$");
-            var fixed_text = $("#chat-txt-message").val().replace(_re, new_text);
-            $("#chat-txt-message").val(fixed_text);
+            hello.updateChatInput(new_text);
+        });
+
+        var li = $('#emoji-preview li');
+        var liSelected, next;
+        $(document.body).on('keyup', '#emoji-preview', function(e){
+            if (e.which === 40) {
+                if (liSelected) {
+                    liSelected.removeClass('selected');
+                    next = liSelected.next();
+                    if(next.length > 0){
+                        liSelected = next.addClass('selected');
+                    } else {
+                        liSelected = li.eq(0).addClass('selected');
+                    }
+                } else {
+                    liSelected = li.eq(0).addClass('selected');
+                }
+            } else if (e.which === 38) {
+                if (liSelected) {
+                    liSelected.removeClass('selected');
+                    next = liSelected.prev();
+                    if(next.length > 0){
+                        liSelected = next.addClass('selected');
+                    }else{
+                        liSelected = li.last().addClass('selected');
+                    }
+                } else {
+                    liSelected = li.last().addClass('selected');
+                }
+            } else if (e.which === 13) {
+                var new_text = $(this).find('span').text();
+                hello.updateChatInput(new_text);
+            }
         });
     },
     optionEmojiPreview: function(){

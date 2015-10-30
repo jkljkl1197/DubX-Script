@@ -25,8 +25,8 @@
   margin: 0;
 }
 
-#emoji-preview .emoji-previews:hover,
-#emoji-preview .twitch-previews:hover {
+#emoji-preview li:hover,
+#emoji-preview li.selected {
   background-color: #555;
 }
 

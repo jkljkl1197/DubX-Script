@@ -53,6 +53,7 @@ if (!hello_run) {
     
     //Ref 2: Options
     var hello = {
+        gitRoot: 'https://rawgit.com/FranciscoG/DubX-Script/dev',
         //Ref 2.1: Initialize
         personalize: function() {
             $('.isUser').text(Dubtrack.session.get('username'));
@@ -65,7 +66,7 @@ if (!hello_run) {
             var li = '<li><button onclick="hello.slide();" class="relate" style="font-size: 1em;height: 32px;margin-right: 16px;border-radius: 0.1875em;">DUBX</button></li>';
             var html = [
                 '<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css">',
-                '<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/asset.css">',
+                '<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/asset.css">',
                 '<div class="isSwordful">',
                     '<div class="verSwordful">',
                         '<p class="Javaling">DubX Settings</p>',
@@ -314,7 +315,7 @@ if (!hello_run) {
             if (!options.let_wide_video) {
                 options.let_wide_video = true;
                 isOn = 'on';
-                $('head').prepend('<link class="wide_video_link" rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/options/wide_video.css">');
+                $('head').prepend('<link class="wide_video_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/wide_video.css">');
                 hello.option('wide_video','true');
                 hello.on('.wide_video');
             } else {
@@ -410,7 +411,7 @@ if (!hello_run) {
             if(!options.let_chat_window) {
                 options.let_chat_window = true;
                 isOn = 'on';
-                $('head').append('<link class="chat_window_link" rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/options/chat_window.css">');
+                $('head').append('<link class="chat_window_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/chat_window.css">');
                 hello.option('chat_window','true');
                 hello.on('.chat_window');
             } else {
@@ -467,7 +468,7 @@ if (!hello_run) {
             if (!options.let_nicole) {
                 options.let_nicole = true;
                 isOn = 'on';
-                $('head').append('<link class="nicole_css" href="https://rawgit.com/sinfulBA/DubX-Script/master/themes/PlugTheme.css" rel="stylesheet" type="text/css">');
+                $('head').append('<link class="nicole_css" href="'+hello.gitRoot+'/themes/PlugTheme.css" rel="stylesheet" type="text/css">');
                 hello.option('nicole', 'true');
                 hello.on('.nicole');
             } else {
@@ -569,7 +570,7 @@ if (!hello_run) {
                             var emoteName = data.channels[channel]['emotes'][i].code;
                             self.twitch.emotes[emoteName.toLowerCase()] = {
                                 "image_id" : data.channels[channel]['emotes'][i]["image_id"],
-                                "description" : 'This is a Twitch emote from the subscriber channel: ' + data.channels[channel].title + ' @ ' + data.channels[channel].link
+                                "description" : 'Twitch subscriber emote from ' + data.channels[channel].title + ' @ ' + data.channels[channel].link
                             };
                         }
                     }
@@ -672,7 +673,7 @@ if (!hello_run) {
                 var self = hello.emojiUtils;
                 var _src = hello.twitch.template.replace("{image_id}", id);
                 var img = self.makeEmoImage(_src);
-                img.title = desc;            
+                img.title = desc;
                 return self.makeLi('twitch', name, img);
             },
             createImg : function(name) {
@@ -684,7 +685,6 @@ if (!hello_run) {
             addToHelper : function(emojiArray) {
                 var self = hello.emojiUtils;
                 $('#emoji-preview').empty();
-                var text = "";
                 var frag = document.createDocumentFragment();
                 var _key;
 
@@ -747,15 +747,22 @@ if (!hello_run) {
                 self.emojiSearchStr = "";
                 $('#emoji-preview').empty().removeClass('emoji-grow');
             }
+            console.log(e.keyCode);
+            // Chrome:  up = 38,  down = 40
 
-            // if input is in focus and up arrow is pressed
-            // change focus to emoji-preview
-            // up/down traverses each element (maybe it mimics tabbing?)
-            // pressing enter takes val and adds it to input
+            // if input is in focus, emojiPreview has class emoji grow, and up arrow is pressed
+            if ( $(this).is(":focus") &&
+                 $('#emoji-preview').hasClass('emoji-grow') &&
+                 e.keyCode === 38)
+            {
+                // change focus to emoji-preview
+                // up/down traverses each element (maybe it mimics tabbing?)
+                // pressing enter takes val and adds it to input
+            }
         },
         emojiTwitchInit: function(){
             // this will only be run once
-            $('head').prepend('<link rel="stylesheet" type="text/css" href="https://rawgit.com/FranciscoG/DubX-Script/dev/css/options/emoji.css">');
+            $('head').prepend('<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/emoji.css">');
             var emojiPreview = document.createElement('ul');
             emojiPreview.id = "emoji-preview";
             $('.pusher-chat-widget-input').prepend(emojiPreview);
