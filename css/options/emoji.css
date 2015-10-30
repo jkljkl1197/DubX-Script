@@ -10,14 +10,31 @@
     position: absolute; 
     bottom: 54px; 
     background-color:#111;
+    width: 94.5%;
+    max-height: 63vh;
+    padding: 10px 0;
 }
 
 #emoji-preview p.preview-title {
   border-bottom: 1px solid #555;
 }
+
 #emoji-preview .emoji-previews,
 #emoji-preview .twitch-previews {
   display: block;
+  padding-top: 6px 0;
+}
+
+#emoji-preview .emoji-previews:hover,
+#emoji-preview .twitch-previews:hover {
+  background-color: #555;
+}
+
+.twitch-previews {
+  background-image: url(http://i.imgur.com/FhzONPQ.png);
+  background-repeat: no-repeat;
+  background-size: 25px;
+  background-position: 98% center;
 }
 
 #emoji-preview span {

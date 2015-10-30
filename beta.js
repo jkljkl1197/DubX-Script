@@ -657,13 +657,16 @@ if (!hello_run) {
             },
             makeNameSpan : function(name){
                 var s = document.createElement('span');
-                s.textContent = name;
+                s.textContent = ":" + name + ":";
                 return s;
             },
-            createTwitchImg : function(id, name) {
+            createTwitchImg : function(id, name, desc) {
                 var self = hello.emojiUtils;
+                var _src = self.twitch.template.replace("{image_id}", _id);
                 var container = self.makePreviewContainer("twitch-previews");
-                var img = self.makeEmoImage('//static-cdn.jtvnw.net/emoticons/v1/'+id+'/1.0');
+                var img = self.makeEmoImage(_src);
+                img.title = desc;
+                img.alt = desc;
                 var span = self.makeNameSpan(name);
                 container.appendChild(img);
                 container.appendChild(span);
@@ -673,7 +676,8 @@ if (!hello_run) {
                 var self = hello.emojiUtils;
                 var container = self.makePreviewContainer("emoji-previews");
                 var img = self.makeEmoImage(emojify.defaultConfig.img_dir+'/'+encodeURI(name)+'.png');
-                img.title = ':'+name+':'; img.alt = ':'+name+':';
+                img.title = ':'+name+':'; 
+                img.alt = ':'+name+':';
                 var span = self.makeNameSpan(name);
                 container.appendChild(img);
                 container.appendChild(span);
@@ -689,19 +693,13 @@ if (!hello_run) {
                 emojiArray.forEach(function(val,i,arr){
                     _key = val.toLowerCase();
                     if (typeof hello.twitch.emotes[_key] !== 'undefined') {
-                        frag.appendChild(self.createTwitchImg(hello.twitch.emotes[_key].image_id, val));
+                        frag.appendChild(self.createTwitchImg(hello.twitch.emotes[_key].image_id, val, hello.twitch.emotes[_key].description));
                     } else {
                         frag.appendChild(self.createImg(val));
                     }
                 });
 
                 document.getElementById('emoji-preview').appendChild(frag);
-                if ($(".twitch-previews").length) {
-                    $('#emoji-preview .twitch-previews').first().before('<p class="preview-title">Twitch emotes:</p>');
-                }
-                if ($(".emoji-previews").length) {
-                    $('#emoji-preview .emoji-previews').first().before('<p class="preview-title">Emojis:</p>');
-                }
                 $('#emoji-preview').show();
             },
             filterEmoji : function(str){
