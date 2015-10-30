@@ -149,7 +149,6 @@ var hello = {
             var container = self.makePreviewContainer("twitch-previews");
             var img = self.makeEmoImage(_src);
             img.title = desc;
-            img.alt = desc;
             var span = self.makeNameSpan(name);
             container.appendChild(img);
             container.appendChild(span);
