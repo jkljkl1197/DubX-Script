@@ -660,27 +660,26 @@ if (!hello_run) {
                 s.textContent = ":" + name + ":";
                 return s;
             },
-            createTwitchImg : function(id, name, desc) {
+            makeLi: function(type, name, img){
                 var self = hello.emojiUtils;
-                var _src = hello.twitch.template.replace("{image_id}", id);
-                var container = self.makePreviewContainer("preview-container twitch-previews");
-                var img = self.makeEmoImage(_src);
-                img.title = desc;
+                var container = self.makePreviewContainer("preview-container "+type+"-previews");
                 var span = self.makeNameSpan(name);
                 container.appendChild(img);
                 container.appendChild(span);
                 return container;
             },
+            createTwitchImg : function(id, name, desc) {
+                var self = hello.emojiUtils;
+                var _src = hello.twitch.template.replace("{image_id}", id);
+                var img = self.makeEmoImage(_src);
+                img.title = desc;            
+                return self.makeLi('twitch', name, img);
+            },
             createImg : function(name) {
                 var self = hello.emojiUtils;
-                var container = self.makePreviewContainer("preview-container emoji-previews");
                 var img = self.makeEmoImage(emojify.defaultConfig.img_dir+'/'+encodeURI(name)+'.png');
                 img.title = ':'+name+':'; 
-                img.alt = ':'+name+':';
-                var span = self.makeNameSpan(name);
-                container.appendChild(img);
-                container.appendChild(span);
-                return container;
+                return self.makeLi('emoji', name, img);
             },
             addToHelper : function(emojiArray) {
                 var self = hello.emojiUtils;
@@ -763,7 +762,8 @@ if (!hello_run) {
 
             $(document.body).on('click', '.preview-container', function(e){
                 var new_text = $(this).find('span').text();
-                var fixed_text = $("#chat-txt-message").val().replace(":"+hello.emojiUtils.emojiSearchStr, new_text);
+                var _re = new RegExp(":"+hello.emojiUtils.emojiSearchStr + "$");
+                var fixed_text = $("#chat-txt-message").val().replace(_re, new_text);
                 $("#chat-txt-message").val(fixed_text);
             });
         },

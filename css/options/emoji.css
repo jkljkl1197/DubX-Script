@@ -6,7 +6,6 @@
 #emoji-preview {
     overflow: auto; 
     display: block; 
-    border: 1px solid #202020; 
     position: absolute; 
     bottom: 54px; 
     background-color:#111;
@@ -50,6 +49,8 @@
 }
 
 #emoji-preview.emoji-grow {
+  border: 1px solid #202020;
+  border-bottom: 0;
   max-height: 63vh;
   -moz-transition: 0.4s;
   -ms-transition: 0.4s;
