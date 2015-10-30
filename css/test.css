@@ -197,6 +197,7 @@ ul.avatar-list li.user-swordling p.dubs:before {
     font-weight: 700 !important;
     color: #89BE6C !important;
 }
+ul.avatar-list li.admin.user-sinful:after, ul.avatar-list li.admin.user-swordling:after,
 ul.avatar-list li.co-owner.user-sinful:after, ul.avatar-list li.co-owner.user-swordling:after,
 ul.avatar-list li.creator.user-sinful:after, ul.avatar-list li.creator.user-swordling:after,
 ul.avatar-list li.manager.user-sinful:after, ul.avatar-list li.manager.user-swordling:after,
@@ -207,12 +208,14 @@ ul.avatar-list li.currentDJ .user-sinful:after, ul.avatar-list li.currentDJ .use
 .user-swordling, .user-sinful, .user-swordling p.username, .user-sinful p.username {
     color: #89BE6C !important;
 }
+#main_avatar_room #main-user-list-room #avatar-list li.admin.user-sinful p.username, #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-sinful p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-sinful p.username, #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-sinful p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.creator.user-sinful p.username, #main_avatar_room #main-user-list-room #avatar-list li.creator.user-sinful p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.manager.user-sinful p.username, #main_avatar_room #main-user-list-room #avatar-list li.manager.user-sinful p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.mod.user-sinful p.username, #main_avatar_room #main-user-list-room #avatar-list li.mod.user-sinful p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-sinful p.username, #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-sinful p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.vip.user-sinful p.username, #main_avatar_room #main-user-list-room #avatar-list li.vip.user-sinful p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.admin.user-swordling p.username, #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-swordling p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-swordling p.username, #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-swordling p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.creator.user-swordling p.username, #main_avatar_room #main-user-list-room #avatar-list li.creator.user-swordling p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.manager.user-swordling p.username, #main_avatar_room #main-user-list-room #avatar-list li.manager.user-swordling p.username:after,

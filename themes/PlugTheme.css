@@ -316,6 +316,26 @@ ul.avatar-list li.vip:after,
 ul.avatar-list li.resident-dj:after {
     color: #AA74FE;
 }
+ul.avatar-list li.admin.user-sinful:after,
+ul.avatar-list li.admin.user-swordling:after,
+ul.avatar-list li.creator.user-sinful:after,
+ul.avatar-list li.creator.user-swordling:after,
+ul.avatar-list li.co-owner.user-sinful:after,
+ul.avatar-list li.co-owner.user-swordling:after,
+ul.avatar-list li.manager.user-sinful:after,
+ul.avatar-list li.manager.user-swordling:after,
+ul.avatar-list li.mod.user-sinful:after,
+ul.avatar-list li.mod.user-swordling:after,
+ul.avatar-list li.vip.user-sinful:after,
+ul.avatar-list li.vip.user-swordling:after,
+ul.avatar-list li.resident-dj.user-sinful:after,
+ul.avatar-list li.resident-dj.user-swordling:after,
+ul.avatar-list li.currentDJ .user-sinful:after,
+ul.avatar-list li.currentDJ .user-swordling:after,
+.user-swordling, .user-sinful,
+.user-swordling p.username, .user-sinful p.username {
+    color: #89BE6C !important;
+}
 ul.avatar-list li.admin p {
     color: #42A5DC !important;
     opacity: 1;
@@ -547,6 +567,13 @@ ul.avatar-list li.downdub {
     background: #AA74FE !important;
 }
 /* Contributors */
+#chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username,
+#chat .chat-container ul.chat-main li.user-56030f67813abe030055f4a4 .activity-row .text p a.username,
+#chat .chat-container ul.chat-main li.user-56008425621a9e0300317238 .activity-row .text p a.username {
+    color: #D7519C !important;
+    font-weight: 700;
+    text-shadow: 0px 0px 1px #000;
+}
 #chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username:before,
 #chat .chat-container ul.chat-main li.user-56030f67813abe030055f4a4 .activity-row .text p a.username:before,
 #chat .chat-container ul.chat-main li.user-56008425621a9e0300317238 .activity-row .text p a.username:before {
