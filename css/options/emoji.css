@@ -4,7 +4,7 @@
  */
 
 #emoji-preview {
-    overflow: auto; 
+    overflow: hidden; 
     display: block; 
     position: absolute; 
     bottom: 54px; 
@@ -30,6 +30,10 @@
   background-color: #555;
 }
 
+#emoji-preview li:focus {
+  outline: none;
+}
+
 .twitch-previews {
   background-image: url(http://i.imgur.com/FhzONPQ.png);
   background-repeat: no-repeat;
@@ -45,6 +49,7 @@
 
 #emoji-preview img {
   height: 1.4em;
+  width: 1.4em;
   display:inline-block;
 }
 

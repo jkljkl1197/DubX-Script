@@ -222,8 +222,7 @@ var hello = {
         });
         
         var lastChar = currentText.charAt(currentText.length - 1);
-        if (e.keyCode === 13 || 
-            self.emojiSearchStr.length <= 2 || // change to set character limit
+        if (self.emojiSearchStr.length <= 2 || // change to set character limit
             lastChar === ":" ||
             lastChar === " " ||
             currentText === "")
@@ -231,23 +230,43 @@ var hello = {
             self.emojiSearchStr = "";
             $('#emoji-preview').empty().removeClass('emoji-grow');
         }
-         console.log(e.keyCode);
-         // Chrome:  up = 38,  down = 40
 
-         // if input is in focus, emojiPreview has class emoji grow, and up arrow is pressed
-         if ( $(this).is(":focus") &&
-              $('#emoji-preview').hasClass('emoji-grow') &&
-              e.keyCode === 38)
-         {
-             // change focus to emoji-preview
-             $('#emoji-preview li').first().focus();
-             // up/down traverses each element (maybe it mimics tabbing?)
-             // pressing enter takes val and adds it to input
+        if (e.keyCode === 38 || e.keyCode === 40) {
+            hello.doNavigate(-1);
+        }
+    },
+    displayBoxIndex : -1,
+    doNavigate : function(diff) {
+        hello.displayBoxIndex += diff;
+        var oBoxCollection = $(".emoji-grow li");
+        if (hello.displayBoxIndex >= oBoxCollection.length){
+            hello.displayBoxIndex = 0;
+        }
+        if (hello.displayBoxIndex < 0){
+             hello.displayBoxIndex = oBoxCollection.length - 1;
          }
+        var cssClass = "selected";
+        oBoxCollection.removeClass(cssClass).eq(hello.displayBoxIndex).addClass(cssClass).focus();
+    },
+    emojiKeyNavFunction: function(e){
+        if ( $('#emoji-preview').hasClass('emoji-grow')) {
+           e.preventDefault();
+           if (e.keyCode === 38) {
+               hello.doNavigate(-1);
+           }
+           else if (e.keyCode === 40) {
+               hello.doNavigate(1);
+           }
+           else if (e.keyCode === 13) {
+               $('#emoji-preview li.selected').trigger('click');
+               return false;
+           }
+        } 
     },
     updateChatInput: function(str){
         var _re = new RegExp(":"+hello.emojiUtils.emojiSearchStr + "$");
-        var fixed_text = $("#chat-txt-message").val().replace(_re, str);
+        var fixed_text = $("#chat-txt-message").val().replace(_re, str) + " ";
+        $('#emoji-preview').empty().removeClass('emoji-grow');
         $("#chat-txt-message").val(fixed_text);
     },
     emojiTwitchInit: function(){
@@ -261,39 +280,7 @@ var hello = {
             var new_text = $(this).find('span').text();
             hello.updateChatInput(new_text);
         });
-
-        var li = $('#emoji-preview li');
-        var liSelected, next;
-        $(document.body).on('keyup', '#emoji-preview', function(e){
-            if (e.which === 40) {
-                if (liSelected) {
-                    liSelected.removeClass('selected');
-                    next = liSelected.next();
-                    if(next.length > 0){
-                        liSelected = next.addClass('selected');
-                    } else {
-                        liSelected = li.eq(0).addClass('selected');
-                    }
-                } else {
-                    liSelected = li.eq(0).addClass('selected');
-                }
-            } else if (e.which === 38) {
-                if (liSelected) {
-                    liSelected.removeClass('selected');
-                    next = liSelected.prev();
-                    if(next.length > 0){
-                        liSelected = next.addClass('selected');
-                    }else{
-                        liSelected = li.last().addClass('selected');
-                    }
-                } else {
-                    liSelected = li.last().addClass('selected');
-                }
-            } else if (e.which === 13) {
-                var new_text = $(this).find('span').text();
-                hello.updateChatInput(new_text);
-            }
-        });
+        $(document.body).on('keyup', '.emoji-grow', hello.emojiKeyNavFunction);
     },
     optionEmojiPreview: function(){
         if (!$('#emoji-preview').length) {
