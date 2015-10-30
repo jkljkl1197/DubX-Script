@@ -667,6 +667,7 @@ if (!hello_run) {
                 var span = self.makeNameSpan(name);
                 container.appendChild(img);
                 container.appendChild(span);
+                container.tabIndex = -1;
                 return container;
             },
             createTwitchImg : function(id, name, desc) {
@@ -738,8 +739,7 @@ if (!hello_run) {
             });
             
             var lastChar = currentText.charAt(currentText.length - 1);
-            if (e.keyCode === 13 || 
-                self.emojiSearchStr.length <= 2 || // change to set character limit
+            if (self.emojiSearchStr.length <= 2 || // change to set character limit
                 lastChar === ":" ||
                 lastChar === " " ||
                 currentText === "")
@@ -747,18 +747,44 @@ if (!hello_run) {
                 self.emojiSearchStr = "";
                 $('#emoji-preview').empty().removeClass('emoji-grow');
             }
-            console.log(e.keyCode);
-            // Chrome:  up = 38,  down = 40
 
-            // if input is in focus, emojiPreview has class emoji grow, and up arrow is pressed
-            if ( $(this).is(":focus") &&
-                 $('#emoji-preview').hasClass('emoji-grow') &&
-                 e.keyCode === 38)
-            {
-                // change focus to emoji-preview
-                // up/down traverses each element (maybe it mimics tabbing?)
-                // pressing enter takes val and adds it to input
+            if (e.keyCode === 38 || e.keyCode === 40) {
+                hello.doNavigate(-1);
             }
+        },
+        displayBoxIndex : -1,
+        doNavigate : function(diff) {
+            hello.displayBoxIndex += diff;
+            var oBoxCollection = $(".emoji-grow li");
+            if (hello.displayBoxIndex >= oBoxCollection.length){
+                hello.displayBoxIndex = 0;
+            }
+            if (hello.displayBoxIndex < 0){
+                 hello.displayBoxIndex = oBoxCollection.length - 1;
+             }
+            var cssClass = "selected";
+            oBoxCollection.removeClass(cssClass).eq(hello.displayBoxIndex).addClass(cssClass).focus();
+        },
+        emojiKeyNavFunction: function(e){
+            if ( $('#emoji-preview').hasClass('emoji-grow')) {
+               e.preventDefault();
+               if (e.keyCode === 38) {
+                   hello.doNavigate(-1);
+               }
+               else if (e.keyCode === 40) {
+                   hello.doNavigate(1);
+               }
+               else if (e.keyCode === 13) {
+                   $('#emoji-preview li.selected').trigger('click');
+                   return false;
+               }
+            } 
+        },
+        updateChatInput: function(str){
+            var _re = new RegExp(":"+hello.emojiUtils.emojiSearchStr + "$");
+            var fixed_text = $("#chat-txt-message").val().replace(_re, str) + " ";
+            $('#emoji-preview').empty().removeClass('emoji-grow');
+            $("#chat-txt-message").val(fixed_text);
         },
         emojiTwitchInit: function(){
             // this will only be run once
@@ -769,10 +795,9 @@ if (!hello_run) {
 
             $(document.body).on('click', '.preview-container', function(e){
                 var new_text = $(this).find('span').text();
-                var _re = new RegExp(":"+hello.emojiUtils.emojiSearchStr + "$");
-                var fixed_text = $("#chat-txt-message").val().replace(_re, new_text);
-                $("#chat-txt-message").val(fixed_text);
+                hello.updateChatInput(new_text);
             });
+            $(document.body).on('keyup', '.emoji-grow', hello.emojiKeyNavFunction);
         },
         optionEmojiPreview: function(){
             if (!$('#emoji-preview').length) {

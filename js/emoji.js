@@ -157,7 +157,7 @@ var hello = {
             var self = hello.emojiUtils;
             var _src = hello.twitch.template.replace("{image_id}", id);
             var img = self.makeEmoImage(_src);
-            img.title = desc;            
+            img.title = desc;
             return self.makeLi('twitch', name, img);
         },
         createImg : function(name) {
