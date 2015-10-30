@@ -607,7 +607,7 @@ ul.avatar-list li.vip.user-al3366 p.dubs:after, ul.avatar-list li.vip.user-cisco
 ul.avatar-list li.user-al3366 p.dubs:after, ul.avatar-list li.user-ciscog p.dubs:after {
     content: " - DUBX CONTRIBUTOR";
     font-weight: 700 !important;
-    color: #D7519C;
+    color: #D7519C !important;
 }
 ul.avatar-list li.user-kris p.dubs:after {
     content: " - DUBX CONTRIBUTOR";
