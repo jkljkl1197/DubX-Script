@@ -699,7 +699,7 @@ if (!hello_run) {
                 });
 
                 document.getElementById('emoji-preview').appendChild(frag);
-                $('#emoji-preview').show();
+                $('#emoji-preview').addClass('emoji-grow');
             },
             filterEmoji : function(str){
                 var finalStr = str.replace("+","\\+");
@@ -746,7 +746,7 @@ if (!hello_run) {
                 currentText === "")
             {
                 self.emojiSearchStr = "";
-                $('#emoji-preview').empty().hide();
+                $('#emoji-preview').empty().removeClass('emoji-grow');
             }
         },
         optionEmojiPreview: function(){

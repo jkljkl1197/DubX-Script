@@ -5,13 +5,13 @@
 
 #emoji-preview {
     overflow: auto; 
-    display: none; 
+    display: block; 
     border: 1px solid #202020; 
     position: absolute; 
     bottom: 54px; 
     background-color:#111;
     width: 94.5%;
-    max-height: 63vh;
+    max-height: 0;
 }
 
 #emoji-preview p.preview-title {
@@ -45,4 +45,13 @@
 #emoji-preview img {
   height: 1.4em;
   display:inline-block;
+}
+
+.emoji-grow {
+  max-height: 63vh;
+  -moz-transition: 0.4s;
+  -ms-transition: 0.4s;
+  -o-transition: 0.4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
