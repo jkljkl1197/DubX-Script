@@ -266,7 +266,8 @@ var hello = {
     updateChatInput: function(str){
         var _re = new RegExp(":"+hello.emojiUtils.emojiSearchStr + "$");
         var fixed_text = $("#chat-txt-message").val().replace(_re, str) + " ";
-        $("#chat-txt-message").val(fixed_text);
+        $('#emoji-preview').empty().removeClass('emoji-grow');
+        $("#chat-txt-message").val(fixed_text).focus();
     },
     emojiTwitchInit: function(){
         // this will only be run once
