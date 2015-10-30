@@ -125,7 +125,7 @@ if (!hello_run) {
                         '</li>',
                         '<li onclick="hello.optionTwitchEmotePreview();" class="optionClass twitch_emote_preview">',
                             '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Twitch Emote Preview</p>',
+                            '<p class="Optionling">Twitch Emotes Preview</p>',
                         '</li>',
                         '<li onclick="hello.optionEmojiPreview();" class="optionClass emoji_preview">',
                             '<p class="isOnOff"><i class="fi-x"></i></p>',
