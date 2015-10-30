@@ -12,7 +12,6 @@
     background-color:#111;
     width: 94.5%;
     max-height: 63vh;
-    padding: 10px 0;
 }
 
 #emoji-preview p.preview-title {
@@ -22,7 +21,7 @@
 #emoji-preview .emoji-previews,
 #emoji-preview .twitch-previews {
   display: block;
-  padding-top: 6px 10px;
+  padding: 6px 10px;
 }
 
 #emoji-preview .emoji-previews:hover,
@@ -38,13 +37,12 @@
 }
 
 #emoji-preview span {
-  font-size: 0.8em; 
   display:inline-block; 
-  padding:0 3px;
+  padding-left: 20px;
 }
 
 #emoji-preview img {
-  width: 1em;
-  height: 1em;
+  width: 1.6em;
+  height: 1.6em;
   display:inline-block;
 }

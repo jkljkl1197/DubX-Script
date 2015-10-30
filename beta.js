@@ -739,9 +739,11 @@ if (!hello_run) {
                 }
             });
             
+            var lastChar = currentText.charAt(currentText.length - 1);
             if (e.keyCode === 13 || 
                 self.emojiSearchStr.length <= 2 || // change to set character limit
-                currentText.charAt(currentText.length - 1) === ":" || 
+                lastChar === ":" ||
+                lastChar === " " ||
                 currentText === "")
             {
                 self.emojiSearchStr = "";
