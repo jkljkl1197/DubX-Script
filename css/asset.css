@@ -268,7 +268,7 @@ ul.avatar-list li.vip.user-sinful:hover:after,
 ul.avatar-list li.vip.user-swordling:hover:after,
 ul.avatar-list li.resident-dj.user-sinful:hover:after,
 ul.avatar-list li.resident-dj.user-swordling:hover:after {
-    content: "- DUBX DEVELOPER";
+    content: " - DUBX DEVELOPER" !important;
     font-weight: 700 !important;
     color: #89BE6C !important;
 }
@@ -337,7 +337,7 @@ ul.avatar-list li.vip.user-kris p.dubs:after {
     font-weight: 700 !important;
     color: #519CD7;
 }
-ul.avatar-list li.creator-co-owner.user-al3366 p.dubs:after, ul.avatar-list li.creator-co-owner.user-ciscog p.dubs:after,
+ul.avatar-list li.creator.user-al3366 p.dubs:after, ul.avatar-list li.creator.user-ciscog p.dubs:after,
 ul.avatar-list li.co-owner.user-al3366 p.dubs:after, ul.avatar-list li.co-owner.user-ciscog p.dubs:after,
 ul.avatar-list li.manager.user-al3366 p.dubs:after, ul.avatar-list li.manager.user-ciscog p.dubs:after,
 ul.avatar-list li.mod.user-al3366 p.dubs:after, ul.avatar-list li.mod.user-ciscog p.dubs:after,
