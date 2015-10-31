@@ -304,6 +304,11 @@ ul.avatar-list li p {
 ul.avatar-list li p.username {
     color: #868489;
 }
+ul.avatar-list li.admin.user-sinful:after
+ul.avatar-list li.admin.user-swordling:after {
+    color: #89BE6C !important;
+    opacity: 1;
+}
 ul.avatar-list li.admin:after {
     color: #42A5DC !important;
     opacity: 1;
@@ -315,6 +320,11 @@ ul.avatar-list li.mod:after,
 ul.avatar-list li.vip:after,
 ul.avatar-list li.resident-dj:after {
     color: #AA74FE;
+}
+ul.avatar-list li.admin.user-sinful p,
+ul.avatar-list li.admin.user-swordling p {
+    color: #89BE6C !important;
+    opacity: 1;
 }
 ul.avatar-list li.admin p {
     color: #42A5DC !important;
@@ -547,6 +557,13 @@ ul.avatar-list li.downdub {
     background: #AA74FE !important;
 }
 /* Contributors */
+#chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username,
+#chat .chat-container ul.chat-main li.user-56030f67813abe030055f4a4 .activity-row .text p a.username,
+#chat .chat-container ul.chat-main li.user-56008425621a9e0300317238 .activity-row .text p a.username {
+    color: #D7519C !important;
+    font-weight: 700;
+    text-shadow: 0px 0px 1px #000;
+}
 #chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username:before,
 #chat .chat-container ul.chat-main li.user-56030f67813abe030055f4a4 .activity-row .text p a.username:before,
 #chat .chat-container ul.chat-main li.user-56008425621a9e0300317238 .activity-row .text p a.username:before {
@@ -580,7 +597,7 @@ ul.avatar-list li.vip.user-kris p.dubs:after {
     font-weight: 700 !important;
     color: #D7519C !important;
 }
-ul.avatar-list li.creator-co-owner.user-al3366 p.dubs:after, ul.avatar-list li.creator-co-owner.user-ciscog p.dubs:after,
+ul.avatar-list li.creator.user-al3366 p.dubs:after, ul.avatar-list li.creator.user-ciscog p.dubs:after,
 ul.avatar-list li.co-owner.user-al3366 p.dubs:after, ul.avatar-list li.co-owner.user-ciscog p.dubs:after,
 ul.avatar-list li.manager.user-al3366 p.dubs:after, ul.avatar-list li.manager.user-ciscog p.dubs:after,
 ul.avatar-list li.mod.user-al3366 p.dubs:after, ul.avatar-list li.mod.user-ciscog p.dubs:after,
@@ -590,7 +607,7 @@ ul.avatar-list li.vip.user-al3366 p.dubs:after, ul.avatar-list li.vip.user-cisco
 ul.avatar-list li.user-al3366 p.dubs:after, ul.avatar-list li.user-ciscog p.dubs:after {
     content: " - DUBX CONTRIBUTOR";
     font-weight: 700 !important;
-    color: #519CD7;
+    color: #D7519C !important;
 }
 ul.avatar-list li.user-kris p.dubs:after {
     content: " - DUBX CONTRIBUTOR";
@@ -611,7 +628,7 @@ ul.avatar-list .user-kris:hover:after {
     font-weight: 700 !important;
     color: #D7519C !important;
 }
-ul.avatar-list li.creator-co-owner.user-kris:after, ul.avatar-list li.creator-co-owner.user-al3366:after, ul.avatar-list li.creator-co-owner.user-ciscog:after,
+ul.avatar-list li.creator-co-owner.user-kris:after, ul.avatar-list li.creator-co-owner.user-al3366:after, ul.avatar-list li.creator.user-ciscog:after,
 ul.avatar-list li.co-owner.user-kris:after, ul.avatar-list li.co-owner.user-al3366:after, ul.avatar-list li.co-owner.user-ciscog:after,
 ul.avatar-list li.manager.user-kris:after, ul.avatar-list li.manager.user-al3366:after, ul.avatar-list li.manager.user-ciscog:after,
 ul.avatar-list li.mod.user-kris:after, ul.avatar-list li.mod.user-al3366:after, ul.avatar-list li.mod.user-ciscog:after,

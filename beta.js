@@ -188,7 +188,7 @@ if (!hello_run) {
                             '</a>',
                         '</li>',
                         '<li class="optionClass">',
-                        	'<p class="Optionful" style="margin: 0;">Dub X currently has 900 users!</p>',
+                        	'<p class="Optionful" style="margin: 0;">Dub X currently has 932 users!</p>',
                         '</li>',
                     '</ul>',
                 '</div>'
