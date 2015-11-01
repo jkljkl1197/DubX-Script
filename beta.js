@@ -540,7 +540,7 @@ if (!hello_run) {
                 xhr.onload = function() {
                     var resp = JSON.parse(xhr.responseText);
                     if (typeof _cb === 'function') { _cb(resp); }
-                    document.dispatchEvent(doneEvent);
+                    if (optionalEvent) { document.dispatchEvent(doneEvent) };
                 };
             }
             if (optionalEvent){ doneEvent = new CustomEvent(optionalEvent); }
@@ -551,53 +551,37 @@ if (!hello_run) {
         }),
 
         twitch : { 
-            template: "",
-            emotes: {}
+            template: "//static-cdn.jtvnw.net/emoticons/v1/{image_id}/1.0",
+            emotes: {},
+            regex: []
         },
         /**************************************************************************
          * Loads the twitch emotes from the api.  
-         * API Source: twitchemotes.com
+         * http://api.twitch.tv/kraken/chat/emoticon_images
          */
         loadTwitchFromApi: function(){
             var self = this;
 
             // load Sub emotes first so that the global ones could override them
-            this.getJSON('//twitchemotes.com/api_cache/v2/subscriber.json', 'emotes:subs:loaded')
-                .done(function(data){ 
-                    self.twitch.template = data.template.small; // just in case global fails
-                    for (var channel in data.channels) {
-                        for (var i in data.channels[channel]['emotes']) {
-                            var emoteName = data.channels[channel]['emotes'][i].code;
-                            self.twitch.emotes[emoteName.toLowerCase()] = {
-                                "image_id" : data.channels[channel]['emotes'][i]["image_id"],
-                                "description" : 'Twitch subscriber emote from ' + data.channels[channel].title + ' @ ' + data.channels[channel].link
-                            };
+            this.getJSON('//api.twitch.tv/kraken/chat/emoticon_images')
+                .done(function(data){
+                    data.emoticons.forEach(function(el,i,arr){
+                        var _key = el.code.toLowerCase();
+                        
+                        if (el.code.indexOf('\\') >= 0) {
+                            self.twitch.regex.push(el.code);
                         }
-                    }
+                        if (!self.twitch.emotes[_key]){
+                            self.twitch.emotes[_key] = el.id;
+                        } else if (el.emoticon_set === null) {
+                            // override if it's a global emote (null emoticon_set = global emote)
+                            self.twitch.emotes[_key] = el.id;
+                        }
+                        
+                    });
+                    self.twitchJSONSLoaded = true;
+                    self.emojiTwitch = emojify.emojiNames.concat(Object.keys(self.twitch.emotes));
                 });
-            
-            document.addEventListener('emotes:subs:loaded', function(e) {
-               // Get the global emojis second so that they could override the sub ones if duplicates
-               self.getJSON('//twitchemotes.com/api_cache/v2/global.json', 'emotes:global:loaded')
-                   .done(function(data){ 
-                       self.twitch.template = data.template.small;
-                       var key, keys = Object.keys(data.emotes);
-                       var n = keys.length;
-                       var newobj={};
-                       while (n--) {
-                         key = keys[n];
-                         self.twitch.emotes[key.toLowerCase()] = data.emotes[key];
-                       }
-                   });
-            });
-
-            // create our giant array of both emoji and twitch names
-            this.twitchJSONSLoaded = false;
-            document.addEventListener('emotes:global:loaded', function(e) {
-                self.twitchJSONSLoaded = true; // if at least one is loaded we can start using it
-                // creating a combined array of emojis and the twitch emote names
-                hello.emojiTwitch = emojify.emojiNames.concat(Object.keys(hello.twitch.emotes));
-            });
         },
         /**************************************************************************
          * handles replacing twitch emotes in the chat box with the images
@@ -606,20 +590,22 @@ if (!hello_run) {
             var self = hello;
 
             if (!self.twitchJSONSLoaded) { return; } // can't do anything until jsons are loaded
-            function makeImage(src, desc){
-                return '<img class="emoji" title="'+desc+'" alt="'+desc+'" src="'+src+'" />';
+            function makeImage(src, name){
+                return '<img class="emoji" title="'+name+'" alt="'+name+'" src="'+src+'" />';
             }
             
-            var inChatEmojiRegex = new RegExp(":([+\\-_A-Za-z0-9]+):","ig");
+            var specialRegex = self.twitch.regex.join("|");
+            var inChatEmojiRegex = new RegExp(":([\\?\\)\\|\\:+\\-_a-z0-9]+|"+specialRegex+"):","ig");
+            var inChatEmojiRegex = new RegExp(":([\\?\\)\\|\\:+\\-_a-z0-9]+):","ig");
             var $last = $('.chat-main .text').last();
-            var emoted = $last.html().replace(inChatEmojiRegex, function(matched, p1){
+            
+            var emoted = $last.html().replace(inChatEmojiRegex, function(matched, p1, p2){
                 var _id, _src, _desc, key = p1.toLowerCase();
 
                 if (typeof self.twitch.emotes[key] !== 'undefined'){
-                    _id = self.twitch.emotes[key].image_id;
+                    _id = self.twitch.emotes[key];
                     _src = self.twitch.template.replace("{image_id}", _id);
-                    _desc = self.twitch.emotes[key].description;
-                    return makeImage(_src, _desc);
+                    return makeImage(_src, key);
                 } else {
                     return matched;
                 }
@@ -631,6 +617,7 @@ if (!hello_run) {
          */
         optionTwitchEmotes: function(){
             if (!options.let_twitch_emotes) {
+                this.replaceTextWithEmote();
                 Dubtrack.Events.bind("realtime:chat-message", this.replaceTextWithEmote);
                 options.let_twitch_emotes = true;
                 hello.option('twitch_emotes', 'true');
@@ -670,11 +657,11 @@ if (!hello_run) {
                 container.tabIndex = -1;
                 return container;
             },
-            createTwitchImg : function(id, name, desc) {
+            createTwitchImg : function(id, name) {
                 var self = hello.emojiUtils;
                 var _src = hello.twitch.template.replace("{image_id}", id);
                 var img = self.makeEmoImage(_src);
-                img.title = desc;
+                img.title = name; img.alt = name;
                 return self.makeLi('twitch', name, img);
             },
             createImg : function(name) {
@@ -692,8 +679,8 @@ if (!hello_run) {
                 emojiArray.forEach(function(val,i,arr){
                     _key = val.toLowerCase();
                     if (typeof hello.twitch.emotes[_key] !== 'undefined') {
-                        frag.appendChild(self.createTwitchImg(hello.twitch.emotes[_key].image_id, val, hello.twitch.emotes[_key].description));
-                    } else {
+                        frag.appendChild(self.createTwitchImg(hello.twitch.emotes[_key], val));
+                    } else if (emojify.emojiNames.indexOf(_key) >= 0) {
                         frag.appendChild(self.createImg(val));
                     }
                 });
@@ -730,7 +717,7 @@ if (!hello_run) {
         },
         emojiKeyUpFunction: function(e){
             var self = hello.emojiUtils;
-            var currentText = $('#chat-txt-message').val();
+            var currentText = this.value;
             var filteredEmoji = currentText.replace(/:([+\\-_a-z0-9]+)$/i, function(matched, p1){
                 self.emojiSearchStr = p1;
                 if (self.emojiSearchStr.length >= 3) { // change to set character limit
@@ -749,7 +736,7 @@ if (!hello_run) {
             }
 
             if (e.keyCode === 38 || e.keyCode === 40) {
-                hello.doNavigate(-1);
+                hello.doNavigate(1);
             }
         },
         displayBoxIndex : -1,
@@ -797,7 +784,6 @@ if (!hello_run) {
                 var new_text = $(this).find('span').text();
                 hello.updateChatInput(new_text);
             });
-            $(document.body).on('keyup', '.emoji-grow', hello.emojiKeyNavFunction);
         },
         optionEmojiPreview: function(){
             if (!$('#emoji-preview').length) {
@@ -806,11 +792,13 @@ if (!hello_run) {
 
             if (!options.let_emoji_preview) {
                 $(document.body).on('keyup', "#chat-txt-message", this.emojiKeyUpFunction);
+                $(document.body).on('keyup', '.emoji-grow', hello.emojiKeyNavFunction);
                 options.let_emoji_preview = true;
                 hello.option('emoji_preview', 'true');
                 hello.on('.emoji_preview');
             } else {
                 $(document.body).off('keyup', "#chat-txt-message", this.emojiKeyUpFunction);
+                $(document.body).off('keyup', '.emoji-grow', hello.emojiKeyNavFunction);
                 options.let_emoji_preview = false;
                 hello.option('emoji_preview', 'false');
                 hello.off('.emoji_preview');
