@@ -552,8 +552,9 @@ if (!hello_run) {
 
         twitch : { 
             template: "//static-cdn.jtvnw.net/emoticons/v1/{image_id}/1.0",
+            specialEmotes: [],
             emotes: {},
-            regex: []
+            chatRegex : new RegExp(":([-_a-z0-9]+):", "ig")
         },
         /**************************************************************************
          * Loads the twitch emotes from the api.  
@@ -568,13 +569,17 @@ if (!hello_run) {
                     data.emoticons.forEach(function(el,i,arr){
                         var _key = el.code.toLowerCase();
                         
+                        // move twitch non-named emojis to their own array
                         if (el.code.indexOf('\\') >= 0) {
-                            self.twitch.regex.push(el.code);
+                            self.twitch.specialEmotes.push([el.code, el.id]);
+                            return;
                         }
+                        
                         if (!self.twitch.emotes[_key]){
+                            // if emote doesn't exist, add it
                             self.twitch.emotes[_key] = el.id;
                         } else if (el.emoticon_set === null) {
-                            // override if it's a global emote (null emoticon_set = global emote)
+                            // override if it's a global emote (null set = global emote)
                             self.twitch.emotes[_key] = el.id;
                         }
                         
@@ -586,6 +591,7 @@ if (!hello_run) {
         /**************************************************************************
          * handles replacing twitch emotes in the chat box with the images
          */
+        
         replaceTextWithEmote: function(){
             var self = hello;
 
@@ -594,14 +600,9 @@ if (!hello_run) {
                 return '<img class="emoji" title="'+name+'" alt="'+name+'" src="'+src+'" />';
             }
             
-            var specialRegex = self.twitch.regex.join("|");
-            var inChatEmojiRegex = new RegExp(":([\\?\\)\\|\\:+\\-_a-z0-9]+|"+specialRegex+"):","ig");
-            var inChatEmojiRegex = new RegExp(":([\\?\\)\\|\\:+\\-_a-z0-9]+):","ig");
             var $last = $('.chat-main .text').last();
-            
-            var emoted = $last.html().replace(inChatEmojiRegex, function(matched, p1, p2){
+            var emoted = $last.html().replace(self.twitch.chatRegex, function(matched, p1){
                 var _id, _src, _desc, key = p1.toLowerCase();
-
                 if (typeof self.twitch.emotes[key] !== 'undefined'){
                     _id = self.twitch.emotes[key];
                     _src = self.twitch.template.replace("{image_id}", _id);
@@ -736,7 +737,7 @@ if (!hello_run) {
             }
 
             if (e.keyCode === 38 || e.keyCode === 40) {
-                hello.doNavigate(1);
+                hello.doNavigate(-1);
             }
         },
         displayBoxIndex : -1,
