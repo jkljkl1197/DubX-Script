@@ -35,9 +35,10 @@
 
         twitch : { 
             template: "//static-cdn.jtvnw.net/emoticons/v1/{image_id}/1.0",
-            specialEmotes: [],
+            specialEmotes: [ [new RegExp(":([a-z0-9_-]+):", "i"), "named"] ],
             emotes: {},
-            chatRegex : new RegExp(":([-_a-z0-9]+):", "ig")
+            chatRegex : new RegExp(":([a-z0-9_-]+):", "ig"),
+            megaRegex : new RegExp(":([a-z0-9_-]+):", "ig")
         },
         /**************************************************************************
          * Loads the twitch emotes from the api.  
@@ -67,32 +68,65 @@
                         }
                         
                     });
+
                     self.twitchJSONSLoaded = true;
+                    // combined twitch and normal emoji names into one array for filtering later
                     self.emojiTwitch = emojify.emojiNames.concat(Object.keys(self.twitch.emotes));
+                    
+                    // create a big regex array
+                    var mega = self.twitch.specialEmotes
+                        .map(function(v) {
+                            var re = v[0];
+                            var val = re.source || re;
+                            val = val.replace(/(^|[^\[])\^/g, '$1');
+                            return "(" + val + ")";
+                        })
+                        .join('|');
+                    self.twitch.megaRegex = new RegExp(mega, "gi");
                 });
         },
         /**************************************************************************
          * handles replacing twitch emotes in the chat box with the images
          */
-        
-        replaceTextWithEmote: function(){
+        getEmojiID: function(matchArray, matched){
             var self = hello;
+            var _id, _src, _desc, key;
 
-            if (!self.twitchJSONSLoaded) { return; } // can't do anything until jsons are loaded
             function makeImage(src, name){
                 return '<img class="emoji" title="'+name+'" alt="'+name+'" src="'+src+'" />';
             }
             
-            var $last = $('.chat-main .text').last();
-            var emoted = $last.html().replace(self.twitch.chatRegex, function(matched, p1){
-                var _id, _src, _desc, key = p1.toLowerCase();
+            if (matchArray[1] && matchArray[2]){
+                key = matchArray[2].toLowerCase();
+                console.log(matched, key, emojify.emojiNames.indexOf(key));
+                if (emojify.emojiNames.indexOf(key) >= 0) { return matched; }
+
                 if (typeof self.twitch.emotes[key] !== 'undefined'){
                     _id = self.twitch.emotes[key];
                     _src = self.twitch.template.replace("{image_id}", _id);
                     return makeImage(_src, key);
-                } else {
-                    return matched;
                 }
+            }
+
+            for(var i = 3; i < matchArray.length - 1; i++) {
+                if(matchArray[i]) {
+                    _id = self.twitch.specialEmotes[i - 2][1];
+                    _src = self.twitch.template.replace("{image_id}", _id);
+                    return makeImage(_src, "special");
+                }
+            }
+            return matched;
+        },
+        replaceTextWithEmote: function(){
+            var self = hello;
+            if (!self.twitchJSONSLoaded) { return; } // can't do anything until jsons are loaded
+            
+            var $last = $('.chat-main .text').last();
+            
+            var emoted = $last.html().replace(self.twitch.megaRegex, function(matched, p1){
+                var matches = Array.prototype.slice.call(arguments, 0, -2);
+                console.log('matches',matches);
+                return self.getEmojiID(matches, matched);
             });
             $last.html(emoted);
         },
