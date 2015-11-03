@@ -248,15 +248,13 @@ if (!hello_run) {
             if (!options.let_split_chat) {
                 options.let_split_chat = true;
                 isOn = 'on';
-                $('.chat-main li:nth-child(even)').addClass('split');
-                $('.chat-main li:nth-child(even) .chatDelete').addClass('splitfix');
+                $('.chat-main').addClass('splitChat');
                 hello.option('split_chat', 'true');
                 hello.on('.split_chat');
             } else {
                 options.let_split_chat = false;
                 isOn = 'off';
-                $('.chat-main li:nth-child(even)').removeClass('split');
-                $('.chat-main li:nth-child(even) .chatDelete').removeClass('splitfix');
+                $('.chat-main').removeClass('splitChat');
                 hello.option('split_chat','false');
                 hello.off('.split_chat');
             }

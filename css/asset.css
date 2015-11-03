@@ -145,11 +145,14 @@
     font-size: 14px !important;
     margin-top: .5em !important;
 }
+
+.chat-main.splitChat li:nth-child(2n),
 .split {
     background: linear-gradient(to right, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.65) 25%,rgba(0,0,0,0) 100%);
     box-shadow: -16px 0px 0px 0px #000;
     width: 100%;
 }
+.chat-main.splitChat li:nth-child(2n) .chatDelete,
 .splitfix {
     right: 1.7em !important;
 }
