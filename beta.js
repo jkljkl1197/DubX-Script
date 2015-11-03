@@ -118,14 +118,14 @@ if (!hello_run) {
                             '<p class="for_content_off"><i class="fi-x"></i></p>',
                             '<p class="for_content_p">Spacebar Mute</p>',
                         '</li>',
-                        /******************************************************/
-                        '<li onclick="hello.optionTwitchEmotes();" class="optionClass twitch_emotes">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Twitch Emotes</p>',
+                        /******************* Emoji ******************************/
+                        '<li onclick="hello.optionTwitchEmotes();" class="for_content_li for_content_feature twitch_emotes">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Twitch Emotes</p>',
                         '</li>',
-                        '<li onclick="hello.optionEmojiPreview();" class="optionClass emoji_preview">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Emoji Preview</p>',
+                        '<li onclick="hello.optionEmojiPreview();" class="for_content_li for_content_feature emoji_preview">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Emoji Preview</p>',
                         '</li>',
                         /******************************************************/
                         '<li class="titleClass">',
