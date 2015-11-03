@@ -25,11 +25,11 @@
     The Software and this license document are provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
     Choice of Law
     This license is governed by the Laws of Norway. Disputes shall be settled by Oslo City Court.
-*/
+*/ /* global Dubtrack */
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.00.10 - Candyland';
+    var our_version = '03.00.61 - Spacebar Mute';
     //Ref 1: Variables
     var options = {
         let_autovote: false,
@@ -42,140 +42,152 @@ if (!hello_run) {
         let_active_afk: true,
         let_chat_window: false,
         let_css: false,
-        let_nicole: false
+        let_nicole: false,
+        let_twitch_emotes: false, // include twitch emojis
+        let_emoji_preview: false, // show emoji preview while typing
+        let_spacebar_mute: false
     };
     
     //Ref 1.1
-    $('.player_sharing').append('<span class="duration">...</span>');
+    $('.player_sharing').append('<span class="icon-history eta_tooltip_t" onmouseover="hello.eta();" onmouseout="hello.hide_eta();"></span>');
     
     //Ref 2: Options
     var hello = {
+        gitRoot: 'https://rawgit.com/sinfulBA/DubX-Script/master',
         //Ref 2.1: Initialize
         personalize: function() {
             $('.isUser').text(Dubtrack.session.get('username'));
         },
         slide: function() {
-            $('.isSwordful').slideToggle('fast');
+            $('.for_content').slideToggle('fast');
         },
         //Ref 2.2: Initialize
         initialize: function() {
-            var li = '<li><button onclick="hello.slide();" class="relate" style="font-size: 1em;height: 32px;margin-right: 16px;border-radius: 0.1875em;">DUBX</button></li>';
+            var li = '<div class="for" onclick="hello.slide();"><img src="'+hello.gitRoot+'/params/params.svg" alt=""></div>';
             var html = [
                 '<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css">',
-                '<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/asset.css">',
-                '<div class="isSwordful">',
-                    '<div class="verSwordful">',
-                        '<p class="Javaling">DubX Settings</p>',
-                        '<p class="Javaful">Version '+our_version+' - Apologies! You will need to restore options.</p>',
-                    '</div>',
-                    '<ul class="optionSwordful">',
-                        '<li class="optionClass">',
-                            '<p class="Optionling" style="margin: 0;">Aloha, <span class="isUser"></span>!</p>',
+                '<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/asset.css">',
+                '<div class="for_content">',
+                    '<span class="for_content_ver">DubX Settings</span>',
+                    '<span class="for_content_version">'+our_version+'</span>',
+                    '<ul class="for_content_ul">',
+                        '<li class="for_content_li">',
+                            '<p class="for_content_c">Standard</p>',
                         '</li>',
-                        '<li class="titleClass">',
-                            '<p class="istitle">Standard</p>',
+                        '<li onclick="hello.autovote();" class="for_content_li for_content_feature autovote">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Autovote</p>',
                         '</li>',
-                        '<li onclick="hello.autovote();" class="optionClass autovote">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Autovote</p>',
+                        '<li onclick="hello.wide_video();" class="for_content_li for_content_feature wide_video">',
+                            '<p class="for_content_off"><i class="fi-alert"></i></p>',
+                            '<p class="for_content_p">Fullscreen</p>',
                         '</li>',
-                        '<li onclick="hello.wide_video();" class="optionClass wide_video">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Fullscreen</p>',
+                        '<li onclick="hello.work();" class="for_content_li for_content_feature work">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Work Mode</p>',
                         '</li>',
-                        '<li onclick="hello.work();" class="optionClass work">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Work Mode</p>',
+                        '<li onclick="hello.split_chat();" class="for_content_li for_content_feature split_chat">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Split Chat</p>',
                         '</li>',
-                        '<li onclick="hello.split_chat();" class="optionClass split_chat">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Split Chat</p>',
+                        '<li onclick="hello.chat_window();" class="for_content_li for_content_feature chat_window">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Chat Only</p>',
                         '</li>',
-                        '<li onclick="hello.chat_window();" class="optionClass chat_window">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Chat Only</p>',
+                        '<li onclick="hello.medium_disable();" class="for_content_li for_content_feature medium_disable">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Hide Background</p>',
                         '</li>',
-                        '<li onclick="hello.medium_disable();" class="optionClass medium_disable">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Hide Background</p>',
+                        '<li onclick="hello.afk();" class="for_content_li for_content_feature afk">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">AFK Autorespond</p>',
                         '</li>',
-                        '<li onclick="hello.afk();" class="optionClass afk">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">AFK Auto-Respond</p>',
+                        '<li onclick="hello.warn_redirect();" class="for_content_li for_content_feature warn_redirect">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Warn On Navigation</p>',
                         '</li>',
-                        '<li onclick="hello.warn_redirect();" class="optionClass warn_redirect">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Warn On Navigation</p>',
+                        '<li onclick="hello.css_for_the_world();" class="for_content_li for_content_feature css">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Room CSS</p>',
                         '</li>',
-                        '<li onclick="hello.css_for_the_world();" class="optionClass css">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Community CSS</p>',
+                        '<li onclick="hello.nicole();" class="for_content_li for_content_feature nicole">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Plug.dj Theme</p>',
                         '</li>',
-                        '<li onclick="hello.nicole();" class="optionClass nicole">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Plug Theme</p>',
+                        '<li onclick="hello.spacebar_mute();" class="for_content_li for_content_feature spacebar_mute">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Spacebar Mute</p>',
                         '</li>',
+                        /******************* Emoji ******************************/
+                        '<li onclick="hello.optionTwitchEmotes();" class="for_content_li for_content_feature twitch_emotes">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Twitch Emotes</p>',
+                        '</li>',
+                        '<li onclick="hello.optionEmojiPreview();" class="for_content_li for_content_feature emoji_preview">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Emoji Preview</p>',
+                        '</li>',
+                        /******************************************************/
                         '<li class="titleClass">',
                             '<p class="istitle">Contact</p>',
+                        '<li class="for_content_li">',
+                            '<p class="for_content_c">Contact</p>',
                         '</li>',
-                        '<li onclick="hello.report_modal();" class="optionClass report">',
-                            '<p class="isOnOff"><i class="fi-comments"></i></p>',
-                            '<p class="Optionling">Bug Report</p>',
+                        '<li onclick="hello.report_modal();" class="for_content_li for_content_feature report">',
+                            '<p class="for_content_off"><i class="fi-comments"></i></p>',
+                            '<p class="for_content_p">Bug Report</p>',
                         '</li>',
-                        '<li class="titleClass">',
-                            '<p class="istitle">Customize</p>',
+                        '<li class="for_content_li">',
+                            '<p class="for_content_c">Customize</p>',
                         '</li>',
-                        '<li onclick="hello.css_modal();" class="optionClass">',
-                            '<p class="isOnOff"><i class="fi-unlink"></i></p>',
-                            '<p class="Optionling">Custom CSS</p>',
+                        '<li onclick="hello.css_modal();" class="for_content_li for_content_feature">',
+                            '<p class="for_content_off"><i class="fi-unlink"></i></p>',
+                            '<p class="for_content_p">Custom CSS</p>',
                         '</li>',
-                        '<li onclick="hello.medium_modal();" class="optionClass">',
-                            '<p class="isOnOff"><i class="fi-unlink"></i></p>',
-                            '<p class="Optionling">Custom Background</p>',
+                        '<li onclick="hello.medium_modal();" class="for_content_li for_content_feature">',
+                            '<p class="for_content_off"><i class="fi-unlink"></i></p>',
+                            '<p class="for_content_p">Custom Background</p>',
                         '</li>',
-                        '<li class="titleClass">',
-                            '<p class="istitle">Social</p>',
+                        '<li class="for_content_li">',
+                            '<p class="for_content_c">Social</p>',
                         '</li>',
-                        '<li class="optionClass facebook">',
-                            '<a href="https://www.facebook.com/DubXScript" target="_blank" style="color: white;">',
-                                '<p class="isOnOff"><i class="fi-social-facebook"></i></p>',
-                                '<p class="Optionling">Like Us on Facebook</p>',
+                        '<li class="for_content_li for_content_feature">',
+                            '<a href="https://www.facebook.com/DubXScript" target="_blank" style="color: #878c8e;">',
+                                '<p class="for_content_off"><i class="fi-social-facebook"></i></p>',
+                                '<p class="for_content_p">Like Us on Facebook</p>',
                             '</a>',
                         '</li>',
-                        '<li class="optionClass twitter">',
-                            '<a href="https://twitter.com/DubXScript" target="_blank" style="color: white;">',
-                                '<p class="isOnOff"><i class="fi-social-twitter"></i></p>',
-                                '<p class="Optionling">Follow Us on Twitter</p>',
+                        '<li class="for_content_li for_content_feature">',
+                            '<a href="https://twitter.com/DubXScript" target="_blank" style="color: #878c8e;">',
+                                '<p class="for_content_off"><i class="fi-social-twitter"></i></p>',
+                                '<p class="for_content_p">Follow Us on Twitter</p>',
                             '</a>',
                         '</li>',
-                        '<li class="optionClass github">',
-                            '<a href="https://github.com/sinfulBA/DubX-Script" target="_blank" style="color: white;">',
-                                '<p class="isOnOff"><i class="fi-social-github"></i></p>',
-                                '<p class="Optionling">Fork Us on Github</p>',
+                        '<li class="for_content_li for_content_feature">',
+                            '<a href="https://github.com/sinfulBA/DubX-Script" target="_blank" style="color: #878c8e;">',
+                                '<p class="for_content_off"><i class="fi-social-github"></i></p>',
+                                '<p class="for_content_p">Fork Us on Github</p>',
                             '</a>',
                         '</li>',
-                        '<li class="optionClass website">',
-                            '<a href="https://dubx.net" target="_blank" style="color: white;">',
-                                '<p class="isOnOff"><i class="fi-link"></i></p>',
-                                '<p class="Optionling">Check out our Website</p>',
+                        '<li class="for_content_li for_content_feature">',
+                            '<a href="https://www.dubx.net" target="_blank" style="color: #878c8e;">',
+                                '<p class="for_content_off"><i class="fi-link"></i></p>',
+                                '<p class="for_content_p">Our Website</p>',
                             '</a>',
                         '</li>',
-                        '<li class="titleClass">',
-                            '<p class="istitle">Our Extension</p>',
+                        '<li class="for_content_li">',
+                            '<p class="for_content_c">Chrome Extension</p>',
                         '</li>',
-                        '<li class="optionClass webstore">',
-                            '<a href="https://chrome.google.com/webstore/detail/dubx/oceofndagjnpebjmknefoelcpcnpcedm/reviews" target="_blank" style="color: white;">',
-                                '<p class="isOnOff"><i class="fi-like"></i></p>',
-                                '<p class="Optionling">Give Us a Rating</p>',
+                        '<li class="for_content_li for_content_feature">',
+                            '<a href="https://chrome.google.com/webstore/detail/dubx/oceofndagjnpebjmknefoelcpcnpcedm/reviews" target="_blank" style="color: #878c8e;">',
+                                '<p class="for_content_off"><i class="fi-like"></i></p>',
+                                '<p class="for_content_p">Give Us a Rating</p>',
                             '</a>',
-                        '</li>',
-                        '<li class="optionClass">',
-                        	'<p class="Optionful" style="margin: 0;">Dub X currently has 874 users!</p>',
                         '</li>',
                     '</ul>',
                 '</div>'
             ].join('');
-            $('.user-header-menu').prepend(li);
+            $('.header-right-navigation').append(li);
             $('body').prepend(html);
         },
         //Ref 2.3.1: Input
@@ -204,10 +216,10 @@ if (!hello_run) {
             $('body').prepend(onErr);
         },
         on: function(selector) {
-            $(selector + ' .isOnOff i').replaceWith('<i class="fi-check"></i>');
+            $(selector + ' .for_content_off i').replaceWith('<i class="fi-check"></i>');
         },
         off: function(selector) {
-            $(selector + ' .isOnOff i').replaceWith('<i class="fi-x"></i>');
+            $(selector + ' .for_content_off i').replaceWith('<i class="fi-x"></i>');
         },
         closeErr: function() {
             $('.onErr').remove();
@@ -259,8 +271,13 @@ if (!hello_run) {
             var booth_duration = parseInt(Dubtrack.room.player.queueInfo.text());
             var booth_time = (booth_duration * time - time) + current_time;
             if (booth_time >= 0) {
-                $('.duration').replaceWith('<span class="duration">You will be on the booth in approximately '+booth_time+' minutes.</span>');
-            };
+                $('.eta_tooltip_t').append('<div class="eta_tooltip" style="position: absolute;font: 1rem/1.5 proxima-nova,sans-serif;display: block;left: -33px;cursor: pointer;border-radius: 1.5rem;padding: 8px 16px;background: #fff;font-weight: 700;font-size: 13.6px;text-transform: uppercase;color: #000;opacity: .8;text-align: center;z-index: 9;">ETA: '+booth_time+' minutes.</div>');
+            } else {
+                $('.eta_tooltip_t').append('<div class="eta_tooltip" style="position: absolute;font: 1rem/1.5 proxima-nova,sans-serif;display: block;left: -33px;cursor: pointer;border-radius: 1.5rem;padding: 8px 16px;background: #fff;font-weight: 700;font-size: 13.6px;text-transform: uppercase;color: #000;opacity: .8;text-align: center;z-index: 9;">You\'re not in the queue.</div>');
+            }
+        },
+        hide_eta: function() {
+            $('.eta_tooltip').remove();
         },
         report_content: function() {
             var content = $('.input').val();
@@ -297,7 +314,7 @@ if (!hello_run) {
             if (!options.let_wide_video) {
                 options.let_wide_video = true;
                 isOn = 'on';
-                $('head').prepend('<link class="wide_video_link" rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/options/wide_video.css">');
+                $('head').prepend('<link class="wide_video_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/wide_video.css">');
                 hello.option('wide_video','true');
                 hello.on('.wide_video');
             } else {
@@ -379,12 +396,12 @@ if (!hello_run) {
             if (!options.let_afk) {
                 options.let_afk = true;
                 isOn = 'on';
-                Dubtrack.Events.bind("realtime:chat-message", hello.afk_chat_respond);
+                Dubtrack.Events.bind("realtime:chat-message", this.afk_chat_respond);
                 hello.on('.afk');
             } else {
                 options.let_afk = false;
                 isOn = 'off';
-                Dubtrack.Events.unbind("realtime:chat-message", hello.afk_chat_respond);
+                Dubtrack.Events.unbind("realtime:chat-message", this.afk_chat_respond);
                 hello.off('.afk');
             }
         },
@@ -393,7 +410,7 @@ if (!hello_run) {
             if(!options.let_chat_window) {
                 options.let_chat_window = true;
                 isOn = 'on';
-                $('head').append('<link class="chat_window_link" rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/options/chat_window.css">');
+                $('head').append('<link class="chat_window_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/chat_window.css">');
                 hello.option('chat_window','true');
                 hello.on('.chat_window');
             } else {
@@ -450,7 +467,7 @@ if (!hello_run) {
             if (!options.let_nicole) {
                 options.let_nicole = true;
                 isOn = 'on';
-                $('head').append('<link class="nicole_css" href="https://rawgit.com/sinfulBA/DubX-Script/master/themes/PlugTheme.css" rel="stylesheet" type="text/css">');
+                $('head').append('<link class="nicole_css" href="'+hello.gitRoot+'/themes/PlugTheme.css" rel="stylesheet" type="text/css">');
                 hello.option('nicole', 'true');
                 hello.on('.nicole');
             } else {
@@ -468,7 +485,7 @@ if (!hello_run) {
         medium_import: function() {
             var content = $('.input').val();
             localStorage.setItem('medium',content);
-            $('.custom_wallpaper').remove();
+            $('.medium').remove();
             $('body').append('<div class="medium" style="width: 100vw;height: 100vh;z-index: -999998;position: fixed; background: url('+content+');background-size: cover;top: 0;"></div>');
             $('.onErr').remove();
         },
@@ -477,15 +494,299 @@ if (!hello_run) {
                 var content = localStorage.getItem('medium');
                 $('body').append('<div class="medium" style="width: 100vw;height: 100vh;z-index: -999998;position: fixed; background: url('+content+');background-size: cover;top: 0;"></div>');
             }
+        },
+        // jQuery's getJSON kept returning errors so making my own with promise-like
+        // structure and added optional Event to fire when done so can hook in elsewhere
+        getJSON : (function (url, optionalEvent) {
+            var doneEvent;
+            function GetJ(_url, _cb){
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', _url);
+                xhr.send();
+                xhr.onload = function() {
+                    var resp = JSON.parse(xhr.responseText);
+                    if (typeof _cb === 'function') { _cb(resp); }
+                    if (optionalEvent) { document.dispatchEvent(doneEvent); }
+                };
+            }
+            if (optionalEvent){ doneEvent = new CustomEvent(optionalEvent); }
+            var done = function(cb){
+                new GetJ(url, cb);
+            };
+            return { done: done };
+        }),
+
+        twitch : { 
+            template: "//static-cdn.jtvnw.net/emoticons/v1/{image_id}/1.0",
+            specialEmotes: [],
+            emotes: {},
+            chatRegex : new RegExp(":([-_a-z0-9]+):", "ig")
+        },
+        /**************************************************************************
+         * Loads the twitch emotes from the api.  
+         * http://api.twitch.tv/kraken/chat/emoticon_images
+         */
+        loadTwitchFromApi: function(){
+            var self = this;
+
+            // load Sub emotes first so that the global ones could override them
+            this.getJSON('//api.twitch.tv/kraken/chat/emoticon_images')
+                .done(function(data){
+                    data.emoticons.forEach(function(el,i,arr){
+                        var _key = el.code.toLowerCase();
+                        
+                        // move twitch non-named emojis to their own array
+                        if (el.code.indexOf('\\') >= 0) {
+                            self.twitch.specialEmotes.push([el.code, el.id]);
+                            return;
+                        }
+                        
+                        if (!self.twitch.emotes[_key]){
+                            // if emote doesn't exist, add it
+                            self.twitch.emotes[_key] = el.id;
+                        } else if (el.emoticon_set === null) {
+                            // override if it's a global emote (null set = global emote)
+                            self.twitch.emotes[_key] = el.id;
+                        }
+                        
+                    });
+                    self.twitchJSONSLoaded = true;
+                    self.emojiTwitch = emojify.emojiNames.concat(Object.keys(self.twitch.emotes));
+                });
+        },
+        /**************************************************************************
+         * handles replacing twitch emotes in the chat box with the images
+         */
+        
+        replaceTextWithEmote: function(){
+            var self = hello;
+
+            if (!self.twitchJSONSLoaded) { return; } // can't do anything until jsons are loaded
+            function makeImage(src, name){
+                return '<img class="emoji" title="'+name+'" alt="'+name+'" src="'+src+'" />';
+            }
+            
+            var $last = $('.chat-main .text').last();
+            var emoted = $last.html().replace(self.twitch.chatRegex, function(matched, p1){
+                var _id, _src, _desc, key = p1.toLowerCase();
+                if (typeof self.twitch.emotes[key] !== 'undefined'){
+                    _id = self.twitch.emotes[key];
+                    _src = self.twitch.template.replace("{image_id}", _id);
+                    return makeImage(_src, key);
+                } else {
+                    return matched;
+                }
+            });
+            $last.html(emoted);
+        },
+        /**************************************************************************
+         * Turn on/off the twitch emoji in chat
+         */
+        optionTwitchEmotes: function(){
+            if (!options.let_twitch_emotes) {
+                this.replaceTextWithEmote();
+                Dubtrack.Events.bind("realtime:chat-message", this.replaceTextWithEmote);
+                options.let_twitch_emotes = true;
+                hello.option('twitch_emotes', 'true');
+                hello.on('.twitch_emotes');
+            } else {
+                Dubtrack.Events.unbind("realtime:chat-message", this.replaceTextWithEmote);
+                options.let_twitch_emotes = false;
+                hello.option('twitch_emotes', 'false');
+                hello.off('.twitch_emotes');
+            }
+        },
+        /**************************************************************************
+         * A bunch of utility helpers for the emoji preview
+         */
+        emojiUtils : {
+            makePreviewContainer : function(cn){
+                var d = document.createElement('li');
+                d.className = cn;
+                return d; 
+            },
+            makeEmoImage : function(src) {
+                var i = document.createElement('img');
+                i.src = src;
+                return i;
+            },
+            makeNameSpan : function(name){
+                var s = document.createElement('span');
+                s.textContent = ":" + name + ":";
+                return s;
+            },
+            makeLi: function(type, name, img){
+                var self = hello.emojiUtils;
+                var container = self.makePreviewContainer("preview-container "+type+"-previews");
+                var span = self.makeNameSpan(name);
+                container.appendChild(img);
+                container.appendChild(span);
+                container.tabIndex = -1;
+                return container;
+            },
+            createTwitchImg : function(id, name) {
+                var self = hello.emojiUtils;
+                var _src = hello.twitch.template.replace("{image_id}", id);
+                var img = self.makeEmoImage(_src);
+                img.title = name; img.alt = name;
+                return self.makeLi('twitch', name, img);
+            },
+            createImg : function(name) {
+                var self = hello.emojiUtils;
+                var img = self.makeEmoImage(emojify.defaultConfig.img_dir+'/'+encodeURI(name)+'.png');
+                img.title = ':'+name+':'; 
+                return self.makeLi('emoji', name, img);
+            },
+            addToHelper : function(emojiArray) {
+                var self = hello.emojiUtils;
+                $('#emoji-preview').empty();
+                var frag = document.createDocumentFragment();
+                var _key;
+
+                emojiArray.forEach(function(val,i,arr){
+                    _key = val.toLowerCase();
+                    if (typeof hello.twitch.emotes[_key] !== 'undefined') {
+                        frag.appendChild(self.createTwitchImg(hello.twitch.emotes[_key], val));
+                    } else if (emojify.emojiNames.indexOf(_key) >= 0) {
+                        frag.appendChild(self.createImg(val));
+                    }
+                });
+
+                document.getElementById('emoji-preview').appendChild(frag);
+                $('#emoji-preview').addClass('emoji-grow');
+            },
+            filterEmoji : function(str){
+                var finalStr = str.replace("+","\\+");
+                var re = new RegExp('^' + finalStr, "i");
+                var arrayToUse = emojify.emojiNames;
+                if (options.let_twitch_emotes) {
+                    arrayToUse = hello.emojiTwitch; // merged array
+                }
+                return arrayToUse.filter(function(val){
+                    return re.test(val);
+                });
+            },
+            emojiSearchStr : ""
+        },
+        /**************************************************************************
+         * This handles the emoji preview in the chat input as you type
+         */
+        emojiKeyUpFunction: function(e){
+            var self = hello.emojiUtils;
+            var currentText = this.value;
+            var filteredEmoji = currentText.replace(/:([+\\-_a-z0-9]+)$/i, function(matched, p1){
+                self.emojiSearchStr = p1;
+                if (self.emojiSearchStr.length >= 3) { // change to set character limit
+                    self.addToHelper(self.filterEmoji(p1));
+                }
+            });
+            
+            var lastChar = currentText.charAt(currentText.length - 1);
+            if (self.emojiSearchStr.length <= 2 || // change to set character limit
+                lastChar === ":" ||
+                lastChar === " " ||
+                currentText === "")
+            {
+                self.emojiSearchStr = "";
+                $('#emoji-preview').empty().removeClass('emoji-grow');
+            }
+
+            if (e.keyCode === 38 || e.keyCode === 40) {
+                hello.doNavigate(-1);
+            }
+        },
+        displayBoxIndex : -1,
+        doNavigate : function(diff) {
+            hello.displayBoxIndex += diff;
+            var oBoxCollection = $(".emoji-grow li");
+            if (hello.displayBoxIndex >= oBoxCollection.length){
+                hello.displayBoxIndex = 0;
+            }
+            if (hello.displayBoxIndex < 0){
+                 hello.displayBoxIndex = oBoxCollection.length - 1;
+             }
+            var cssClass = "selected";
+            oBoxCollection.removeClass(cssClass).eq(hello.displayBoxIndex).addClass(cssClass).focus();
+        },
+        emojiKeyNavFunction: function(e){
+            if ( $('#emoji-preview').hasClass('emoji-grow')) {
+               e.preventDefault();
+               if (e.keyCode === 38) {
+                   hello.doNavigate(-1);
+               }
+               else if (e.keyCode === 40) {
+                   hello.doNavigate(1);
+               }
+               else if (e.keyCode === 13) {
+                   $('#emoji-preview li.selected').trigger('click');
+                   return false;
+               }
+            } 
+        },
+        updateChatInput: function(str){
+            var _re = new RegExp(":"+hello.emojiUtils.emojiSearchStr + "$");
+            var fixed_text = $("#chat-txt-message").val().replace(_re, str) + " ";
+            $('#emoji-preview').empty().removeClass('emoji-grow');
+            $("#chat-txt-message").val(fixed_text).focus();
+        },
+        emojiTwitchInit: function(){
+            // this will only be run once
+            $('head').prepend('<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/emoji.css">');
+            var emojiPreview = document.createElement('ul');
+            emojiPreview.id = "emoji-preview";
+            $('.pusher-chat-widget-input').prepend(emojiPreview);
+
+            $(document.body).on('click', '.preview-container', function(e){
+                var new_text = $(this).find('span').text();
+                hello.updateChatInput(new_text);
+            });
+        },
+        optionEmojiPreview: function(){
+            if (!$('#emoji-preview').length) {
+                hello.emojiTwitchInit();
+            }
+
+            if (!options.let_emoji_preview) {
+                $(document.body).on('keyup', "#chat-txt-message", this.emojiKeyUpFunction);
+                $(document.body).on('keyup', '.emoji-grow', hello.emojiKeyNavFunction);
+                options.let_emoji_preview = true;
+                hello.option('emoji_preview', 'true');
+                hello.on('.emoji_preview');
+            } else {
+                $(document.body).off('keyup', "#chat-txt-message", this.emojiKeyUpFunction);
+                $(document.body).off('keyup', '.emoji-grow', hello.emojiKeyNavFunction);
+                options.let_emoji_preview = false;
+                hello.option('emoji_preview', 'false');
+                hello.off('.emoji_preview');
+            }
+        },
+        spacebar_mute: function() {
+            var isOn;
+            if (!options.let_spacebar_mute) {
+                options.let_spacebar_mute = true;
+                isOn = 'on';
+                $(document).bind('keypress.key32', function() {
+                    var tag = event.target.tagName.toLowerCase();
+                    if (event.which === 32 && tag != 'input' && tag != 'textarea') {
+                        $('.mute').click();
+                    }
+                });
+                hello.option('spacebar_mute', 'true');
+                hello.on('.spacebar_mute');
+            } else {
+                options.let_spacebar_mute = false;
+                isOn = 'off';
+                $(document).unbind("keypress.key32");
+                hello.option('spacebar_mute','false');
+                hello.off('.spacebar_mute');
+            }
         }
     };
     //Ref 3:
     hello.initialize();
     hello.personalize();
-    setInterval(function() {
-        hello.eta();
-    }, 5000);
-    
+    hello.loadTwitchFromApi();
+
     //Ref 4: 
     $('.user-info-button').click(hello.wide_video_disable);
     $('.user-info-button').click(hello.disable_work);
@@ -495,44 +796,47 @@ if (!hello_run) {
     }, true);
     if (localStorage.getItem('autovote') === 'true') {
         hello.autovote();
-    };
+    }
     if (localStorage.getItem('split_chat') === 'true') {
         hello.split_chat();
-    };
+    }
     if (localStorage.getItem('wide_video') === 'true') {
         hello.wide_video();
-    };
+    }
     if (localStorage.getItem('medium_disable') === 'true') {
         hello.medium_disable();
-    };
+    }
     if (localStorage.getItem('work') === 'true') {
         hello.work();
-    };
+    }
     if (localStorage.getItem('warn_redirect') === 'true') {
         hello.warn_redirect();
-    };
+    }
     if (localStorage.getItem('chat_window') === 'true') {
         hello.chat_window();
-    };
+    }
     if (localStorage.getItem('css_world') === 'true') {
         hello.css_for_the_world();
-    };
+    }
     if (localStorage.getItem('nicole') === 'true') {
         hello.nicole();
-    };
+    }
+    if (localStorage.getItem('twitch_emotes') === 'true') {
+        hello.optionTwitchEmotes();
+    }
+    if (localStorage.getItem('emoji_preview') === 'true') {
+        hello.optionEmojiPreview();
+    }
+    if (localStorage.getItem('spacebar_mute') === 'true') {
+        hello.spacebar_mute();
+    }
     $('document').ready(hello.css_run);
     $('document').ready(hello.medium_load);
     
-     // Ref 5:
-	$('.chat-main').on('DOMNodeInserted', function(e) {
-		var itemEl = $(e.target);
-		if(itemEl.prop('tagName').toLowerCase() !== 'li' || itemEl.attr('class').substring(0, 'user-'.length) !== 'user-') return;
-		var user = Dubtrack.room.users.collection.findWhere({userid: itemEl.attr('class').split(/-| /)[1]});
-		var role = !user.get('roleid') ? 'default' : Dubtrack.helpers.isDubtrackAdmin(user.get('userid')) ? 'admin' : user.get('roleid').type;
-		itemEl.addClass('is' + (role.charAt(0).toUpperCase() + role.slice(1)));
-	});
-    
-    
+    $('.for').click(function() {
+        $('.for_content').show();
+    });
+
 } else {
     function onErr(error) {
         var onErr = [
@@ -556,8 +860,8 @@ if (!hello_run) {
             '</div>'
         ].join('');
         $('body').prepend(onErr);
-    };
-	onErr('Oh no! Error 69: Extension is already open.');
+    }
+    onErr('Oh no! Error 69: Extension is already open.');
     $('.cancel').click(hello.closeErr);
     $('.confirm-err').click(hello.closeErr);
 }
