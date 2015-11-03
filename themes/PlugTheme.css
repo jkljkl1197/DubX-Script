@@ -157,7 +157,7 @@ span.name,
 #chat .chat-container ul.chat-main li.user-52d24bff4cf9670200000515 .activity-row .text p a.username,
 #chat .chat-container ul.chat-main li.user-52c8efcf37e22b0200000008 .activity-row .text p a.username,
 #chat .chat-container ul.chat-main li.user-52c8254ca7b7260200000001 .activity-row .text p a.username {
-	color: #42A5DC
+	color: #42A5DC !important;
 }
 
 /** Contributors **/
@@ -189,7 +189,7 @@ span.name,
 /** Admin **/
 #main_avatar_room #main-user-list-room #avatar-list li.admin p.username,
 #main_avatar_room #main-user-list-room #avatar-list li.admin p.username:after {
-	color: #42A5DC;
+	color: #42A5DC !important;
 }
 
 /** Moderators **/
