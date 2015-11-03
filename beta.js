@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.00.83 - Twitch Emotes/Custom Emojis';
+    var our_version = '03.00.84 - Twitch Emotes/Custom Emojis';
     //Ref 1: Variables
     var options = {
         let_autovote: false,
