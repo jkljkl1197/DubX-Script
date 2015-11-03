@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.00.83 - Custom Emojis';
+    var our_version = '03.00.83 - Twitch Emotes/Custom Emojis';
     //Ref 1: Variables
     var options = {
         let_autovote: false,
@@ -511,7 +511,7 @@ if (!hello_run) {
         }),
 
         twitch : { 
-            template: "//static-cdn.jtvnw.net/emoticons/v1/{image_id}/1.0",
+            template: "//static-cdn.jtvnw.net/emoticons/v1/{image_id}/3.0",
             specialEmotes: [],
             emotes: {},
             chatRegex : new RegExp(":([-_a-z0-9]+):", "ig")

@@ -47,7 +47,7 @@ a, a:active, a:focus, a:hover,
 
 /* DubX Menu */
 .for_content {
-	background: rgba(8,8,8,0.78);
+	background: rgba(8,8,8,0.78) !important;
 }
 .for_content_off {
 	color: #DDDDDD !important;
