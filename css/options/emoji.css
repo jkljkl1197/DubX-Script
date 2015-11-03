@@ -8,10 +8,11 @@
     display: block; 
     position: absolute; 
     bottom: 54px; 
-    background-color:#111;
-    width: 94.5%;
+    background-color: rgba(0,0,0,0.9);
+    width: 100%;
     height: auto;
     max-height: 0;
+    border-bottom: 1px solid #878c8e !important;
 
     /* thinking of turning it into a UL*/
     padding: 0;
@@ -45,6 +46,8 @@
   font-size: 0.8em;
   display:inline-block; 
   padding-left: 20px;
+  position: relative;
+  top: -7px;
 }
 
 #emoji-preview img {
@@ -56,7 +59,7 @@
 #emoji-preview.emoji-grow {
   border: 1px solid #202020;
   border-bottom: 0;
-  max-height: 63vh;
+  max-height: 164px;
   -moz-transition: 0.4s;
   -ms-transition: 0.4s;
   -o-transition: 0.4s;
