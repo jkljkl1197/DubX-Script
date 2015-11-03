@@ -563,7 +563,7 @@ if (!hello_run) {
 
             if (!self.twitchJSONSLoaded) { return; } // can't do anything until jsons are loaded
             function makeImage(src, name){
-                return '<img class="emoji" title="'+name+'" alt="'+name+'" src="'+src+'" />';
+                return '<img class="emoji twitch-emoji" title="'+name+'" alt="'+name+'" src="'+src+'" />';
             }
             
             var $last = $('.chat-main .text').last();
@@ -693,7 +693,7 @@ if (!hello_run) {
                 $('#emoji-preview').empty().removeClass('emoji-grow');
             }
 
-            if (e.keyCode === 38 || e.keyCode === 40) {
+            if (e.keyCode === 38 || e.keyCode === 40 || $('.emoji-grow li').length === 1) {
                 hello.doNavigate(-1);
             }
         },
