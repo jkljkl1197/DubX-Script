@@ -46,7 +46,7 @@ if (!hello_run) {
     };
     
     //Ref 1.1
-    $('.player_sharing').append('<span class="duration">...</span>');
+    $('.player_sharing').append('<span class="icon-history eta_tooltip_t" onmouseover="hello.eta();" onmouseout="hello.hide_eta();"></span>');
     
     //Ref 2: Options
     var hello = {
@@ -245,15 +245,20 @@ if (!hello_run) {
                 hello.off('.split_chat');
             }
         },
-        /* eta: function() {
+        eta: function() {
             var time = 4;
             var current_time = parseInt($('#player-controller div.left ul li.infoContainer.display-block div.currentTime span.min').text());
             var booth_duration = parseInt(Dubtrack.room.player.queueInfo.text());
             var booth_time = (booth_duration * time - time) + current_time;
             if (booth_time >= 0) {
-                $('.duration').replaceWith('<span class="duration">You will be on the booth in approximately '+booth_time+' minutes.</span>');
-            };
-        }, */
+                $('.eta_tooltip_t').append('<div class="eta_tooltip" style="position: absolute;font: 1rem/1.5 proxima-nova,sans-serif;display: block;left: -33px;cursor: pointer;border-radius: 1.5rem;padding: 8px 16px;background: #fff;font-weight: 700;font-size: 13.6px;text-transform: uppercase;color: #000;opacity: .8;text-align: center;z-index: 9;">ETA: '+booth_time+' minutes.</div>');
+            } else {
+                $('.eta_tooltip_t').append('<div class="eta_tooltip" style="position: absolute;font: 1rem/1.5 proxima-nova,sans-serif;display: block;left: -33px;cursor: pointer;border-radius: 1.5rem;padding: 8px 16px;background: #fff;font-weight: 700;font-size: 13.6px;text-transform: uppercase;color: #000;opacity: .8;text-align: center;z-index: 9;">You\'re not in the queue.</div>')
+            }
+        },
+        hide_eta: function() {
+            $('.eta_tooltip').remove();
+        },
         report_content: function() {
             var content = $('.input').val();
             var user = Dubtrack.session.get('username');
@@ -474,11 +479,7 @@ if (!hello_run) {
     //Ref 3:
     hello.initialize();
     hello.personalize();
-    /*
-    setInterval(function() {
-        hello.eta();
-    }, 5000);
-    */
+
     //Ref 4: 
     $('.user-info-button').click(hello.wide_video_disable);
     $('.user-info-button').click(hello.disable_work);
