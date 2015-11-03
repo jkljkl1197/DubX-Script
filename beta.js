@@ -25,11 +25,11 @@
     The Software and this license document are provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
     Choice of Law
     This license is governed by the Laws of Norway. Disputes shall be settled by Oslo City Court.
-*/
+*/ /* global Dubtrack */
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.00.10 - Candyland';
+    var our_version = '03.00.61 - Spacebar Mute';
     //Ref 1: Variables
     var options = {
         let_autovote: false,
@@ -43,13 +43,13 @@ if (!hello_run) {
         let_chat_window: false,
         let_css: false,
         let_nicole: false,
-        let_twitch_emotes: false, // convert emotes in chat
+        let_twitch_emotes: false, // include twitch emojis
         let_emoji_preview: false, // show emoji preview while typing
-        let_twitch_emote_preview: false // show twitch emote preview while typing
+        let_spacebar_mute: false
     };
     
     //Ref 1.1
-    $('.player_sharing').append('<span class="duration">...</span>');
+    $('.player_sharing').append('<span class="icon-history eta_tooltip_t" onmouseover="hello.eta();" onmouseout="hello.hide_eta();"></span>');
     
     //Ref 2: Options
     var hello = {
@@ -59,74 +59,69 @@ if (!hello_run) {
             $('.isUser').text(Dubtrack.session.get('username'));
         },
         slide: function() {
-            $('.isSwordful').slideToggle('fast');
+            $('.for_content').slideToggle('fast');
         },
         //Ref 2.2: Initialize
         initialize: function() {
-            var li = '<li><button onclick="hello.slide();" class="relate" style="font-size: 1em;height: 32px;margin-right: 16px;border-radius: 0.1875em;">DUBX</button></li>';
+            var li = '<div class="for" onclick="hello.slide();"><img src="'+hello.gitRoot+'/params/params.svg" alt=""></div>';
             var html = [
                 '<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css">',
                 '<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/asset.css">',
-                '<div class="isSwordful">',
-                    '<div class="verSwordful">',
-                        '<p class="Javaling">DubX Settings</p>',
-                        '<p class="Javaful">Version '+our_version+' - Apologies! You will need to restore options.</p>',
-                    '</div>',
-                    '<ul class="optionSwordful">',
-                        '<li class="optionClass">',
-                            '<p class="Optionling" style="margin: 0;">Aloha, <span class="isUser"></span>!</p>',
+                '<div class="for_content">',
+                    '<span class="for_content_ver">DubX Settings</span>',
+                    '<span class="for_content_version">'+our_version+'</span>',
+                    '<ul class="for_content_ul">',
+                        '<li class="for_content_li">',
+                            '<p class="for_content_c">Standard</p>',
                         '</li>',
-                        '<li class="titleClass">',
-                            '<p class="istitle">Standard</p>',
+                        '<li onclick="hello.autovote();" class="for_content_li for_content_feature autovote">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Autovote</p>',
                         '</li>',
-                        '<li onclick="hello.autovote();" class="optionClass autovote">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Autovote</p>',
+                        '<li onclick="hello.wide_video();" class="for_content_li for_content_feature wide_video">',
+                            '<p class="for_content_off"><i class="fi-alert"></i></p>',
+                            '<p class="for_content_p">Fullscreen</p>',
                         '</li>',
-                        '<li onclick="hello.wide_video();" class="optionClass wide_video">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Fullscreen</p>',
+                        '<li onclick="hello.work();" class="for_content_li for_content_feature work">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Work Mode</p>',
                         '</li>',
-                        '<li onclick="hello.work();" class="optionClass work">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Work Mode</p>',
+                        '<li onclick="hello.split_chat();" class="for_content_li for_content_feature split_chat">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Split Chat</p>',
                         '</li>',
-                        '<li onclick="hello.split_chat();" class="optionClass split_chat">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Split Chat</p>',
+                        '<li onclick="hello.chat_window();" class="for_content_li for_content_feature chat_window">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Chat Only</p>',
                         '</li>',
-                        '<li onclick="hello.chat_window();" class="optionClass chat_window">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Chat Only</p>',
+                        '<li onclick="hello.medium_disable();" class="for_content_li for_content_feature medium_disable">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Hide Background</p>',
                         '</li>',
-                        '<li onclick="hello.medium_disable();" class="optionClass medium_disable">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Hide Background</p>',
+                        '<li onclick="hello.afk();" class="for_content_li for_content_feature afk">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">AFK Autorespond</p>',
                         '</li>',
-                        '<li onclick="hello.afk();" class="optionClass afk">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">AFK Auto-Respond</p>',
+                        '<li onclick="hello.warn_redirect();" class="for_content_li for_content_feature warn_redirect">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Warn On Navigation</p>',
                         '</li>',
-                        '<li onclick="hello.warn_redirect();" class="optionClass warn_redirect">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Warn On Navigation</p>',
+                        '<li onclick="hello.css_for_the_world();" class="for_content_li for_content_feature css">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Room CSS</p>',
                         '</li>',
-                        '<li onclick="hello.css_for_the_world();" class="optionClass css">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Community CSS</p>',
+                        '<li onclick="hello.nicole();" class="for_content_li for_content_feature nicole">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Plug.dj Theme</p>',
                         '</li>',
-                        '<li onclick="hello.nicole();" class="optionClass nicole">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Plug Theme</p>',
+                        '<li onclick="hello.spacebar_mute();" class="for_content_li for_content_feature spacebar_mute">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Spacebar Mute</p>',
                         '</li>',
                         /******************************************************/
                         '<li onclick="hello.optionTwitchEmotes();" class="optionClass twitch_emotes">',
                             '<p class="isOnOff"><i class="fi-x"></i></p>',
                             '<p class="Optionling">Twitch Emotes</p>',
-                        '</li>',
-                        '<li onclick="hello.optionTwitchEmotePreview();" class="optionClass twitch_emote_preview">',
-                            '<p class="isOnOff"><i class="fi-x"></i></p>',
-                            '<p class="Optionling">Twitch Emotes Preview</p>',
                         '</li>',
                         '<li onclick="hello.optionEmojiPreview();" class="optionClass emoji_preview">',
                             '<p class="isOnOff"><i class="fi-x"></i></p>',
@@ -135,65 +130,64 @@ if (!hello_run) {
                         /******************************************************/
                         '<li class="titleClass">',
                             '<p class="istitle">Contact</p>',
+                        '<li class="for_content_li">',
+                            '<p class="for_content_c">Contact</p>',
                         '</li>',
-                        '<li onclick="hello.report_modal();" class="optionClass report">',
-                            '<p class="isOnOff"><i class="fi-comments"></i></p>',
-                            '<p class="Optionling">Bug Report</p>',
+                        '<li onclick="hello.report_modal();" class="for_content_li for_content_feature report">',
+                            '<p class="for_content_off"><i class="fi-comments"></i></p>',
+                            '<p class="for_content_p">Bug Report</p>',
                         '</li>',
-                        '<li class="titleClass">',
-                            '<p class="istitle">Customize</p>',
+                        '<li class="for_content_li">',
+                            '<p class="for_content_c">Customize</p>',
                         '</li>',
-                        '<li onclick="hello.css_modal();" class="optionClass">',
-                            '<p class="isOnOff"><i class="fi-unlink"></i></p>',
-                            '<p class="Optionling">Custom CSS</p>',
+                        '<li onclick="hello.css_modal();" class="for_content_li for_content_feature">',
+                            '<p class="for_content_off"><i class="fi-unlink"></i></p>',
+                            '<p class="for_content_p">Custom CSS</p>',
                         '</li>',
-                        '<li onclick="hello.medium_modal();" class="optionClass">',
-                            '<p class="isOnOff"><i class="fi-unlink"></i></p>',
-                            '<p class="Optionling">Custom Background</p>',
+                        '<li onclick="hello.medium_modal();" class="for_content_li for_content_feature">',
+                            '<p class="for_content_off"><i class="fi-unlink"></i></p>',
+                            '<p class="for_content_p">Custom Background</p>',
                         '</li>',
-                        '<li class="titleClass">',
-                            '<p class="istitle">Social</p>',
+                        '<li class="for_content_li">',
+                            '<p class="for_content_c">Social</p>',
                         '</li>',
-                        '<li class="optionClass facebook">',
-                            '<a href="https://www.facebook.com/DubXScript" target="_blank" style="color: white;">',
-                                '<p class="isOnOff"><i class="fi-social-facebook"></i></p>',
-                                '<p class="Optionling">Like Us on Facebook</p>',
+                        '<li class="for_content_li for_content_feature">',
+                            '<a href="https://www.facebook.com/DubXScript" target="_blank" style="color: #878c8e;">',
+                                '<p class="for_content_off"><i class="fi-social-facebook"></i></p>',
+                                '<p class="for_content_p">Like Us on Facebook</p>',
                             '</a>',
                         '</li>',
-                        '<li class="optionClass twitter">',
-                            '<a href="https://twitter.com/DubXScript" target="_blank" style="color: white;">',
-                                '<p class="isOnOff"><i class="fi-social-twitter"></i></p>',
-                                '<p class="Optionling">Follow Us on Twitter</p>',
+                        '<li class="for_content_li for_content_feature">',
+                            '<a href="https://twitter.com/DubXScript" target="_blank" style="color: #878c8e;">',
+                                '<p class="for_content_off"><i class="fi-social-twitter"></i></p>',
+                                '<p class="for_content_p">Follow Us on Twitter</p>',
                             '</a>',
                         '</li>',
-                        '<li class="optionClass github">',
-                            '<a href="https://github.com/sinfulBA/DubX-Script" target="_blank" style="color: white;">',
-                                '<p class="isOnOff"><i class="fi-social-github"></i></p>',
-                                '<p class="Optionling">Fork Us on Github</p>',
+                        '<li class="for_content_li for_content_feature">',
+                            '<a href="https://github.com/sinfulBA/DubX-Script" target="_blank" style="color: #878c8e;">',
+                                '<p class="for_content_off"><i class="fi-social-github"></i></p>',
+                                '<p class="for_content_p">Fork Us on Github</p>',
                             '</a>',
                         '</li>',
-                        '<li class="optionClass website">',
-                            '<a href="https://dubx.net" target="_blank" style="color: white;">',
-                                '<p class="isOnOff"><i class="fi-link"></i></p>',
-                                '<p class="Optionling">Check out our Website</p>',
+                        '<li class="for_content_li for_content_feature">',
+                            '<a href="https://www.dubx.net" target="_blank" style="color: #878c8e;">',
+                                '<p class="for_content_off"><i class="fi-link"></i></p>',
+                                '<p class="for_content_p">Our Website</p>',
                             '</a>',
                         '</li>',
-                        '<li class="titleClass">',
-                            '<p class="istitle">Our Extension</p>',
+                        '<li class="for_content_li">',
+                            '<p class="for_content_c">Chrome Extension</p>',
                         '</li>',
-                        '<li class="optionClass webstore">',
-                            '<a href="https://chrome.google.com/webstore/detail/dubx/oceofndagjnpebjmknefoelcpcnpcedm/reviews" target="_blank" style="color: white;">',
-                                '<p class="isOnOff"><i class="fi-like"></i></p>',
-                                '<p class="Optionling">Give Us a Rating</p>',
+                        '<li class="for_content_li for_content_feature">',
+                            '<a href="https://chrome.google.com/webstore/detail/dubx/oceofndagjnpebjmknefoelcpcnpcedm/reviews" target="_blank" style="color: #878c8e;">',
+                                '<p class="for_content_off"><i class="fi-like"></i></p>',
+                                '<p class="for_content_p">Give Us a Rating</p>',
                             '</a>',
-                        '</li>',
-                        '<li class="optionClass">',
-                        	'<p class="Optionful" style="margin: 0;">Dub X currently has 977 users!</p>',
                         '</li>',
                     '</ul>',
                 '</div>'
             ].join('');
-            $('.user-header-menu').prepend(li);
+            $('.header-right-navigation').append(li);
             $('body').prepend(html);
         },
         //Ref 2.3.1: Input
@@ -222,10 +216,10 @@ if (!hello_run) {
             $('body').prepend(onErr);
         },
         on: function(selector) {
-            $(selector + ' .isOnOff i').replaceWith('<i class="fi-check"></i>');
+            $(selector + ' .for_content_off i').replaceWith('<i class="fi-check"></i>');
         },
         off: function(selector) {
-            $(selector + ' .isOnOff i').replaceWith('<i class="fi-x"></i>');
+            $(selector + ' .for_content_off i').replaceWith('<i class="fi-x"></i>');
         },
         closeErr: function() {
             $('.onErr').remove();
@@ -277,8 +271,13 @@ if (!hello_run) {
             var booth_duration = parseInt(Dubtrack.room.player.queueInfo.text());
             var booth_time = (booth_duration * time - time) + current_time;
             if (booth_time >= 0) {
-                $('.duration').replaceWith('<span class="duration">You will be on the booth in approximately '+booth_time+' minutes.</span>');
+                $('.eta_tooltip_t').append('<div class="eta_tooltip" style="position: absolute;font: 1rem/1.5 proxima-nova,sans-serif;display: block;left: -33px;cursor: pointer;border-radius: 1.5rem;padding: 8px 16px;background: #fff;font-weight: 700;font-size: 13.6px;text-transform: uppercase;color: #000;opacity: .8;text-align: center;z-index: 9;">ETA: '+booth_time+' minutes.</div>');
+            } else {
+                $('.eta_tooltip_t').append('<div class="eta_tooltip" style="position: absolute;font: 1rem/1.5 proxima-nova,sans-serif;display: block;left: -33px;cursor: pointer;border-radius: 1.5rem;padding: 8px 16px;background: #fff;font-weight: 700;font-size: 13.6px;text-transform: uppercase;color: #000;opacity: .8;text-align: center;z-index: 9;">You\'re not in the queue.</div>');
             }
+        },
+        hide_eta: function() {
+            $('.eta_tooltip').remove();
         },
         report_content: function() {
             var content = $('.input').val();
@@ -397,12 +396,12 @@ if (!hello_run) {
             if (!options.let_afk) {
                 options.let_afk = true;
                 isOn = 'on';
-                Dubtrack.Events.bind("realtime:chat-message", hello.afk_chat_respond);
+                Dubtrack.Events.bind("realtime:chat-message", this.afk_chat_respond);
                 hello.on('.afk');
             } else {
                 options.let_afk = false;
                 isOn = 'off';
-                Dubtrack.Events.unbind("realtime:chat-message", hello.afk_chat_respond);
+                Dubtrack.Events.unbind("realtime:chat-message", this.afk_chat_respond);
                 hello.off('.afk');
             }
         },
@@ -496,39 +495,6 @@ if (!hello_run) {
                 $('body').append('<div class="medium" style="width: 100vw;height: 100vh;z-index: -999998;position: fixed; background: url('+content+');background-size: cover;top: 0;"></div>');
             }
         },
-        mobileSongTitle: function(){
-            /* Show the song title on hover when in the mobile view */
-            var mobileWidth = 1134;
-            var isMobile = $(window).width() <= mobileWidth;
-            // create holder span that will be the popup
-            var songTitlePopup = document.createElement('span');
-            songTitlePopup.style.cssText = "display: none; padding: 3px 4px; background-color:rgba(0,0,0,0.8); position: absolute; bottom: 44px; left: 0; width: 100%; z-index: 99;";
-            songTitlePopup.id = "songTitlePopup";
-            document.body.appendChild(songTitlePopup);
-
-            // add hover to infoContainer
-            $('#player-controller')
-              .mouseenter(function(e){
-                if (isMobile) { $('#songTitlePopup').show(); }
-              })
-              .mouseleave(function(e){
-                if (isMobile) { $('#songTitlePopup').hide(); }
-              });
-
-            function getTitle() {
-              isMobile = $(window).width() <= mobileWidth;
-              var songTitle = $('.currentSong').text();
-              $('#songTitlePopup').text(songTitle);
-            }
-            getTitle();
-
-            // bind on resize
-            $(window).resize(function(){
-              isMobile = $(window).width() <= mobileWidth;
-            });
-            // bind on new song change
-            Dubtrack.Events.bind("realtime:room_playlist-update", getTitle);
-        },
         // jQuery's getJSON kept returning errors so making my own with promise-like
         // structure and added optional Event to fire when done so can hook in elsewhere
         getJSON : (function (url, optionalEvent) {
@@ -540,7 +506,7 @@ if (!hello_run) {
                 xhr.onload = function() {
                     var resp = JSON.parse(xhr.responseText);
                     if (typeof _cb === 'function') { _cb(resp); }
-                    if (optionalEvent) { document.dispatchEvent(doneEvent) };
+                    if (optionalEvent) { document.dispatchEvent(doneEvent); }
                 };
             }
             if (optionalEvent){ doneEvent = new CustomEvent(optionalEvent); }
@@ -693,7 +659,7 @@ if (!hello_run) {
                 var finalStr = str.replace("+","\\+");
                 var re = new RegExp('^' + finalStr, "i");
                 var arrayToUse = emojify.emojiNames;
-                if (options.let_twitch_emote_preview) {
+                if (options.let_twitch_emotes) {
                     arrayToUse = hello.emojiTwitch; // merged array
                 }
                 return arrayToUse.filter(function(val){
@@ -705,17 +671,6 @@ if (!hello_run) {
         /**************************************************************************
          * This handles the emoji preview in the chat input as you type
          */
-        optionTwitchEmotePreview: function(){
-            if (!options.let_twitch_emote_preview) {
-                options.let_twitch_emote_preview = true;
-                hello.option('twitch_emote_preview', 'true');
-                hello.on('.twitch_emote_preview');
-            } else {
-                options.let_twitch_emote_preview = false;
-                hello.option('twitch_emote_preview', 'false');
-                hello.off('.twitch_emote_preview');
-            }
-        },
         emojiKeyUpFunction: function(e){
             var self = hello.emojiUtils;
             var currentText = this.value;
@@ -804,18 +759,34 @@ if (!hello_run) {
                 hello.option('emoji_preview', 'false');
                 hello.off('.emoji_preview');
             }
+        },
+        spacebar_mute: function() {
+            var isOn;
+            if (!options.let_spacebar_mute) {
+                options.let_spacebar_mute = true;
+                isOn = 'on';
+                $(document).bind('keypress.key32', function() {
+                    var tag = event.target.tagName.toLowerCase();
+                    if (event.which === 32 && tag != 'input' && tag != 'textarea') {
+                        $('.mute').click();
+                    }
+                });
+                hello.option('spacebar_mute', 'true');
+                hello.on('.spacebar_mute');
+            } else {
+                options.let_spacebar_mute = false;
+                isOn = 'off';
+                $(document).unbind("keypress.key32");
+                hello.option('spacebar_mute','false');
+                hello.off('.spacebar_mute');
+            }
         }
     };
     //Ref 3:
     hello.initialize();
     hello.personalize();
-    hello.mobileSongTitle();
     hello.loadTwitchFromApi();
 
-    setInterval(function() {
-        hello.eta();
-    }, 5000);
-    
     //Ref 4: 
     $('.user-info-button').click(hello.wide_video_disable);
     $('.user-info-button').click(hello.disable_work);
@@ -849,32 +820,23 @@ if (!hello_run) {
     }
     if (localStorage.getItem('nicole') === 'true') {
         hello.nicole();
-    }    
+    }
     if (localStorage.getItem('twitch_emotes') === 'true') {
         hello.optionTwitchEmotes();
-    }
-    if (localStorage.getItem('twitch_emote_preview') === 'true') {
-        hello.optionTwitchEmotePreview();
     }
     if (localStorage.getItem('emoji_preview') === 'true') {
         hello.optionEmojiPreview();
     }
-
-    $('document').ready(function(){
-        hello.css_run();
-        hello.medium_load();
+    if (localStorage.getItem('spacebar_mute') === 'true') {
+        hello.spacebar_mute();
+    }
+    $('document').ready(hello.css_run);
+    $('document').ready(hello.medium_load);
+    
+    $('.for').click(function() {
+        $('.for_content').show();
     });
-    
-     // Ref 5:
-	$('.chat-main').on('DOMNodeInserted', function(e) {
-		var itemEl = $(e.target);
-		if(itemEl.prop('tagName').toLowerCase() !== 'li' || itemEl.attr('class').substring(0, 'user-'.length) !== 'user-') return;
-		var user = Dubtrack.room.users.collection.findWhere({userid: itemEl.attr('class').split(/-| /)[1]});
-		var role = !user.get('roleid') ? 'default' : Dubtrack.helpers.isDubtrackAdmin(user.get('userid')) ? 'admin' : user.get('roleid').type;
-		itemEl.addClass('is' + (role.charAt(0).toUpperCase() + role.slice(1)));
-	});
-    
-    
+
 } else {
     function onErr(error) {
         var onErr = [
@@ -899,7 +861,7 @@ if (!hello_run) {
         ].join('');
         $('body').prepend(onErr);
     }
-	onErr('Oh no! Error 69: Extension is already open.');
+    onErr('Oh no! Error 69: Extension is already open.');
     $('.cancel').click(hello.closeErr);
     $('.confirm-err').click(hello.closeErr);
 }
