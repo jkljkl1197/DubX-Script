@@ -141,7 +141,8 @@ span.name,
 	background: rgba(8,8,8,0.78);
 	border-radius: 0.4rem;
 }
-#main_player .player_sharing .player-controller-container .volume-controller-container #volume-div .ui-slider-range-min {
+#main_player .player_sharing .player-controller-container .volume-controller-container #volume-div .ui-slider-range-min,
+#main_player .play-song-link .queue-info {
 	background: #AA74FE;
 }
 
