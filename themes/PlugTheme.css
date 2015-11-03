@@ -99,6 +99,7 @@ a, a:active, a:focus, a:hover,
 span.name,
 #room-list #container-room-list .room-item .current-song, #room-list #container-room-list .room-item .roomImage .join {
 	color: #AA74FE;
+    opacity: 0.5;
 }
 #room-list #container-room-list .room-item .roomImage .join {
 	background: #AA74FE;
