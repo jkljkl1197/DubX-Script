@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.00.50 - I have a sweet-tooth';
+    var our_version = '03.00.61 - Spacebar Mute';
     //Ref 1: Variables
     var options = {
         let_autovote: false,
@@ -42,7 +42,8 @@ if (!hello_run) {
         let_active_afk: true,
         let_chat_window: false,
         let_css: false,
-        let_nicole: false
+        let_nicole: false,
+        let_spacebar_mute: false
     };
     
     //Ref 1.1
@@ -65,7 +66,7 @@ if (!hello_run) {
                 '<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/asset.css">',
                 '<div class="for_content">',
                     '<span class="for_content_ver">DubX Settings</span>',
-                    '<span class="for_content_version">03.00.50</span>',
+                    '<span class="for_content_version">'+our_version+'</span>',
                     '<ul class="for_content_ul">',
                         '<li class="for_content_li">',
                             '<p class="for_content_c">Standard</p>',
@@ -109,6 +110,10 @@ if (!hello_run) {
                         '<li onclick="hello.nicole();" class="for_content_li for_content_feature nicole">',
                             '<p class="for_content_off"><i class="fi-x"></i></p>',
                             '<p class="for_content_p">Plug.dj Theme</p>',
+                        '</li>',
+                        '<li onclick="hello.spacebar_mute();" class="for_content_li for_content_feature spacebar_mute">',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
+                            '<p class="for_content_p">Spacebar Mute</p>',
                         '</li>',
                         '<li class="for_content_li">',
                             '<p class="for_content_c">Contact</p>',
@@ -474,6 +479,27 @@ if (!hello_run) {
                 var content = localStorage.getItem('medium');
                 $('body').append('<div class="medium" style="width: 100vw;height: 100vh;z-index: -999998;position: fixed; background: url('+content+');background-size: cover;top: 0;"></div>');
             }
+        },
+        spacebar_mute: function() {
+            var isOn;
+            if (!options.let_spacebar_mute) {
+                options.let_spacebar_mute = true;
+                isOn = 'on';
+                $(document).bind('keypress.key32', function() {
+                    var tag = event.target.tagName.toLowerCase();
+                    if (event.which === 32 && tag != 'input' && tag != 'textarea') {
+                        $('.mute').click();
+                    }
+                });
+                hello.option('spacebar_mute', 'true');
+                hello.on('.spacebar_mute');
+            } else {
+                options.let_spacebar_mute = false;
+                isOn = 'off';
+                $(document).unbind("keypress.key32");
+                hello.option('spacebar_mute','false');
+                hello.off('.spacebar_mute');
+            }
         }
     };
     //Ref 3:
@@ -513,6 +539,9 @@ if (!hello_run) {
     };
     if (localStorage.getItem('nicole') === 'true') {
         hello.nicole();
+    };
+    if (localStorage.getItem('spacebar_mute') === 'true') {
+        hello.spacebar_mute();
     };
     $('document').ready(hello.css_run);
     $('document').ready(hello.medium_load);
