@@ -25,6 +25,9 @@ a, a:active, a:focus, a:hover,
 #main-loading {
 	background: #AA74FE;
 }
+#header-global .header-right-navigation .user-messages .message-counter {
+	background: #AA74FE;
+}
 
 /* Private Messages */
 #private-messages .main-message-list ul.message-list li.message-item .message-content h3, #private-messages .message-details ul.message-list li.message-item .message-content h3,
@@ -33,6 +36,9 @@ a, a:active, a:focus, a:hover,
 	color: #AA74FE;
 }
 #private-messages .loading {
+	background: #AA74FE;
+}
+#private-messages .main-message-list ul.message-list li.message-item.new-message:before, #private-messages .message-details ul.message-list li.message-item.new-message:before {
 	background: #AA74FE;
 }
 
