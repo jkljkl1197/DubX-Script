@@ -7,6 +7,7 @@
 -------------
 Our Team
 ---
+ - [TerminallyChill](https://github.com/JBader89) __(Hoster/Developer)__
  - [sinful](https://github.com/sinfulBA) __(Owner/Developer)__
  - [Swordling](https://github.com/swordling) __(Owner/Developer)__
  - [Kris](https://github.com/PossiblyKris) __(Helper/Developer)__
@@ -17,9 +18,11 @@ Our Team
 IMPORTANT
 ---
 
-__Updates (Version 03.00.50)__
+__Updates (Version 03.00.10 - Sushi)__
 
-- Updated for the new Dubtrack UI
+- Added Plug Theme
+- Working on bug issues
+- Namespaced the plug-in
 
 -----------------
 Usage
