@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.00.61 - Spacebar Mute';
+    var our_version = '03.00.83 - Custom Emojis';
     //Ref 1: Variables
     var options = {
         let_autovote: false,
@@ -43,8 +43,8 @@ if (!hello_run) {
         let_chat_window: false,
         let_css: false,
         let_nicole: false,
-        let_twitch_emotes: false, // include twitch emojis
-        let_emoji_preview: false, // show emoji preview while typing
+        let_twitch_emotes: false,
+        let_emoji_preview: false,
         let_spacebar_mute: false
     };
     
@@ -118,7 +118,6 @@ if (!hello_run) {
                             '<p class="for_content_off"><i class="fi-x"></i></p>',
                             '<p class="for_content_p">Spacebar Mute</p>',
                         '</li>',
-                        /******************* Emoji ******************************/
                         '<li onclick="hello.optionTwitchEmotes();" class="for_content_li for_content_feature twitch_emotes">',
                             '<p class="for_content_off"><i class="fi-x"></i></p>',
                             '<p class="for_content_p">Twitch Emotes</p>',
@@ -127,9 +126,6 @@ if (!hello_run) {
                             '<p class="for_content_off"><i class="fi-x"></i></p>',
                             '<p class="for_content_p">Emoji Preview</p>',
                         '</li>',
-                        /******************************************************/
-                        '<li class="titleClass">',
-                            '<p class="istitle">Contact</p>',
                         '<li class="for_content_li">',
                             '<p class="for_content_c">Contact</p>',
                         '</li>',
@@ -563,7 +559,7 @@ if (!hello_run) {
 
             if (!self.twitchJSONSLoaded) { return; } // can't do anything until jsons are loaded
             function makeImage(src, name){
-                return '<img class="emoji" title="'+name+'" alt="'+name+'" src="'+src+'" />';
+                return '<img class="emoji twitch-emoji" title="'+name+'" alt="'+name+'" src="'+src+'" />';
             }
             
             var $last = $('.chat-main .text').last();
@@ -693,7 +689,7 @@ if (!hello_run) {
                 $('#emoji-preview').empty().removeClass('emoji-grow');
             }
 
-            if (e.keyCode === 38 || e.keyCode === 40) {
+            if (e.keyCode === 38 || e.keyCode === 40 || $('.emoji-grow li').length === 1) {
                 hello.doNavigate(-1);
             }
         },
