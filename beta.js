@@ -107,7 +107,7 @@ if (!hello_run) {
                             '<p class="for_content_p">Room CSS</p>',
                         '</li>',
                         '<li onclick="hello.nicole();" class="for_content_li for_content_feature nicole">',
-                            '<p class="for_content_off"><i class="fi-alert"></i></p>',
+                            '<p class="for_content_off"><i class="fi-x"></i></p>',
                             '<p class="for_content_p">Plug.dj Theme</p>',
                         '</li>',
                         '<li class="for_content_li">',
