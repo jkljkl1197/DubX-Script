@@ -567,6 +567,8 @@ if (!hello_run) {
             }
             
             var $last = $('.chat-main .text').last();
+            if (!$last.html()) { return; } // nothing to do
+            
             var emoted = $last.html().replace(self.twitch.chatRegex, function(matched, p1){
                 var _id, _src, _desc, key = p1.toLowerCase();
                 if (typeof self.twitch.emotes[key] !== 'undefined'){
