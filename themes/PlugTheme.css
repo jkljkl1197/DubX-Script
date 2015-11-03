@@ -117,6 +117,12 @@ span.name,
 	font-weight: 500;
 	color: #FFF;
 }
+#room-info-display .room-info-display-wrapper h2 span i {
+	color: #AA74FE;
+}
+#mods-controllers .mods-controllers-main-wrapper .mod-controllers-headers a.active {
+	#color: #42A5DC;
+}
 
 /* Video Buttons (bottom) */
 #main_player .play-song-link {
