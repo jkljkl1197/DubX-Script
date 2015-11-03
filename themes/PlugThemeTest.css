@@ -47,7 +47,7 @@ a, a:active, a:focus, a:hover,
 
 /* DubX Menu */
 .for_content {
-	color: rgba(8,8,8,0.78);
+	background: rgba(8,8,8,0.78);
 }
 .for_content_off {
 	color: #DDDDDD !important;
@@ -61,7 +61,7 @@ a, a:active, a:focus, a:hover,
 	background: #AA74FE;
 }
 .for_content_c {
-	#color: #AA74FE;
+	#color: #AA74FE !important;
 }
 
 /* Bottom Header */
@@ -99,6 +99,7 @@ a, a:active, a:focus, a:hover,
 span.name,
 #room-list #container-room-list .room-item .current-song, #room-list #container-room-list .room-item .roomImage .join {
 	color: #AA74FE;
+    opacity: 0.5;
 }
 #room-list #container-room-list .room-item .roomImage .join {
 	background: #AA74FE;
@@ -141,7 +142,8 @@ span.name,
 	background: rgba(8,8,8,0.78);
 	border-radius: 0.4rem;
 }
-#main_player .player_sharing .player-controller-container .volume-controller-container #volume-div .ui-slider-range-min {
+#main_player .player_sharing .player-controller-container .volume-controller-container #volume-div .ui-slider-range-min,
+#main_player .play-song-link .queue-info {
 	background: #AA74FE;
 }
 
@@ -296,7 +298,8 @@ ul.avatar-list li.currentDJ .user-kris:after, ul.avatar-list li.currentDJ .user-
 
 /* Queue */
 #browser .browser-content .browser-content-header .close-browser,
-#browser .browser-content .browser-content-main .nano .loading {
+#browser .browser-content .browser-content-main .nano .loading,
+#browser .browser-content .browser-content-main .nano .content-videos #results_video_api .playlist-item .display-success  {
 	background: #AA74FE;
 }
 #browser .browser-content .browser-content-main .sidebar #playlists-scroll .playlist-style li.selected {
@@ -317,7 +320,8 @@ ul.avatar-list li.currentDJ .user-kris:after, ul.avatar-list li.currentDJ .user-
 #browser .browser-content .browser-content-main .sidebar .create-playlist .create-playlist-display span {
 	color: #AA74FE;
 }
-#browser .browser-content .browser-content-main .nano .content-videos #results_video_api .queue-item.selected {
+#browser .browser-content .browser-content-main .nano .content-videos #results_video_api .queue-item.selected,
+#browser .browser-content .browser-content-main .nano .content-videos #results_video_api .playlist-item.selected {
 	border: 1px solid #AA74FE;
 }
 
