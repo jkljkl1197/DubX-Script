@@ -7,7 +7,7 @@
 .for_content {
 	display: none;
 	position: absolute;
-	width: 344px;
+	width: 320px;
 	height: calc(100% - 112px);
 	right: 0px;
 	top: 56px;

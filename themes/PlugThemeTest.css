@@ -47,7 +47,7 @@ a, a:active, a:focus, a:hover,
 
 /* DubX Menu */
 .for_content {
-	color: rgba(8,8,8,0.78);
+	background: rgba(8,8,8,0.78);
 }
 .for_content_off {
 	color: #DDDDDD !important;
@@ -61,7 +61,7 @@ a, a:active, a:focus, a:hover,
 	background: #AA74FE;
 }
 .for_content_c {
-	#color: #AA74FE;
+	#color: #AA74FE !important;
 }
 
 /* Bottom Header */
