@@ -59,7 +59,7 @@ if (!hello_run) {
         },
         //Ref 2.2: Initialize
         initialize: function() {
-            var li = '<div class="for" onclick="hello.slide();"><img src="https://rawgit.com/sinfulBA/DubX-Script/master/params.svg" alt=""></div>';
+            var li = '<div class="for" onclick="hello.slide();"><img src="https://rawgit.com/sinfulBA/DubX-Script/master/params/params.svg" alt=""></div>';
             var html = [
                 '<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css">',
                 '<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/asset.css">',
@@ -474,10 +474,11 @@ if (!hello_run) {
     //Ref 3:
     hello.initialize();
     hello.personalize();
+    /*
     setInterval(function() {
         hello.eta();
     }, 5000);
-    
+    */
     //Ref 4: 
     $('.user-info-button').click(hello.wide_video_disable);
     $('.user-info-button').click(hello.disable_work);
