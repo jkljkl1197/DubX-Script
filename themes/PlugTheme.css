@@ -41,10 +41,13 @@ a, a:active, a:focus, a:hover,
 #private-messages .main-message-list ul.message-list li.message-item.new-message:before, #private-messages .message-details ul.message-list li.message-item.new-message:before {
 	background: #AA74FE;
 }
+#private-messages .main-message-list, #private-messages .message-details {
+	background: #1A1A1A;
+}
 
 /* DubX Menu */
 .for_content {
-	color: #1A1A1A
+	color: rgba(8,8,8,0.78);
 }
 .for_content_off {
 	color: #DDDDDD !important;
@@ -54,13 +57,10 @@ a, a:active, a:focus, a:hover,
 }
 
 /** DubX Feature Menus **/
-.for_content {
-	background: rgba(8,8,8,0.78);
-}
 .onErr .container .control .confirm {
 	background: #AA74FE;
 }
-.for_content_li {
+.for_content_c {
 	#color: #AA74FE;
 }
 
