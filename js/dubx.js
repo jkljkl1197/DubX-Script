@@ -289,7 +289,7 @@ if (!hello_run) {
             if (!options.let_wide_video) {
                 options.let_wide_video = true;
                 isOn = 'on';
-                $('head').prepend('<link class="wide_video_link" rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/wide_video.css">');
+                $('head').prepend('<link class="wide_video_link" rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/options/wide_video.css">');
                 hello.option('wide_video','true');
                 hello.on('.wide_video');
             } else {
@@ -385,7 +385,7 @@ if (!hello_run) {
             if(!options.let_chat_window) {
                 options.let_chat_window = true;
                 isOn = 'on';
-                $('head').append('<link class="chat_window_link" rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/chat_window.css">');
+                $('head').append('<link class="chat_window_link" rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/options/chat_window.css">');
                 hello.option('chat_window','true');
                 hello.on('.chat_window');
             } else {
