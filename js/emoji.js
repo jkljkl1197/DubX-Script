@@ -1,3 +1,6 @@
+    /************************************************************
+        This is just used for testing
+    *************************************************************/
     /* global emojify, Dubtrack, twitchObject */
 
     var options = {
