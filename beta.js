@@ -764,7 +764,7 @@ if (!hello_run) {
                 $(document).bind('keypress.key32', function() {
                     var tag = event.target.tagName.toLowerCase();
                     if (event.which === 32 && tag != 'input' && tag != 'textarea') {
-                        $('.mute').click();
+                        $('#main_player .player_sharing .player-controller-container .mute').click();
                     }
                 });
                 hello.option('spacebar_mute', 'true');
