@@ -58,7 +58,7 @@ a, a:active, a:focus, a:hover,
 
 /** DubX Feature Menus **/
 .onErr .container .control .confirm {
-	background: #AA74FE;
+	background: #AA74FE !important;
 }
 .for_content_c {
 	#color: #AA74FE !important;
