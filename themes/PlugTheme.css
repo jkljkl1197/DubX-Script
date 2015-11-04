@@ -134,7 +134,7 @@ span.name,
 	color: #AA74FE;
 }
 #mods-controllers .mods-controllers-main-wrapper .mod-controllers-headers a.active {
-	#color: #42A5DC;
+	#color: #42A5DC !important;
 }
 
 /* Video Buttons (bottom) */
