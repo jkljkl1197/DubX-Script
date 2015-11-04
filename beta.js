@@ -53,7 +53,7 @@ if (!hello_run) {
     
     //Ref 2: Options
     var hello = {
-        gitRoot: 'https://rawgit.com/sinfulBA/DubX-Script/master',
+        gitRoot: 'https://rawgit.com/FranciscoG/DubX-Script/dev',
         //Ref 2.1: Initialize
         personalize: function() {
             $('.isUser').text(Dubtrack.session.get('username'));
@@ -683,7 +683,16 @@ if (!hello_run) {
                 $('#emoji-preview').empty().removeClass('emoji-grow');
             }
 
-            if (e.keyCode === 38 || e.keyCode === 40 || $('.emoji-grow li').length === 1) {
+            if ($('.emoji-grow li').length === 1) {
+                $('.emoji-grow li').append('<span>press &darr; to select</span>').addClass('selected');
+            }
+
+            if ($('.emoji-grow li').length === 1 && e.keyCode === 40) {
+                $('#emoji-preview li.selected').trigger('click');
+                return;
+            }
+
+            if (e.keyCode === 38 || e.keyCode === 40) {
                 hello.doNavigate(-1);
             }
         },
@@ -729,7 +738,7 @@ if (!hello_run) {
             $('.pusher-chat-widget-input').prepend(emojiPreview);
 
             $(document.body).on('click', '.preview-container', function(e){
-                var new_text = $(this).find('span').text();
+                var new_text = $(this).find('span')[0].textContent;
                 hello.updateChatInput(new_text);
             });
         },
