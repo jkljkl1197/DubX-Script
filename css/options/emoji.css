@@ -66,6 +66,6 @@
 }
 
 .twitch-emoji.emoji {
-  width: 1.75rem !important;
-  height: 1.75rem !important;
+  max-width: 1.75rem !important;
+  height: auto !important;
 }
