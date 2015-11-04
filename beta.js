@@ -526,6 +526,10 @@ if (!hello_run) {
                             self.twitch.specialEmotes.push([el.code, el.id]);
                             return;
                         }
+
+                        if (emojify.emojiNames.indexOf(_key) >= 0) {
+                            return; // do nothing so we don't override emoji
+                        }
                         
                         if (!self.twitch.emotes[_key]){
                             // if emote doesn't exist, add it
