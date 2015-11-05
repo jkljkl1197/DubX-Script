@@ -215,7 +215,7 @@
     -webkit-font-smoothing: antialiased;
     display: inline-block;
     text-decoration: inherit;
-    margin-right: 5px;
+    margin-left: 5px;
 }
 ul.avatar-list li.user-sinful p.dubs:before,
 ul.avatar-list li.user-swordling p.dubs:before {
@@ -278,7 +278,7 @@ ul.avatar-list li.currentDJ .user-sinful:after, ul.avatar-list li.currentDJ .use
     -webkit-font-smoothing: antialiased;
     display: inline-block;
     text-decoration: inherit;
-    margin-right: 5px;
+    margin-left: 5px;
 }
 ul.avatar-list li.user-kris p.dubs:before,
 ul.avatar-list li.user-al3366 p.dubs:before,
@@ -336,7 +336,7 @@ ul.avatar-list li.currentDJ .user-kris:after, ul.avatar-list li.currentDJ .user-
     -webkit-font-smoothing: antialiased;
     display: inline-block;
     text-decoration: inherit;
-    margin-right: 5px;
+    margin-left: 5px;
 }
 ul.avatar-list li.user-fi p.dubs:before {
     content: "DubX VIP  -  ";
