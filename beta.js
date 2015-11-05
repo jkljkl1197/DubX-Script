@@ -263,33 +263,27 @@ if (!hello_run) {
             $('.dubup').click();
         },
         autovote: function() {
-            var isOn;
             if (!options.let_autovote) {
                 options.let_autovote = true;
-                isOn = 'on';
                 hello.advance_vote();
                 hello.option('autovote','true');
                 hello.on('.autovote');
                 Dubtrack.Events.bind("realtime:room_playlist-update", hello.advance_vote);    
             } else {
                 options.let_autovote = false;
-                isOn = 'off';
                 hello.option('autovote','false');
                 hello.off('.autovote');
                 Dubtrack.Events.unbind("realtime:room_playlist-update", hello.advance_vote);
             }
         },
         split_chat: function() {
-            var isOn;
             if (!options.let_split_chat) {
                 options.let_split_chat = true;
-                isOn = 'on';
                 $('.chat-main').addClass('splitChat');
                 hello.option('split_chat', 'true');
                 hello.on('.split_chat');
             } else {
                 options.let_split_chat = false;
-                isOn = 'off';
                 $('.chat-main').removeClass('splitChat');
                 hello.option('split_chat','false');
                 hello.off('.split_chat');
@@ -345,17 +339,14 @@ if (!hello_run) {
             }
         },
         medium_disable: function() {
-            var isOn;
             if (!options.let_medium_disable) {
                 options.let_medium_disable = true;
-                isOn = 'on';
                 $('.backstretch').hide();
                 $('.medium').hide();
                 hello.option('medium_disable','true');
                 hello.on('.medium_disable');
             } else {
                 options.let_medium_disable = false;
-                isOn = 'off';
                 $('.backstretch').show();
                 $('.medium').show();
                 hello.option('medium_disable','false');
@@ -365,14 +356,11 @@ if (!hello_run) {
         disable_work: function() {
             options.let_work = false;
             $('#main-room').show();
-            isOn = 'off';
             hello.option('work','false');
             hello.off('.work');
         },
         work: function() {
-            var isOn;
             if (!options.let_work) {
-                isOn = 'on';
                 options.let_work = true;
                 $('#main-room').hide();
                 hello.option('work','true');
@@ -382,10 +370,8 @@ if (!hello_run) {
             }
         },
         warn_redirect: function() {
-            var isOn;
             if(!options.let_warn_redirect) {
                 options.let_warn_redirect = true;
-                isOn = 'on';
                 window.onbeforeunload = function(e) {
                     return '';
                 };
@@ -393,7 +379,6 @@ if (!hello_run) {
                 hello.on('.warn_redirect');
             } else {
                 options.let_warn_redirect = false;
-                isOn = 'off';
                 window.onbeforeunload = null;
                 hello.option('warn_redirect','false');
                 hello.off('.warn_redirect');
@@ -414,30 +399,24 @@ if (!hello_run) {
             }
         },
         afk: function() {
-            var isOn;
             if (!options.let_afk) {
                 options.let_afk = true;
-                isOn = 'on';
                 Dubtrack.Events.bind("realtime:chat-message", this.afk_chat_respond);
                 hello.on('.afk');
             } else {
                 options.let_afk = false;
-                isOn = 'off';
                 Dubtrack.Events.unbind("realtime:chat-message", this.afk_chat_respond);
                 hello.off('.afk');
             }
         },
         chat_window: function() {
-            var isOn;
             if(!options.let_chat_window) {
                 options.let_chat_window = true;
-                isOn = 'on';
                 $('head').append('<link class="chat_window_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/chat_window.css">');
                 hello.option('chat_window','true');
                 hello.on('.chat_window');
             } else {
                 options.let_chat_window = false;
-                isOn = 'off';
                 $('.chat_window_link').remove();
                 hello.option('chat_window','false');
                 hello.off('.chat_window');
@@ -478,23 +457,19 @@ if (!hello_run) {
                 hello.on('.css');
             } else {
                 options.let_css = false;
-                isOn = 'off';
                 $('.css_world').remove();
                 hello.option('css_world','false');
                 hello.off('.css');
             }
         },
         nicole: function() {
-            var isOn;
             if (!options.let_nicole) {
                 options.let_nicole = true;
-                isOn = 'on';
                 $('head').append('<link class="nicole_css" href="'+hello.gitRoot+'/themes/PlugTheme.css" rel="stylesheet" type="text/css">');
                 hello.option('nicole', 'true');
                 hello.on('.nicole');
             } else {
                 options.let_nicole = false;
-                isOn = 'off';
                 $('.nicole_css').remove();
                 hello.option('nicole','false');
                 hello.off('.nicole');
@@ -798,10 +773,8 @@ if (!hello_run) {
             }
         },
         spacebar_mute: function() {
-            var isOn;
             if (!options.let_spacebar_mute) {
                 options.let_spacebar_mute = true;
-                isOn = 'on';
                 $(document).bind('keypress.key32', function() {
                     var tag = event.target.tagName.toLowerCase();
                     if (event.which === 32 && tag != 'input' && tag != 'textarea') {
@@ -812,7 +785,6 @@ if (!hello_run) {
                 hello.on('.spacebar_mute');
             } else {
                 options.let_spacebar_mute = false;
-                isOn = 'off';
                 $(document).unbind("keypress.key32");
                 hello.option('spacebar_mute','false');
                 hello.off('.spacebar_mute');
