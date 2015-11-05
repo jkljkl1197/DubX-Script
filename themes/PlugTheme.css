@@ -239,38 +239,38 @@ span.name,
 #chat .chat-container ul.chat-main li.user-52d24bff4cf9670200000515 .activity-row .text p a.username:before,
 #chat .chat-container ul.chat-main li.user-52c8efcf37e22b0200000008 .activity-row .text p a.username:before,
 #chat .chat-container ul.chat-main li.user-52c8254ca7b7260200000001 .activity-row .text p a.username:before {
-    content: url(http://i.imgur.com/Niafpz9.png)" " !important;
+    content: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/images/admin.png)" " !important;
 }
 
 /*** DubX Owners ***/
 #chat .chat-container ul.chat-main li.user-551d295433cd73030089d184 .activity-row .text p a.username:before,
 #chat .chat-container ul.chat-main li.user-53f7c199892b010200a98809 .activity-row .text p a.username:before {
-    content: url(http://i.imgur.com/6KZQYJV.png)" ""\f1af" !important;
+    content: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/images/admin-green.png)" ""\f1af" !important;
 }
 
 /*** Owners ***/
 #chat .chat-main .isOwner .username:before, #chat .chat-main .isCo-owner .username:before {
-    content: url(http://i.imgur.com/pp2ateH.png)" " !important;
+    content: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/images/host-cohost.png)" " !important;
 }
 
 /*** Manager ***/
 #chat .chat-main .isManager .username:before {
-    content: url(http://i.imgur.com/vkEZWZG.png)" " !important;
+    content: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/images/manager.png)" " !important;
 }
 
 /*** Mod ***/
 #chat .chat-main .isMod .username:before {
-    content: url(http://i.imgur.com/k1ehW7l.png)" " !important;
+    content: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/images/mod.png)" " !important;
 }
 
 /*** Resident DJ ***/
 #chat .chat-main .isResident-dj .username:before {
-    content: url(http://i.imgur.com/M3HygTy.png)" " !important;
+    content: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/images/residentdj.png)" " !important;
 }
 
 /*** VIP ***/
 #chat .chat-main .isVip .username:before {
-    content: url(http://i.imgur.com/iD3JF2A.png)" " !important;
+    content: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/images/vip.png)" " !important;
 }
 
 /* User List */
