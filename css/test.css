@@ -31,6 +31,7 @@
     font-weight: bold;
     text-transform: uppercase;
     margin-top: 1rem;
+    cursor: pointer;
 }
 .for_content_ul {
 	padding: 1rem 1rem;
@@ -195,9 +196,15 @@
     text-decoration: inherit;
     margin-right: 5px;
 }
-ul.avatar-list li.user-sinful p.dubs:before,
-ul.avatar-list li.user-swordling p.dubs:before {
-    content: "DubX Developer  -  ";
+ul.avatar-list li.user-sinful p.dubs:hover:before,
+ul.avatar-list li.user-swordling p.dubs:hover:before {
+    content: "DubX Team  -  ";
+    font-weight: 700 !important;
+    color: #89BE6C !important;
+}
+ul.avatar-list li.user-sinful p.dubs:hover:before,
+ul.avatar-list li.user-swordling p.dubs:hover:before {
+    content: "DubX Owner  -  ";
     font-weight: 700 !important;
     color: #89BE6C !important;
 }
@@ -255,7 +262,7 @@ ul.avatar-list li.currentDJ .user-sinful:after, ul.avatar-list li.currentDJ .use
 ul.avatar-list li.user-kris p.dubs:before,
 ul.avatar-list li.user-al3366 p.dubs:before,
 ul.avatar-list li.user-ciscog p.dubs:before {
-    content: "DubX Contributor  -  ";
+    content: "DubX Team  -  ";
     font-weight: 700 !important;
     color: #519CD7;
 }
