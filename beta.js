@@ -220,7 +220,7 @@ if (!hello_run) {
             $('.draw_settings').slideToggle('fast');
         },
         drawAll: function() {
-            $('.draw_standard, .draw_contact, .draw_customize, .draw_social, .draw_chrome').slideUp();
+            $('.draw_general, .draw_contact, .draw_customize, .draw_social, .draw_chrome, .draw_settings').slideUp();
         },
         //Ref 2.3.1: Input
         input: function(title,content,placeholder,confirm) {
