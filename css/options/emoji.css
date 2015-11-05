@@ -12,7 +12,6 @@
     width: 100%;
     height: auto;
     max-height: 0;
-    border-bottom: 1px solid #878c8e !important;
     padding: 0;
     list-style-type: none;
     margin: 0;
@@ -56,7 +55,7 @@
 
 #emoji-preview.emoji-grow {
   border: 1px solid #202020;
-  border-bottom: 0;
+  border-bottom: 1px solid #878c8e;
   max-height: 164px;
   -moz-transition: 0.4s;
   -ms-transition: 0.4s;
