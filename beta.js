@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.00.95 - Emotes & Emojis!';
+    var our_version = '03.00.97 - Emotes & Emojis!';
     //Ref 1: Variables
     var options = {
         let_autovote: false,
@@ -122,7 +122,7 @@ if (!hello_run) {
                             '</li>',
                             '<li onclick="hello.css_for_the_world();" class="for_content_li for_content_feature css">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Community CSS</p>',
+                                '<p class="for_content_p">Community Theme</p>',
                             '</li>',
                         '</ul>',
 			'<li class="for_content_li" onclick="hello.drawSettings();">',
