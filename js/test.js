@@ -29,12 +29,12 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.00.83 - Twitch Emotes/Custom Emojis';
+    var our_version = '03.00.90 - Emotes & Emojis!';
     //Ref 1: Variables
     var options = {
         let_autovote: false,
         let_split_chat: false,
-        let_wide_video: false,
+        let_fs: false,
         let_medium_disable: false,
         let_work: false,
         let_warn_redirect: false,
@@ -78,8 +78,8 @@ if (!hello_run) {
                             '<p class="for_content_off"><i class="fi-x"></i></p>',
                             '<p class="for_content_p">Autovote</p>',
                         '</li>',
-                        '<li onclick="hello.wide_video();" class="for_content_li for_content_feature wide_video">',
-                            '<p class="for_content_off"><i class="fi-alert"></i></p>',
+                        '<li onclick="hello.fs();" class="for_content_li for_content_feature fs">',
+                            '<p class="for_content_off"><i class="fi-arrows-out"></i></p>',
                             '<p class="for_content_p">Fullscreen</p>',
                         '</li>',
                         '<li onclick="hello.work();" class="for_content_li for_content_feature work">',
@@ -296,23 +296,16 @@ if (!hello_run) {
             $('.confirm-for36').click(hello.report_content);
             $('.confirm-for36').click(hello.closeErr);
         },
-        wide_video_disable: function() {
-            $('.wide_video_link').remove();
-            options.let_wide_video = false;
-            isOn = 'off';
-            hello.option('wide_video','false');
-            hello.off('.wide_video');
-        },
-        wide_video: function() {
-            var isOn;
-            if (!options.let_wide_video) {
-                options.let_wide_video = true;
-                isOn = 'on';
-                $('head').prepend('<link class="wide_video_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/wide_video.css">');
-                hello.option('wide_video','true');
-                hello.on('.wide_video');
-            } else {
-                hello.wide_video_disable();
+        fs: function() {
+            var elem = document.querySelector('.playerElement iframe');
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
+            } else if (elem.mozRequestFullScreen) {
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) {
+                elem.webkitRequestFullscreen();
             }
         },
         medium_disable: function() {
@@ -346,7 +339,6 @@ if (!hello_run) {
                 isOn = 'on';
                 options.let_work = true;
                 $('#main-room').hide();
-                hello.wide_video_disable;
                 hello.option('work','true');
                 hello.on('.work');
             } else {
@@ -534,6 +526,10 @@ if (!hello_run) {
                             self.twitch.specialEmotes.push([el.code, el.id]);
                             return;
                         }
+
+                        if (emojify.emojiNames.indexOf(_key) >= 0) {
+                            return; // do nothing so we don't override emoji
+                        }
                         
                         if (!self.twitch.emotes[_key]){
                             // if emote doesn't exist, add it
@@ -687,7 +683,16 @@ if (!hello_run) {
                 $('#emoji-preview').empty().removeClass('emoji-grow');
             }
 
-            if (e.keyCode === 38 || e.keyCode === 40 || $('.emoji-grow li').length === 1) {
+            if ($('.emoji-grow li').length === 1) {
+                $('.emoji-grow li').append('<span>press &darr; to select</span>').addClass('selected');
+            }
+
+            if ($('.emoji-grow li').length === 1 && e.keyCode === 40) {
+                $('#emoji-preview li.selected').trigger('click');
+                return;
+            }
+
+            if (e.keyCode === 38 || e.keyCode === 40) {
                 hello.doNavigate(-1);
             }
         },
@@ -733,7 +738,7 @@ if (!hello_run) {
             $('.pusher-chat-widget-input').prepend(emojiPreview);
 
             $(document.body).on('click', '.preview-container', function(e){
-                var new_text = $(this).find('span').text();
+                var new_text = $(this).find('span')[0].textContent;
                 hello.updateChatInput(new_text);
             });
         },
@@ -764,7 +769,7 @@ if (!hello_run) {
                 $(document).bind('keypress.key32', function() {
                     var tag = event.target.tagName.toLowerCase();
                     if (event.which === 32 && tag != 'input' && tag != 'textarea') {
-                        $('.mute').click();
+                        $('#main_player .player_sharing .player-controller-container .mute').click();
                     }
                 });
                 hello.option('spacebar_mute', 'true');
@@ -784,20 +789,11 @@ if (!hello_run) {
     hello.loadTwitchFromApi();
 
     //Ref 4: 
-    $('.user-info-button').click(hello.wide_video_disable);
-    $('.user-info-button').click(hello.disable_work);
-    window.addEventListener("resize", function(){
-        var window_width = $(window).width();
-        if (window_width <= 1185) {hello.wide_video_disable();}
-    }, true);
     if (localStorage.getItem('autovote') === 'true') {
         hello.autovote();
     }
     if (localStorage.getItem('split_chat') === 'true') {
         hello.split_chat();
-    }
-    if (localStorage.getItem('wide_video') === 'true') {
-        hello.wide_video();
     }
     if (localStorage.getItem('medium_disable') === 'true') {
         hello.medium_disable();
@@ -831,6 +827,15 @@ if (!hello_run) {
     
     $('.for').click(function() {
         $('.for_content').show();
+    });
+    
+    // Ref 5:
+    $('.chat-main').on('DOMNodeInserted', function(e) {
+        var itemEl = $(e.target);
+        if(itemEl.prop('tagName').toLowerCase() !== 'li' || itemEl.attr('class').substring(0, 'user-'.length) !== 'user-') return;
+        var user = Dubtrack.room.users.collection.findWhere({userid: itemEl.attr('class').split(/-| /)[1]});
+        var role = !user.get('roleid') ? 'default' : Dubtrack.helpers.isDubtrackAdmin(user.get('userid')) ? 'admin' : user.get('roleid').type;
+        itemEl.addClass('is' + (role.charAt(0).toUpperCase() + role.slice(1)));
     });
 
 } else {
