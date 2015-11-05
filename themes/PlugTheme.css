@@ -271,7 +271,7 @@ span.name,
 	content: "\f17b" !important;
     font-family: "foundation-icons";
 }
-#main_avatar_room #main-user-list-room #avatar-list li.creator.user-fi p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-fi p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.manager.user-fi p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.mod.user-fi p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-fi p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.vip.user-fi p.username:before {
+#main_avatar_room #main-user-list-room #avatar-list li.creator.user-fi p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-fi p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.manager.user-fi p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.mod.user-fi p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-fi p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.vip.user-fi p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.user-fi p.username:before {
     content: "\f17b"" " !important;
     font-family: "foundation-icons";
 }
