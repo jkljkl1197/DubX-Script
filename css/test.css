@@ -196,8 +196,8 @@
     text-decoration: inherit;
     margin-right: 5px;
 }
-ul.avatar-list li.user-sinful p.dubs:hover:before,
-ul.avatar-list li.user-swordling p.dubs:hover:before {
+ul.avatar-list li.user-sinful p.dubs:before,
+ul.avatar-list li.user-swordling p.dubs:before {
     content: "DubX Team  -  ";
     font-weight: 700 !important;
     color: #89BE6C !important;
