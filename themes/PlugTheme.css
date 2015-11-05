@@ -240,7 +240,7 @@ span.name,
 #chat .chat-container ul.chat-main li.user-52c8efcf37e22b0200000008 .activity-row .text p a.username:before,
 #chat .chat-container ul.chat-main li.user-52c8254ca7b7260200000001 .activity-row .text p a.username:before,
 #main_avatar_room #main-user-list-room #avatar-list li.admin p.username:before {
-    content: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/images/admin.png)" ";
+    content: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/images/admin.png)" " !important;
 }
 
 /*** DubX Owners ***/
