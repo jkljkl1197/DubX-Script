@@ -161,21 +161,14 @@
 /* Custom CSS for ranks & special users */
 #chat .chat-container ul.chat-main li.user-551d295433cd73030089d184 .activity-row .text p a.username:hover:before,
 #chat .chat-container ul.chat-main li.user-53f7c199892b010200a98809 .activity-row .text p a.username:hover:before {
-	content: "Admin";
+	content: "Admin & DubX";
     font-weight: 700;
     font-family: proxima-nova,sans-serif;
     font-size: 10px;
 }
-#chat .chat-container ul.chat-main li.user-551d295433cd73030089d184 .activity-row .text p a.username:hover:after,
-#chat .chat-container ul.chat-main li.user-53f7c199892b010200a98809 .activity-row .text p a.username:hover:after {
-	content: "DubX";
-    font-weight: 700;
-    font-family: proxima-nova,sans-serif;
-    font-size: 10px;
-}
-#chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username:hover:after,
-#chat .chat-container ul.chat-main li.user-5607c12b8c2ecf0300b4233b .activity-row .text p a.username:hover:after,
-#chat .chat-container ul.chat-main li.user-56008425621a9e0300317238 .activity-row .text p a.username:hover:after {
+#chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username:hover:before,
+#chat .chat-container ul.chat-main li.user-5607c12b8c2ecf0300b4233b .activity-row .text p a.username:hover:before,
+#chat .chat-container ul.chat-main li.user-56008425621a9e0300317238 .activity-row .text p a.username:hover:before {
     content: "DubX";
     font-weight: 700;
     font-family: proxima-nova,sans-serif;
@@ -191,7 +184,7 @@
 }
 #chat .chat-container ul.chat-main li.user-551d295433cd73030089d184 .activity-row .text p a.username:before,
 #chat .chat-container ul.chat-main li.user-53f7c199892b010200a98809 .activity-row .text p a.username:before {
-    content: "\f137";
+    content: "\f137  \f1af";
     font-family: "foundation-icons";
     font-style: normal;
     font-weight: normal;
@@ -202,20 +195,6 @@
     display: inline-block;
     text-decoration: inherit;
     margin-right: 5px;
-}
-#chat .chat-container ul.chat-main li.user-551d295433cd73030089d184 .activity-row .text p a.username:after,
-#chat .chat-container ul.chat-main li.user-53f7c199892b010200a98809 .activity-row .text p a.username:after {
-    content: "\f1af";
-    font-family: "foundation-icons";
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    display: inline-block;
-    text-decoration: inherit;
-    margin-left: 5px;
 }
 ul.avatar-list li.user-sinful p.dubs:before,
 ul.avatar-list li.user-swordling p.dubs:before {
@@ -265,9 +244,9 @@ ul.avatar-list li.currentDJ .user-sinful:after, ul.avatar-list li.currentDJ .use
     font-weight: 700;
     text-shadow: 0px 0px 1px #000;
 }
-#chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username:after,
-#chat .chat-container ul.chat-main li.user-56030f67813abe030055f4a4 .activity-row .text p a.username:after,
-#chat .chat-container ul.chat-main li.user-56008425621a9e0300317238 .activity-row .text p a.username:after {
+#chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username:before,
+#chat .chat-container ul.chat-main li.user-56030f67813abe030055f4a4 .activity-row .text p a.username:before,
+#chat .chat-container ul.chat-main li.user-56008425621a9e0300317238 .activity-row .text p a.username:before {
     content: "\f1ee";
     font-family: "foundation-icons";
     font-style: normal;
@@ -278,7 +257,7 @@ ul.avatar-list li.currentDJ .user-sinful:after, ul.avatar-list li.currentDJ .use
     -webkit-font-smoothing: antialiased;
     display: inline-block;
     text-decoration: inherit;
-    margin-left: 5px;
+    margin-right: 5px;
 }
 ul.avatar-list li.user-kris p.dubs:before,
 ul.avatar-list li.user-al3366 p.dubs:before,
@@ -325,7 +304,7 @@ ul.avatar-list li.currentDJ .user-kris:after, ul.avatar-list li.currentDJ .user-
     font-weight: 600;
     text-shadow: 0px 0px 1px #000;
 }
-#chat .chat-container ul.chat-main li.user-5607c12b8c2ecf0300b4233b .activity-row .text p a.username:after {
+#chat .chat-container ul.chat-main li.user-5607c12b8c2ecf0300b4233b .activity-row .text p a.username:before {
     content: "\f17b";
     font-family: "foundation-icons";
     font-style: normal;
@@ -336,7 +315,7 @@ ul.avatar-list li.currentDJ .user-kris:after, ul.avatar-list li.currentDJ .user-
     -webkit-font-smoothing: antialiased;
     display: inline-block;
     text-decoration: inherit;
-    margin-left: 5px;
+    margin-right: 5px;
 }
 ul.avatar-list li.user-fi p.dubs:before {
     content: "DubX VIP  -  ";
