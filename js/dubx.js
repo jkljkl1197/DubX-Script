@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.00.95 - Emotes & Emojis!';
+    var our_version = '03.00.97 - Emotes & Emojis!';
     //Ref 1: Variables
     var options = {
         let_autovote: false,
@@ -122,10 +122,10 @@ if (!hello_run) {
                             '</li>',
                             '<li onclick="hello.css_for_the_world();" class="for_content_li for_content_feature css">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Community CSS</p>',
+                                '<p class="for_content_p">Community Theme</p>',
                             '</li>',
                         '</ul>',
-						'<li class="for_content_li" onclick="hello.drawSettings();">',
+			'<li class="for_content_li" onclick="hello.drawSettings();">',
                             '<p class="for_content_c">Settings</p>',
                         '</li>',
                         '<ul class="draw_settings">',
@@ -201,8 +201,8 @@ if (!hello_run) {
             $('.header-right-navigation').append(li);
             $('body').prepend(html);
         },
-        drawStandard: function() {
-            $('.draw_standard').slideToggle('fast');
+        drawGeneral: function() {
+            $('.draw_general').slideToggle('fast');
         },
         drawContact: function() {
             $('.draw_contact').slideToggle('fast');
@@ -215,6 +215,9 @@ if (!hello_run) {
         },
         drawChrome: function() {
             $('.draw_chrome').slideToggle('fast');
+        },
+        drawSettings: function() {
+            $('.draw_settings').slideToggle('fast');
         },
         drawAll: function() {
             $('.draw_standard, .draw_contact, .draw_customize, .draw_social, .draw_chrome').slideUp();
