@@ -85,7 +85,7 @@ if (!hello_run) {
                             '</li>',
                             '<li onclick="hello.fs();" class="for_content_li for_content_feature fs">',
                                 '<p class="for_content_off"><i class="fi-arrows-out"></i></p>',
-                                '<p class="for_content_p">Fullscreen</p>',
+                                '<p class="for_content_p">Fullscreen Video</p>',
                             '</li>',
                             '<li onclick="hello.work();" class="for_content_li for_content_feature work">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
