@@ -213,6 +213,23 @@ span.name,
 #chat .chat-container ul.chat-main li.user-52c8254ca7b7260200000001 .activity-row .text p a.username {
 	color: #42A5DC !important;
 }
+#chat .chat-container ul.chat-main li.user-52c821781e2b1fd945000001 .activity-row .text p a.username:before,
+#chat .chat-container ul.chat-main li.user-52c8ef6037e22b0200000005 .activity-row .text p a.username:before,
+#chat .chat-container ul.chat-main li.user-52d24bff4cf9670200000515 .activity-row .text p a.username:before,
+#chat .chat-container ul.chat-main li.user-52c8efcf37e22b0200000008 .activity-row .text p a.username:before,
+#chat .chat-container ul.chat-main li.user-52c8254ca7b7260200000001 .activity-row .text p a.username:before {
+    content: url(http://i.imgur.com/Niafpz9.png)" " !important;
+    font-family: "foundation-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    text-decoration: inherit;
+    margin-right: 5px;
+}
 
 /* Owners */
 #chat .chat-container ul.chat-main li.user-551d295433cd73030089d184 .activity-row .text p a.username,
@@ -223,7 +240,7 @@ span.name,
 }
 #chat .chat-container ul.chat-main li.user-551d295433cd73030089d184 .activity-row .text p a.username:before,
 #chat .chat-container ul.chat-main li.user-53f7c199892b010200a98809 .activity-row .text p a.username:before {
-    content: url(http://i.imgur.com/6KZQYJV.png)" ""\f1af";
+    content: url(http://i.imgur.com/6KZQYJV.png)" ""\f1af" !important;
     font-family: "foundation-icons";
     font-style: normal;
     font-weight: normal;
