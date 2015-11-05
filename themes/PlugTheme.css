@@ -252,13 +252,19 @@ span.name,
 }
 
 /*** DubX Contributors ***/
-#chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username,
-#chat .chat-container ul.chat-main li.user-56030f67813abe030055f4a4 .activity-row .text p a.username,
-#chat .chat-container ul.chat-main li.user-56008425621a9e0300317238 .activity-row .text p a.username,
+#chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username:before,
+#chat .chat-container ul.chat-main li.user-56030f67813abe030055f4a4 .activity-row .text p a.username:before,
+#chat .chat-container ul.chat-main li.user-56008425621a9e0300317238 .activity-row .text p a.username:before,
 #main_avatar_room #main-user-list-room #avatar-list li.creator.user-kris p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-kris p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.manager.user-kris p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.mod.user-kris p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-kris p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.vip.user-kris p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.creator.user-al3366 p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-al3366 p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.manager.user-al3366 p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.mod.user-al3366 p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-al3366 p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.vip.user-al3366 p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.creator.user-ciscog p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-ciscog p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.manager.user-ciscog p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.mod.user-ciscog p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-ciscog p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.vip.user-ciscog p.username:before {
     content: "\f1ee"" " !important;
 	font-family: "foundation-icons";
 }
+
+/*** DubX Special Users ***/
+#chat .chat-container ul.chat-main li.user-5607c12b8c2ecf0300b4233b .activity-row .text p a.username:before,
+#main_avatar_room #main-user-list-room #avatar-list li.creator.user-fi p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-fi p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.manager.user-fi p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.mod.user-fi p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-fi p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.vip.user-fi p.username:before {
+    content: "\f17b" !important;
+    font-family: "foundation-icons";
 
 /*** Owners ***/
 #chat .chat-main .isOwner .username:before, #chat .chat-main .isCo-owner .username:before,
