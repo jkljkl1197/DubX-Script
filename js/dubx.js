@@ -122,7 +122,7 @@ if (!hello_run) {
                             '</li>',
                             '<li onclick="hello.css_for_the_world();" class="for_content_li for_content_feature css">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Room CSS</p>',
+                                '<p class="for_content_p">Community CSS</p>',
                             '</li>',
                         '</ul>',
 						'<li class="for_content_li" onclick="hello.drawSettings();">',
