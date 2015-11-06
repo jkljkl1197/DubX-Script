@@ -30,6 +30,7 @@ var hello_run;
 if (!hello_run) {
     hello_run = true;
     var our_version = '03.00.97 - Emotes & Emojis!';
+
     //Ref 1: Variables
     var options = {
         let_autovote: false,
@@ -47,6 +48,8 @@ if (!hello_run) {
         let_emoji_preview: false,
         let_spacebar_mute: false
     };
+    
+    $('html').addClass('dubx');
     
     //Ref 1.1
     $('.player_sharing').append('<span class="icon-history eta_tooltip_t" onmouseover="hello.eta();" onmouseout="hello.hide_eta();"></span>');
@@ -520,7 +523,7 @@ if (!hello_run) {
                 xhr.open('GET', _url);
                 xhr.send();
                 xhr.onload = function() {
-                    var resp = JSON.parse(xhr.responseText);
+                    var resp = xhr.responseText;
                     if (typeof _cb === 'function') { _cb(resp); }
                     if (optionalEvent) { document.dispatchEvent(doneEvent); }
                 };
@@ -542,37 +545,57 @@ if (!hello_run) {
          * Loads the twitch emotes from the api.  
          * http://api.twitch.tv/kraken/chat/emoticon_images
          */
-        loadTwitchFromApi: function(){
+        loadTwitchEmotes: function(){
             var self = this;
+            var day = 86400000; // milliseconds
+            var savedData;
 
-            // load Sub emotes first so that the global ones could override them
-            this.getJSON('//api.twitch.tv/kraken/chat/emoticon_images')
-                .done(function(data){
-                    data.emoticons.forEach(function(el,i,arr){
-                        var _key = el.code.toLowerCase();
-                        
-                        // move twitch non-named emojis to their own array
-                        if (el.code.indexOf('\\') >= 0) {
-                            self.twitch.specialEmotes.push([el.code, el.id]);
-                            return;
-                        }
-
-                        if (emojify.emojiNames.indexOf(_key) >= 0) {
-                            return; // do nothing so we don't override emoji
-                        }
-                        
-                        if (!self.twitch.emotes[_key]){
-                            // if emote doesn't exist, add it
-                            self.twitch.emotes[_key] = el.id;
-                        } else if (el.emoticon_set === null) {
-                            // override if it's a global emote (null set = global emote)
-                            self.twitch.emotes[_key] = el.id;
-                        }
-                        
+            var today = Date.now();
+            var lastSaved = parseInt(localStorage.getItem('twitch_api_timestamp'));
+            
+            // if it doesn't exist in localStorage or it's older than 5 days
+            // grab it from the twitch API
+            if (isNaN(lastSaved) || today - lastSaved > day * 5 || !localStorage.twitch_api) {
+                console.log('Dubx','twitch','loading from api');
+                this.getJSON('//api.twitch.tv/kraken/chat/emoticon_images', 'emotes:loaded')
+                    .done(function(data){
+                        localStorage.setItem('twitch_api_timestamp', Date.now().toString());
+                        localStorage.setItem('twitch_api', data);
+                        self.processEmotes(JSON.parse(data));
                     });
-                    self.twitchJSONSLoaded = true;
-                    self.emojiTwitch = emojify.emojiNames.concat(Object.keys(self.twitch.emotes));
-                });
+            } else {
+                console.log('Dubx','twitch','loading from localstorage');
+                savedData = JSON.parse(localStorage.getItem('twitch_api'));
+                self.processEmotes(savedData);
+            }
+            
+        },
+        processEmotes: function(data) {
+            var self = hello;
+            data.emoticons.forEach(function(el,i,arr){
+                var _key = el.code.toLowerCase();
+                
+                // move twitch non-named emojis to their own array
+                if (el.code.indexOf('\\') >= 0) {
+                    self.twitch.specialEmotes.push([el.code, el.id]);
+                    return;
+                }
+
+                if (emojify.emojiNames.indexOf(_key) >= 0) {
+                    return; // do nothing so we don't override emoji
+                }
+                
+                if (!self.twitch.emotes[_key]){
+                    // if emote doesn't exist, add it
+                    self.twitch.emotes[_key] = el.id;
+                } else if (el.emoticon_set === null) {
+                    // override if it's a global emote (null set = global emote)
+                    self.twitch.emotes[_key] = el.id;
+                }
+                
+            });
+            self.twitchJSONSLoaded = true;
+            self.emojiTwitch = emojify.emojiNames.concat(Object.keys(self.twitch.emotes));
         },
         /**************************************************************************
          * handles replacing twitch emotes in the chat box with the images
@@ -606,7 +629,14 @@ if (!hello_run) {
          */
         optionTwitchEmotes: function(){
             if (!options.let_twitch_emotes) {
-                this.replaceTextWithEmote();
+
+                if (!hello.twitchJSONSLoaded) {
+                    hello.loadTwitchEmotes();
+                    document.addEventListener('emotes:loaded', this.replaceTextWithEmote);
+                } else {
+                    this.replaceTextWithEmote();
+                }
+                
                 Dubtrack.Events.bind("realtime:chat-message", this.replaceTextWithEmote);
                 options.let_twitch_emotes = true;
                 hello.option('twitch_emotes', 'true');
@@ -813,7 +843,6 @@ if (!hello_run) {
     //Ref 3:
     hello.initialize();
     hello.personalize();
-    hello.loadTwitchFromApi();
 
     //Ref 4: 
     if (localStorage.getItem('autovote') === 'true') {
