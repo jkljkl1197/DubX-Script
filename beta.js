@@ -56,7 +56,7 @@ if (!hello_run) {
     
     //Ref 2: Options
     var hello = {
-        gitRoot: 'https://rawgit.com/sinfulBA/DubX-Script/master',
+        gitRoot: 'https://rawgit.com/FranciscoG/DubX-Script/dev',
         //Ref 2.1: Initialize
         personalize: function() {
             $('.isUser').text(Dubtrack.session.get('username'));
@@ -85,6 +85,10 @@ if (!hello_run) {
                             '<li onclick="hello.chat_window();" class="for_content_li for_content_feature chat_window">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Chat Only</p>',
+                            '</li>',
+							'<li onclick="hello.video_window();" class="for_content_li for_content_feature video_window">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Video Only</p>',
                             '</li>',
                             '<li onclick="hello.fs();" class="for_content_li for_content_feature fs">',
                                 '<p class="for_content_off"><i class="fi-arrows-out"></i></p>',
@@ -418,6 +422,7 @@ if (!hello_run) {
                 $('head').append('<link class="chat_window_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/chat_window.css">');
                 hello.option('chat_window','true');
                 hello.on('.chat_window');
+				hello.off('.video_window');
             } else {
                 options.let_chat_window = false;
                 $('.chat_window_link').remove();
@@ -495,6 +500,20 @@ if (!hello_run) {
                 $('body').append('<div class="medium" style="width: 100vw;height: 100vh;z-index: -999998;position: fixed; background: url('+content+');background-size: cover;top: 0;"></div>');
             }
         },
+		video_window: function() {
+            if(!options.let_video_window) {
+                options.let_video_window = true;
+                $('head').append('<link class="video_window_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/video_window.css">');
+                hello.option('video_window','true');
+                hello.on('.video_window');
+				hello.off('.chat_window');
+            } else {
+                options.let_video_window = false;
+                $('.video_window_link').remove();
+                hello.option('video_window','false');
+                hello.off('.video_window');
+            }
+        },
         // jQuery's getJSON kept returning errors so making my own with promise-like
         // structure and added optional Event to fire when done so can hook in elsewhere
         getJSON : (function (url, optionalEvent) {
@@ -504,7 +523,7 @@ if (!hello_run) {
                 xhr.open('GET', _url);
                 xhr.send();
                 xhr.onload = function() {
-                    var resp = JSON.parse(xhr.responseText);
+                    var resp = xhr.responseText;
                     if (typeof _cb === 'function') { _cb(resp); }
                     if (optionalEvent) { document.dispatchEvent(doneEvent); }
                 };
@@ -526,37 +545,57 @@ if (!hello_run) {
          * Loads the twitch emotes from the api.  
          * http://api.twitch.tv/kraken/chat/emoticon_images
          */
-        loadTwitchFromApi: function(){
+        loadTwitchEmotes: function(){
             var self = this;
+            var day = 86400000; // milliseconds
+            var savedData;
 
-            // load Sub emotes first so that the global ones could override them
-            this.getJSON('//api.twitch.tv/kraken/chat/emoticon_images')
-                .done(function(data){
-                    data.emoticons.forEach(function(el,i,arr){
-                        var _key = el.code.toLowerCase();
-                        
-                        // move twitch non-named emojis to their own array
-                        if (el.code.indexOf('\\') >= 0) {
-                            self.twitch.specialEmotes.push([el.code, el.id]);
-                            return;
-                        }
-
-                        if (emojify.emojiNames.indexOf(_key) >= 0) {
-                            return; // do nothing so we don't override emoji
-                        }
-                        
-                        if (!self.twitch.emotes[_key]){
-                            // if emote doesn't exist, add it
-                            self.twitch.emotes[_key] = el.id;
-                        } else if (el.emoticon_set === null) {
-                            // override if it's a global emote (null set = global emote)
-                            self.twitch.emotes[_key] = el.id;
-                        }
-                        
+            var today = Date.now();
+            var lastSaved = parseInt(localStorage.getItem('twitch_api_timestamp'));
+            
+            // if it doesn't exist in localStorage or it's older than 5 days
+            // grab it from the twitch API
+            if (isNaN(lastSaved) || today - lastSaved > day * 5 || !localStorage.twitch_api) {
+                console.log('Dubx','twitch','loading from api');
+                this.getJSON('//api.twitch.tv/kraken/chat/emoticon_images', 'emotes:loaded')
+                    .done(function(data){
+                        localStorage.setItem('twitch_api_timestamp', Date.now().toString());
+                        localStorage.setItem('twitch_api', data);
+                        self.processEmotes(JSON.parse(data));
                     });
-                    self.twitchJSONSLoaded = true;
-                    self.emojiTwitch = emojify.emojiNames.concat(Object.keys(self.twitch.emotes));
-                });
+            } else {
+                console.log('Dubx','twitch','loading from localstorage');
+                savedData = JSON.parse(localStorage.getItem('twitch_api'));
+                self.processEmotes(savedData);
+            }
+            
+        },
+        processEmotes: function(data) {
+            var self = hello;
+            data.emoticons.forEach(function(el,i,arr){
+                var _key = el.code.toLowerCase();
+                
+                // move twitch non-named emojis to their own array
+                if (el.code.indexOf('\\') >= 0) {
+                    self.twitch.specialEmotes.push([el.code, el.id]);
+                    return;
+                }
+
+                if (emojify.emojiNames.indexOf(_key) >= 0) {
+                    return; // do nothing so we don't override emoji
+                }
+                
+                if (!self.twitch.emotes[_key]){
+                    // if emote doesn't exist, add it
+                    self.twitch.emotes[_key] = el.id;
+                } else if (el.emoticon_set === null) {
+                    // override if it's a global emote (null set = global emote)
+                    self.twitch.emotes[_key] = el.id;
+                }
+                
+            });
+            self.twitchJSONSLoaded = true;
+            self.emojiTwitch = emojify.emojiNames.concat(Object.keys(self.twitch.emotes));
         },
         /**************************************************************************
          * handles replacing twitch emotes in the chat box with the images
@@ -590,7 +629,14 @@ if (!hello_run) {
          */
         optionTwitchEmotes: function(){
             if (!options.let_twitch_emotes) {
-                this.replaceTextWithEmote();
+
+                if (!hello.twitchJSONSLoaded) {
+                    hello.loadTwitchEmotes();
+                    document.addEventListener('emotes:loaded', this.replaceTextWithEmote);
+                } else {
+                    this.replaceTextWithEmote();
+                }
+                
                 Dubtrack.Events.bind("realtime:chat-message", this.replaceTextWithEmote);
                 options.let_twitch_emotes = true;
                 hello.option('twitch_emotes', 'true');
@@ -797,7 +843,6 @@ if (!hello_run) {
     //Ref 3:
     hello.initialize();
     hello.personalize();
-    hello.loadTwitchFromApi();
 
     //Ref 4: 
     if (localStorage.getItem('autovote') === 'true') {
@@ -817,6 +862,9 @@ if (!hello_run) {
     }
     if (localStorage.getItem('chat_window') === 'true') {
         hello.chat_window();
+    }
+	if (localStorage.getItem('video_window') === 'true') {
+        hello.video_window();
     }
     if (localStorage.getItem('css_world') === 'true') {
         hello.css_for_the_world();
