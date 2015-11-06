@@ -548,15 +548,15 @@ if (!hello_run) {
             var savedData;
 
             var today = Date.now();
-            var lastSaved = parseInt(localStorage.getItem('emote_timestamp'));
+            var lastSaved = parseInt(localStorage.getItem('twitch_api_timestamp'));
             
             // if it doesn't exist in localStorage or it's older than 5 days
             // grab it from the twitch API
-            if (isNaN(lastSaved) || today - lastSaved > day * 5) {
+            if (isNaN(lastSaved) || today - lastSaved > day * 5 || !localStorage.twitch_api) {
                 console.log('Dubx','twitch','loading from api');
                 this.getJSON('//api.twitch.tv/kraken/chat/emoticon_images', 'emotes:loaded')
                     .done(function(data){
-                        localStorage.setItem('emote_timestamp', Date.now().toString());
+                        localStorage.setItem('twitch_api_timestamp', Date.now().toString());
                         localStorage.setItem('twitch_api', data);
                         self.processEmotes(JSON.parse(data));
                     });
