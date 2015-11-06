@@ -30,6 +30,7 @@ var hello_run;
 if (!hello_run) {
     hello_run = true;
     var our_version = '03.00.97 - Emotes & Emojis!';
+
     //Ref 1: Variables
     var options = {
         let_autovote: false,
@@ -47,6 +48,8 @@ if (!hello_run) {
         let_emoji_preview: false,
         let_spacebar_mute: false
     };
+    
+    $('html').addClass('dubx');
     
     //Ref 1.1
     $('.player_sharing').append('<span class="icon-history eta_tooltip_t" onmouseover="hello.eta();" onmouseout="hello.hide_eta();"></span>');

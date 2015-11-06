@@ -48,6 +48,8 @@ if (!hello_run) {
         let_spacebar_mute: false
     };
     
+    $('html').addClass('dubx');
+    
     //Ref 1.1
     $('.player_sharing').append('<span class="icon-history eta_tooltip_t" onmouseover="hello.eta();" onmouseout="hello.hide_eta();"></span>');
     
