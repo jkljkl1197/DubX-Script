@@ -83,6 +83,10 @@ if (!hello_run) {
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Chat Only</p>',
                             '</li>',
+							'<li onclick="hello.video_window();" class="for_content_li for_content_feature video_window">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Video Only</p>',
+                            '</li>',
                             '<li onclick="hello.fs();" class="for_content_li for_content_feature fs">',
                                 '<p class="for_content_off"><i class="fi-arrows-out"></i></p>',
                                 '<p class="for_content_p">Fullscreen Video</p>',
@@ -220,7 +224,7 @@ if (!hello_run) {
             $('.draw_settings').slideToggle('fast');
         },
         drawAll: function() {
-            $('.draw_standard, .draw_contact, .draw_customize, .draw_social, .draw_chrome').slideUp();
+            $('.draw_general, .draw_contact, .draw_customize, .draw_social, .draw_chrome, .draw_settings').slideUp();
         },
         //Ref 2.3.1: Input
         input: function(title,content,placeholder,confirm) {
@@ -490,6 +494,19 @@ if (!hello_run) {
             if (localStorage.getItem('medium') !== null) {
                 var content = localStorage.getItem('medium');
                 $('body').append('<div class="medium" style="width: 100vw;height: 100vh;z-index: -999998;position: fixed; background: url('+content+');background-size: cover;top: 0;"></div>');
+            }
+        },
+		video_window: function() {
+            if(!options.let_video_window) {
+                options.let_video_window = true;
+                $('head').append('<link class="chat_window_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/video_window.css">');
+                hello.option('video_window','true');
+                hello.on('.video_window');
+            } else {
+                options.let_video_window = false;
+                $('.video_window_link').remove();
+                hello.option('video_window','false');
+                hello.off('.video_window');
             }
         },
         // jQuery's getJSON kept returning errors so making my own with promise-like
@@ -814,6 +831,9 @@ if (!hello_run) {
     }
     if (localStorage.getItem('chat_window') === 'true') {
         hello.chat_window();
+    }
+	if (localStorage.getItem('video_window') === 'true') {
+        hello.video_window();
     }
     if (localStorage.getItem('css_world') === 'true') {
         hello.css_for_the_world();
