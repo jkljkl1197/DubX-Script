@@ -546,7 +546,7 @@ if (!hello_run) {
             var self = this;
 
             // load Sub emotes first so that the global ones could override them
-            this.getJSON('//api.twitch.tv/kraken/chat/emoticon_images')
+            this.getJSON('//api.twitch.tv/kraken/chat/emoticon_images', 'emotes:loaded')
                 .done(function(data){
                     data.emoticons.forEach(function(el,i,arr){
                         var _key = el.code.toLowerCase();
@@ -606,7 +606,14 @@ if (!hello_run) {
          */
         optionTwitchEmotes: function(){
             if (!options.let_twitch_emotes) {
-                this.replaceTextWithEmote();
+
+                if (!hello.twitchJSONSLoaded) {
+                    hello.loadTwitchFromApi();
+                    document.addEventListener('emotes:loaded', this.replaceTextWithEmote);
+                } else {
+                    this.replaceTextWithEmote();
+                }
+                
                 Dubtrack.Events.bind("realtime:chat-message", this.replaceTextWithEmote);
                 options.let_twitch_emotes = true;
                 hello.option('twitch_emotes', 'true');
@@ -813,7 +820,6 @@ if (!hello_run) {
     //Ref 3:
     hello.initialize();
     hello.personalize();
-    hello.loadTwitchFromApi();
 
     //Ref 4: 
     if (localStorage.getItem('autovote') === 'true') {
