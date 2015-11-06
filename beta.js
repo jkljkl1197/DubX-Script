@@ -499,7 +499,7 @@ if (!hello_run) {
 		video_window: function() {
             if(!options.let_video_window) {
                 options.let_video_window = true;
-                $('head').append('<link class="chat_window_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/video_window.css">');
+                $('head').append('<link class="video_window_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/video_window.css">');
                 hello.option('video_window','true');
                 hello.on('.video_window');
             } else {
