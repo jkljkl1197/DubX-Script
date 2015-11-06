@@ -47,7 +47,7 @@ a, a:active, a:focus, a:hover,
 
 /* DubX Menu */
 .for_content {
-	background: rgba(8,8,8,0.78) !important;
+	background: #1A1A1A !important;
 }
 .for_content_off {
 	color: #DDDDDD !important;
@@ -110,6 +110,10 @@ span.name,
 }
 
 /* Video Player */
+#main-room .left_section {
+	width: 125%;
+	margin-left: -200px;
+}
 #main_player {
 	background: rgba(8,8,8,0.78);
 	border-radius: 0.4rem;
@@ -148,6 +152,9 @@ span.name,
 }
 
 /* Chat */
+#main-room .right_section {
+	right: -200px;
+}
 #main-room .right_section, #profileMainSection {
 	background: rgba(8,8,8,0.78);
 	border-radius: 0.4rem;
