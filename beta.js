@@ -422,7 +422,9 @@ if (!hello_run) {
                 $('head').append('<link class="chat_window_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/chat_window.css">');
                 hello.option('chat_window','true');
                 hello.on('.chat_window');
-				hello.off('.video_window');
+				if (options.let_video_window) {
+                    hello.video_window();
+                }
             } else {
                 options.let_chat_window = false;
                 $('.chat_window_link').remove();
@@ -506,7 +508,9 @@ if (!hello_run) {
                 $('head').append('<link class="video_window_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/video_window.css">');
                 hello.option('video_window','true');
                 hello.on('.video_window');
-				hello.off('.chat_window');
+				if (options.let_chat_window) {
+                    hello.chat_window();
+                }
             } else {
                 options.let_video_window = false;
                 $('.video_window_link').remove();
