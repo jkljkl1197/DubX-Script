@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.00.97 - Emotes & Emojis!';
+    var our_version = '03.01.03 - VIDEO ONLY';
 
     //Ref 1: Variables
     var options = {
