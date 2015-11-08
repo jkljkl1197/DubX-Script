@@ -279,31 +279,31 @@ span.name,
 /*** Owners ***/
 #chat .chat-main .isOwner .username:before, #chat .chat-main .isCo-owner .username:before,
 #main_avatar_room #main-user-list-room #avatar-list li.creator p.username:before, #main_avatar_room #main-user-list-room #avatar-list li.co-owner p.username:before {
-    content: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/images/host-cohost.png)" " !important;
+    content: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/images/host-cohost.png)" ";
 }
 
 /*** Manager ***/
 #chat .chat-main .isManager .username:before,
 #main_avatar_room #main-user-list-room #avatar-list li.manager p.username:before {
-    content: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/images/manager.png)" " !important;
+    content: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/images/manager.png)" ";
 }
 
 /*** Mod ***/
 #chat .chat-main .isMod .username:before,
 #main_avatar_room #main-user-list-room #avatar-list li.mod p.username:before {
-    content: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/images/mod.png)" " !important;
+    content: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/images/mod.png)" ";
 }
 
 /*** Resident DJ ***/
 #chat .chat-main .isResident-dj .username:before,
 #main_avatar_room #main-user-list-room #avatar-list li.resident-dj p.username:before {
-    content: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/images/residentdj.png)" " !important;
+    content: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/images/residentdj.png)" ";
 }
 
 /*** VIP ***/
 #chat .chat-main .isVip .username:before,
 #main_avatar_room #main-user-list-room #avatar-list li.vip p.username:before {
-    content: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/images/vip.png)" " !important;
+    content: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/images/vip.png)" ";
 }
 
 /* User List */
