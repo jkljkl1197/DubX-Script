@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.01.03 - ROLLBACK... SORRY!';
+    var our_version = '03.SAFE.00 - ROLLBACK... SORRY!';
 
     //Ref 1: Variables
     var options = {
@@ -557,12 +557,6 @@ if (!hello_run) {
     if (localStorage.getItem('nicole') === 'true') {
         hello.nicole();
     }
-    if (localStorage.getItem('twitch_emotes') === 'true') {
-        hello.optionTwitchEmotes();
-    }
-    if (localStorage.getItem('emoji_preview') === 'true') {
-        hello.optionEmojiPreview();
-    }
     if (localStorage.getItem('spacebar_mute') === 'true') {
         hello.spacebar_mute();
     }
@@ -574,13 +568,6 @@ if (!hello_run) {
     });
     
     // Ref 5:
-    $('.chat-main').on('DOMNodeInserted', function(e) {
-        var itemEl = $(e.target);
-        if(itemEl.prop('tagName').toLowerCase() !== 'li' || itemEl.attr('class').substring(0, 'user-'.length) !== 'user-') return;
-        var user = Dubtrack.room.users.collection.findWhere({userid: itemEl.attr('class').split(/-| /)[1]});
-        var role = !user.get('roleid') ? 'default' : Dubtrack.helpers.isDubtrackAdmin(user.get('userid')) ? 'admin' : user.get('roleid').type;
-        itemEl.addClass('is' + (role.charAt(0).toUpperCase() + role.slice(1)));
-    });
 
 } else {
     function onErr(error) {
