@@ -459,7 +459,7 @@ if (!hello_run) {
                     url: 'https://api.dubtrack.fm/room/'+location,
                 }).done(function(e) {
                     var content = e.data.description;
-                    var url = content.match(/((@dubx=)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/);
+                    var url = content.match(/(@dubx=)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/);
                     var append = url[0].split('@dubx=');
                     $('head').append('<link class="css_world" href="'+append[1]+'" rel="stylesheet" type="text/css">');
                 });
