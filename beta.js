@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.01.08 - VIDEO ONLY';
+    var our_version = '03.01.09 - VIDEO ONLY';
 
     //Ref 1: Variables
     var options = {
