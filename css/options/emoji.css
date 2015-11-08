@@ -53,6 +53,7 @@
 }
 #autocomplete-preview .ac-image img {
   width: 100%;
+  height: auto;
 }
 
 .users-preview .ac-image {
