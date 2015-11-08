@@ -47,10 +47,16 @@
   top: -7px;
 }
 
-#autocomplete-preview img {
-  max-height: 1.4em;
-  max-width: 1.4em;
+#autocomplete-preview .ac-image {
+  width: 1.4em;
   display:inline-block;
+}
+#autocomplete-preview .ac-image img {
+  width: 100%;
+}
+
+.users-preview .ac-image {
+  border-radius: 100%;
 }
 
 #autocomplete-preview.ac-show {
