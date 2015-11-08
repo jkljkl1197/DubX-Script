@@ -56,7 +56,7 @@ if (!hello_run) {
     
     //Ref 2: Options
     var hello = {
-        gitRoot: 'https://rawgit.com/sinfulBA/DubX-Script/master',
+        gitRoot: 'https://rawgit.com/FranciscoG/DubX-Script/dev',
         //Ref 2.1: Initialize
         personalize: function() {
             $('.isUser').text(Dubtrack.session.get('username'));
@@ -652,64 +652,122 @@ if (!hello_run) {
                 hello.off('.twitch_emotes');
             }
         },
-        /**************************************************************************
-         * A bunch of utility helpers for the emoji preview
+        /**
+         * Populates the popup container with a list of items that you can click/enter
+         * on to autocomplete items in the chat box
+         * @param  {Array} acArray  the array of items to be added.  Each item is an object:
+         * { 
+         *   src : full image src,
+         *   text : text for auto completion,
+         *   cn : css class name for to be concat with '-preview',
+         *   alt : OPTIONAL, to add to alt and title tag
+         * }
          */
-        emojiUtils : {
-            makePreviewContainer : function(cn){
+        previewList: function(acArray) {
+            var self = this;
+
+            function makePreviewContainer(cn){
                 var d = document.createElement('li');
                 d.className = cn;
                 return d; 
-            },
-            makeEmoImage : function(src) {
+            }
+            function makeImg(src, altText) {
                 var i = document.createElement('img');
                 i.src = src;
+                if (altText) { 
+                    i.title = altText; 
+                    i.alt = altText;
+                }
                 return i;
-            },
-            makeNameSpan : function(name){
+            }
+            function makeNameSpan (name){
                 var s = document.createElement('span');
-                s.textContent = ":" + name + ":";
+                s.textContent = name
+                s.className = "ac-text"; // autocomplete text
                 return s;
-            },
-            makeLi: function(type, name, img){
-                var self = hello.emojiUtils;
-                var container = self.makePreviewContainer("preview-container "+type+"-previews");
-                var span = self.makeNameSpan(name);
+            }
+            function makeLi (info){
+                var container = makePreviewContainer("preview-item "+info.cn+"-previews");
+                var span = makeNameSpan(info.text);
+                var img;
+                if (info.alt) {
+                    img = makeImg(info.src, info.alt);
+                } else {
+                    img = makeImg(info.src);
+                }
                 container.appendChild(img);
                 container.appendChild(span);
                 container.tabIndex = -1;
                 return container;
+            }
+            
+            var aCp =  document.getElementById('autocomplete-preview');
+            aCp.innerHTML = "";
+            var frag = document.createDocumentFragment();
+
+            acArray.forEach(function(val,i,arr){
+                frag.appendChild(makeLi(val));
+            });
+
+            aCp.appendChild(frag);
+            aCp.classList.add('ac-show');
+        },
+        previewSearchStr : "",
+        updateChatInput: function(str){
+            var _re = new RegExp(":"+hello.previewSearchStr + "$");
+            var fixed_text = $("#chat-txt-message").val().replace(_re, str) + " ";
+            $('#autocomplete-preview').empty().removeClass('ac-show');
+            $("#chat-txt-message").val(fixed_text).focus();
+        },
+        previewListInit: function(){
+            // bind the keyup and click functions here
+
+            $('head').prepend('<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/emoji.css">');
+            var acUL = document.createElement('ul');
+            acUL.id = "autocomplete-preview";
+            $('.pusher-chat-widget-input').prepend(acUL);
+
+            $(document.body).on('click', '.preview-item', function(e){
+                var new_text = $(this).find('span')[0].textContent;
+                hello.updateChatInput(new_text);
+            });
+        },
+        /**************************************************************************
+         * A bunch of utility helpers for the emoji preview
+         */
+        emojiUtils : {
+            createTwitchObj : function(id, name) {
+                return {
+                    src : hello.twitch.template.replace("{image_id}", id),
+                    text : name,
+                    alt : name,
+                    cn : "twitch"
+                };
             },
-            createTwitchImg : function(id, name) {
-                var self = hello.emojiUtils;
-                var _src = hello.twitch.template.replace("{image_id}", id);
-                var img = self.makeEmoImage(_src);
-                img.title = name; img.alt = name;
-                return self.makeLi('twitch', name, img);
-            },
-            createImg : function(name) {
-                var self = hello.emojiUtils;
-                var img = self.makeEmoImage(emojify.defaultConfig.img_dir+'/'+encodeURI(name)+'.png');
-                img.title = ':'+name+':'; 
-                return self.makeLi('emoji', name, img);
+            createEmojiObj : function(name) {
+                return {
+                    src : emojify.defaultConfig.img_dir+'/'+encodeURI(name)+'.png',
+                    text : name,
+                    alt : name,
+                    cn : "emoji"
+                }
             },
             addToHelper : function(emojiArray) {
                 var self = hello.emojiUtils;
-                $('#emoji-preview').empty();
-                var frag = document.createDocumentFragment();
+                var listArray = [];
                 var _key;
 
                 emojiArray.forEach(function(val,i,arr){
                     _key = val.toLowerCase();
+                    
                     if (typeof hello.twitch.emotes[_key] !== 'undefined') {
-                        frag.appendChild(self.createTwitchImg(hello.twitch.emotes[_key], val));
+                        listArray.push(self.createTwitchObj(hello.twitch.emotes[_key], val));
                     } else if (emojify.emojiNames.indexOf(_key) >= 0) {
-                        frag.appendChild(self.createImg(val));
+                        listArray.push(self.createEmojiObj(val));
                     }
                 });
 
-                document.getElementById('emoji-preview').appendChild(frag);
-                $('#emoji-preview').addClass('emoji-grow');
+                hello.previewList(listArray);
             },
             filterEmoji : function(str){
                 var finalStr = str.replace("+","\\+");
@@ -721,8 +779,7 @@ if (!hello_run) {
                 return arrayToUse.filter(function(val){
                     return re.test(val);
                 });
-            },
-            emojiSearchStr : ""
+            }
         },
         /**************************************************************************
          * This handles the emoji preview in the chat input as you type
@@ -731,28 +788,28 @@ if (!hello_run) {
             var self = hello.emojiUtils;
             var currentText = this.value;
             var filteredEmoji = currentText.replace(/:([+\\-_a-z0-9]+)$/i, function(matched, p1){
-                self.emojiSearchStr = p1;
-                if (self.emojiSearchStr.length >= 3) { // change to set character limit
+                hello.previewSearchStr = p1;
+                if (hello.previewSearchStr.length >= 3) { // change to set character limit
                     self.addToHelper(self.filterEmoji(p1));
                 }
             });
             
             var lastChar = currentText.charAt(currentText.length - 1);
-            if (self.emojiSearchStr.length <= 2 || // change to set character limit
+            if (hello.previewSearchStr.length <= 2 || // change to set character limit
                 lastChar === ":" ||
                 lastChar === " " ||
                 currentText === "")
             {
-                self.emojiSearchStr = "";
-                $('#emoji-preview').empty().removeClass('emoji-grow');
+                hello.previewSearchStr = "";
+                $('#autocomplete-preview').empty().removeClass('ac-show');
             }
 
-            if ($('.emoji-grow li').length === 1) {
-                $('.emoji-grow li').append('<span>press &darr; to select</span>').addClass('selected');
+            if ($('.ac-show li').length === 1) {
+                $('.ac-show li').append('<span>press &darr; to select</span>').addClass('selected');
             }
 
-            if ($('.emoji-grow li').length === 1 && e.keyCode === 40) {
-                $('#emoji-preview li.selected').trigger('click');
+            if ($('.ac-show li').length === 1 && e.keyCode === 40) {
+                $('#autocomplete-preview li.selected').trigger('click');
                 return;
             }
 
@@ -763,7 +820,7 @@ if (!hello_run) {
         displayBoxIndex : -1,
         doNavigate : function(diff) {
             hello.displayBoxIndex += diff;
-            var oBoxCollection = $(".emoji-grow li");
+            var oBoxCollection = $(".ac-show li");
             if (hello.displayBoxIndex >= oBoxCollection.length){
                 hello.displayBoxIndex = 0;
             }
@@ -773,53 +830,16 @@ if (!hello_run) {
             var cssClass = "selected";
             oBoxCollection.removeClass(cssClass).eq(hello.displayBoxIndex).addClass(cssClass).focus();
         },
-        emojiKeyNavFunction: function(e){
-            if ( $('#emoji-preview').hasClass('emoji-grow')) {
-               e.preventDefault();
-               if (e.keyCode === 38) {
-                   hello.doNavigate(-1);
-               }
-               else if (e.keyCode === 40) {
-                   hello.doNavigate(1);
-               }
-               else if (e.keyCode === 13) {
-                   $('#emoji-preview li.selected').trigger('click');
-                   return false;
-               }
-            } 
-        },
-        updateChatInput: function(str){
-            var _re = new RegExp(":"+hello.emojiUtils.emojiSearchStr + "$");
-            var fixed_text = $("#chat-txt-message").val().replace(_re, str) + " ";
-            $('#emoji-preview').empty().removeClass('emoji-grow');
-            $("#chat-txt-message").val(fixed_text).focus();
-        },
-        emojiTwitchInit: function(){
-            // this will only be run once
-            $('head').prepend('<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/emoji.css">');
-            var emojiPreview = document.createElement('ul');
-            emojiPreview.id = "emoji-preview";
-            $('.pusher-chat-widget-input').prepend(emojiPreview);
-
-            $(document.body).on('click', '.preview-container', function(e){
-                var new_text = $(this).find('span')[0].textContent;
-                hello.updateChatInput(new_text);
-            });
-        },
         optionEmojiPreview: function(){
-            if (!$('#emoji-preview').length) {
-                hello.emojiTwitchInit();
-            }
-
             if (!options.let_emoji_preview) {
                 $(document.body).on('keyup', "#chat-txt-message", this.emojiKeyUpFunction);
-                $(document.body).on('keyup', '.emoji-grow', hello.emojiKeyNavFunction);
+                $(document.body).on('keyup', '.ac-show', hello.emojiKeyNavFunction);
                 options.let_emoji_preview = true;
                 hello.option('emoji_preview', 'true');
                 hello.on('.emoji_preview');
             } else {
                 $(document.body).off('keyup', "#chat-txt-message", this.emojiKeyUpFunction);
-                $(document.body).off('keyup', '.emoji-grow', hello.emojiKeyNavFunction);
+                $(document.body).off('keyup', '.ac-show', hello.emojiKeyNavFunction);
                 options.let_emoji_preview = false;
                 hello.option('emoji_preview', 'false');
                 hello.off('.emoji_preview');
@@ -847,6 +867,7 @@ if (!hello_run) {
     //Ref 3:
     hello.initialize();
     hello.personalize();
+    hello.previewListInit();
 
     //Ref 4: 
     if (localStorage.getItem('autovote') === 'true') {
