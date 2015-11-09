@@ -850,28 +850,27 @@ if (!hello_run) {
             var keyCharMin = 3; // when to start showing previews, default to 3 chars
             
             var filteredEmoji = currentText.replace(/(:|@)([+\-_a-z0-9]+)$/i, function(matched, p1, p2){
-                console.log(p1,p2);
                 hello.previewSearchStr = p2;
+                keyCharMin = (p1 === "@") ? 1 : 3;
                 
                 // twitch and emoji
-                if (p2 && p2.length >= 3 && p1 === ":" && hello.let_emoji_preview) {
-                    keyCharMin = 3;
+                if (p2 && p2.length >= keyCharMin && p1 === ":" && options.let_emoji_preview) {
                     self.emojiUtils.addToPreviewList( self.emojiUtils.filterEmoji(p2) );
                 }
 
                 // users
-                if (p2 && p2.length >= 1 && p1 === "@") {
-                    keyCharMin = 1;
+                if (p2 && p2.length >= keyCharMin && p1 === "@") {
                     self.previewList( self.filterUsers(p2) );
                 }
             });
             
             var lastChar = currentText.charAt(currentText.length - 1);
-            if (self.previewSearchStr.length < keyCharMin || // change to set character limit
+            if (self.previewSearchStr.length < keyCharMin ||
                 lastChar === ":" ||
                 lastChar === " " ||
                 currentText === "")
             {
+                self.previewSearchStr = "";
                 $('#autocomplete-preview').empty().removeClass('ac-show');
             }
 
@@ -884,8 +883,11 @@ if (!hello_run) {
                 return;
             }
 
-            if (e.keyCode === 38 || e.keyCode === 40) {
+            if (e.keyCode === 38) {
                 self.doNavigate(-1);
+            }
+            if (e.keyCode === 40) {
+                self.doNavigate(1);
             }
         },
         optionEmojiPreview: function(){
@@ -924,7 +926,6 @@ if (!hello_run) {
             });
         },
         updateUsersArray: function(){
-            console.log("updating roomUsers");
             var self = hello;
             self.roomUsers = []; // clear, start over
             Dubtrack.room.users.collection.models.forEach(function(val,i, arr){
