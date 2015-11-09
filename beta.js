@@ -731,6 +731,7 @@ if (!hello_run) {
             
             var aCp =  document.getElementById('autocomplete-preview');
             aCp.innerHTML = "";
+            self.displayBoxIndex = -1;
             var frag = document.createDocumentFragment();
 
             acArray.forEach(function(val,i,arr){
@@ -773,7 +774,7 @@ if (!hello_run) {
                 case 13:
                     $('#autocomplete-preview li.selected').trigger('click');
                     break;
-                case 27:
+                default:
                     $("#chat-txt-message").focus();
                     break;
             }
