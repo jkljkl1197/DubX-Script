@@ -25,11 +25,12 @@
     The Software and this license document are provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
     Choice of Law
     This license is governed by the Laws of Norway. Disputes shall be settled by Oslo City Court.
-*/ /* global Dubtrack */
+*/ /* global Dubtrack, emojify */
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.00.97 - Emotes & Emojis!';
+    var our_version = '03.01.09 - VIDEO ONLY';
+
     //Ref 1: Variables
     var options = {
         let_autovote: false,
@@ -85,7 +86,7 @@ if (!hello_run) {
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Chat Only</p>',
                             '</li>',
-							'<li onclick="hello.video_window();" class="for_content_li for_content_feature video_window">',
+                            '<li onclick="hello.video_window();" class="for_content_li for_content_feature video_window">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Video Only</p>',
                             '</li>',
@@ -131,7 +132,7 @@ if (!hello_run) {
                                 '<p class="for_content_p">Community Theme</p>',
                             '</li>',
                         '</ul>',
-			'<li class="for_content_li" onclick="hello.drawSettings();">',
+            '<li class="for_content_li" onclick="hello.drawSettings();">',
                             '<p class="for_content_c">Settings</p>',
                         '</li>',
                         '<ul class="draw_settings">',
@@ -421,6 +422,9 @@ if (!hello_run) {
                 $('head').append('<link class="chat_window_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/chat_window.css">');
                 hello.option('chat_window','true');
                 hello.on('.chat_window');
+                if (options.let_video_window) {
+                    hello.video_window();
+                }
             } else {
                 options.let_chat_window = false;
                 $('.chat_window_link').remove();
@@ -455,7 +459,7 @@ if (!hello_run) {
                     url: 'https://api.dubtrack.fm/room/'+location,
                 }).done(function(e) {
                     var content = e.data.description;
-                    var url = content.match(/(@dubx=)(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/);
+                    var url = content.match(/(@dubx=)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/);
                     var append = url[0].split('@dubx=');
                     $('head').append('<link class="css_world" href="'+append[1]+'" rel="stylesheet" type="text/css">');
                 });
@@ -498,12 +502,15 @@ if (!hello_run) {
                 $('body').append('<div class="medium" style="width: 100vw;height: 100vh;z-index: -999998;position: fixed; background: url('+content+');background-size: cover;top: 0;"></div>');
             }
         },
-		video_window: function() {
+        video_window: function() {
             if(!options.let_video_window) {
                 options.let_video_window = true;
                 $('head').append('<link class="video_window_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/video_window.css">');
                 hello.option('video_window','true');
                 hello.on('.video_window');
+                if (options.let_chat_window) {
+                    hello.chat_window();
+                }
             } else {
                 options.let_video_window = false;
                 $('.video_window_link').remove();
@@ -531,6 +538,30 @@ if (!hello_run) {
             };
             return { done: done };
         }),
+        /**
+         * pings for the existence of var/function for 5 seconds until found
+         * runs callback once found and stop pinging
+         * @param  {variable}   waitingFor Your global function, variable, etc
+         * @param  {Function} cb         Callback function
+         */
+        whenAvailable : function(waitingFor, cb) {
+            var interval = 100; // ms
+            var currInterval = 0; 
+            var limit = 50; // how many intervals
+
+            var check = function () {
+                if (waitingFor && typeof cb === "function") {
+                    console.log("available", waitingFor);
+                    cb();
+                } else if (currInterval < limit) {
+                    currInterval++;
+                    console.log('not available', waitingFor);
+                    window.setTimeout(check, interval);
+                }
+            };
+
+            window.setTimeout(check, interval);
+        },
 
         twitch : { 
             template: "//static-cdn.jtvnw.net/emoticons/v1/{image_id}/3.0",
@@ -564,6 +595,7 @@ if (!hello_run) {
                 console.log('Dubx','twitch','loading from localstorage');
                 savedData = JSON.parse(localStorage.getItem('twitch_api'));
                 self.processEmotes(savedData);
+                savedData = null; // clear the var from memory
             }
             
         },
@@ -626,7 +658,14 @@ if (!hello_run) {
          */
         optionTwitchEmotes: function(){
             if (!options.let_twitch_emotes) {
-                this.replaceTextWithEmote();
+
+                if (!hello.twitchJSONSLoaded) {
+                    hello.loadTwitchEmotes();
+                    document.addEventListener('emotes:loaded', this.replaceTextWithEmote);
+                } else {
+                    this.replaceTextWithEmote();
+                }
+                
                 Dubtrack.Events.bind("realtime:chat-message", this.replaceTextWithEmote);
                 options.let_twitch_emotes = true;
                 hello.option('twitch_emotes', 'true');
@@ -638,64 +677,158 @@ if (!hello_run) {
                 hello.off('.twitch_emotes');
             }
         },
-        /**************************************************************************
-         * A bunch of utility helpers for the emoji preview
+        /**
+         * Populates the popup container with a list of items that you can click/enter
+         * on to autocomplete items in the chat box
+         * @param  {Array} acArray  the array of items to be added.  Each item is an object:
+         * { 
+         *   src : full image src,
+         *   text : text for auto completion,
+         *   cn : css class name for to be concat with '-preview',
+         *   alt : OPTIONAL, to add to alt and title tag
+         * }
          */
-        emojiUtils : {
-            makePreviewContainer : function(cn){
+        previewList: function(acArray) {
+            var self = this;
+
+            function makePreviewContainer(cn){
                 var d = document.createElement('li');
                 d.className = cn;
                 return d; 
-            },
-            makeEmoImage : function(src) {
+            }
+            function makeImg(src, altText) {
                 var i = document.createElement('img');
                 i.src = src;
-                return i;
-            },
-            makeNameSpan : function(name){
+                if (altText) { 
+                    i.title = altText; 
+                    i.alt = altText;
+                }
+                var div = document.createElement('div');
+                div.className = "ac-image";
+                div.appendChild(i);
+                return div;
+            }
+            function makeNameSpan (name){
                 var s = document.createElement('span');
-                s.textContent = ":" + name + ":";
+                s.textContent = name;
+                s.className = "ac-text"; // autocomplete text
                 return s;
-            },
-            makeLi: function(type, name, img){
-                var self = hello.emojiUtils;
-                var container = self.makePreviewContainer("preview-container "+type+"-previews");
-                var span = self.makeNameSpan(name);
+            }
+            function makeLi (info){
+                var container = makePreviewContainer("preview-item "+info.cn+"-previews");
+                var span = makeNameSpan(info.text);
+                var img;
+                if (info.alt) {
+                    img = makeImg(info.src, info.alt);
+                } else {
+                    img = makeImg(info.src);
+                }
                 container.appendChild(img);
                 container.appendChild(span);
                 container.tabIndex = -1;
                 return container;
+            }
+            
+            var aCp =  document.getElementById('autocomplete-preview');
+            aCp.innerHTML = "";
+            var frag = document.createDocumentFragment();
+
+            acArray.forEach(function(val,i,arr){
+                frag.appendChild(makeLi(val));
+            });
+
+            aCp.appendChild(frag);
+            aCp.classList.add('ac-show');
+        },
+        previewSearchStr : "",
+        updateChatInput: function(str){
+            var _re = new RegExp("(:|@)"+hello.previewSearchStr + "$");
+            var fixed_text = $("#chat-txt-message").val().replace(_re, str) + " ";
+            $('#autocomplete-preview').empty().removeClass('ac-show');
+            $("#chat-txt-message").val(fixed_text).focus();
+        },
+        displayBoxIndex : -1,
+        doNavigate : function(diff) {
+            var self = hello;
+            self.displayBoxIndex += diff;
+            var oBoxCollection = $(".ac-show li");
+            if (self.displayBoxIndex >= oBoxCollection.length){
+                hello.displayBoxIndex = 0;
+            }
+            if (self.displayBoxIndex < 0){
+                 self.displayBoxIndex = oBoxCollection.length - 1;
+             }
+            var cssClass = "selected";
+            oBoxCollection.removeClass(cssClass).eq(self.displayBoxIndex).addClass(cssClass).focus();
+        },
+        prewiewListKeyUp: function(e){
+            e.preventDefault();
+            switch(e.keyCode) {
+                case 38:
+                    hello.doNavigate(-1);
+                    break;
+                case 40:
+                    hello.doNavigate(1);
+                    break;
+                case 13:
+                    $('#autocomplete-preview li.selected').trigger('click');
+                    break;
+                case 27:
+                    $("#chat-txt-message").focus();
+                    break;
+            }
+        },
+        previewListInit: function(){
+            // bind the keyup and click functions here
+
+            $('head').prepend('<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/autocomplete.css">');
+            var acUL = document.createElement('ul');
+            acUL.id = "autocomplete-preview";
+            $('.pusher-chat-widget-input').prepend(acUL);
+
+            $(document.body).on('click', '.preview-item', function(e){
+                var new_text = $(this).find('.ac-text')[0].textContent;
+                hello.updateChatInput(new_text);
+            });
+
+            $(document.body).on('keyup', '.ac-show', hello.prewiewListKeyUp);
+        },
+        /**************************************************************************
+         * A bunch of utility helpers for the emoji preview
+         */
+        emojiUtils : {
+            createTwitchObj : function(id, name) {
+                return {
+                    src : hello.twitch.template.replace("{image_id}", id),
+                    text : ":" + name + ":",
+                    alt : name,
+                    cn : "twitch"
+                };
             },
-            createTwitchImg : function(id, name) {
-                var self = hello.emojiUtils;
-                var _src = hello.twitch.template.replace("{image_id}", id);
-                var img = self.makeEmoImage(_src);
-                img.title = name; img.alt = name;
-                return self.makeLi('twitch', name, img);
+            createEmojiObj : function(name) {
+                return {
+                    src : emojify.defaultConfig.img_dir+'/'+encodeURI(name)+'.png',
+                    text : ":" + name + ":",
+                    alt : ":" + name + ":",
+                    cn : "emoji"
+                };
             },
-            createImg : function(name) {
+            addToPreviewList : function(emojiArray) {
                 var self = hello.emojiUtils;
-                var img = self.makeEmoImage(emojify.defaultConfig.img_dir+'/'+encodeURI(name)+'.png');
-                img.title = ':'+name+':'; 
-                return self.makeLi('emoji', name, img);
-            },
-            addToHelper : function(emojiArray) {
-                var self = hello.emojiUtils;
-                $('#emoji-preview').empty();
-                var frag = document.createDocumentFragment();
+                var listArray = [];
                 var _key;
 
                 emojiArray.forEach(function(val,i,arr){
                     _key = val.toLowerCase();
+                    
                     if (typeof hello.twitch.emotes[_key] !== 'undefined') {
-                        frag.appendChild(self.createTwitchImg(hello.twitch.emotes[_key], val));
+                        listArray.push(self.createTwitchObj(hello.twitch.emotes[_key], val));
                     } else if (emojify.emojiNames.indexOf(_key) >= 0) {
-                        frag.appendChild(self.createImg(val));
+                        listArray.push(self.createEmojiObj(val));
                     }
                 });
 
-                document.getElementById('emoji-preview').appendChild(frag);
-                $('#emoji-preview').addClass('emoji-grow');
+                hello.previewList(listArray);
             },
             filterEmoji : function(str){
                 var finalStr = str.replace("+","\\+");
@@ -707,105 +840,63 @@ if (!hello_run) {
                 return arrayToUse.filter(function(val){
                     return re.test(val);
                 });
-            },
-            emojiSearchStr : ""
+            }
         },
         /**************************************************************************
-         * This handles the emoji preview in the chat input as you type
+         * handles filtering emoji, twitch, and users preview autocomplete popup on keyup
          */
-        emojiKeyUpFunction: function(e){
-            var self = hello.emojiUtils;
+        chatInputKeyupFunc: function(e){
+            var self = hello;
             var currentText = this.value;
-            var filteredEmoji = currentText.replace(/:([+\\-_a-z0-9]+)$/i, function(matched, p1){
-                self.emojiSearchStr = p1;
-                if (self.emojiSearchStr.length >= 3) { // change to set character limit
-                    self.addToHelper(self.filterEmoji(p1));
+            var keyCharMin = 3; // when to start showing previews, default to 3 chars
+            
+            var filterText = currentText.replace(/(:|@)([+\-_a-z0-9]+)$/i, function(matched, p1, p2){
+                hello.previewSearchStr = p2;
+                keyCharMin = (p1 === "@") ? 1 : 3;
+                
+                // twitch and emoji
+                if (p2 && p2.length >= keyCharMin && p1 === ":" && options.let_emoji_preview) {
+                    self.emojiUtils.addToPreviewList( self.emojiUtils.filterEmoji(p2) );
+                }
+
+                // users
+                if (p2 && p2.length >= keyCharMin && p1 === "@") {
+                    self.previewList( self.filterUsers(p2) );
                 }
             });
             
             var lastChar = currentText.charAt(currentText.length - 1);
-            if (self.emojiSearchStr.length <= 2 || // change to set character limit
+            if (self.previewSearchStr.length < keyCharMin ||
                 lastChar === ":" ||
                 lastChar === " " ||
                 currentText === "")
             {
-                self.emojiSearchStr = "";
-                $('#emoji-preview').empty().removeClass('emoji-grow');
+                self.previewSearchStr = "";
+                $('#autocomplete-preview').empty().removeClass('ac-show');
             }
 
-            if ($('.emoji-grow li').length === 1) {
-                $('.emoji-grow li').append('<span>press &darr; to select</span>').addClass('selected');
+            if ($('.ac-show li').length === 1) {
+                $('.ac-show li').append('<span>press &darr; to select</span>').addClass('selected');
             }
 
-            if ($('.emoji-grow li').length === 1 && e.keyCode === 40) {
-                $('#emoji-preview li.selected').trigger('click');
+            if ($('.ac-show li').length === 1 && e.keyCode === 40) {
+                $('#autocomplete-preview li.selected').trigger('click');
                 return;
             }
 
-            if (e.keyCode === 38 || e.keyCode === 40) {
-                hello.doNavigate(-1);
+            if (e.keyCode === 38) {
+                self.doNavigate(-1);
             }
-        },
-        displayBoxIndex : -1,
-        doNavigate : function(diff) {
-            hello.displayBoxIndex += diff;
-            var oBoxCollection = $(".emoji-grow li");
-            if (hello.displayBoxIndex >= oBoxCollection.length){
-                hello.displayBoxIndex = 0;
+            if (e.keyCode === 40) {
+                self.doNavigate(1);
             }
-            if (hello.displayBoxIndex < 0){
-                 hello.displayBoxIndex = oBoxCollection.length - 1;
-             }
-            var cssClass = "selected";
-            oBoxCollection.removeClass(cssClass).eq(hello.displayBoxIndex).addClass(cssClass).focus();
-        },
-        emojiKeyNavFunction: function(e){
-            if ( $('#emoji-preview').hasClass('emoji-grow')) {
-               e.preventDefault();
-               if (e.keyCode === 38) {
-                   hello.doNavigate(-1);
-               }
-               else if (e.keyCode === 40) {
-                   hello.doNavigate(1);
-               }
-               else if (e.keyCode === 13) {
-                   $('#emoji-preview li.selected').trigger('click');
-                   return false;
-               }
-            } 
-        },
-        updateChatInput: function(str){
-            var _re = new RegExp(":"+hello.emojiUtils.emojiSearchStr + "$");
-            var fixed_text = $("#chat-txt-message").val().replace(_re, str) + " ";
-            $('#emoji-preview').empty().removeClass('emoji-grow');
-            $("#chat-txt-message").val(fixed_text).focus();
-        },
-        emojiTwitchInit: function(){
-            // this will only be run once
-            $('head').prepend('<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/emoji.css">');
-            var emojiPreview = document.createElement('ul');
-            emojiPreview.id = "emoji-preview";
-            $('.pusher-chat-widget-input').prepend(emojiPreview);
-
-            $(document.body).on('click', '.preview-container', function(e){
-                var new_text = $(this).find('span')[0].textContent;
-                hello.updateChatInput(new_text);
-            });
         },
         optionEmojiPreview: function(){
-            if (!$('#emoji-preview').length) {
-                hello.emojiTwitchInit();
-            }
-
             if (!options.let_emoji_preview) {
-                $(document.body).on('keyup', "#chat-txt-message", this.emojiKeyUpFunction);
-                $(document.body).on('keyup', '.emoji-grow', hello.emojiKeyNavFunction);
                 options.let_emoji_preview = true;
                 hello.option('emoji_preview', 'true');
                 hello.on('.emoji_preview');
             } else {
-                $(document.body).off('keyup', "#chat-txt-message", this.emojiKeyUpFunction);
-                $(document.body).off('keyup', '.emoji-grow', hello.emojiKeyNavFunction);
                 options.let_emoji_preview = false;
                 hello.option('emoji_preview', 'false');
                 hello.off('.emoji_preview');
@@ -828,12 +919,39 @@ if (!hello_run) {
                 hello.option('spacebar_mute','false');
                 hello.off('.spacebar_mute');
             }
+        },
+        filterUsers :function(str){
+            var re = new RegExp('^@' + str, "i");
+            return hello.roomUsers.filter(function(val){
+                return re.test(val.text);
+            });
+        },
+        updateUsersArray: function(){
+            var self = hello;
+            self.roomUsers = []; // clear, start over
+            Dubtrack.room.users.collection.models.forEach(function(val,i, arr){
+                var u = val.attributes._user;
+                self.roomUsers.push({
+                    src : "https://api.dubtrack.fm/user/"+u._id+"/image",
+                    text : "@" + u.username,
+                    cn : "users"
+                });
+            });
+        },
+        userAutoComplete: function(){
+            $(document.body).on('keyup', "#chat-txt-message", this.chatInputKeyupFunc);
+            hello.whenAvailable("Dubtrack.room.users", hello.updateUsersArray);
+            Dubtrack.Events.bind("realtime:user-ban", hello.updateUsersArray);
+            Dubtrack.Events.bind("realtime:user-join", hello.updateUsersArray);
+            Dubtrack.Events.bind("realtime:user-kick", hello.updateUsersArray);
+            Dubtrack.Events.bind("realtime:user-leave", hello.updateUsersArray);
         }
     };
     //Ref 3:
     hello.initialize();
     hello.personalize();
-    hello.loadTwitchEmotes();
+    hello.previewListInit();
+    hello.userAutoComplete();
 
     //Ref 4: 
     if (localStorage.getItem('autovote') === 'true') {
@@ -854,7 +972,7 @@ if (!hello_run) {
     if (localStorage.getItem('chat_window') === 'true') {
         hello.chat_window();
     }
-	if (localStorage.getItem('video_window') === 'true') {
+    if (localStorage.getItem('video_window') === 'true') {
         hello.video_window();
     }
     if (localStorage.getItem('css_world') === 'true') {

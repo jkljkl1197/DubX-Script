@@ -25,7 +25,7 @@
     The Software and this license document are provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
     Choice of Law
     This license is governed by the Laws of Norway. Disputes shall be settled by Oslo City Court.
-*/ /* global Dubtrack */
+*/ /* global Dubtrack, emojify */
 var hello_run;
 if (!hello_run) {
     hello_run = true;
@@ -56,7 +56,7 @@ if (!hello_run) {
     
     //Ref 2: Options
     var hello = {
-        gitRoot: 'https://rawgit.com/FranciscoG/DubX-Script/dev',
+        gitRoot: 'https://rawgit.com/sinfulBA/DubX-Script/master',
         //Ref 2.1: Initialize
         personalize: function() {
             $('.isUser').text(Dubtrack.session.get('username'));
@@ -595,6 +595,7 @@ if (!hello_run) {
                 console.log('Dubx','twitch','loading from localstorage');
                 savedData = JSON.parse(localStorage.getItem('twitch_api'));
                 self.processEmotes(savedData);
+                savedData = null; // clear the var from memory
             }
             
         },
@@ -709,7 +710,7 @@ if (!hello_run) {
             }
             function makeNameSpan (name){
                 var s = document.createElement('span');
-                s.textContent = name
+                s.textContent = name;
                 s.className = "ac-text"; // autocomplete text
                 return s;
             }
@@ -810,7 +811,7 @@ if (!hello_run) {
                     text : ":" + name + ":",
                     alt : ":" + name + ":",
                     cn : "emoji"
-                }
+                };
             },
             addToPreviewList : function(emojiArray) {
                 var self = hello.emojiUtils;
@@ -849,7 +850,7 @@ if (!hello_run) {
             var currentText = this.value;
             var keyCharMin = 3; // when to start showing previews, default to 3 chars
             
-            var filteredEmoji = currentText.replace(/(:|@)([+\-_a-z0-9]+)$/i, function(matched, p1, p2){
+            var filterText = currentText.replace(/(:|@)([+\-_a-z0-9]+)$/i, function(matched, p1, p2){
                 hello.previewSearchStr = p2;
                 keyCharMin = (p1 === "@") ? 1 : 3;
                 
