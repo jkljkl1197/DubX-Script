@@ -538,6 +538,30 @@ if (!hello_run) {
             };
             return { done: done };
         }),
+        /**
+         * pings for the existence of var/function for 5 seconds until found
+         * runs callback once found and stop pinging
+         * @param  {variable}   waitingFor Your global function, variable, etc
+         * @param  {Function} cb         Callback function
+         */
+        whenAvailable : function(waitingFor, cb) {
+            var interval = 100; // ms
+            var currInterval = 0; 
+            var limit = 50; // how many intervals
+
+            var check = function () {
+                if (waitingFor && typeof cb === "function") {
+                    console.log("available", waitingFor);
+                    cb();
+                } else if (currInterval < limit) {
+                    currInterval++;
+                    console.log('not available', waitingFor);
+                    window.setTimeout(check, interval);
+                }
+            };
+
+            window.setTimeout(check, interval);
+        },
 
         twitch : { 
             template: "//static-cdn.jtvnw.net/emoticons/v1/{image_id}/3.0",
@@ -678,7 +702,10 @@ if (!hello_run) {
                     i.title = altText; 
                     i.alt = altText;
                 }
-                return i;
+                var div = document.createElement('div');
+                div.className = "ac-image";
+                div.appendChild(i);
+                return div;
             }
             function makeNameSpan (name){
                 var s = document.createElement('span');
@@ -714,23 +741,56 @@ if (!hello_run) {
         },
         previewSearchStr : "",
         updateChatInput: function(str){
-            var _re = new RegExp(":"+hello.previewSearchStr + "$");
+            var _re = new RegExp("(:|@)"+hello.previewSearchStr + "$");
             var fixed_text = $("#chat-txt-message").val().replace(_re, str) + " ";
             $('#autocomplete-preview').empty().removeClass('ac-show');
             $("#chat-txt-message").val(fixed_text).focus();
         },
+        displayBoxIndex : -1,
+        doNavigate : function(diff) {
+            var self = hello;
+            self.displayBoxIndex += diff;
+            var oBoxCollection = $(".ac-show li");
+            if (self.displayBoxIndex >= oBoxCollection.length){
+                hello.displayBoxIndex = 0;
+            }
+            if (self.displayBoxIndex < 0){
+                 self.displayBoxIndex = oBoxCollection.length - 1;
+             }
+            var cssClass = "selected";
+            oBoxCollection.removeClass(cssClass).eq(self.displayBoxIndex).addClass(cssClass).focus();
+        },
+        prewiewListKeyUp: function(e){
+            e.preventDefault();
+            switch(e.keyCode) {
+                case 38:
+                    hello.doNavigate(-1);
+                    break;
+                case 40:
+                    hello.doNavigate(1);
+                    break;
+                case 13:
+                    $('#autocomplete-preview li.selected').trigger('click');
+                    break;
+                case 27:
+                    $("#chat-txt-message").focus();
+                    break;
+            }
+        },
         previewListInit: function(){
             // bind the keyup and click functions here
 
-            $('head').prepend('<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/emoji.css">');
+            $('head').prepend('<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/autocomplete.css">');
             var acUL = document.createElement('ul');
             acUL.id = "autocomplete-preview";
             $('.pusher-chat-widget-input').prepend(acUL);
 
             $(document.body).on('click', '.preview-item', function(e){
-                var new_text = $(this).find('span')[0].textContent;
+                var new_text = $(this).find('.ac-text')[0].textContent;
                 hello.updateChatInput(new_text);
             });
+
+            $(document.body).on('keyup', '.ac-show', hello.prewiewListKeyUp);
         },
         /**************************************************************************
          * A bunch of utility helpers for the emoji preview
@@ -739,7 +799,7 @@ if (!hello_run) {
             createTwitchObj : function(id, name) {
                 return {
                     src : hello.twitch.template.replace("{image_id}", id),
-                    text : name,
+                    text : ":" + name + ":",
                     alt : name,
                     cn : "twitch"
                 };
@@ -747,12 +807,12 @@ if (!hello_run) {
             createEmojiObj : function(name) {
                 return {
                     src : emojify.defaultConfig.img_dir+'/'+encodeURI(name)+'.png',
-                    text : name,
-                    alt : name,
+                    text : ":" + name + ":",
+                    alt : ":" + name + ":",
                     cn : "emoji"
                 }
             },
-            addToHelper : function(emojiArray) {
+            addToPreviewList : function(emojiArray) {
                 var self = hello.emojiUtils;
                 var listArray = [];
                 var _key;
@@ -782,25 +842,36 @@ if (!hello_run) {
             }
         },
         /**************************************************************************
-         * This handles the emoji preview in the chat input as you type
+         * handles filtering emoji, twitch, and users preview autocomplete popup on keyup
          */
-        emojiKeyUpFunction: function(e){
-            var self = hello.emojiUtils;
+        chatInputKeyupFunc: function(e){
+            var self = hello;
             var currentText = this.value;
-            var filteredEmoji = currentText.replace(/:([+\\-_a-z0-9]+)$/i, function(matched, p1){
-                hello.previewSearchStr = p1;
-                if (hello.previewSearchStr.length >= 3) { // change to set character limit
-                    self.addToHelper(self.filterEmoji(p1));
+            var keyCharMin = 3; // when to start showing previews, default to 3 chars
+            
+            var filteredEmoji = currentText.replace(/(:|@)([+\-_a-z0-9]+)$/i, function(matched, p1, p2){
+                console.log(p1,p2);
+                hello.previewSearchStr = p2;
+                
+                // twitch and emoji
+                if (p2 && p2.length >= 3 && p1 === ":" && hello.let_emoji_preview) {
+                    keyCharMin = 3;
+                    self.emojiUtils.addToPreviewList( self.emojiUtils.filterEmoji(p2) );
+                }
+
+                // users
+                if (p2 && p2.length >= 1 && p1 === "@") {
+                    keyCharMin = 1;
+                    self.previewList( self.filterUsers(p2) );
                 }
             });
             
             var lastChar = currentText.charAt(currentText.length - 1);
-            if (hello.previewSearchStr.length <= 2 || // change to set character limit
+            if (self.previewSearchStr.length < keyCharMin || // change to set character limit
                 lastChar === ":" ||
                 lastChar === " " ||
                 currentText === "")
             {
-                hello.previewSearchStr = "";
                 $('#autocomplete-preview').empty().removeClass('ac-show');
             }
 
@@ -814,32 +885,15 @@ if (!hello_run) {
             }
 
             if (e.keyCode === 38 || e.keyCode === 40) {
-                hello.doNavigate(-1);
+                self.doNavigate(-1);
             }
-        },
-        displayBoxIndex : -1,
-        doNavigate : function(diff) {
-            hello.displayBoxIndex += diff;
-            var oBoxCollection = $(".ac-show li");
-            if (hello.displayBoxIndex >= oBoxCollection.length){
-                hello.displayBoxIndex = 0;
-            }
-            if (hello.displayBoxIndex < 0){
-                 hello.displayBoxIndex = oBoxCollection.length - 1;
-             }
-            var cssClass = "selected";
-            oBoxCollection.removeClass(cssClass).eq(hello.displayBoxIndex).addClass(cssClass).focus();
         },
         optionEmojiPreview: function(){
             if (!options.let_emoji_preview) {
-                $(document.body).on('keyup', "#chat-txt-message", this.emojiKeyUpFunction);
-                $(document.body).on('keyup', '.ac-show', hello.emojiKeyNavFunction);
                 options.let_emoji_preview = true;
                 hello.option('emoji_preview', 'true');
                 hello.on('.emoji_preview');
             } else {
-                $(document.body).off('keyup', "#chat-txt-message", this.emojiKeyUpFunction);
-                $(document.body).off('keyup', '.ac-show', hello.emojiKeyNavFunction);
                 options.let_emoji_preview = false;
                 hello.option('emoji_preview', 'false');
                 hello.off('.emoji_preview');
@@ -862,12 +916,40 @@ if (!hello_run) {
                 hello.option('spacebar_mute','false');
                 hello.off('.spacebar_mute');
             }
+        },
+        filterUsers :function(str){
+            var re = new RegExp('^@' + str, "i");
+            return hello.roomUsers.filter(function(val){
+                return re.test(val.text);
+            });
+        },
+        updateUsersArray: function(){
+            console.log("updating roomUsers");
+            var self = hello;
+            self.roomUsers = []; // clear, start over
+            Dubtrack.room.users.collection.models.forEach(function(val,i, arr){
+                var u = val.attributes._user;
+                self.roomUsers.push({
+                    src : "https://api.dubtrack.fm/user/"+u._id+"/image",
+                    text : "@" + u.username,
+                    cn : "users"
+                });
+            });
+        },
+        userAutoComplete: function(){
+            $(document.body).on('keyup', "#chat-txt-message", this.chatInputKeyupFunc);
+            hello.whenAvailable("Dubtrack.room.users", hello.updateUsersArray);
+            Dubtrack.Events.bind("realtime:user-ban", hello.updateUsersArray);
+            Dubtrack.Events.bind("realtime:user-join", hello.updateUsersArray);
+            Dubtrack.Events.bind("realtime:user-kick", hello.updateUsersArray);
+            Dubtrack.Events.bind("realtime:user-leave", hello.updateUsersArray);
         }
     };
     //Ref 3:
     hello.initialize();
     hello.personalize();
     hello.previewListInit();
+    hello.userAutoComplete();
 
     //Ref 4: 
     if (localStorage.getItem('autovote') === 'true') {
