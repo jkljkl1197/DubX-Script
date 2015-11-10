@@ -399,7 +399,8 @@ ul.avatar-list li.currentDJ .user-kris:after, ul.avatar-list li.currentDJ .user-
 /* Queue */
 #browser .browser-content .browser-content-header .close-browser,
 #browser .browser-content .browser-content-main .nano .loading,
-#browser .browser-content .browser-content-main .nano .content-videos #results_video_api .playlist-item .display-success  {
+#browser .browser-content .browser-content-main .nano .content-videos #results_video_api .playlist-item .display-success,
+#browser .browser-content #import-playlist-container .close-import-playlist {
 	background: #AA74FE;
 }
 #browser .browser-content .browser-content-main .sidebar #playlists-scroll .playlist-style li.selected {
@@ -417,7 +418,9 @@ ul.avatar-list li.currentDJ .user-kris:after, ul.avatar-list li.currentDJ .user-
 #browser .browser-content .browser-content-main .nano .content-videos #results_video_api .search-item .description .dubs-display,
 #browser .browser-content .browser-content-main .nano .content-videos #results_video_api .search-item .description .playedby,
 #browser .browser-content .browser-content-main .nano .content-videos #results_video_api .search-item .description .preview,
-#browser .browser-content .browser-content-main .sidebar .create-playlist .create-playlist-display span {
+#browser .browser-content .browser-content-main .sidebar .import-playlist span,
+#browser .browser-content .browser-content-main .sidebar .create-playlist .create-playlist-display span,
+#browser .browser-content #import-playlist-container .playlist-type-select span:hover {
 	color: #AA74FE;
 }
 #browser .browser-content .browser-content-main .nano .content-videos #results_video_api .queue-item.selected,
