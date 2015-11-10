@@ -46,7 +46,8 @@ if (!hello_run) {
         let_nicole: false,
         let_twitch_emotes: false,
         let_emoji_preview: false,
-        let_spacebar_mute: false
+        let_spacebar_mute: false,
+        let_autocomplete_mentions : false
     };
     
     $('html').addClass('dubx');
@@ -143,6 +144,10 @@ if (!hello_run) {
                             '<li onclick="hello.optionEmojiPreview();" class="for_content_li for_content_feature emoji_preview">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Emoji Preview</p>',
+                            '</li>',
+                            '<li onclick="hello.optionMentions();" class="for_content_li for_content_feature autocomplete_mentions">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Autocomplete Mentions</p>',
                             '</li>',
                             '<li onclick="hello.spacebar_mute();" class="for_content_li for_content_feature spacebar_mute">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
@@ -861,7 +866,7 @@ if (!hello_run) {
                 }
 
                 // users
-                if (p2 && p2.length >= keyCharMin && p1 === "@") {
+                if (p2 && p2.length >= keyCharMin && p1 === "@" && options.let_autocomplete_mentions) {
                     self.previewList( self.filterUsers(p2) );
                 }
             });
@@ -901,6 +906,17 @@ if (!hello_run) {
                 options.let_emoji_preview = false;
                 hello.option('emoji_preview', 'false');
                 hello.off('.emoji_preview');
+            }
+        },
+        optionMentions: function(){
+            if (!options.let_autocomplete_mentions) {
+                options.let_autocomplete_mentions = true;
+                hello.option('autocomplete_mentions', 'true');
+                hello.on('.autocomplete_mentions');
+            } else {
+                options.let_autocomplete_mentions = false;
+                hello.option('autocomplete_mentions', 'false');
+                hello.off('.autocomplete_mentions');
             }
         },
         spacebar_mute: function() {
@@ -987,6 +1003,9 @@ if (!hello_run) {
     }
     if (localStorage.getItem('emoji_preview') === 'true') {
         hello.optionEmojiPreview();
+    }
+    if (localStorage.getItem('autocomplete_mentions') === 'true') {
+        hello.optionMentions();
     }
     if (localStorage.getItem('spacebar_mute') === 'true') {
         hello.spacebar_mute();
