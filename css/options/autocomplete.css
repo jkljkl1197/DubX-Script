@@ -3,7 +3,7 @@
  * twitch logo white: http://i.imgur.com/FhzONPQ.png
  */
 
-#emoji-preview {
+#autocomplete-preview {
     overflow: auto; 
     display: block; 
     position: absolute; 
@@ -17,18 +17,18 @@
     margin: 0;
 }
 
-#emoji-preview li {
+#autocomplete-preview li {
   display: block;
   padding: 6px 10px;
   margin: 0;
 }
 
-#emoji-preview li:hover,
-#emoji-preview li.selected {
+#autocomplete-preview li:hover,
+#autocomplete-preview li.selected {
   background-color: #555;
 }
 
-#emoji-preview li:focus {
+#autocomplete-preview li:focus {
   outline: none;
 }
 
@@ -39,7 +39,7 @@
   background-position: 98% center;
 }
 
-#emoji-preview span {
+#autocomplete-preview span {
   font-size: 0.8em;
   display:inline-block; 
   padding-left: 20px;
@@ -47,13 +47,20 @@
   top: -7px;
 }
 
-#emoji-preview img {
-  max-height: 1.4em;
-  max-width: 1.4em;
+#autocomplete-preview .ac-image {
+  width: 1.4em;
   display:inline-block;
 }
+#autocomplete-preview .ac-image img {
+  width: 100%;
+  height: auto;
+}
 
-#emoji-preview.emoji-grow {
+.users-preview .ac-image {
+  border-radius: 100%;
+}
+
+#autocomplete-preview.ac-show {
   border: 1px solid #202020;
   border-bottom: 1px solid #878c8e;
   max-height: 164px;
