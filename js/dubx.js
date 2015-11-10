@@ -29,7 +29,8 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.00.97 - Emotes & Emojis!';
+    var our_version = '03.01.15 - SPLIT CHAT FIX';
+
     //Ref 1: Variables
     var options = {
         let_autovote: false,
@@ -421,6 +422,9 @@ if (!hello_run) {
                 $('head').append('<link class="chat_window_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/chat_window.css">');
                 hello.option('chat_window','true');
                 hello.on('.chat_window');
+				if (options.let_video_window) {
+                    hello.video_window();
+                }
             } else {
                 options.let_chat_window = false;
                 $('.chat_window_link').remove();
@@ -455,7 +459,7 @@ if (!hello_run) {
                     url: 'https://api.dubtrack.fm/room/'+location,
                 }).done(function(e) {
                     var content = e.data.description;
-                    var url = content.match(/(@dubx=)(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/);
+                    var url = content.match(/(@dubx=)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/);
                     var append = url[0].split('@dubx=');
                     $('head').append('<link class="css_world" href="'+append[1]+'" rel="stylesheet" type="text/css">');
                 });
@@ -504,6 +508,9 @@ if (!hello_run) {
                 $('head').append('<link class="video_window_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/video_window.css">');
                 hello.option('video_window','true');
                 hello.on('.video_window');
+				if (options.let_chat_window) {
+                    hello.chat_window();
+                }
             } else {
                 options.let_video_window = false;
                 $('.video_window_link').remove();
@@ -626,7 +633,14 @@ if (!hello_run) {
          */
         optionTwitchEmotes: function(){
             if (!options.let_twitch_emotes) {
-                this.replaceTextWithEmote();
+
+                if (!hello.twitchJSONSLoaded) {
+                    hello.loadTwitchEmotes();
+                    document.addEventListener('emotes:loaded', this.replaceTextWithEmote);
+                } else {
+                    this.replaceTextWithEmote();
+                }
+                
                 Dubtrack.Events.bind("realtime:chat-message", this.replaceTextWithEmote);
                 options.let_twitch_emotes = true;
                 hello.option('twitch_emotes', 'true');
@@ -833,7 +847,6 @@ if (!hello_run) {
     //Ref 3:
     hello.initialize();
     hello.personalize();
-    hello.loadTwitchEmotes();
 
     //Ref 4: 
     if (localStorage.getItem('autovote') === 'true') {
