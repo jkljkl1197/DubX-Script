@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.01.15 - SPLIT CHAT FIX';
+    var our_version = '03.01.16 - USERNAME AUTOCOMPLETION';
 
     //Ref 1: Variables
     var options = {

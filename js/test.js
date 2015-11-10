@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.01.15 - SPLIT CHAT FIX';
+    var our_version = '03.01.16 - USERNAME AUTOCOMPLETION';
 
     //Ref 1: Variables
     var options = {
@@ -132,7 +132,7 @@ if (!hello_run) {
                                 '<p class="for_content_p">Community Theme</p>',
                             '</li>',
                         '</ul>',
-            '<li class="for_content_li" onclick="hello.drawSettings();">',
+			'<li class="for_content_li" onclick="hello.drawSettings();">',
                             '<p class="for_content_c">Settings</p>',
                         '</li>',
                         '<ul class="draw_settings">',
@@ -731,6 +731,7 @@ if (!hello_run) {
             
             var aCp =  document.getElementById('autocomplete-preview');
             aCp.innerHTML = "";
+            self.displayBoxIndex = -1;
             var frag = document.createDocumentFragment();
 
             acArray.forEach(function(val,i,arr){
@@ -773,7 +774,7 @@ if (!hello_run) {
                 case 13:
                     $('#autocomplete-preview li.selected').trigger('click');
                     break;
-                case 27:
+                default:
                     $("#chat-txt-message").focus();
                     break;
             }

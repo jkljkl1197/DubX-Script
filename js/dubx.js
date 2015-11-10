@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.01.15 - SPLIT CHAT FIX';
+    var our_version = '03.01.16 - USERNAME AUTOCOMPLETION';
 
     //Ref 1: Variables
     var options = {
@@ -86,7 +86,7 @@ if (!hello_run) {
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Chat Only</p>',
                             '</li>',
-                            '<li onclick="hello.video_window();" class="for_content_li for_content_feature video_window">',
+							'<li onclick="hello.video_window();" class="for_content_li for_content_feature video_window">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Video Only</p>',
                             '</li>',
@@ -132,7 +132,7 @@ if (!hello_run) {
                                 '<p class="for_content_p">Community Theme</p>',
                             '</li>',
                         '</ul>',
-            '<li class="for_content_li" onclick="hello.drawSettings();">',
+			'<li class="for_content_li" onclick="hello.drawSettings();">',
                             '<p class="for_content_c">Settings</p>',
                         '</li>',
                         '<ul class="draw_settings">',
@@ -502,7 +502,7 @@ if (!hello_run) {
                 $('body').append('<div class="medium" style="width: 100vw;height: 100vh;z-index: -999998;position: fixed; background: url('+content+');background-size: cover;top: 0;"></div>');
             }
         },
-        video_window: function() {
+		video_window: function() {
             if(!options.let_video_window) {
                 options.let_video_window = true;
                 $('head').append('<link class="video_window_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/video_window.css">');
@@ -731,6 +731,7 @@ if (!hello_run) {
             
             var aCp =  document.getElementById('autocomplete-preview');
             aCp.innerHTML = "";
+            self.displayBoxIndex = -1;
             var frag = document.createDocumentFragment();
 
             acArray.forEach(function(val,i,arr){
@@ -773,7 +774,7 @@ if (!hello_run) {
                 case 13:
                     $('#autocomplete-preview li.selected').trigger('click');
                     break;
-                case 27:
+                default:
                     $("#chat-txt-message").focus();
                     break;
             }
@@ -972,7 +973,7 @@ if (!hello_run) {
     if (localStorage.getItem('chat_window') === 'true') {
         hello.chat_window();
     }
-    if (localStorage.getItem('video_window') === 'true') {
+	if (localStorage.getItem('video_window') === 'true') {
         hello.video_window();
     }
     if (localStorage.getItem('css_world') === 'true') {
