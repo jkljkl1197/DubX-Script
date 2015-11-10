@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.01.16 - USERNAME AUTOCOMPLETION';
+    var our_version = '03.01.17 - USERNAME AUTOCOMPLETION';
 
     //Ref 1: Variables
     var options = {
