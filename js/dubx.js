@@ -87,7 +87,7 @@ if (!hello_run) {
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Chat Only</p>',
                             '</li>',
-							'<li onclick="hello.video_window();" class="for_content_li for_content_feature video_window">',
+                            '<li onclick="hello.video_window();" class="for_content_li for_content_feature video_window">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Video Only</p>',
                             '</li>',
@@ -112,7 +112,7 @@ if (!hello_run) {
                                 '<p class="for_content_p">AFK Autorespond</p>',
                             '</li>',
                         '</ul>',
-						'<li class="for_content_li" onclick="hello.drawSettings();">',
+                        '<li class="for_content_li" onclick="hello.drawSettings();">',
                             '<p class="for_content_c">Settings</p>',
                         '</li>',
                         '<ul class="draw_settings">',
@@ -427,7 +427,7 @@ if (!hello_run) {
                 $('head').append('<link class="chat_window_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/chat_window.css">');
                 hello.option('chat_window','true');
                 hello.on('.chat_window');
-				if (options.let_video_window) {
+                if (options.let_video_window) {
                     hello.video_window();
                 }
             } else {
@@ -507,13 +507,13 @@ if (!hello_run) {
                 $('body').append('<div class="medium" style="width: 100vw;height: 100vh;z-index: -999998;position: fixed; background: url('+content+');background-size: cover;top: 0;"></div>');
             }
         },
-		video_window: function() {
+        video_window: function() {
             if(!options.let_video_window) {
                 options.let_video_window = true;
                 $('head').append('<link class="video_window_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/video_window.css">');
                 hello.option('video_window','true');
                 hello.on('.video_window');
-				if (options.let_chat_window) {
+                if (options.let_chat_window) {
                     hello.chat_window();
                 }
             } else {
@@ -534,10 +534,10 @@ if (!hello_run) {
                 xhr.onload = function() {
                     var resp = xhr.responseText;
                     if (typeof _cb === 'function') { _cb(resp); }
-                    if (optionalEvent) { document.dispatchEvent(doneEvent); }
+                    if (optionalEvent) { document.body.dispatchEvent(doneEvent); }
                 };
             }
-            if (optionalEvent){ doneEvent = new CustomEvent(optionalEvent); }
+            if (optionalEvent){ doneEvent = new Event(optionalEvent); }
             var done = function(cb){
                 new GetJ(url, cb);
             };
@@ -574,37 +574,69 @@ if (!hello_run) {
             emotes: {},
             chatRegex : new RegExp(":([-_a-z0-9]+):", "ig")
         },
-        /**************************************************************************
-         * Loads the twitch emotes from the api.  
-         * http://api.twitch.tv/kraken/chat/emoticon_images
-         */
-        loadTwitchEmotes: function(){
+        bttv : { 
+            template: "//cdn.betterttv.net/emote/{image_id}/3x",
+            emotes: {},
+            chatRegex : new RegExp(":([&!()\\-_a-z0-9]+):", "ig")
+        },
+        shouldUpdateAPIs : function(apiName){
             var self = this;
             var day = 86400000; // milliseconds
             var savedData;
 
             var today = Date.now();
-            var lastSaved = parseInt(localStorage.getItem('twitch_api_timestamp'));
-            
+            var lastSaved = parseInt(localStorage.getItem(apiName+'_api_timestamp'));
+            return isNaN(lastSaved) || today - lastSaved > day * 5 || !localStorage[apiName +'_api'];
+        },
+        /**************************************************************************
+         * Loads the twitch emotes from the api.  
+         * http://api.twitch.tv/kraken/chat/emoticon_images
+         */
+        loadTwitchEmotes: function(){
+            var self = hello;
             // if it doesn't exist in localStorage or it's older than 5 days
             // grab it from the twitch API
-            if (isNaN(lastSaved) || today - lastSaved > day * 5 || !localStorage.twitch_api) {
+            if (self.shouldUpdateAPIs('twitch')) {
                 console.log('Dubx','twitch','loading from api');
-                this.getJSON('//api.twitch.tv/kraken/chat/emoticon_images', 'emotes:loaded')
-                    .done(function(data){
-                        localStorage.setItem('twitch_api_timestamp', Date.now().toString());
-                        localStorage.setItem('twitch_api', data);
-                        self.processEmotes(JSON.parse(data));
-                    });
+                var twApi = new self.getJSON('//api.twitch.tv/kraken/chat/emoticon_images', 'twitch:loaded');
+                twApi.done(function(data){
+                    localStorage.setItem('twitch_api_timestamp', Date.now().toString());
+                    localStorage.setItem('twitch_api', data);
+                    self.processTwitchEmotes(JSON.parse(data));
+                });
             } else {
                 console.log('Dubx','twitch','loading from localstorage');
                 savedData = JSON.parse(localStorage.getItem('twitch_api'));
-                self.processEmotes(savedData);
+                self.processTwitchEmotes(savedData);
                 savedData = null; // clear the var from memory
+                var twEvent = new Event('twitch:loaded')
+                document.body.dispatchEvent(twEvent);
             }
             
         },
-        processEmotes: function(data) {
+        loadBTTVEmotes: function(){
+            var self = hello;
+            // if it doesn't exist in localStorage or it's older than 5 days
+            // grab it from the bttv API
+            if (self.shouldUpdateAPIs('bttv')) {
+                console.log('Dubx','bttv','loading from api');
+                var bttvApi = new self.getJSON('//api.betterttv.net/2/emotes', 'bttv:loaded');
+                bttvApi.done(function(data){
+                    localStorage.setItem('bttv_api_timestamp', Date.now().toString());
+                    localStorage.setItem('bttv_api', data);
+                    self.processBTTVEmotes(JSON.parse(data));
+                });
+            } else {
+                console.log('Dubx','bttv','loading from localstorage');
+                savedData = JSON.parse(localStorage.getItem('bttv_api'));
+                self.processBTTVEmotes(savedData);
+                savedData = null; // clear the var from memory
+                var twEvent = new Event('bttv:loaded')
+                document.body.dispatchEvent(twEvent);
+            }
+
+        },
+        processTwitchEmotes: function(data) {
             var self = hello;
             data.emoticons.forEach(function(el,i,arr){
                 var _key = el.code.toLowerCase();
@@ -629,7 +661,26 @@ if (!hello_run) {
                 
             });
             self.twitchJSONSLoaded = true;
-            self.emojiTwitch = emojify.emojiNames.concat(Object.keys(self.twitch.emotes));
+            self.emojiEmotes = emojify.emojiNames.concat(Object.keys(self.twitch.emotes));
+        },
+        processBTTVEmotes: function(data){
+            var self = hello;
+            data.emotes.forEach(function(el,i,arr){
+                var _key = el.code.toLowerCase();
+                
+                if (el.code.indexOf(':') >= 0) {
+                    return; // don't want any emotes with smileys and stuff
+                }
+
+                if (emojify.emojiNames.indexOf(_key) >= 0) {
+                    return; // do nothing so we don't override emoji
+                }
+                
+                self.bttv.emotes[_key] = el.id;
+                
+            });
+            self.bttvJSONSLoaded = true;
+            self.emojiEmotes = self.emojiEmotes.concat(Object.keys(self.bttv.emotes));
         },
         /**************************************************************************
          * handles replacing twitch emotes in the chat box with the images
@@ -637,25 +688,36 @@ if (!hello_run) {
         
         replaceTextWithEmote: function(){
             var self = hello;
+            var _regex = self.twitch.chatRegex;
 
             if (!self.twitchJSONSLoaded) { return; } // can't do anything until jsons are loaded
+
             function makeImage(src, name){
                 return '<img class="emoji twitch-emoji" title="'+name+'" alt="'+name+'" src="'+src+'" />';
             }
             
             var $last = $('.chat-main .text').last();
             if (!$last.html()) { return; } // nothing to do
+
+            if (self.bttvJSONSLoaded) { _regex = self.bttv.chatRegex; }
             
-            var emoted = $last.html().replace(self.twitch.chatRegex, function(matched, p1){
+            var emoted = $last.html().replace(_regex, function(matched, p1){
                 var _id, _src, _desc, key = p1.toLowerCase();
+                
                 if (typeof self.twitch.emotes[key] !== 'undefined'){
                     _id = self.twitch.emotes[key];
                     _src = self.twitch.template.replace("{image_id}", _id);
                     return makeImage(_src, key);
+                } else if (typeof self.bttv.emotes[key] !== 'undefined') {
+                    _id = self.bttv.emotes[key];
+                    _src = self.bttv.template.replace("{image_id}", _id);
+                    return makeImage(_src, key); 
                 } else {
                     return matched;
                 }
+
             });
+
             $last.html(emoted);
         },
         /**************************************************************************
@@ -663,10 +725,11 @@ if (!hello_run) {
          */
         optionTwitchEmotes: function(){
             if (!options.let_twitch_emotes) {
+                document.body.addEventListener('twitch:loaded', this.loadBTTVEmotes);
 
                 if (!hello.twitchJSONSLoaded) {
                     hello.loadTwitchEmotes();
-                    document.addEventListener('emotes:loaded', this.replaceTextWithEmote);
+                    document.body.addEventListener('bttv:loaded', this.replaceTextWithEmote);
                 } else {
                     this.replaceTextWithEmote();
                 }
@@ -811,6 +874,14 @@ if (!hello_run) {
                     cn : "twitch"
                 };
             },
+            createBttvObj : function(id, name) {
+                return {
+                    src : hello.bttv.template.replace("{image_id}", id),
+                    text : ":" + name + ":",
+                    alt : name,
+                    cn : "bttv"
+                };
+            },
             createEmojiObj : function(name) {
                 return {
                     src : emojify.defaultConfig.img_dir+'/'+encodeURI(name)+'.png',
@@ -829,7 +900,11 @@ if (!hello_run) {
                     
                     if (typeof hello.twitch.emotes[_key] !== 'undefined') {
                         listArray.push(self.createTwitchObj(hello.twitch.emotes[_key], val));
-                    } else if (emojify.emojiNames.indexOf(_key) >= 0) {
+                    }
+                    if (typeof hello.bttv.emotes[_key] !== 'undefined') {
+                        listArray.push(self.createBttvObj(hello.bttv.emotes[_key], val));
+                    } 
+                    if (emojify.emojiNames.indexOf(_key) >= 0) {
                         listArray.push(self.createEmojiObj(val));
                     }
                 });
@@ -837,11 +912,11 @@ if (!hello_run) {
                 hello.previewList(listArray);
             },
             filterEmoji : function(str){
-                var finalStr = str.replace("+","\\+");
+                var finalStr = str.replace(/(\+\(\))/,"\\$1");
                 var re = new RegExp('^' + finalStr, "i");
                 var arrayToUse = emojify.emojiNames;
                 if (options.let_twitch_emotes) {
-                    arrayToUse = hello.emojiTwitch; // merged array
+                    arrayToUse = hello.emojiEmotes; // merged array
                 }
                 return arrayToUse.filter(function(val){
                     return re.test(val);
@@ -989,7 +1064,7 @@ if (!hello_run) {
     if (localStorage.getItem('chat_window') === 'true') {
         hello.chat_window();
     }
-	if (localStorage.getItem('video_window') === 'true') {
+    if (localStorage.getItem('video_window') === 'true') {
         hello.video_window();
     }
     if (localStorage.getItem('css_world') === 'true') {
