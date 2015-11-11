@@ -1,6 +1,7 @@
 /****************************************************
- * Emoji and Twitch emote section
+ * Emoji and emote section
  * twitch logo white: http://i.imgur.com/FhzONPQ.png
+ * bttv logo white: http://i.imgur.com/oTfAI0O.png
  */
 
 #autocomplete-preview {
@@ -34,6 +35,13 @@
 
 .twitch-previews {
   background-image: url(http://i.imgur.com/FhzONPQ.png);
+  background-repeat: no-repeat;
+  background-size: 25px;
+  background-position: 98% center;
+}
+
+.bttv-previews {
+  background-image: url(http://i.imgur.com/oTfAI0O.png);
   background-repeat: no-repeat;
   background-size: 25px;
   background-position: 98% center;
