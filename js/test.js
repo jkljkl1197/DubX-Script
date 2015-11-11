@@ -132,6 +132,10 @@ if (!hello_run) {
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Spacebar Mute</p>',
                             '</li>',
+							'<li onclick="hello.show_timestamps();" class="for_content_li for_content_feature show_timestamps">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Show Timestamps</p>',
+                            '</li>',
                             '<li onclick="hello.warn_redirect();" class="for_content_li for_content_feature warn_redirect">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Warn On Navigation</p>',
@@ -505,6 +509,19 @@ if (!hello_run) {
             if (localStorage.getItem('medium') !== null) {
                 var content = localStorage.getItem('medium');
                 $('body').append('<div class="medium" style="width: 100vw;height: 100vh;z-index: -999998;position: fixed; background: url('+content+');background-size: cover;top: 0;"></div>');
+            }
+        },
+		show_timestamps: function() {
+            if(!options.let_show_timestamps) {
+                options.let_show_timestamps = true;
+                $('head').append('<link class="show_timestamps_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/show_timestamps.css">');
+                hello.option('show_timestamps','true');
+                hello.on('.show_timestamps');
+            } else {
+                options.let_show_timestamps = false;
+                $('.show_timestamps_link').remove();
+                hello.option('show_timestamps','false');
+                hello.off('.show_timestamps');
             }
         },
         video_window: function() {
