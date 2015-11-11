@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.01.20 - BTTV EMOTES';
+    var our_version = '03.01.21 - SHOW TIMESTAMPS';
 
     //Ref 1: Variables
     var options = {

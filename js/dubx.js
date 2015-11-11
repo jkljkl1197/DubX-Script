@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.01.20 - BTTV EMOTES';
+    var our_version = '03.01.21 - SHOW TIMESTAMPS';
 
     //Ref 1: Variables
     var options = {
@@ -131,6 +131,10 @@ if (!hello_run) {
                             '<li onclick="hello.spacebar_mute();" class="for_content_li for_content_feature spacebar_mute">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Spacebar Mute</p>',
+                            '</li>',
+							'<li onclick="hello.show_timestamps();" class="for_content_li for_content_feature show_timestamps">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Show Timestamps</p>',
                             '</li>',
                             '<li onclick="hello.warn_redirect();" class="for_content_li for_content_feature warn_redirect">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
@@ -505,6 +509,19 @@ if (!hello_run) {
             if (localStorage.getItem('medium') !== null) {
                 var content = localStorage.getItem('medium');
                 $('body').append('<div class="medium" style="width: 100vw;height: 100vh;z-index: -999998;position: fixed; background: url('+content+');background-size: cover;top: 0;"></div>');
+            }
+        },
+		show_timestamps: function() {
+            if(!options.let_show_timestamps) {
+                options.let_show_timestamps = true;
+                $('head').append('<link class="show_timestamps_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/show_timestamps.css">');
+                hello.option('show_timestamps','true');
+                hello.on('.show_timestamps');
+            } else {
+                options.let_show_timestamps = false;
+                $('.show_timestamps_link').remove();
+                hello.option('show_timestamps','false');
+                hello.off('.show_timestamps');
             }
         },
         video_window: function() {
@@ -1069,6 +1086,9 @@ if (!hello_run) {
     }
     if (localStorage.getItem('chat_window') === 'true') {
         hello.chat_window();
+    }
+	if (localStorage.getItem('show_timestamps') === 'true') {
+        hello.show_timestamps();
     }
     if (localStorage.getItem('video_window') === 'true') {
         hello.video_window();
