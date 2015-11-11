@@ -1087,6 +1087,9 @@ if (!hello_run) {
     if (localStorage.getItem('chat_window') === 'true') {
         hello.chat_window();
     }
+	if (localStorage.getItem('show_timestamps') === 'true') {
+        hello.show_timestamps();
+    }
     if (localStorage.getItem('video_window') === 'true') {
         hello.video_window();
     }
