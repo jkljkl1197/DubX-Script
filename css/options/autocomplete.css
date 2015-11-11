@@ -33,18 +33,18 @@
   outline: none;
 }
 
-.twitch-previews {
-  background-image: url(http://i.imgur.com/FhzONPQ.png);
+#autocomplete-preview .preview-item {
   background-repeat: no-repeat;
   background-size: 25px;
   background-position: 98% center;
 }
 
+.twitch-previews {
+  background-image: url(http://i.imgur.com/FhzONPQ.png); 
+}
+
 .bttv-previews {
   background-image: url(http://i.imgur.com/oTfAI0O.png);
-  background-repeat: no-repeat;
-  background-size: 25px;
-  background-position: 98% center;
 }
 
 #autocomplete-preview span {
