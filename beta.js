@@ -582,7 +582,6 @@ if (!hello_run) {
         shouldUpdateAPIs : function(apiName){
             var self = this;
             var day = 86400000; // milliseconds
-            var savedData;
 
             var today = Date.now();
             var lastSaved = parseInt(localStorage.getItem(apiName+'_api_timestamp'));
@@ -594,6 +593,7 @@ if (!hello_run) {
          */
         loadTwitchEmotes: function(){
             var self = hello;
+            var savedData;
             // if it doesn't exist in localStorage or it's older than 5 days
             // grab it from the twitch API
             if (self.shouldUpdateAPIs('twitch')) {
@@ -609,13 +609,14 @@ if (!hello_run) {
                 savedData = JSON.parse(localStorage.getItem('twitch_api'));
                 self.processTwitchEmotes(savedData);
                 savedData = null; // clear the var from memory
-                var twEvent = new Event('twitch:loaded')
+                var twEvent = new Event('twitch:loaded');
                 document.body.dispatchEvent(twEvent);
             }
             
         },
         loadBTTVEmotes: function(){
             var self = hello;
+            var savedData;
             // if it doesn't exist in localStorage or it's older than 5 days
             // grab it from the bttv API
             if (self.shouldUpdateAPIs('bttv')) {
@@ -631,7 +632,7 @@ if (!hello_run) {
                 savedData = JSON.parse(localStorage.getItem('bttv_api'));
                 self.processBTTVEmotes(savedData);
                 savedData = null; // clear the var from memory
-                var twEvent = new Event('bttv:loaded')
+                var twEvent = new Event('bttv:loaded');
                 document.body.dispatchEvent(twEvent);
             }
 
@@ -674,6 +675,10 @@ if (!hello_run) {
 
                 if (emojify.emojiNames.indexOf(_key) >= 0) {
                     return; // do nothing so we don't override emoji
+                }
+
+                if (el.code.indexOf('(') >= 0) {
+                    _key = _key.replace(/([()])/g, "");
                 }
                 
                 self.bttv.emotes[_key] = el.id;
@@ -811,7 +816,8 @@ if (!hello_run) {
         },
         previewSearchStr : "",
         updateChatInput: function(str){
-            var _re = new RegExp("(:|@)"+hello.previewSearchStr + "$");
+            var regexString = hello.previewSearchStr.replace(/([()])/, "\\$1");
+            var _re = new RegExp("(:|@)"+regexString + "$");
             var fixed_text = $("#chat-txt-message").val().replace(_re, str) + " ";
             $('#autocomplete-preview').empty().removeClass('ac-show');
             $("#chat-txt-message").val(fixed_text).focus();
@@ -912,7 +918,7 @@ if (!hello_run) {
                 hello.previewList(listArray);
             },
             filterEmoji : function(str){
-                var finalStr = str.replace(/(\+\(\))/,"\\$1");
+                var finalStr = str.replace(/([+()])/,"\\$1");
                 var re = new RegExp('^' + finalStr, "i");
                 var arrayToUse = emojify.emojiNames;
                 if (options.let_twitch_emotes) {
@@ -931,7 +937,7 @@ if (!hello_run) {
             var currentText = this.value;
             var keyCharMin = 3; // when to start showing previews, default to 3 chars
             
-            var filterText = currentText.replace(/(:|@)([+\-_a-z0-9]+)$/i, function(matched, p1, p2){
+            var filterText = currentText.replace(/(:|@)([&!()\+\-_a-z0-9]+)$/i, function(matched, p1, p2){
                 hello.previewSearchStr = p2;
                 keyCharMin = (p1 === "@") ? 1 : 3;
                 
