@@ -43,7 +43,7 @@ if (!hello_run) {
         let_active_afk: true,
         let_chat_window: false,
         let_css: false,
-        let_hide_badges: false;
+        let_hide_badges: false,
         let_nicole: false,
         let_show_timestamps: false;
         let_video_window: false,
