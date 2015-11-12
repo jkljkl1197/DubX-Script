@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.01.25 - HIDE CHAT/VIDEO';
+    var our_version = '03.01.27 - UPDATE MENU';
 
     //Ref 1: Variables
     var options = {
@@ -85,35 +85,10 @@ if (!hello_run) {
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Autovote</p>',
                             '</li>',
-                            '<li onclick="hello.chat_window();" class="for_content_li for_content_feature chat_window">',
-                                '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Hide Video</p>',
-                            '</li>',
-                            '<li onclick="hello.video_window();" class="for_content_li for_content_feature video_window">',
-                                '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Hide Chat</p>',
-                            '</li>',
-                            '<li onclick="hello.fs();" class="for_content_li for_content_feature fs">',
-                                '<p class="for_content_off"><i class="fi-arrows-out"></i></p>',
-                                '<p class="for_content_p">Fullscreen Video</p>',
-                            '</li>',
-                            '<li onclick="hello.split_chat();" class="for_content_li for_content_feature split_chat">',
-                                '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Split Chat</p>',
-                            '</li>',
-                            '<li onclick="hello.medium_disable();" class="for_content_li for_content_feature medium_disable">',
-                                '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Hide Background</p>',
-                            '</li>',
                             '<li onclick="hello.afk();" class="for_content_li for_content_feature afk">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">AFK Autorespond</p>',
                             '</li>',
-                        '</ul>',
-                        '<li class="for_content_li" onclick="hello.drawSettings();">',
-                            '<p class="for_content_c">Settings</p>',
-                        '</li>',
-                        '<ul class="draw_settings">',
                             '<li onclick="hello.optionTwitchEmotes();" class="for_content_li for_content_feature twitch_emotes">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Twitch Emotes</p>',
@@ -126,13 +101,43 @@ if (!hello_run) {
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Autocomplete Mentions</p>',
                             '</li>',
-                            '<li onclick="hello.spacebar_mute();" class="for_content_li for_content_feature spacebar_mute">',
+                        '</ul>',
+                        '<li class="for_content_li" onclick="hello.drawUserInterface();">',
+                            '<p class="for_content_c">User Interface</p>',
+                        '</li>',
+                        '<ul class="draw_userinterface">',
+                            '<li onclick="hello.fs();" class="for_content_li for_content_feature fs">',
+                                '<p class="for_content_off"><i class="fi-arrows-out"></i></p>',
+                                '<p class="for_content_p">Fullscreen Video</p>',
+                            '</li>',
+                            '<li onclick="hello.split_chat();" class="for_content_li for_content_feature split_chat">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Spacebar Mute</p>',
+                                '<p class="for_content_p">Split Chat</p>',
+                            '</li>',
+                            '<li onclick="hello.video_window();" class="for_content_li for_content_feature video_window">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Hide Chat</p>',
+                            '</li>',
+                            '<li onclick="hello.chat_window();" class="for_content_li for_content_feature chat_window">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Hide Video</p>',
                             '</li>',
                             '<li onclick="hello.hide_avatars();" class="for_content_li for_content_feature hide_avatars">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Hide Badges</p>',
+                                '<p class="for_content_p">Hide Avatars</p>',
+                            '</li>',
+                            '<li onclick="hello.medium_disable();" class="for_content_li for_content_feature medium_disable">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Hide Background</p>',
+                            '</li>',
+                        '</ul>',
+                        '<li class="for_content_li" onclick="hello.drawSettings();">',
+                            '<p class="for_content_c">Settings</p>',
+                        '</li>',
+                        '<ul class="draw_settings">',
+                            '<li onclick="hello.spacebar_mute();" class="for_content_li for_content_feature spacebar_mute">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Spacebar Mute</p>',
                             '</li>',
                             '<li onclick="hello.show_timestamps();" class="for_content_li for_content_feature show_timestamps">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
@@ -234,11 +239,14 @@ if (!hello_run) {
         drawChrome: function() {
             $('.draw_chrome').slideToggle('fast');
         },
+        drawUserInterface: function() {
+            $('.draw_userinterface').slideToggle('fast');
+        },
         drawSettings: function() {
             $('.draw_settings').slideToggle('fast');
         },
         drawAll: function() {
-            $('.draw_general, .draw_contact, .draw_customize, .draw_social, .draw_chrome, .draw_settings').slideUp();
+            $('.draw_general, .draw_contact, .draw_customize, .draw_social, .draw_chrome, .draw_userinterface, .draw_settings').slideUp();
         },
         //Ref 2.3.1: Input
         input: function(title,content,placeholder,confirm) {
