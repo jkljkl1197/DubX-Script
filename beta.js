@@ -348,7 +348,7 @@ if (!hello_run) {
             });
         },
         report_modal: function() {
-            hello.input('Bug Report:','Report (Please only report bugs for DubX, not Dubtrack):','Please give a detailed description of the bug.','confirm-for36','cancel');
+            hello.input('Bug Report:','Report: (Please only report bugs for DubX, not Dubtrack)','Please give a detailed description of the bug.','confirm-for36','cancel');
             $('.confirm-for36').click(hello.report_content);
             $('.confirm-for36').click(hello.closeErr);
         },
