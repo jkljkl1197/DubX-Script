@@ -45,7 +45,7 @@ if (!hello_run) {
         let_css: false,
         let_hide_badges: false,
         let_nicole: false,
-        let_show_timestamps: false;
+        let_show_timestamps: false,
         let_video_window: false,
         let_twitch_emotes: false,
         let_emoji_preview: false,
