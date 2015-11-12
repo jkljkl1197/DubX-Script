@@ -1,6 +1,6 @@
 /*
     THE Q PUBLIC LICENSE version 1.0
-    Copyright (C) 1999-2005 Trolltech AS, Norway. 
+    Copyright (C) 1999-2005 Trolltech AS, Norway.
     Everyone is permitted to copy and distribute this license document.
     The intent of this license is to establish freedom to share and change the software regulated by this license under the open source model.
     This license applies to any software containing a notice placed by the copyright holder saying that it may be distributed under the terms of the Q Public License version 1.0. Such software is herein referred to as the Software. This license covers modification and distribution of the Software, use of third-party application programs based on the Software, and development of free software which uses the Software.
@@ -8,16 +8,16 @@
     1. You are granted the non-exclusive rights set forth in this license provided you agree to and comply with any and all conditions in this license. Whole or partial distribution of the Software, or software items that link with the Software, in any form signifies acceptance of this license.
     2. You may copy and distribute the Software in unmodified form provided that the entire package, including - but not restricted to - copyright, trademark notices and disclaimers, as released by the initial developer of the Software, is distributed.
     3. You may make modifications to the Software and distribute your modifications, in a form that is separate from the Software, such as patches. The following restrictions apply to modifications:
-    a. Modifications must not alter or remove any copyright notices in the Software. 
+    a. Modifications must not alter or remove any copyright notices in the Software.
     b. When modifications to the Software are released under this license, a non-exclusive royalty-free right is granted to the initial developer of the Software to distribute your modification in future versions of the Software provided such versions remain available under these terms in addition to any other license(s) of the initial developer.
     4. You may distribute machine-executable forms of the Software or machine-executable forms of modified versions of the Software, provided that you meet these restrictions:
-    a. You must include this license document in the distribution. 
-    b. You must ensure that all recipients of the machine-executable forms are also able to receive the complete machine-readable source code to the distributed Software, including all modifications, without any charge beyond the costs of data transfer, and place prominent notices in the distribution explaining this. 
+    a. You must include this license document in the distribution.
+    b. You must ensure that all recipients of the machine-executable forms are also able to receive the complete machine-readable source code to the distributed Software, including all modifications, without any charge beyond the costs of data transfer, and place prominent notices in the distribution explaining this.
     c. You must ensure that all modifications included in the machine-executable forms are available under the terms of this license.
     5. You may use the original or modified versions of the Software to compile, link and run application programs legally developed by you or by others.
     6. You may develop application programs, reusable components and other software items that link with the original or modified versions of the Software. These items, when distributed, are subject to the following requirements:
-    a. You must ensure that all recipients of machine-executable forms of these items are also able to receive and use the complete machine-readable source code to the items without any charge beyond the costs of data transfer. 
-    b. You must explicitly license all recipients of your items to use and re-distribute original and modified versions of the items in both machine-executable and source code forms. The recipients must be able to do so without any charges whatsoever, and they must be able to re-distribute to anyone they choose. 
+    a. You must ensure that all recipients of machine-executable forms of these items are also able to receive and use the complete machine-readable source code to the items without any charge beyond the costs of data transfer.
+    b. You must explicitly license all recipients of your items to use and re-distribute original and modified versions of the items in both machine-executable and source code forms. The recipients must be able to do so without any charges whatsoever, and they must be able to re-distribute to anyone they choose.
     c. If the items are not available to the general public, and the initial developer of the Software requests a copy of the items, then you must supply one.
     Limitations of Liability
     In no event shall the initial developers or copyright holders be liable for any damages whatsoever, including - but not restricted to - lost revenue or profits or other direct, indirect, special, incidental or consequential damages, even if they have been advised of the possibility of such damages, except to the extent invariable law, if any, provides otherwise.
@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.01.21 - SHOW TIMESTAMPS';
+    var our_version = '03.01.22 - HIDE BADGES';
 
     //Ref 1: Variables
     var options = {
@@ -43,18 +43,21 @@ if (!hello_run) {
         let_active_afk: true,
         let_chat_window: false,
         let_css: false,
+        let_hide_badges: false;
         let_nicole: false,
+        let_show_timestamps: false;
+        let_video_window: false,
         let_twitch_emotes: false,
         let_emoji_preview: false,
         let_spacebar_mute: false,
         let_autocomplete_mentions : false
     };
-    
+
     $('html').addClass('dubx');
-    
+
     //Ref 1.1
     $('.player_sharing').append('<span class="icon-history eta_tooltip_t" onmouseover="hello.eta();" onmouseout="hello.hide_eta();"></span>');
-    
+
     //Ref 2: Options
     var hello = {
         gitRoot: 'https://rawgit.com/sinfulBA/DubX-Script/master',
@@ -132,7 +135,11 @@ if (!hello_run) {
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Spacebar Mute</p>',
                             '</li>',
-							'<li onclick="hello.show_timestamps();" class="for_content_li for_content_feature show_timestamps">',
+                            '<li onclick="hello.hide_badges();" class="for_content_li for_content_feature hide_badges">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Hide Badges</p>',
+                            '</li>',
+                            '<li onclick="hello.show_timestamps();" class="for_content_li for_content_feature show_timestamps">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Show Timestamps</p>',
                             '</li>',
@@ -284,7 +291,7 @@ if (!hello_run) {
                 hello.advance_vote();
                 hello.option('autovote','true');
                 hello.on('.autovote');
-                Dubtrack.Events.bind("realtime:room_playlist-update", hello.advance_vote);    
+                Dubtrack.Events.bind("realtime:room_playlist-update", hello.advance_vote);
             } else {
                 options.let_autovote = false;
                 hello.option('autovote','false');
@@ -481,6 +488,19 @@ if (!hello_run) {
                 hello.off('.css');
             }
         },
+        hide_badges: function() {
+            if(!options.let_hide_badges) {
+                options.let_hide_badges = true;
+                $('head').append('<link class="hide_badges_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/hide_badges.css">');
+                hello.option('hide_badges','true');
+                hello.on('.hide_badges');
+            } else {
+                options.let_hide_badges = false;
+                $('.hide_badges_link').remove();
+                hello.option('hide_badges','false');
+                hello.off('.hide_badges');
+            }
+        },
         nicole: function() {
             if (!options.let_nicole) {
                 options.let_nicole = true;
@@ -511,7 +531,7 @@ if (!hello_run) {
                 $('body').append('<div class="medium" style="width: 100vw;height: 100vh;z-index: -999998;position: fixed; background: url('+content+');background-size: cover;top: 0;"></div>');
             }
         },
-		show_timestamps: function() {
+        show_timestamps: function() {
             if(!options.let_show_timestamps) {
                 options.let_show_timestamps = true;
                 $('head').append('<link class="show_timestamps_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/show_timestamps.css">');
@@ -568,7 +588,7 @@ if (!hello_run) {
          */
         whenAvailable : function(waitingFor, cb) {
             var interval = 100; // ms
-            var currInterval = 0; 
+            var currInterval = 0;
             var limit = 50; // how many intervals
 
             var check = function () {
@@ -585,13 +605,13 @@ if (!hello_run) {
             window.setTimeout(check, interval);
         },
 
-        twitch : { 
+        twitch : {
             template: "//static-cdn.jtvnw.net/emoticons/v1/{image_id}/3.0",
             specialEmotes: [],
             emotes: {},
             chatRegex : new RegExp(":([-_a-z0-9]+):", "ig")
         },
-        bttv : { 
+        bttv : {
             template: "//cdn.betterttv.net/emote/{image_id}/3x",
             emotes: {},
             chatRegex : new RegExp(":([&!()\\-_a-z0-9]+):", "ig")
@@ -605,7 +625,7 @@ if (!hello_run) {
             return isNaN(lastSaved) || today - lastSaved > day * 5 || !localStorage[apiName +'_api'];
         },
         /**************************************************************************
-         * Loads the twitch emotes from the api.  
+         * Loads the twitch emotes from the api.
          * http://api.twitch.tv/kraken/chat/emoticon_images
          */
         loadTwitchEmotes: function(){
@@ -629,7 +649,7 @@ if (!hello_run) {
                 var twEvent = new Event('twitch:loaded');
                 document.body.dispatchEvent(twEvent);
             }
-            
+
         },
         loadBTTVEmotes: function(){
             var self = hello;
@@ -658,7 +678,7 @@ if (!hello_run) {
             var self = hello;
             data.emoticons.forEach(function(el,i,arr){
                 var _key = el.code.toLowerCase();
-                
+
                 // move twitch non-named emojis to their own array
                 if (el.code.indexOf('\\') >= 0) {
                     self.twitch.specialEmotes.push([el.code, el.id]);
@@ -668,7 +688,7 @@ if (!hello_run) {
                 if (emojify.emojiNames.indexOf(_key) >= 0) {
                     return; // do nothing so we don't override emoji
                 }
-                
+
                 if (!self.twitch.emotes[_key]){
                     // if emote doesn't exist, add it
                     self.twitch.emotes[_key] = el.id;
@@ -676,7 +696,7 @@ if (!hello_run) {
                     // override if it's a global emote (null set = global emote)
                     self.twitch.emotes[_key] = el.id;
                 }
-                
+
             });
             self.twitchJSONSLoaded = true;
             self.emojiEmotes = emojify.emojiNames.concat(Object.keys(self.twitch.emotes));
@@ -685,7 +705,7 @@ if (!hello_run) {
             var self = hello;
             data.emotes.forEach(function(el,i,arr){
                 var _key = el.code.toLowerCase();
-                
+
                 if (el.code.indexOf(':') >= 0) {
                     return; // don't want any emotes with smileys and stuff
                 }
@@ -697,9 +717,9 @@ if (!hello_run) {
                 if (el.code.indexOf('(') >= 0) {
                     _key = _key.replace(/([()])/g, "");
                 }
-                
+
                 self.bttv.emotes[_key] = el.id;
-                
+
             });
             self.bttvJSONSLoaded = true;
             self.emojiEmotes = self.emojiEmotes.concat(Object.keys(self.bttv.emotes));
@@ -707,7 +727,7 @@ if (!hello_run) {
         /**************************************************************************
          * handles replacing twitch emotes in the chat box with the images
          */
-        
+
         replaceTextWithEmote: function(){
             var self = hello;
             var _regex = self.twitch.chatRegex;
@@ -717,15 +737,15 @@ if (!hello_run) {
             function makeImage(src, name){
                 return '<img class="emoji twitch-emoji" title="'+name+'" alt="'+name+'" src="'+src+'" />';
             }
-            
+
             var $last = $('.chat-main .text').last();
             if (!$last.html()) { return; } // nothing to do
 
             if (self.bttvJSONSLoaded) { _regex = self.bttv.chatRegex; }
-            
+
             var emoted = $last.html().replace(_regex, function(matched, p1){
                 var _id, _src, _desc, key = p1.toLowerCase();
-                
+
                 if (typeof self.twitch.emotes[key] !== 'undefined'){
                     _id = self.twitch.emotes[key];
                     _src = self.twitch.template.replace("{image_id}", _id);
@@ -733,7 +753,7 @@ if (!hello_run) {
                 } else if (typeof self.bttv.emotes[key] !== 'undefined') {
                     _id = self.bttv.emotes[key];
                     _src = self.bttv.template.replace("{image_id}", _id);
-                    return makeImage(_src, key); 
+                    return makeImage(_src, key);
                 } else {
                     return matched;
                 }
@@ -755,7 +775,7 @@ if (!hello_run) {
                 } else {
                     this.replaceTextWithEmote();
                 }
-                
+
                 Dubtrack.Events.bind("realtime:chat-message", this.replaceTextWithEmote);
                 options.let_twitch_emotes = true;
                 hello.option('twitch_emotes', 'true');
@@ -771,7 +791,7 @@ if (!hello_run) {
          * Populates the popup container with a list of items that you can click/enter
          * on to autocomplete items in the chat box
          * @param  {Array} acArray  the array of items to be added.  Each item is an object:
-         * { 
+         * {
          *   src : full image src,
          *   text : text for auto completion,
          *   cn : css class name for to be concat with '-preview',
@@ -784,13 +804,13 @@ if (!hello_run) {
             function makePreviewContainer(cn){
                 var d = document.createElement('li');
                 d.className = cn;
-                return d; 
+                return d;
             }
             function makeImg(src, altText) {
                 var i = document.createElement('img');
                 i.src = src;
-                if (altText) { 
-                    i.title = altText; 
+                if (altText) {
+                    i.title = altText;
                     i.alt = altText;
                 }
                 var div = document.createElement('div');
@@ -818,7 +838,7 @@ if (!hello_run) {
                 container.tabIndex = -1;
                 return container;
             }
-            
+
             var aCp =  document.getElementById('autocomplete-preview');
             aCp.innerHTML = "";
             self.displayBoxIndex = -1;
@@ -920,13 +940,13 @@ if (!hello_run) {
 
                 emojiArray.forEach(function(val,i,arr){
                     _key = val.toLowerCase();
-                    
+
                     if (typeof hello.twitch.emotes[_key] !== 'undefined') {
                         listArray.push(self.createTwitchObj(hello.twitch.emotes[_key], val));
                     }
                     if (typeof hello.bttv.emotes[_key] !== 'undefined') {
                         listArray.push(self.createBttvObj(hello.bttv.emotes[_key], val));
-                    } 
+                    }
                     if (emojify.emojiNames.indexOf(_key) >= 0) {
                         listArray.push(self.createEmojiObj(val));
                     }
@@ -953,11 +973,11 @@ if (!hello_run) {
             var self = hello;
             var currentText = this.value;
             var keyCharMin = 3; // when to start showing previews, default to 3 chars
-            
+
             var filterText = currentText.replace(/(:|@)([&!()\+\-_a-z0-9]+)$/i, function(matched, p1, p2){
                 hello.previewSearchStr = p2;
                 keyCharMin = (p1 === "@") ? 1 : 3;
-                
+
                 // twitch and emoji
                 if (p2 && p2.length >= keyCharMin && p1 === ":" && options.let_emoji_preview) {
                     self.emojiUtils.addToPreviewList( self.emojiUtils.filterEmoji(p2) );
@@ -968,7 +988,7 @@ if (!hello_run) {
                     self.previewList( self.filterUsers(p2) );
                 }
             });
-            
+
             var lastChar = currentText.charAt(currentText.length - 1);
             if (self.previewSearchStr.length < keyCharMin ||
                 lastChar === ":" ||
@@ -1068,7 +1088,7 @@ if (!hello_run) {
     hello.previewListInit();
     hello.userAutoComplete();
 
-    //Ref 4: 
+    //Ref 4:
     if (localStorage.getItem('autovote') === 'true') {
         hello.autovote();
     }
@@ -1087,7 +1107,10 @@ if (!hello_run) {
     if (localStorage.getItem('chat_window') === 'true') {
         hello.chat_window();
     }
-	if (localStorage.getItem('show_timestamps') === 'true') {
+    if (localStorage.getItem('hide_badges') === 'true') {
+        hello.hide_badges();
+    }
+    if (localStorage.getItem('show_timestamps') === 'true') {
         hello.show_timestamps();
     }
     if (localStorage.getItem('video_window') === 'true') {
@@ -1113,11 +1136,11 @@ if (!hello_run) {
     }
     $('document').ready(hello.css_run);
     $('document').ready(hello.medium_load);
-    
+
     $('.for').click(function() {
         $('.for_content').show();
     });
-    
+
     // Ref 5:
     $('.chat-main').on('DOMNodeInserted', function(e) {
         var itemEl = $(e.target);
