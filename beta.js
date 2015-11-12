@@ -88,11 +88,11 @@ if (!hello_run) {
                             '</li>',
                             '<li onclick="hello.chat_window();" class="for_content_li for_content_feature chat_window">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Chat Only</p>',
+                                '<p class="for_content_p">Hide Video</p>',
                             '</li>',
                             '<li onclick="hello.video_window();" class="for_content_li for_content_feature video_window">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Video Only</p>',
+                                '<p class="for_content_p">Hide Chat</p>',
                             '</li>',
                             '<li onclick="hello.fs();" class="for_content_li for_content_feature fs">',
                                 '<p class="for_content_off"><i class="fi-arrows-out"></i></p>',
@@ -438,9 +438,6 @@ if (!hello_run) {
                 $('head').append('<link class="chat_window_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/chat_window.css">');
                 hello.option('chat_window','true');
                 hello.on('.chat_window');
-                if (options.let_video_window) {
-                    hello.video_window();
-                }
             } else {
                 options.let_chat_window = false;
                 $('.chat_window_link').remove();
@@ -550,9 +547,6 @@ if (!hello_run) {
                 $('head').append('<link class="video_window_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/video_window.css">');
                 hello.option('video_window','true');
                 hello.on('.video_window');
-                if (options.let_chat_window) {
-                    hello.chat_window();
-                }
             } else {
                 options.let_video_window = false;
                 $('.video_window_link').remove();
