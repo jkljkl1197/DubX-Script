@@ -95,7 +95,7 @@ if (!hello_run) {
                             '</li>',
                             '<li onclick="hello.optionEmojiPreview();" class="for_content_li for_content_feature emoji_preview">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Emoji Preview</p>',
+                                '<p class="for_content_p">Autocomplete Emoji</p>',
                             '</li>',
                             '<li onclick="hello.optionMentions();" class="for_content_li for_content_feature autocomplete_mentions">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
