@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.01.27 - UPDATE MENU';
+    var our_version = '03.01.28 - UPDATE MENU';
 
     //Ref 1: Variables
     var options = {
@@ -152,14 +152,6 @@ if (!hello_run) {
                             '<p class="for_content_c">Customize</p>',
                         '</li>',
                         '<ul class="draw_customize">',
-                            '<li onclick="hello.css_modal();" class="for_content_li for_content_feature">',
-                                '<p class="for_content_off"><i class="fi-unlink"></i></p>',
-                                '<p class="for_content_p">Custom CSS</p>',
-                            '</li>',
-                            '<li onclick="hello.medium_modal();" class="for_content_li for_content_feature">',
-                                '<p class="for_content_off"><i class="fi-unlink"></i></p>',
-                                '<p class="for_content_p">Custom Background</p>',
-                            '</li>',
                             '<li onclick="hello.nicole();" class="for_content_li for_content_feature nicole">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Plug.dj Theme</p>',
@@ -167,6 +159,14 @@ if (!hello_run) {
                             '<li onclick="hello.css_for_the_world();" class="for_content_li for_content_feature css">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Community Theme</p>',
+                            '</li>',
+                            '<li onclick="hello.css_modal();" class="for_content_li for_content_feature">',
+                                '<p class="for_content_off"><i class="fi-unlink"></i></p>',
+                                '<p class="for_content_p">Custom CSS</p>',
+                            '</li>',
+                            '<li onclick="hello.medium_modal();" class="for_content_li for_content_feature">',
+                                '<p class="for_content_off"><i class="fi-unlink"></i></p>',
+                                '<p class="for_content_p">Custom Background</p>',
                             '</li>',
                         '</ul>',
                         '<li class="for_content_li" onclick="hello.drawContact();">',
@@ -348,7 +348,7 @@ if (!hello_run) {
             });
         },
         report_modal: function() {
-            hello.input('Bug Report:','Report:','Please give a detailed description of the bug.','confirm-for36','cancel');
+            hello.input('Bug Report:','Report (Please only report bugs for DubX, not Dubtrack):','Please give a detailed description of the bug.','confirm-for36','cancel');
             $('.confirm-for36').click(hello.report_content);
             $('.confirm-for36').click(hello.closeErr);
         },
