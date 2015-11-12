@@ -42,7 +42,7 @@ if (!hello_run) {
         let_active_afk: true,
         let_chat_window: false,
         let_css: false,
-        let_hide_badges: false,
+        let_hide_avatars: false,
         let_nicole: false,
         let_show_timestamps: false,
         let_video_window: false,
@@ -130,7 +130,7 @@ if (!hello_run) {
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Spacebar Mute</p>',
                             '</li>',
-                            '<li onclick="hello.hide_badges();" class="for_content_li for_content_feature hide_badges">',
+                            '<li onclick="hello.hide_avatars();" class="for_content_li for_content_feature hide_avatars">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Hide Badges</p>',
                             '</li>',
@@ -464,17 +464,17 @@ if (!hello_run) {
                 hello.off('.css');
             }
         },
-        hide_badges: function() {
-            if(!options.let_hide_badges) {
-                options.let_hide_badges = true;
-                $('head').append('<link class="hide_badges_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/hide_badges.css">');
-                hello.option('hide_badges','true');
-                hello.on('.hide_badges');
+        hide_avatars: function() {
+            if(!options.let_hide_avatars) {
+                options.let_hide_avatars = true;
+                $('head').append('<link class="hide_avatars_link" rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/hide_avatars.css">');
+                hello.option('hide_avatars','true');
+                hello.on('.hide_avatars');
             } else {
-                options.let_hide_badges = false;
-                $('.hide_badges_link').remove();
-                hello.option('hide_badges','false');
-                hello.off('.hide_badges');
+                options.let_hide_avatars = false;
+                $('.hide_avatars_link').remove();
+                hello.option('hide_avatars','false');
+                hello.off('.hide_avatars');
             }
         },
         nicole: function() {
@@ -1077,8 +1077,8 @@ if (!hello_run) {
     if (localStorage.getItem('chat_window') === 'true') {
         hello.chat_window();
     }
-    if (localStorage.getItem('hide_badges') === 'true') {
-        hello.hide_badges();
+    if (localStorage.getItem('hide_avatars') === 'true') {
+        hello.hide_avatars();
     }
     if (localStorage.getItem('show_timestamps') === 'true') {
         hello.show_timestamps();
