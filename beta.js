@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.01.22 - HIDE BADGES';
+    var our_version = '03.01.25 - HIDE CHAT/VIDEO';
 
     //Ref 1: Variables
     var options = {
@@ -37,7 +37,6 @@ if (!hello_run) {
         let_split_chat: false,
         let_fs: false,
         let_medium_disable: false,
-        let_work: false,
         let_warn_redirect: false,
         let_afk: false,
         let_active_afk: true,
@@ -50,7 +49,7 @@ if (!hello_run) {
         let_twitch_emotes: false,
         let_emoji_preview: false,
         let_spacebar_mute: false,
-        let_autocomplete_mentions : false
+        let_autocomplete_mentions: false
     };
 
     $('html').addClass('dubx');
@@ -97,10 +96,6 @@ if (!hello_run) {
                             '<li onclick="hello.fs();" class="for_content_li for_content_feature fs">',
                                 '<p class="for_content_off"><i class="fi-arrows-out"></i></p>',
                                 '<p class="for_content_p">Fullscreen Video</p>',
-                            '</li>',
-                            '<li onclick="hello.work();" class="for_content_li for_content_feature work">',
-                                '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Work Mode</p>',
                             '</li>',
                             '<li onclick="hello.split_chat();" class="for_content_li for_content_feature split_chat">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
@@ -374,22 +369,6 @@ if (!hello_run) {
                 $('.medium').show();
                 hello.option('medium_disable','false');
                 hello.off('.medium_disable');
-            }
-        },
-        disable_work: function() {
-            options.let_work = false;
-            $('#main-room').show();
-            hello.option('work','false');
-            hello.off('.work');
-        },
-        work: function() {
-            if (!options.let_work) {
-                options.let_work = true;
-                $('#main-room').hide();
-                hello.option('work','true');
-                hello.on('.work');
-            } else {
-                hello.disable_work();
             }
         },
         warn_redirect: function() {
@@ -1091,9 +1070,6 @@ if (!hello_run) {
     }
     if (localStorage.getItem('medium_disable') === 'true') {
         hello.medium_disable();
-    }
-    if (localStorage.getItem('work') === 'true') {
-        hello.work();
     }
     if (localStorage.getItem('warn_redirect') === 'true') {
         hello.warn_redirect();

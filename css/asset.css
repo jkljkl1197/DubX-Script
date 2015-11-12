@@ -164,6 +164,10 @@
 #chat .chat-container .chat-messages .chat-main li .activity-row {
 	padding-top: 0.6rem;
 }
+#chat .chat-container .chat-messages .chat-main li.chat-system-loading, #chat .chat-container .chat-messages .chat-main li.system, #chat .chat-container .chat-messages .chat-main li.system-error, #chat .chat-container .chat-messages .chat-main li.chat-me-command-joined {
+	padding-top: 1rem;
+	padding: 5px;
+}
 
 /* Custom CSS for ranks & special users */
 #chat .chat-container ul.chat-main li.user-551d295433cd73030089d184 .activity-row .text p a.username:hover:before,
