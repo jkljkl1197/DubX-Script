@@ -765,11 +765,14 @@ if (!hello_run) {
 
                 if (typeof self.twitch.emotes[key] !== 'undefined'){
                     _id = self.twitch.emotes[key];
-                    _src = self.twitch.template.replace("{image_id}", _id);
+                    _src = self.twitch.template(_id);
                     return makeImage(_src, key);
                 } else if (typeof self.bttv.emotes[key] !== 'undefined') {
                     _id = self.bttv.emotes[key];
-                    _src = self.bttv.template.replace("{image_id}", _id);
+                    _src = self.bttv.template(_id);
+                    return makeImage(_src, key);
+                } else if (typeof self.tasty.emotes[key] !== 'undefined') {
+                    _src = self.tasty.template(key);
                     return makeImage(_src, key);
                 } else {
                     return matched;
