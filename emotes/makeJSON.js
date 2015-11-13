@@ -1,13 +1,16 @@
 /*
   this is meant to run locally with NODE and it just creates a JSON file with
   all the emotes data from the subfolders 
+
+  we might want to use rawgit but it seems to be working fin with their own raw. 
+  https://rawgit.com/sinfulBA/DubX-Script/master
  */
 
 var fs = require('fs');
 var path = require('path');
 
 var tastyJSON = {
-  template: 'https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/emotes/',
+  template: '//raw.githubusercontent.com/sinfulBA/DubX-Script/master/emotes/',
   emotes: {
     'cats' : {},
     'gifs' : {},
