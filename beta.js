@@ -59,7 +59,7 @@ if (!hello_run) {
 
     //Ref 2: Options
     var hello = {
-        gitRoot: 'https://github.com/sinfulBA/DubX-Script/tree/testing',
+        gitRoot: 'https://github.com/sinfulBA/DubX-Script/blob/testing',
         //Ref 2.1: Initialize
         personalize: function() {
             $('.isUser').text(Dubtrack.session.get('username'));
