@@ -9,18 +9,8 @@
 var fs = require('fs');
 var path = require('path');
 
-var tastyJSON = {
-  template: '//raw.githubusercontent.com/sinfulBA/DubX-Script/master/emotes/',
-  emotes: {
-    'cats' : {},
-    'gifs' : {},
-    'logos' : {},
-    'misc' : {},
-    'tastycat' : {},
-    'userfaces' : {}
-  }
-};
-
+var contents = fs.readFileSync(__dirname + "/emotes.json");
+var jsonContent = JSON.parse(contents);
 
 var sets = [
   'cats',
@@ -31,23 +21,23 @@ var sets = [
   'userfaces'
 ];
 
-function getFiles(set){
-  
-  var files = fs.readdirSync(__dirname + '/' + set);
-  var ext, base;
+var tastyJSON = {
+  template: '//raw.githubusercontent.com/sinfulBA/DubX-Script/master/emotes/',
+  emotes: { }
+};
 
-  for (var i in files) {
-    ext = path.extname(files[i]);
-    base = path.basename(files[i], ext);
-
-    if (ext === ".gif" || ext === ".png") {
-      tastyJSON.emotes[set][base] = set + '/' + files[i];
+function getEmotes(set) {
+  for (var emote in jsonContent[set]) {
+    var url = jsonContent[set][emote].url.split('/');
+    if (emote.indexOf('amp;') >= 0){ 
+      emote = emote.replace("amp;", ""); 
     }
+    tastyJSON.emotes[emote] = set + "/" + url[url.length - 1];
   }
 }
 
 sets.forEach(function(val,i,r){
-  getFiles(val);
+  getEmotes(val);
 });
 
 console.log(tastyJSON);
