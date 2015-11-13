@@ -22,7 +22,6 @@ var sets = [
 ];
 
 var tastyJSON = {
-  template: '//raw.githubusercontent.com/sinfulBA/DubX-Script/testing/emotes/',
   emotes: { }
 };
 

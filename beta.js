@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.01.28 - UPDATE MENU';
+    var our_version = '03.01.30 - TASTY EMOTES';
 
     //Ref 1: Variables
     var options = {
@@ -91,7 +91,7 @@ if (!hello_run) {
                             '</li>',
                             '<li onclick="hello.optionTwitchEmotes();" class="for_content_li for_content_feature twitch_emotes">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Twitch Emotes</p>',
+                                '<p class="for_content_p">Emotes</p>',
                             '</li>',
                             '<li onclick="hello.optionEmojiPreview();" class="for_content_li for_content_feature emoji_preview">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
