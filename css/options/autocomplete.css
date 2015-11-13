@@ -47,6 +47,10 @@
   background-image: url(http://i.imgur.com/oTfAI0O.png);
 }
 
+.tasty-previews {
+  background-image: url(https://raw.githubusercontent.com/sinfulBA/DubX-Script/master/emotes/tastycat/21.png);
+}
+
 #autocomplete-preview span {
   font-size: 0.8em;
   display:inline-block; 

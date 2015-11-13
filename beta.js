@@ -59,7 +59,7 @@ if (!hello_run) {
 
     //Ref 2: Options
     var hello = {
-        gitRoot: 'https://rawgit.com/sinfulBA/DubX-Script/master',
+        gitRoot: 'https://rawgit.com/sinfulBA/DubX-Script/testing',
         //Ref 2.1: Initialize
         personalize: function() {
             $('.isUser').text(Dubtrack.session.get('username'));
@@ -91,7 +91,7 @@ if (!hello_run) {
                             '</li>',
                             '<li onclick="hello.optionTwitchEmotes();" class="for_content_li for_content_feature twitch_emotes">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Twitch Emotes</p>',
+                                '<p class="for_content_p">Emotes</p>',
                             '</li>',
                             '<li onclick="hello.optionEmojiPreview();" class="for_content_li for_content_feature emoji_preview">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
@@ -578,24 +578,31 @@ if (!hello_run) {
                     cb();
                 } else if (currInterval < limit) {
                     currInterval++;
-                    console.log('not available', waitingFor);
+                    console.log('waiting for', waitingFor);
                     window.setTimeout(check, interval);
                 }
             };
 
             window.setTimeout(check, interval);
         },
-
+        emoji : {
+            template: function(id) { return emojify.defaultConfig.img_dir+'/'+encodeURI(id)+'.png'; },
+        },
         twitch : {
-            template: "//static-cdn.jtvnw.net/emoticons/v1/{image_id}/3.0",
+            template: function(id) { return "//static-cdn.jtvnw.net/emoticons/v1/" + id + "/3.0"; },
             specialEmotes: [],
             emotes: {},
             chatRegex : new RegExp(":([-_a-z0-9]+):", "ig")
         },
         bttv : {
-            template: "//cdn.betterttv.net/emote/{image_id}/3x",
+            template: function(id) { return  "//cdn.betterttv.net/emote/" + id + "/3x";  },
             emotes: {},
             chatRegex : new RegExp(":([&!()\\-_a-z0-9]+):", "ig")
+        },
+        tasty : {
+            url: "",
+            template: function(id) { return hello.tasty.url + hello.tasty.emotes[id]; },
+            emotes: {}
         },
         shouldUpdateAPIs : function(apiName){
             var self = this;
@@ -655,6 +662,28 @@ if (!hello_run) {
             }
 
         },
+        loadTastyEmotes: function(){
+            var self = hello;
+            var savedData;
+            // if it doesn't exist in localStorage or it's older than 5 days
+            // grab it from the bttv API
+            if (self.shouldUpdateAPIs('tasty')) {
+                console.log('Dubx','tasty','loading from api');
+                var tastyApi = new self.getJSON(hello.gitRoot + '/emotes/tastyemotes.json', 'tasty:loaded');
+                tastyApi.done(function(data){
+                    localStorage.setItem('tasty_api_timestamp', Date.now().toString());
+                    localStorage.setItem('tasty_api', data);
+                    self.processTastyEmotes(JSON.parse(data));
+                });
+            } else {
+                console.log('Dubx','tasty','loading from localstorage');
+                savedData = JSON.parse(localStorage.getItem('tasty_api'));
+                self.processTastyEmotes(savedData);
+                savedData = null; // clear the var from memory
+                var twEvent = new Event('tasty:loaded');
+                document.body.dispatchEvent(twEvent);
+            }
+        },
         processTwitchEmotes: function(data) {
             var self = hello;
             data.emoticons.forEach(function(el,i,arr){
@@ -705,6 +734,13 @@ if (!hello_run) {
             self.bttvJSONSLoaded = true;
             self.emojiEmotes = self.emojiEmotes.concat(Object.keys(self.bttv.emotes));
         },
+        processTastyEmotes: function(data) {
+            var self = hello;
+            self.tasty.url = data.template;
+            self.tasty.emotes = data.emotes;
+            self.tastyJSONLoaded = true;
+            self.emojiEmotes = self.emojiEmotes.concat(Object.keys(self.tasty.emotes));
+        },
         /**************************************************************************
          * handles replacing twitch emotes in the chat box with the images
          */
@@ -729,11 +765,14 @@ if (!hello_run) {
 
                 if (typeof self.twitch.emotes[key] !== 'undefined'){
                     _id = self.twitch.emotes[key];
-                    _src = self.twitch.template.replace("{image_id}", _id);
+                    _src = self.twitch.template(_id);
                     return makeImage(_src, key);
                 } else if (typeof self.bttv.emotes[key] !== 'undefined') {
                     _id = self.bttv.emotes[key];
-                    _src = self.bttv.template.replace("{image_id}", _id);
+                    _src = self.bttv.template(_id);
+                    return makeImage(_src, key);
+                } else if (typeof self.tasty.emotes[key] !== 'undefined') {
+                    _src = self.tasty.template(key);
                     return makeImage(_src, key);
                 } else {
                     return matched;
@@ -749,10 +788,11 @@ if (!hello_run) {
         optionTwitchEmotes: function(){
             if (!options.let_twitch_emotes) {
                 document.body.addEventListener('twitch:loaded', this.loadBTTVEmotes);
+                document.body.addEventListener('bttv:loaded', this.loadTastyEmotes);
 
                 if (!hello.twitchJSONSLoaded) {
                     hello.loadTwitchEmotes();
-                    document.body.addEventListener('bttv:loaded', this.replaceTextWithEmote);
+                    document.body.addEventListener('tasty:loaded', this.replaceTextWithEmote);
                 } else {
                     this.replaceTextWithEmote();
                 }
@@ -890,28 +930,12 @@ if (!hello_run) {
          * A bunch of utility helpers for the emoji preview
          */
         emojiUtils : {
-            createTwitchObj : function(id, name) {
+            createPreviewObj : function(type, id, name) {
                 return {
-                    src : hello.twitch.template.replace("{image_id}", id),
+                    src : hello[type].template(id),
                     text : ":" + name + ":",
                     alt : name,
-                    cn : "twitch"
-                };
-            },
-            createBttvObj : function(id, name) {
-                return {
-                    src : hello.bttv.template.replace("{image_id}", id),
-                    text : ":" + name + ":",
-                    alt : name,
-                    cn : "bttv"
-                };
-            },
-            createEmojiObj : function(name) {
-                return {
-                    src : emojify.defaultConfig.img_dir+'/'+encodeURI(name)+'.png',
-                    text : ":" + name + ":",
-                    alt : ":" + name + ":",
-                    cn : "emoji"
+                    cn : type
                 };
             },
             addToPreviewList : function(emojiArray) {
@@ -921,15 +945,17 @@ if (!hello_run) {
 
                 emojiArray.forEach(function(val,i,arr){
                     _key = val.toLowerCase();
-
                     if (typeof hello.twitch.emotes[_key] !== 'undefined') {
-                        listArray.push(self.createTwitchObj(hello.twitch.emotes[_key], val));
+                        listArray.push(self.createPreviewObj("twitch", hello.twitch.emotes[_key], val));
                     }
                     if (typeof hello.bttv.emotes[_key] !== 'undefined') {
-                        listArray.push(self.createBttvObj(hello.bttv.emotes[_key], val));
+                        listArray.push(self.createPreviewObj("bttv", hello.bttv.emotes[_key], val));
+                    }
+                    if (typeof hello.tasty.emotes[_key] !== 'undefined') {
+                        listArray.push(self.createPreviewObj("tasty", _key, val));
                     }
                     if (emojify.emojiNames.indexOf(_key) >= 0) {
-                        listArray.push(self.createEmojiObj(val));
+                        listArray.push(self.createPreviewObj("emoji", val, val));
                     }
                 });
 
