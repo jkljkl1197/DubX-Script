@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run) {
     hello_run = true;
-    var our_version = '03.01.28 - UPDATE MENU';
+    var our_version = '03.01.30 - TASTY EMOTES';
 
     //Ref 1: Variables
     var options = {
@@ -59,7 +59,7 @@ if (!hello_run) {
 
     //Ref 2: Options
     var hello = {
-        gitRoot: 'https://rawgit.com/sinfulBA/DubX-Script/testing',
+        gitRoot: 'https://rawgit.com/sinfulBA/DubX-Script/master',
         //Ref 2.1: Initialize
         personalize: function() {
             $('.isUser').text(Dubtrack.session.get('username'));
