@@ -32,7 +32,7 @@ function getEmotes(set) {
     if (emote.indexOf('amp;') >= 0){ 
       emote = emote.replace("amp;", ""); 
     }
-    tastyJSON.emotes[emote] = set + "/" + url[url.length - 1];
+    tastyJSON.emotes[emote.toLowerCase()] = set + "/" + url[url.length - 1];
   }
 }
 
