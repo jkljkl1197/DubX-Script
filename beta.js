@@ -59,7 +59,7 @@ if (!hello_run) {
 
     //Ref 2: Options
     var hello = {
-        gitRoot: 'https://rawgit.com/FranciscoG/DubX-Script/dev',
+        gitRoot: 'https://rawgit.com/sinfulBA/DubX-Script/testing',
         //Ref 2.1: Initialize
         personalize: function() {
             $('.isUser').text(Dubtrack.session.get('username'));
@@ -756,12 +756,13 @@ if (!hello_run) {
                 return '<img class="emoji twitch-emoji" title="'+name+'" alt="'+name+'" src="'+src+'" />';
             }
 
-            var $last = $('.chat-main .text').last();
-            if (!$last.html()) { return; } // nothing to do
+            var $chatTarget = $('.chat-main .text').last();
+            
+            if (!$chatTarget.html()) { return; } // nothing to do
 
             if (self.bttvJSONSLoaded) { _regex = self.bttv.chatRegex; }
 
-            var emoted = $last.html().replace(_regex, function(matched, p1){
+            var emoted = $chatTarget.html().replace(_regex, function(matched, p1){
                 var _id, _src, _desc, key = p1.toLowerCase();
 
                 if (typeof self.twitch.emotes[key] !== 'undefined'){
@@ -774,26 +775,25 @@ if (!hello_run) {
                     return makeImage(_src, key);
                 } else if (typeof self.tasty.emotes[key] !== 'undefined') {
                     _src = self.tasty.template(key);
-                    return makeImage(_src, key, self.tasty.emotes[key].width, self.tasty.emotes[key].height);
+                    return makeImage(_src, key, "tasty", self.tasty.emotes[key].width, self.tasty.emotes[key].height);
                 } else {
                     return matched;
                 }
 
             });
 
-            $last.html(emoted);
+            $chatTarget.html(emoted);
         },
         /**************************************************************************
          * Turn on/off the twitch emoji in chat
          */
         optionTwitchEmotes: function(){
+            document.body.addEventListener('twitch:loaded', this.loadBTTVEmotes);
+            document.body.addEventListener('bttv:loaded', this.loadTastyEmotes);
+            
             if (!options.let_twitch_emotes) {
-                document.body.addEventListener('twitch:loaded', this.loadBTTVEmotes);
-                document.body.addEventListener('bttv:loaded', this.loadTastyEmotes);
-
                 if (!hello.twitchJSONSLoaded) {
                     hello.loadTwitchEmotes();
-                    document.body.addEventListener('tasty:loaded', this.replaceTextWithEmote);
                 } else {
                     this.replaceTextWithEmote();
                 }
@@ -875,8 +875,7 @@ if (!hello_run) {
         },
         previewSearchStr : "",
         updateChatInput: function(str){
-            var regexString = hello.previewSearchStr.replace(/([()])/, "\\$1");
-            var _re = new RegExp("(:|@)"+regexString + "$");
+            var _re = new RegExp(":[&!()\\-_a-z0-9]+:?$", "i");
             var fixed_text = $("#chat-txt-message").val().replace(_re, str) + " ";
             $('#autocomplete-preview').empty().removeClass('ac-show');
             $("#chat-txt-message").val(fixed_text).focus();
