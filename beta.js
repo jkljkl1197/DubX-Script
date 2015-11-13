@@ -59,7 +59,7 @@ if (!hello_run) {
 
     //Ref 2: Options
     var hello = {
-        gitRoot: 'https://rawgit.com/sinfulBA/DubX-Script/testing',
+        gitRoot: 'https://rawgit.com/FranciscoG/DubX-Script/dev',
         //Ref 2.1: Initialize
         personalize: function() {
             $('.isUser').text(Dubtrack.session.get('username'));
@@ -600,8 +600,7 @@ if (!hello_run) {
             chatRegex : new RegExp(":([&!()\\-_a-z0-9]+):", "ig")
         },
         tasty : {
-            url: "",
-            template: function(id) { return hello.tasty.url + hello.tasty.emotes[id]; },
+            template: function(id) { return hello.tasty.emotes[id].url; },
             emotes: {}
         },
         shouldUpdateAPIs : function(apiName){
@@ -736,7 +735,6 @@ if (!hello_run) {
         },
         processTastyEmotes: function(data) {
             var self = hello;
-            self.tasty.url = data.template;
             self.tasty.emotes = data.emotes;
             self.tastyJSONLoaded = true;
             self.emojiEmotes = self.emojiEmotes.concat(Object.keys(self.tasty.emotes));
@@ -751,7 +749,10 @@ if (!hello_run) {
 
             if (!self.twitchJSONSLoaded) { return; } // can't do anything until jsons are loaded
 
-            function makeImage(src, name){
+            function makeImage(src, name, type, w, h){
+                if (type === "tasty") {
+                    return '<img class="emoji tasty-emoji" width="'+w+'" height="'+h+'" title="'+name+'" alt="'+name+'" src="'+src+'" />';
+                }
                 return '<img class="emoji twitch-emoji" title="'+name+'" alt="'+name+'" src="'+src+'" />';
             }
 
@@ -773,7 +774,7 @@ if (!hello_run) {
                     return makeImage(_src, key);
                 } else if (typeof self.tasty.emotes[key] !== 'undefined') {
                     _src = self.tasty.template(key);
-                    return makeImage(_src, key);
+                    return makeImage(_src, key, self.tasty.emotes[key].width, self.tasty.emotes[key].height);
                 } else {
                     return matched;
                 }
