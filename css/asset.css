@@ -1,26 +1,26 @@
 .for {
-	width: 21px;
+    width: 21px;
 }
 .isUser {
     text-transform: capitalize;
 }
 .for_content {
-	display: none;
-	position: absolute;
-	width: 325px;
-	height: calc(100% - 114px);
-	right: 0px;
-	top: 58px;
-	overflow-y: scroll;
-	background: #222;
+    display: none;
+    position: absolute;
+    width: 325px;
+    height: calc(100% - 114px);
+    right: 0px;
+    top: 58px;
+    overflow-y: scroll;
+    background: #222;
     z-index: 99;
 }
 .for_content_ver {
-	display: block;
+    display: block;
     padding: 0 1rem;
     font-weight: 700;
-	text-transform: uppercase;
-	color: white;
+    text-transform: uppercase;
+    color: white;
     font-size: 16px;
     margin-top: 1rem;
 }
@@ -34,36 +34,36 @@
     cursor: pointer;
 }
 .for_content_ul {
-	padding: 1rem 1rem;
+    padding: 1rem 1rem;
 }
 .for_content_li {
-	cursor: pointer;
+    cursor: pointer;
 }
 .for_content_c {
-	border-bottom: 1px solid white;
+    border-bottom: 1px solid white;
 }
 .for_content_off {
-	display: inline-block;
-	color: #878c8e;
+    display: inline-block;
+    color: #878c8e;
     font-size: .85rem;
     font-weight: bold;
-	margin: 0 1rem 0 0;
+    margin: 0 1rem 0 0;
 }
 .for_content_p {
-	display: inline-block;
-	color: #878c8e;
+    display: inline-block;
+    color: #878c8e;
     font-size: .85rem;
     font-weight: bold;
     text-transform: uppercase;
-	position: relative;
-	bottom: 1px;
+    position: relative;
+    bottom: 1px;
 }
 .for {
-	font-size: 1.2rem;
+    font-size: 1.2rem;
     line-height: 1.2;
     cursor: pointer;
     position: relative;
-	display: inline-block;
+    display: inline-block;
     vertical-align: middle;
     margin-left: 1rem;
 }
@@ -75,7 +75,7 @@
     position: fixed;
     z-index: 2147483647;
     font-weight: 400;
-	top: 0;
+    top: 0;
 }
 .onErr .container {
     display: block;
@@ -116,7 +116,7 @@
     color: white;
     border-radius: 5px;
     border: transparent;
-	font-size: 14px;
+    font-size: 14px;
 }
 .onErr .container .control {
     display: inline-block;
@@ -140,7 +140,7 @@
     cursor: pointer;
 }
 .onErr .container .control .confirm, .onErr .container .control .cancel {
-	padding: 1em 0 0 0;
+    padding: 1em 0 0 0;
 }
 .duration {
     font-size: 14px !important;
@@ -159,26 +159,28 @@
 }
 #chat .chat-container .chat-messages .chat-main li .stream-item-content .image_row,
 #chat .chat-container .chat-messages .chat-main li .chatDelete {
-	top: 0.6rem;
+    top: 0.6rem;
 }
 #chat .chat-container .chat-messages .chat-main li .activity-row {
-	padding-top: 0.6rem;
+    padding-top: 0.6rem;
 }
-#chat .chat-container .chat-messages .chat-main li.system {
-	padding-top: 1rem;
+#chat .chat-container .chat-messages .chat-main li.chat-system-loading, #chat .chat-container .chat-messages .chat-main li.system, #chat .chat-container .chat-messages .chat-main li.system-error, #chat .chat-container .chat-messages .chat-main li.chat-me-command-joined {
+    padding-top: 1rem;
+    padding: 5px;
 }
 
 /* Custom CSS for ranks & special users */
 #chat .chat-container ul.chat-main li.user-551d295433cd73030089d184 .activity-row .text p a.username:hover:before,
 #chat .chat-container ul.chat-main li.user-53f7c199892b010200a98809 .activity-row .text p a.username:hover:before {
-	content: "Admin & DubX" !important;
+    content: "Admin & DubX" !important;
     font-weight: 700;
     font-family: proxima-nova,sans-serif;
     font-size: 10px;
 }
 #chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username:hover:before,
 #chat .chat-container ul.chat-main li.user-5607c12b8c2ecf0300b4233b .activity-row .text p a.username:hover:before,
-#chat .chat-container ul.chat-main li.user-56008425621a9e0300317238 .activity-row .text p a.username:hover:before {
+#chat .chat-container ul.chat-main li.user-56008425621a9e0300317238 .activity-row .text p a.username:hover:before,
+#chat .chat-container ul.chat-main li.user-560a30833e735703002efb74 .activity-row .text p a.username:hover:before {
     content: "DubX" !important;
     font-weight: 700;
     font-family: proxima-nova,sans-serif;
@@ -242,7 +244,7 @@ ul.avatar-list li.currentDJ .user-sinful:after, ul.avatar-list li.currentDJ .use
 #main_avatar_room #main-user-list-room #avatar-list li.mod.user-swordling p.username, #main_avatar_room #main-user-list-room #avatar-list li.mod.user-swordling p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-swordling p.username, #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-swordling p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.vip.user-swordling p.username, #main_avatar_room #main-user-list-room #avatar-list li.vip.user-swordling p.username:after {
-	color: #89BE6C !important;
+    color: #89BE6C !important;
 }
 
 /* Team */
@@ -303,11 +305,13 @@ ul.avatar-list li.currentDJ .user-kris:after, ul.avatar-list li.currentDJ .user-
 #main_avatar_room #main-user-list-room #avatar-list li.mod.user-ciscog p.username, #main_avatar_room #main-user-list-room #avatar-list li.mod.user-ciscog p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-ciscog p.username, #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-ciscog p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.vip.user-ciscog p.username, #main_avatar_room #main-user-list-room #avatar-list li.vip.user-ciscog p.username:after {
-	color: #519CD7;
+    color: #519CD7;
 }
 
 /* Special users */
-#chat .chat-container ul.chat-main li.user-5607c12b8c2ecf0300b4233b .activity-row .text p a.username {
+#chat .chat-container ul.chat-main li.user-5607c12b8c2ecf0300b4233b .activity-row .text p a.username,
+#chat .chat-container ul.chat-main li.user-560a30833e735703002efb74 .activity-row .text p a.username,
+#chat .chat-container ul.chat-main li.user-5618cf0f465bce1800d389fa .activity-row .text p a.username {
     color: #FFD904 !important;
     text-shadow: 0px 0px 1px rgba(0,0,0,.5);
 }
@@ -324,19 +328,47 @@ ul.avatar-list li.currentDJ .user-kris:after, ul.avatar-list li.currentDJ .user-
     text-decoration: inherit;
     margin-right: 5px;
 }
-ul.avatar-list li.user-fi p.dubs:before {
+#chat .chat-container ul.chat-main li.user-560a30833e735703002efb74 .activity-row .text p a.username:before {
+    content: "\f106" !important;
+    font-family: "foundation-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    text-decoration: inherit;
+    margin-right: 5px;
+}
+#chat .chat-container ul.chat-main li.user-5618cf0f465bce1800d389fa .activity-row .text p a.username:before {
+    content: "\f106" !important;
+    font-family: "foundation-icons";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    text-decoration: inherit;
+    margin-right: 5px;
+}
+ul.avatar-list li.user-fi p.dubs:before,
+ul.avatar-list li.user-jinkx p.dubs:before,
+ul.avatar-list li.user-surreal p.dubs:before {
     content: "DubX VIP  -  ";
     font-weight: 700 !important;
     color: #FFD904 !important;
 }
-ul.avatar-list li.co-owner.user-fi:after,
-ul.avatar-list li.creator.user-fi:after,
-ul.avatar-list li.manager.user-fi:after,
-ul.avatar-list li.mod.user-fi:after,
-ul.avatar-list li.vip.user-fi:after,
-ul.avatar-list li.resident-dj.user-fi:after,
-ul.avatar-list li.currentDJ .user-fi:after,
-.user-fi, .user-fi p.username {
+ul.avatar-list li.co-owner.user-fi:after, ul.avatar-list li.co-owner.user-jinkx:after, ul.avatar-list li.co-owner.user-surreal:after,
+ul.avatar-list li.creator.user-fi:after, ul.avatar-list li.creator.user-jinkx:after, ul.avatar-list li.creator.user-surreal:after,
+ul.avatar-list li.manager.user-fi:after, ul.avatar-list li.manager.user-jinkx:after, ul.avatar-list li.manager.user-surreal:after,
+ul.avatar-list li.mod.user-fi:after, ul.avatar-list li.mod.user-jinkx:after, ul.avatar-list li.mod.user-surreal:after,
+ul.avatar-list li.vip.user-fi:after, ul.avatar-list li.vip.user-jinkx:after, ul.avatar-list li.vip.user-surreal:after,
+ul.avatar-list li.resident-dj.user-fi:after, ul.avatar-list li.resident-dj.user-jinkx:after, ul.avatar-list li.resident-dj.user-surreal:after,
+ul.avatar-list li.currentDJ .user-fi:after, ul.avatar-list li.currentDJ.user-jinkx:after, ul.avatar-list li.currentDJ.user-surreal:after,
+.user-fi, .user-fi p.username, .user-jinkx, .user-jinkx p.username, .user-surreal, .user-surreal p.username {
     color: #FFD904 !important;
 }
 #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-fi p.username, #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-fi p.username:after,
@@ -344,8 +376,20 @@ ul.avatar-list li.currentDJ .user-fi:after,
 #main_avatar_room #main-user-list-room #avatar-list li.manager.user-fi p.username, #main_avatar_room #main-user-list-room #avatar-list li.manager.user-fi p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.mod.user-fi p.username, #main_avatar_room #main-user-list-room #avatar-list li.mod.user-fi p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-fi p.username, #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-fi p.username:after,
-#main_avatar_room #main-user-list-room #avatar-list li.vip.user-fi p.username, #main_avatar_room #main-user-list-room #avatar-list li.vip.user-fi p.username:after {
-	color: #FFD904 !important;
+#main_avatar_room #main-user-list-room #avatar-list li.vip.user-fi p.username, #main_avatar_room #main-user-list-room #avatar-list li.vip.user-fi p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-jinkx p.username, #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-jinkx p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.creator.user-jinkx p.username, #main_avatar_room #main-user-list-room #avatar-list li.creator.user-jinkx p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.manager.user-jinkx p.username, #main_avatar_room #main-user-list-room #avatar-list li.manager.user-jinkx p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.mod.user-jinkx p.username, #main_avatar_room #main-user-list-room #avatar-list li.mod.user-jinkx p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-jinkx p.username, #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-jinkx p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.vip.user-jinkx p.username, #main_avatar_room #main-user-list-room #avatar-list li.vip.user-jinkx p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-surreal p.username, #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-surreal p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.creator.user-surreal p.username, #main_avatar_room #main-user-list-room #avatar-list li.creator.user-surreal p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.manager.user-surreal p.username, #main_avatar_room #main-user-list-room #avatar-list li.manager.user-surreal p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.mod.user-surreal p.username, #main_avatar_room #main-user-list-room #avatar-list li.mod.user-surreal p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-surreal p.username, #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-surreal p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list li.vip.user-surreal p.username, #main_avatar_room #main-user-list-room #avatar-list li.vip.user-surreal p.username:after {
+    color: #FFD904 !important;
 }
 
 /* Admins */
@@ -388,37 +432,37 @@ ul.avatar-list li.admin:after {
     color: #FF7E00;
 }
 ul.avatar-list li.admin p {
-	color: #FF7E00;
+    color: #FF7E00;
 }
 
 
 /* Fix for no separation? */
 /** Admin **/
 #main_avatar_room #main-user-list-room #avatar-list li.admin p.username:after {
-	content: "-  Admin" !important;
+    content: "-  Admin" !important;
 }
 
 /** Moderators **/
 #main_avatar_room #main-user-list-room #avatar-list li.co-owner p.username:after {
-	content: "-  Co-owner";
+    content: "-  Co-owner";
 }
 #main_avatar_room #main-user-list-room #avatar-list li.creator p.username:after {
-	content: "-  Creator" !important;
+    content: "-  Creator" !important;
 }
 #main_avatar_room #main-user-list-room #avatar-list li.manager p.username:after {
-	content: "-  Manager";
+    content: "-  Manager";
 }
 #main_avatar_room #main-user-list-room #avatar-list li.mod p.username:after {
-	content: "-  Mod";
+    content: "-  Mod";
 }
 #main_avatar_room #main-user-list-room #avatar-list li.resident-dj p.username:after {
-	content: "-  Resident DJ";
+    content: "-  Resident DJ";
 }
 #main_avatar_room #main-user-list-room #avatar-list li.vip p.username:after {
-	content: "-  VIP";
+    content: "-  VIP";
 }
 
 /** Current DJ **/
 #main_avatar_room #main-user-list-room #avatar-list li.currentDJ p.username:after {
-	content: "-  DJ" !important;
+    content: "-  DJ" !important;
 }
