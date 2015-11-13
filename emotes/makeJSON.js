@@ -33,7 +33,7 @@ var sets = [
 
 function getFiles(set){
   
-  var files = fs.readdirSync(set);
+  var files = fs.readdirSync(__dirname + '/' + set);
   var ext, base;
 
   for (var i in files) {
@@ -52,7 +52,7 @@ sets.forEach(function(val,i,r){
 
 console.log(tastyJSON);
 
-fs.writeFile("tastyemotes.json", JSON.stringify(tastyJSON), function(err) {
+fs.writeFile(__dirname + "/tastyemotes.json", JSON.stringify(tastyJSON), function(err) {
     if(err) {
         return console.log(err);
     }
