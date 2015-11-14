@@ -27,7 +27,7 @@
     This license is governed by the Laws of Norway. Disputes shall be settled by Oslo City Court.
 */ /* global Dubtrack, emojify */
 var hello_run;
-if (!hello_run) {
+if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
     var our_version = '03.01.30 - TASTY EMOTES';
 
@@ -1157,6 +1157,7 @@ if (!hello_run) {
 } else {
     function onErr(error) {
         var onErr = [
+            '<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/asset.css">',
             '<div class="onErr">',
                 '<div class="container">',
                     '<div class="title">',
@@ -1178,7 +1179,14 @@ if (!hello_run) {
         ].join('');
         $('body').prepend(onErr);
     }
-    onErr('Oh no! Error 69: Extension is already open.');
-    $('.cancel').click(hello.closeErr);
-    $('.confirm-err').click(hello.closeErr);
+    if (!Dubtrack.session.id) {    
+        onErr('You\'re not logged in. Please login to use DUBX.');
+    } else {
+        onErr('Oh noes! We\'ve encountered a runtime error');
+    };
+    function closeErr() {
+        $('.onErr').remove();
+    };
+    $('.cancel').click(closeErr);
+    $('.confirm-err').click(closeErr);
 }
