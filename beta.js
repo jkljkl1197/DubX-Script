@@ -59,7 +59,7 @@ if (!hello_run && Dubtrack.session.id) {
 
     //Ref 2: Options
     var hello = {
-        gitRoot: 'https://rawgit.com/sinfulBA/DubX-Script/testing',
+        gitRoot: 'https://rawgit.com/FranciscoG/DubX-Script/dev',
         //Ref 2.1: Initialize
         personalize: function() {
             $('.isUser').text(Dubtrack.session.get('username'));
@@ -664,24 +664,13 @@ if (!hello_run && Dubtrack.session.id) {
         loadTastyEmotes: function(){
             var self = hello;
             var savedData;
-            // if it doesn't exist in localStorage or it's older than 5 days
-            // grab it from the bttv API
-            if (self.shouldUpdateAPIs('tasty')) {
-                console.log('Dubx','tasty','loading from api');
-                var tastyApi = new self.getJSON(hello.gitRoot + '/emotes/tastyemotes.json', 'tasty:loaded');
-                tastyApi.done(function(data){
-                    localStorage.setItem('tasty_api_timestamp', Date.now().toString());
-                    localStorage.setItem('tasty_api', data);
-                    self.processTastyEmotes(JSON.parse(data));
-                });
-            } else {
-                console.log('Dubx','tasty','loading from localstorage');
-                savedData = JSON.parse(localStorage.getItem('tasty_api'));
-                self.processTastyEmotes(savedData);
-                savedData = null; // clear the var from memory
-                var twEvent = new Event('tasty:loaded');
-                document.body.dispatchEvent(twEvent);
-            }
+            console.log('Dubx','tasty','loading from api');
+            // since we control this API we should always have it load from remote
+            var tastyApi = new self.getJSON(hello.gitRoot + '/emotes/tastyemotes.json', 'tasty:loaded');
+            tastyApi.done(function(data){
+                localStorage.setItem('tasty_api', data);
+                self.processTastyEmotes(JSON.parse(data));
+            });
         },
         processTwitchEmotes: function(data) {
             var self = hello;
@@ -876,7 +865,7 @@ if (!hello_run && Dubtrack.session.id) {
         },
         previewSearchStr : "",
         updateChatInput: function(str){
-            var _re = new RegExp(":[&!()\\-_a-z0-9]+:?$", "i");
+            var _re = new RegExp("[:@][&!()\\-_a-z0-9]+:?$", "i");
             var fixed_text = $("#chat-txt-message").val().replace(_re, str) + " ";
             $('#autocomplete-preview').empty().removeClass('ac-show');
             $("#chat-txt-message").val(fixed_text).focus();
