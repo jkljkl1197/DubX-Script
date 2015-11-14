@@ -749,11 +749,11 @@ if (!hello_run && Dubtrack.session.id) {
 
             if (!self.twitchJSONSLoaded) { return; } // can't do anything until jsons are loaded
 
-            function makeImage(src, name, type, w, h){
-                if (type === "tasty") {
-                    return '<img class="emoji tasty-emoji" width="'+w+'" height="'+h+'" title="'+name+'" alt="'+name+'" src="'+src+'" />';
-                }
-                return '<img class="emoji twitch-emoji" title="'+name+'" alt="'+name+'" src="'+src+'" />';
+            function makeImage(type, src, name, w, h){
+                return '<img class="emoji '+type+'-emote" '+
+                    (w ? 'width="'+w+'" ' : '') +
+                    (h ? 'height="'+h+'" ' : '') +
+                     'title="'+name+'" alt="'+name+'" src="'+src+'" />';
             }
 
             var $chatTarget = $('.chat-main .text').last();
@@ -768,14 +768,14 @@ if (!hello_run && Dubtrack.session.id) {
                 if (typeof self.twitch.emotes[key] !== 'undefined'){
                     _id = self.twitch.emotes[key];
                     _src = self.twitch.template(_id);
-                    return makeImage(_src, key);
+                    return makeImage("twitch", _src, key);
                 } else if (typeof self.bttv.emotes[key] !== 'undefined') {
                     _id = self.bttv.emotes[key];
                     _src = self.bttv.template(_id);
-                    return makeImage(_src, key);
+                    return makeImage("bttv", _src, key);
                 } else if (typeof self.tasty.emotes[key] !== 'undefined') {
                     _src = self.tasty.template(key);
-                    return makeImage(_src, key, "tasty", self.tasty.emotes[key].width, self.tasty.emotes[key].height);
+                    return makeImage("tasty", _src, key, self.tasty.emotes[key].width, self.tasty.emotes[key].height);
                 } else {
                     return matched;
                 }
@@ -783,6 +783,7 @@ if (!hello_run && Dubtrack.session.id) {
             });
 
             $chatTarget.html(emoted);
+            // TODO : Convert existing :emotes: in chat on plugin load
         },
         /**************************************************************************
          * Turn on/off the twitch emoji in chat
@@ -912,9 +913,7 @@ if (!hello_run && Dubtrack.session.id) {
             }
         },
         previewListInit: function(){
-            // bind the keyup and click functions here
-
-            $('head').prepend('<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/autocomplete.css">');
+             $('head').prepend('<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/autocomplete.css">');
             var acUL = document.createElement('ul');
             acUL.id = "autocomplete-preview";
             $('.pusher-chat-widget-input').prepend(acUL);
