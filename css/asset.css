@@ -313,7 +313,7 @@ ul.avatar-list li.currentDJ .user-kris:after, ul.avatar-list li.currentDJ .user-
 #chat .chat-container ul.chat-main li.user-560a30833e735703002efb74 .activity-row .text p a.username,
 #chat .chat-container ul.chat-main li.user-5618cf0f465bce1800d389fa .activity-row .text p a.username,
 #chat .chat-container ul.chat-main li.user-55ffae6a1564a403003f5132 .activity-row .text p a.username {
-    color: #FFD904 !important;
+    color: #E8C248 !important;
     text-shadow: 0px 0px 1px rgba(0,0,0,.5);
 }
 #chat .chat-container ul.chat-main li.user-5607c12b8c2ecf0300b4233b .activity-row .text p a.username:before {
@@ -362,7 +362,7 @@ ul.avatar-list li.user-surreal p.dubs:before,
 ul.avatar-list li.user-pikachu p.dubs:before {
     content: "DubX VIP  -  ";
     font-weight: 700 !important;
-    color: #FFD904 !important;
+    color: #E8C248 !important;
 }
 ul.avatar-list li.co-owner.user-fi:after, ul.avatar-list li.co-owner.user-jinkx:after, ul.avatar-list li.co-owner.user-surreal:after, ul.avatar-list li.co-owner.user-pikachu:after,
 ul.avatar-list li.creator.user-fi:after, ul.avatar-list li.creator.user-jinkx:after, ul.avatar-list li.creator.user-surreal:after, ul.avatar-list li.creator.user-pikachu:after,
@@ -372,7 +372,7 @@ ul.avatar-list li.vip.user-fi:after, ul.avatar-list li.vip.user-jinkx:after, ul.
 ul.avatar-list li.resident-dj.user-fi:after, ul.avatar-list li.resident-dj.user-jinkx:after, ul.avatar-list li.resident-dj.user-surreal:after, ul.avatar-list li.resident-dj.user-pikachu:after,
 ul.avatar-list li.currentDJ .user-fi:after, ul.avatar-list li.currentDJ.user-jinkx:after, ul.avatar-list li.currentDJ.user-surreal:after, ul.avatar-list li.currentDJ.user-pikachu:after,
 .user-fi, .user-fi p.username, .user-jinkx, .user-jinkx p.username, .user-surreal, .user-surreal p.username, .user-pikachu, .user-pikachu p.username {
-    color: #FFD904 !important;
+    color: #E8C248 !important;
 }
 #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-fi p.username, #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-fi p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.creator.user-fi p.username, #main_avatar_room #main-user-list-room #avatar-list li.creator.user-fi p.username:after,
@@ -398,7 +398,7 @@ ul.avatar-list li.currentDJ .user-fi:after, ul.avatar-list li.currentDJ.user-jin
 #main_avatar_room #main-user-list-room #avatar-list li.mod.user-pikachu p.username, #main_avatar_room #main-user-list-room #avatar-list li.mod.user-pikachu p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-pikachu p.username, #main_avatar_room #main-user-list-room #avatar-list li.resident-dj.user-pikachu p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.vip.user-pikachu p.username, #main_avatar_room #main-user-list-room #avatar-list li.vip.user-pikachu p.username:after {
-    color: #FFD904 !important;
+    color: #E8C248 !important;
 }
 
 /* Admins */
