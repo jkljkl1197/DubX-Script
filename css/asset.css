@@ -171,7 +171,6 @@
 
 #header-global .header-left-navigation:after {
   content: "❤ we stand with you france ❤";
-  margin-left: 28rem !important;
   font-family: sans-serif;
   font-size: 1.2rem;
   text-transform: capitalize;
