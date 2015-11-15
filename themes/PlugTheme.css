@@ -35,7 +35,8 @@ a, a:active, a:focus, a:hover,
 /* Private Messages */
 #private-messages .main-message-list ul.message-list li.message-item .message-content h3, #private-messages .message-details ul.message-list li.message-item .message-content h3,
 #private-messages .main-message-list .message-header a, #private-messages .message-details .message-header a,
-#private-messages .message-details ul.message-list li.message-item .message-content h3 {
+#private-messages .message-details ul.message-list li.message-item .message-content h3,
+#private-messages .private-message-details-info, #private-messages .private-message-info {
 	color: #AA74FE;
 }
 #private-messages .loading {
