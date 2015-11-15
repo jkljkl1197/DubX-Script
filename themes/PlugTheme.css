@@ -331,7 +331,8 @@ ul.avatar-list li.currentDJ .user-kris:after, ul.avatar-list li.currentDJ .user-
 #browser .browser-content #import-playlist-container .close-import-playlist {
 	background: #AA74FE;
 }
-#browser .browser-content .browser-content-main .sidebar #playlists-scroll .playlist-style li.selected {
+#browser .browser-content .browser-content-main .sidebar #playlists-scroll .playlist-style li.selected,
+#import-playlist-container .import-playlist-youtube span {
 	background: #fff;
 }
 #browser .browser-content .browser-content-main .nano .content-videos #results_video_api .history-item .description .dubs-display,
