@@ -53,6 +53,7 @@ if (!hello_run && Dubtrack.session.id) {
     };
 
     $('html').addClass('dubx');
+    $('#header-global .header-left-navigation h1').css('background-image','url(http://i.imgur.com/P2LGYoi.png)');
 
     //Ref 1.1
     $('.player_sharing').append('<span class="icon-history eta_tooltip_t" onmouseover="hello.eta();" onmouseout="hello.hide_eta();"></span>');
