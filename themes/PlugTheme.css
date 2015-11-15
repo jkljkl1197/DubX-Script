@@ -13,7 +13,7 @@
 }
 
 #header-global .header-left-navigation:after {
-	color: #AA74FE;
+	color: #AA74FE !important;
 }
 /* Main Menu (right) */
 #header-global .header-right-navigation .user-info span {
