@@ -35,7 +35,8 @@ a, a:active, a:focus, a:hover,
 /* Private Messages */
 #private-messages .main-message-list ul.message-list li.message-item .message-content h3, #private-messages .message-details ul.message-list li.message-item .message-content h3,
 #private-messages .main-message-list .message-header a, #private-messages .message-details .message-header a,
-#private-messages .message-details ul.message-list li.message-item .message-content h3 {
+#private-messages .message-details ul.message-list li.message-item .message-content h3,
+#private-messages .private-message-details-info, #private-messages .private-message-info {
 	color: #AA74FE;
 }
 #private-messages .loading {
@@ -331,7 +332,8 @@ ul.avatar-list li.currentDJ .user-kris:after, ul.avatar-list li.currentDJ .user-
 #browser .browser-content #import-playlist-container .close-import-playlist {
 	background: #AA74FE;
 }
-#browser .browser-content .browser-content-main .sidebar #playlists-scroll .playlist-style li.selected {
+#browser .browser-content .browser-content-main .sidebar #playlists-scroll .playlist-style li.selected,
+#import-playlist-container .import-playlist-youtube span {
 	background: #fff;
 }
 #browser .browser-content .browser-content-main .nano .content-videos #results_video_api .history-item .description .dubs-display,
