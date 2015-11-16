@@ -180,7 +180,11 @@
 #chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .activity-row .text p a.username:hover:before,
 #chat .chat-container ul.chat-main li.user-5607c12b8c2ecf0300b4233b .activity-row .text p a.username:hover:before,
 #chat .chat-container ul.chat-main li.user-56008425621a9e0300317238 .activity-row .text p a.username:hover:before,
-#chat .chat-container ul.chat-main li.user-560a30833e735703002efb74 .activity-row .text p a.username:hover:before {
+#chat .chat-container ul.chat-main li.user-560a30833e735703002efb74 .activity-row .text p a.username:hover:before,
+#chat .chat-container ul.chat-main li.user-560a30833e735703002efb74 .activity-row .text p a.username:hover:before,
+#chat .chat-container ul.chat-main li.user-5618cf0f465bce1800d389fa .activity-row .text p a.username:hover:before,
+#chat .chat-container ul.chat-main li.user-55ffae6a1564a403003f5132 .activity-row .text p a.username:hover:before,
+#chat .chat-container ul.chat-main li.user-560af26e9d6ab30300404673 .activity-row .text p a.username:hover:before {
     content: "DubX" !important;
     font-weight: 700;
     font-family: proxima-nova,sans-serif;
