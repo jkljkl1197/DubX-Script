@@ -1145,7 +1145,7 @@ if (!hello_run && Dubtrack.session.id) {
 } else {
     function onErr(error) {
         var onErr = [
-            '<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/asset.css">',
+            '<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/asset.css">',
             '<div class="onErr">',
                 '<div class="container">',
                     '<div class="title">',
