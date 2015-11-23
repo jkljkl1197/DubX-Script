@@ -278,6 +278,26 @@ if (!hello_run && Dubtrack.session.id) {
             ].join('');
             $('body').prepend(onErr);
         },
+        alertReplace: function(title, content){
+            var onErr = [
+                '<div class="onErr">',
+                    '<div class="container">',
+                        '<div class="title">',
+                            '<h1>'+title+'</h1>',
+                        '</div>',
+                        '<div class="content">',
+                            '<p>'+content+'</p>',
+                        '</div>',
+                        '<div class="control">',
+                            '<div class="cancel" onclick="hello.closeErr();">',
+                                '<p>Close</p>',
+                            '</div>',
+                        '</div>',
+                    '</div>',
+                '</div>'
+            ].join('');
+            $('body').prepend(onErr);
+        },
         on: function(selector) {
             $(selector + ' .for_content_off i').replaceWith('<i class="fi-check"></i>');
         },
@@ -1038,30 +1058,29 @@ if (!hello_run && Dubtrack.session.id) {
             }
         },
         mentionNotifications: function(){
+            var self = hello;
+
+            function bindNotifications() {
+                Dubtrack.Events.bind("realtime:chat-message", self.notifyOnMention);
+                options.let_mention_notifications = true;
+                hello.option('mention_notifications', 'true');
+                hello.on('.mention_notifications');
+            }
+
             if (!options.let_mention_notifications) {
                 if (!("Notification" in window)) {
-                    alert("This browser does not support desktop notification");
-                }
-                else{
+                    hello.alertReplace("Mention Notifications", "Sorry this browser does not support desktop notification.  Please use the latest version of Chrome or FireFox");
+                } else {
                     if (Notification.permission === "granted") {
-                        Dubtrack.Events.bind("realtime:chat-message", this.notifyOnMention);
-                        options.let_mention_notifications = true;
-                        hello.option('mention_notifications', 'true');
-                        hello.on('.mention_notifications');
-                    }
-                    else if (Notification.permission !== 'denied') {
-                        var parent = this;
+                        bindNotifications();
+                    } else if (Notification.permission !== 'denied') {
                         Notification.requestPermission(function (permission) {
                             if (permission === "granted") {
-                                Dubtrack.Events.bind("realtime:chat-message", parent.notifyOnMention);
-                                options.let_mention_notifications = true;
-                                hello.option('mention_notifications', 'true');
-                                hello.on('.mention_notifications');
+                                bindNotifications();
                             }
                         });
-                    }
-                    else{
-                        alert("You have chosen to block notifications. Reset this choice by clearing your cache for the site.");
+                    } else {
+                        hello.alertReplace("Mention Notifications", "You have chosen to block notifications. Reset this choice by clearing your cache for the site.");
                     }
                 }
             } else {
@@ -1077,8 +1096,8 @@ if (!hello_run && Dubtrack.session.id) {
             if (content.indexOf('@'+user) >-1) {
                 var options = {
                     body: content,
-                    icon: "http://i.imgur.com/RXJnXNJ.png"
-                }
+                    icon: "https://res.cloudinary.com/hhberclba/image/upload/c_lpad,h_100,w_100/v1400351432/dubtrack_new_logo_fvpxa6.png"
+                };
                 var n = new Notification("Message from "+e.user.username,options);
             }
         },
@@ -1087,7 +1106,7 @@ if (!hello_run && Dubtrack.session.id) {
                 options.let_spacebar_mute = true;
                 $(document).bind('keypress.key32', function() {
                     var tag = event.target.tagName.toLowerCase();
-                    if (event.which === 32 && tag != 'input' && tag != 'textarea') {
+                    if (event.which === 32 && tag !== 'input' && tag !== 'textarea') {
                         $('#main_player .player_sharing .player-controller-container .mute').click();
                     }
                 });
