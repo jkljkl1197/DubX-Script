@@ -49,7 +49,8 @@ if (!hello_run && Dubtrack.session.id) {
         let_twitch_emotes: false,
         let_emoji_preview: false,
         let_spacebar_mute: false,
-        let_autocomplete_mentions: false
+        let_autocomplete_mentions: false,
+        let_mention_notifications: false
     };
 
     $('html').addClass('dubx');
@@ -100,6 +101,10 @@ if (!hello_run && Dubtrack.session.id) {
                             '<li onclick="hello.optionMentions();" class="for_content_li for_content_feature autocomplete_mentions">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Autocomplete Mentions</p>',
+                            '</li>',
+                            '<li onclick="hello.mentionNotifications();" class="for_content_li for_content_feature mention_notifications">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Notification on Mentions</p>',
                             '</li>',
                         '</ul>',
                         '<li class="for_content_li" onclick="hello.drawUserInterface();">',
@@ -1044,6 +1049,51 @@ if (!hello_run && Dubtrack.session.id) {
                 hello.off('.autocomplete_mentions');
             }
         },
+        mentionNotifications: function(){
+            if (!options.let_mention_notifications) {
+                if (!("Notification" in window)) {
+                    alert("This browser does not support desktop notification");
+                }
+                else{
+                    if (Notification.permission === "granted") {
+                        Dubtrack.Events.bind("realtime:chat-message", this.notifyOnMention);
+                        options.let_mention_notifications = true;
+                        hello.option('mention_notifications', 'true');
+                        hello.on('.mention_notifications');
+                    }
+                    else if (Notification.permission !== 'denied') {
+                        var parent = this;
+                        Notification.requestPermission(function (permission) {
+                            if (permission === "granted") {
+                                Dubtrack.Events.bind("realtime:chat-message", parent.notifyOnMention);
+                                options.let_mention_notifications = true;
+                                hello.option('mention_notifications', 'true');
+                                hello.on('.mention_notifications');
+                            }
+                        });
+                    }
+                    else{
+                        alert("You have chosen to block notifications. Reset this choice by clearing your cache for the site.");
+                    }
+                }
+            } else {
+                Dubtrack.Events.unbind("realtime:chat-message", this.notifyOnMention);
+                options.let_mention_notifications = false;
+                hello.option('mention_notifications', 'false');
+                hello.off('.mention_notifications');
+            }
+        },
+        notifyOnMention: function(e){
+            var content = e.message;
+            var user = Dubtrack.session.get('username');
+            if (content.indexOf('@'+user) >-1) {
+                var options = {
+                    body: content,
+                    icon: "http://i.imgur.com/RXJnXNJ.png"
+                }
+                var n = new Notification("Message from "+e.user.username,options);
+            }
+        },
         spacebar_mute: function() {
             if (!options.let_spacebar_mute) {
                 options.let_spacebar_mute = true;
@@ -1134,6 +1184,9 @@ if (!hello_run && Dubtrack.session.id) {
     }
     if (localStorage.getItem('autocomplete_mentions') === 'true') {
         hello.optionMentions();
+    }
+    if (localStorage.getItem('mention_notifications') === 'true') {
+        hello.mentionNotifications();
     }
     if (localStorage.getItem('spacebar_mute') === 'true') {
         hello.spacebar_mute();
