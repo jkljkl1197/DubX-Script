@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
-    var our_version = '03.01.30 - TASTY EMOTES';
+    var our_version = '03.01.40 - Mention Notifications';
 
     //Ref 1: Variables
     var options = {
