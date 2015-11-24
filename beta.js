@@ -263,35 +263,13 @@ if (!hello_run && Dubtrack.session.id) {
                         '</div>',
                         '<div class="content">',
                             '<p>'+content+'</p>',
-                            '<textarea class="input" type="text" placeholder="'+placeholder+'"></textarea>',
+                            placeholder  ? '<textarea class="input" type="text" placeholder="'+placeholder+'"></textarea>' : '',
                         '</div>',
                         '<div class="control">',
                             '<div class="cancel" onclick="hello.closeErr();">',
                                 '<p>Cancel</p>',
                             '</div>',
-                            '<div class="'+confirm+' confirm">',
-                                '<p>Okay</p>',
-                            '</div>',
-                        '</div>',
-                    '</div>',
-                '</div>'
-            ].join('');
-            $('body').prepend(onErr);
-        },
-        alertReplace: function(title, content){
-            var onErr = [
-                '<div class="onErr">',
-                    '<div class="container">',
-                        '<div class="title">',
-                            '<h1>'+title+'</h1>',
-                        '</div>',
-                        '<div class="content">',
-                            '<p>'+content+'</p>',
-                        '</div>',
-                        '<div class="control">',
-                            '<div class="cancel" onclick="hello.closeErr();">',
-                                '<p>Close</p>',
-                            '</div>',
+                            confirm ? '<div class="'+confirm+' confirm"><p>Okay</p></div>' : '',
                         '</div>',
                     '</div>',
                 '</div>'
@@ -458,7 +436,7 @@ if (!hello_run && Dubtrack.session.id) {
             }
         },
         css_modal: function() {
-            var current = localStorage.getItem('css');
+            var current = localStorage.getItem('css') || "";
             hello.input('CSS',current,'https://example.com/example.css','confirm-for313');
             $('.confirm-for313').click(hello.css_import);
         },
@@ -1058,29 +1036,27 @@ if (!hello_run && Dubtrack.session.id) {
             }
         },
         mentionNotifications: function(){
-            var self = hello;
+            var self = this;
 
-            function bindNotifications() {
-                Dubtrack.Events.bind("realtime:chat-message", self.notifyOnMention);
-                options.let_mention_notifications = true;
-                hello.option('mention_notifications', 'true');
-                hello.on('.mention_notifications');
+            function startNotifications(permission) {
+                if (permission === "granted") {
+                    Dubtrack.Events.bind("realtime:chat-message", self.notifyOnMention);
+                    options.let_mention_notifications = true;
+                    hello.option('mention_notifications', 'true');
+                    hello.on('.mention_notifications');
+                }
             }
 
             if (!options.let_mention_notifications) {
                 if (!("Notification" in window)) {
-                    hello.alertReplace("Mention Notifications", "Sorry this browser does not support desktop notification.  Please use the latest version of Chrome or FireFox");
+                    hello.input("Mention Notifications", "Sorry this browser does not support desktop notifications.  Please use the latest version of Chrome or FireFox");
                 } else {
                     if (Notification.permission === "granted") {
-                        bindNotifications();
+                        startNotifications("granted");
                     } else if (Notification.permission !== 'denied') {
-                        Notification.requestPermission(function (permission) {
-                            if (permission === "granted") {
-                                bindNotifications();
-                            }
-                        });
+                        Notification.requestPermission(startNotifications);
                     } else {
-                        hello.alertReplace("Mention Notifications", "You have chosen to block notifications. Reset this choice by clearing your cache for the site.");
+                        hello.input("Mention Notifications", "You have chosen to block notifications. Reset this choice by clearing your cache for the site.");
                     }
                 }
             } else {
