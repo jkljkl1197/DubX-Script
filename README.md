@@ -17,9 +17,9 @@ Our Team
 IMPORTANT
 ---
 
-__Updates (Version 03.00.50)__
+__Updates (Version 03.01.40)__
 
-- Updated for the new Dubtrack UI
+- Added ability to be shown a Web API notification when mentioned in chat (if browser supports it)
 
 -----------------
 Usage

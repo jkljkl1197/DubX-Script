@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
-    var our_version = '03.01.30 - TASTY EMOTES';
+    var our_version = '03.01.40 - Mention Notifications';
 
     //Ref 1: Variables
     var options = {
@@ -1074,6 +1074,7 @@ if (!hello_run && Dubtrack.session.id) {
                     body: content,
                     icon: "https://res.cloudinary.com/hhberclba/image/upload/c_lpad,h_100,w_100/v1400351432/dubtrack_new_logo_fvpxa6.png"
                 };
+
                 var n = new Notification("Message from "+e.user.username,options);
             }
         },
