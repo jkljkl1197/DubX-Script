@@ -27,9 +27,9 @@
     This license is governed by the Laws of Norway. Disputes shall be settled by Oslo City Court.
 */ /* global Dubtrack, emojify */
 var hello_run;
-if (!hello_run) {
+if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
-    var our_version = '03.01.28 - UPDATE MENU';
+    var our_version = '03.01.30 - TASTY EMOTES';
 
     //Ref 1: Variables
     var options = {
@@ -600,8 +600,7 @@ if (!hello_run) {
             chatRegex : new RegExp(":([&!()\\-_a-z0-9]+):", "ig")
         },
         tasty : {
-            url: "",
-            template: function(id) { return hello.tasty.url + hello.tasty.emotes[id]; },
+            template: function(id) { return hello.tasty.emotes[id].url; },
             emotes: {}
         },
         shouldUpdateAPIs : function(apiName){
@@ -665,24 +664,13 @@ if (!hello_run) {
         loadTastyEmotes: function(){
             var self = hello;
             var savedData;
-            // if it doesn't exist in localStorage or it's older than 5 days
-            // grab it from the bttv API
-            if (self.shouldUpdateAPIs('tasty')) {
-                console.log('Dubx','tasty','loading from api');
-                var tastyApi = new self.getJSON(hello.gitRoot + '/emotes/tastyemotes.json', 'tasty:loaded');
-                tastyApi.done(function(data){
-                    localStorage.setItem('tasty_api_timestamp', Date.now().toString());
-                    localStorage.setItem('tasty_api', data);
-                    self.processTastyEmotes(JSON.parse(data));
-                });
-            } else {
-                console.log('Dubx','tasty','loading from localstorage');
-                savedData = JSON.parse(localStorage.getItem('tasty_api'));
-                self.processTastyEmotes(savedData);
-                savedData = null; // clear the var from memory
-                var twEvent = new Event('tasty:loaded');
-                document.body.dispatchEvent(twEvent);
-            }
+            console.log('Dubx','tasty','loading from api');
+            // since we control this API we should always have it load from remote
+            var tastyApi = new self.getJSON(hello.gitRoot + '/emotes/tastyemotes.json', 'tasty:loaded');
+            tastyApi.done(function(data){
+                localStorage.setItem('tasty_api', data);
+                self.processTastyEmotes(JSON.parse(data));
+            });
         },
         processTwitchEmotes: function(data) {
             var self = hello;
@@ -736,7 +724,6 @@ if (!hello_run) {
         },
         processTastyEmotes: function(data) {
             var self = hello;
-            self.tasty.url = data.template;
             self.tasty.emotes = data.emotes;
             self.tastyJSONLoaded = true;
             self.emojiEmotes = self.emojiEmotes.concat(Object.keys(self.tasty.emotes));
@@ -751,48 +738,52 @@ if (!hello_run) {
 
             if (!self.twitchJSONSLoaded) { return; } // can't do anything until jsons are loaded
 
-            function makeImage(src, name){
-                return '<img class="emoji twitch-emoji" title="'+name+'" alt="'+name+'" src="'+src+'" />';
+            function makeImage(type, src, name, w, h){
+                return '<img class="emoji '+type+'-emote" '+
+                    (w ? 'width="'+w+'" ' : '') +
+                    (h ? 'height="'+h+'" ' : '') +
+                     'title="'+name+'" alt="'+name+'" src="'+src+'" />';
             }
 
-            var $last = $('.chat-main .text').last();
-            if (!$last.html()) { return; } // nothing to do
+            var $chatTarget = $('.chat-main .text').last();
+            
+            if (!$chatTarget.html()) { return; } // nothing to do
 
             if (self.bttvJSONSLoaded) { _regex = self.bttv.chatRegex; }
 
-            var emoted = $last.html().replace(_regex, function(matched, p1){
+            var emoted = $chatTarget.html().replace(_regex, function(matched, p1){
                 var _id, _src, _desc, key = p1.toLowerCase();
 
                 if (typeof self.twitch.emotes[key] !== 'undefined'){
                     _id = self.twitch.emotes[key];
                     _src = self.twitch.template(_id);
-                    return makeImage(_src, key);
+                    return makeImage("twitch", _src, key);
                 } else if (typeof self.bttv.emotes[key] !== 'undefined') {
                     _id = self.bttv.emotes[key];
                     _src = self.bttv.template(_id);
-                    return makeImage(_src, key);
+                    return makeImage("bttv", _src, key);
                 } else if (typeof self.tasty.emotes[key] !== 'undefined') {
                     _src = self.tasty.template(key);
-                    return makeImage(_src, key);
+                    return makeImage("tasty", _src, key, self.tasty.emotes[key].width, self.tasty.emotes[key].height);
                 } else {
                     return matched;
                 }
 
             });
 
-            $last.html(emoted);
+            $chatTarget.html(emoted);
+            // TODO : Convert existing :emotes: in chat on plugin load
         },
         /**************************************************************************
          * Turn on/off the twitch emoji in chat
          */
         optionTwitchEmotes: function(){
+            document.body.addEventListener('twitch:loaded', this.loadBTTVEmotes);
+            document.body.addEventListener('bttv:loaded', this.loadTastyEmotes);
+            
             if (!options.let_twitch_emotes) {
-                document.body.addEventListener('twitch:loaded', this.loadBTTVEmotes);
-                document.body.addEventListener('bttv:loaded', this.loadTastyEmotes);
-
                 if (!hello.twitchJSONSLoaded) {
                     hello.loadTwitchEmotes();
-                    document.body.addEventListener('tasty:loaded', this.replaceTextWithEmote);
                 } else {
                     this.replaceTextWithEmote();
                 }
@@ -874,8 +865,7 @@ if (!hello_run) {
         },
         previewSearchStr : "",
         updateChatInput: function(str){
-            var regexString = hello.previewSearchStr.replace(/([()])/, "\\$1");
-            var _re = new RegExp("(:|@)"+regexString + "$");
+            var _re = new RegExp("[:@][&!()\\-_a-z0-9]+:?$", "i");
             var fixed_text = $("#chat-txt-message").val().replace(_re, str) + " ";
             $('#autocomplete-preview').empty().removeClass('ac-show');
             $("#chat-txt-message").val(fixed_text).focus();
@@ -912,9 +902,7 @@ if (!hello_run) {
             }
         },
         previewListInit: function(){
-            // bind the keyup and click functions here
-
-            $('head').prepend('<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/autocomplete.css">');
+             $('head').prepend('<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/autocomplete.css">');
             var acUL = document.createElement('ul');
             acUL.id = "autocomplete-preview";
             $('.pusher-chat-widget-input').prepend(acUL);
@@ -1157,6 +1145,7 @@ if (!hello_run) {
 } else {
     function onErr(error) {
         var onErr = [
+            '<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/asset.css">',
             '<div class="onErr">',
                 '<div class="container">',
                     '<div class="title">',
@@ -1178,7 +1167,14 @@ if (!hello_run) {
         ].join('');
         $('body').prepend(onErr);
     }
-    onErr('Oh no! Error 69: Extension is already open.');
-    $('.cancel').click(hello.closeErr);
-    $('.confirm-err').click(hello.closeErr);
+    if (!Dubtrack.session.id) {    
+        onErr('You\'re not logged in. Please login to use DUBX.');
+    } else {
+        onErr('Oh noes! We\'ve encountered a runtime error');
+    };
+    function closeErr() {
+        $('.onErr').remove();
+    };
+    $('.cancel').click(closeErr);
+    $('.confirm-err').click(closeErr);
 }
