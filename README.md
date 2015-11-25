@@ -12,7 +12,7 @@ Our Team
  - [Kris](https://github.com/PossiblyKris) __(Helper/Developer)__
  - [Al3366](https://github.com/Al3366) __(Helper/Extension Manager)__
  - [Ciscog](https://github.com/FranciscoG) __(Helper/Developer)__
- - [Cory (mbsurfer)](https://github.com/coryshaw1) __(Helper/Developer)__
+ - [mbsurfer](https://github.com/coryshaw1) __(Helper/Developer)__
 
 -----------------
 IMPORTANT
@@ -38,28 +38,36 @@ javascript:(function(){$.getScript('https://rawgit.com/sinfulBA/DubX-Script/mast
 Custom CSS
 ---
 
-* plug.dj theme made by Kris and edited by sinful. Paste `https://rawgit.com/sinfulBA/DubX-Script/master/themes/PlugTheme.css` in the Custom CSS option in Dub X, then click 'Okay' 
+* plug.dj theme made by Kris and edited by sinful. Paste `https://rawgit.com/sinfulBA/DubX-Script/master/themes/PlugTheme.css` in the Custom CSS option in Dub X, then click 'Okay'
 
 -----------------
 Features
 ---
 
 - Autovote
+- AFK Autorespond
+- Emotes
+- Autocomplete Emoji
+- Autocomplete Mentions
+- Notification on Mentions
+
 - Fullscreen Video
-- Notifications for moderators & friends (followers/following)
-- Ping for user mentions (will add a highlit bar on the side of the message container)
-- Staff (helps differentiate staff members from normal users)
-- Work Mode (no video or chat)
-- Bug Report (report bugs to the developers)
-- Split Chat (easily see the difference in chat blocks)
-- Custom CSS
-- Chat Only
-- Custom Background
+- Split Chat
+- Hide Chat
+- Hide Video
+- Hide Avatars
 - Hide Background
-- Community CSS
-- Prompt before refreshing page
-- Autorespond
-- Plug CSS Theme
+
+- Spacebar Mute
+- Show Timestamps
+- Warn on Navigation
+
+- plug.dj Theme
+- Community Theme
+- Custom CSS
+- Custom Background
+
+- Bug Report
 
 -----------------
 Translations
