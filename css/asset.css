@@ -48,6 +48,10 @@
 .for_content_c {
     border-bottom: 1px solid white;
 }
+.for_content_c i {
+    float: right;
+    margin-right: 5px;
+}
 .for_content_off {
     display: inline-block;
     color: #878c8e;

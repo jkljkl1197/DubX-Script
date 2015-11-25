@@ -12,14 +12,15 @@ Our Team
  - [Kris](https://github.com/PossiblyKris) __(Helper/Developer)__
  - [Al3366](https://github.com/Al3366) __(Helper/Extension Manager)__
  - [Ciscog](https://github.com/FranciscoG) __(Helper/Developer)__
+ - [Cory (mbsurfer)](https://github.com/coryshaw1) __(Helper/Developer)__
 
 -----------------
 IMPORTANT
 ---
 
-__Updates (Version 03.01.40)__
+__Updates (Version 03.01.50)__
 
-- Added ability to be shown a Web API notification when mentioned in chat (if browser supports it)
+- Add open/close icons for sections within DubX dropdown
 
 -----------------
 Usage
