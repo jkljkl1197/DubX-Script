@@ -1210,14 +1210,114 @@ if (!hello_run && Dubtrack.session.id) {
                 this.resetDubs();
 
                 Dubtrack.Events.bind("realtime:room_playlist-dub", this.dubWatcher);
+                Dubtrack.Events.bind("realtime:user-leave", this.dubUserLeaveWatcher);
                 Dubtrack.Events.bind("realtime:room_playlist-update", hello.resetDubs);
+
+                var dubupEl = $('.dubup')[0];
+                var dubdownEl = $('.dubdown')[0];
+
+                $(dubupEl).mouseenter(function(){
+                    var html = '<ul>';
+                    hello.dubs.upDubs.forEach(function(val){
+                        html += "<li>" + val.username + "</li>"
+                    });
+                    html += '</ul>';
+
+                    var newEl = document.createElement('div');
+                    newEl.id = 'dubx-updubs-container';
+                    newEl.className = 'dubx-updubs-hover';
+                    newEl.innerHTML = html;
+                    newEl.style.visibility = "hidden";
+                    document.body.appendChild(newEl);
+
+                    var elemRect = this.getBoundingClientRect();
+
+                    newEl.style.visibility = "";
+                    newEl.style.top = (elemRect.top-100) + 'px';
+                    newEl.style.left = elemRect.left + 'px';
+                    newEl.style.position = 'absolute';
+                    newEl.style.overflowY = 'auto';
+                    newEl.style.overflowX = 'visible';
+                    newEl.style.height = '100px';
+
+                    document.body.appendChild(newEl);
+
+                    $(this).addClass('dubx-updubs-hover');
+
+                    $('.dubx-updubs-hover').mouseleave(function(){
+                        var x = event.clientX, y = event.clientY,
+                            elementMouseIsOver = document.elementFromPoint(x, y);
+
+                        if(!$(elementMouseIsOver).hasClass('dubx-updubs-hover'))
+                            $('#dubx-updubs-container').remove();
+                    });
+                });
+
+                $(dubdownEl).mouseenter(function(){
+                    var html = '<ul>';
+                    hello.dubs.downDubs.forEach(function(val){
+                        html += "<li>" + val.username + "</li>"
+                    });
+                    html += '</ul>';
+
+                    var newEl = document.createElement('div');
+                    newEl.id = 'dubx-downdubs-container';
+                    newEl.className = 'dubx-downdubs-hover';
+                    newEl.innerHTML = html;
+                    newEl.style.visibility = "hidden";
+                    document.body.appendChild(newEl);
+
+                    var elemRect = this.getBoundingClientRect();
+
+                    newEl.style.visibility = "";
+                    newEl.style.top = (elemRect.top-100) + 'px';
+                    newEl.style.left = elemRect.left + 'px';
+                    newEl.style.position = 'absolute';
+                    newEl.style.overflowY = 'auto';
+                    newEl.style.overflowX = 'visible';
+                    newEl.style.height = '100px';
+
+                    document.body.appendChild(newEl);
+
+                    $(this).addClass('dubx-downdubs-hover');
+
+                    $('.dubx-downdubs-hover').mouseleave(function(){
+                        var x = event.clientX, y = event.clientY,
+                            elementMouseIsOver = document.elementFromPoint(x, y);
+
+                        if(!$(elementMouseIsOver).hasClass('dubx-downdubs-hover'))
+                            $('#dubx-downdubs-container').remove();
+                    });
+                });
+
+
             }
             else{
                 options.let_dubs_hover = false;
                 hello.option('dubs_hover', 'false');
                 hello.off('.dubs_hover');
                 Dubtrack.Events.unbind("realtime:room_playlist-dub", this.dubWatcher);
+                Dubtrack.Events.unbind("realtime:user-leave", this.dubUserLeaveWatcher);
                 Dubtrack.Events.unbind("realtime:room_playlist-update", hello.resetDubs);
+            }
+        },
+        dubUserLeaveWatcher: function(e){
+            //Remove user from dub list
+            if($.grep(hello.dubs.downDubs, function(el){ return el.userid == e.user._id; }).length > 0){
+                $.each(hello.dubs.downDubs, function(i){
+                    if(hello.dubs.downDubs[i].userid === e.user._id) {
+                        hello.dubs.downDubs.splice(i,1);
+                        return false;
+                    }
+                });
+            }
+            if($.grep(hello.dubs.upDubs, function(el){ return el.userid == e.user._id; }).length > 0){
+                $.each(hello.dubs.upDubs, function(i){
+                    if(hello.dubs.upDubs[i].userid === e.user._id) {
+                        hello.dubs.upDubs.splice(i,1);
+                        return false;
+                    }
+                });
             }
         },
         dubWatcher: function(e){
@@ -1253,6 +1353,14 @@ if (!hello_run && Dubtrack.session.id) {
                     });
                 }
             }
+
+            var msSinceSongStart = new Date() - new Date(Dubtrack.room.player.activeSong.attributes.song.played);
+            if(msSinceSongStart >= 1000 && (hello.dubs.downDubs.length !== Dubtrack.room.player.activeSong.attributes.song.downdubs ||
+                hello.dubs.upDubs.length !== Dubtrack.room.player.activeSong.attributes.song.updubs)){
+                console.log("Dubs don't match reset! Song started ", msSinceSongStart, "ms ago!");
+                hello.resetDubs();
+            }
+
             console.log(e);
             console.log(hello.dubs);
         },
@@ -1356,9 +1464,6 @@ if (!hello_run && Dubtrack.session.id) {
     if (localStorage.getItem('updub_chat') === 'true') {
         hello.updubChat();
     }
-    if (localStorage.getItem('updub_chat') === 'true') {
-        hello.updubChat();
-    }
     if (localStorage.getItem('dubs_hover') === 'true') {
         hello.showDubsOnHover();
     }
@@ -1377,36 +1482,33 @@ if (!hello_run && Dubtrack.session.id) {
         var role = !user.get('roleid') ? 'default' : Dubtrack.helpers.isDubtrackAdmin(user.get('userid')) ? 'admin' : user.get('roleid').type;
         itemEl.addClass('is' + (role.charAt(0).toUpperCase() + role.slice(1)));
     });
-
-    // Ref 6?:
-
-
+    
 } else {
     function onErr(error) {
         var onErr = [
             '<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/asset.css">',
             '<div class="onErr">',
-                '<div class="container">',
-                    '<div class="title">',
-                        '<h1>Oh noes:</h1>',
-                    '</div>',
-                    '<div class="content">',
-                        '<p>'+error+'</p>',
-                    '</div>',
-                    '<div class="control">',
-                        '<div class="cancel" onclick="hello.closeErr();">',
-                            '<p>Cancel</p>',
-                        '</div>',
-                        '<div class="confirm confirm-err">',
-                            '<p>Okay</p>',
-                        '</div>',
-                    '</div>',
-                '</div>',
+            '<div class="container">',
+            '<div class="title">',
+            '<h1>Oh noes:</h1>',
+            '</div>',
+            '<div class="content">',
+            '<p>'+error+'</p>',
+            '</div>',
+            '<div class="control">',
+            '<div class="cancel" onclick="hello.closeErr();">',
+            '<p>Cancel</p>',
+            '</div>',
+            '<div class="confirm confirm-err">',
+            '<p>Okay</p>',
+            '</div>',
+            '</div>',
+            '</div>',
             '</div>'
         ].join('');
         $('body').prepend(onErr);
     }
-    if (!Dubtrack.session.id) {    
+    if (!Dubtrack.session.id) {
         onErr('You\'re not logged in. Please login to use DUBX.');
     } else {
         onErr('Oh noes! We\'ve encountered a runtime error');
