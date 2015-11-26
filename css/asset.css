@@ -194,7 +194,8 @@
 #chat .chat-container ul.chat-main li.user-560a30833e735703002efb74 .activity-row .text p a.username:hover:before,
 #chat .chat-container ul.chat-main li.user-5618cf0f465bce1800d389fa .activity-row .text p a.username:hover:before,
 #chat .chat-container ul.chat-main li.user-55ffae6a1564a403003f5132 .activity-row .text p a.username:hover:before,
-#chat .chat-container ul.chat-main li.user-560af26e9d6ab30300404673 .activity-row .text p a.username:hover:before {
+#chat .chat-container ul.chat-main li.user-560af26e9d6ab30300404673 .activity-row .text p a.username:hover:before,
+#chat .chat-container ul.chat-main li.user-560892bf8e9cb60300550aa2 .activity-row .text p a.username:hover:before {
     content: "DubX" !important;
     font-weight: 700;
     font-family: proxima-nova,sans-serif;
@@ -302,7 +303,7 @@ ul.avatar-list li.resident-dj.user-kris:after, ul.avatar-list li.resident-dj.use
 ul.avatar-list li.currentDJ .user-kris:after, ul.avatar-list li.currentDJ .user-al3366:after, ul.avatar-list li.currentDJ .user-ciscog:after, ul.avatar-list li.currentDJ .user-mbsurfer:after,
 .user-kris, .user-al3366, .user-ciscog, .user-mbsurfer,
 .user-kris p.username, .user-al3366 p.username, .user-ciscog p.username, .user-mbsurfer p.username {
-    color: #409fff;
+    color: #409fff !important;
 }
 #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-kris p.username, #main_avatar_room #main-user-list-room #avatar-list li.co-owner.user-kris p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list li.creator.user-kris p.username, #main_avatar_room #main-user-list-room #avatar-list li.creator.user-kris p.username:after,
