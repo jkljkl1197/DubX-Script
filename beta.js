@@ -913,7 +913,7 @@ if (!hello_run && Dubtrack.session.id) {
             var cssClass = "selected";
             oBoxCollection.removeClass(cssClass).eq(self.displayBoxIndex).addClass(cssClass).focus();
         },
-        prewiewListKeyUp: function(e){
+        previewListKeyUp: function(e){
             e.preventDefault();
             switch(e.keyCode) {
                 case 38:
@@ -943,7 +943,7 @@ if (!hello_run && Dubtrack.session.id) {
                 hello.updateChatInput(new_text);
             });
 
-            $(document.body).on('keyup', '.ac-show', hello.prewiewListKeyUp);
+            $(document.body).on('keydown', '.ac-show', hello.previewListKeyUp);
         },
         /**************************************************************************
          * A bunch of utility helpers for the emoji preview
