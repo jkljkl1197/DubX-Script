@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
-    var our_version = '03.01.50 - UI Section Icons';
+    var our_version = '03.01.51 - Autocomplete Fixes';
 
     //Ref 1: Variables
     var options = {
@@ -913,7 +913,7 @@ if (!hello_run && Dubtrack.session.id) {
             var cssClass = "selected";
             oBoxCollection.removeClass(cssClass).eq(self.displayBoxIndex).addClass(cssClass).focus();
         },
-        prewiewListKeyUp: function(e){
+        previewListKeyUp: function(e){
             e.preventDefault();
             switch(e.keyCode) {
                 case 38:
@@ -943,7 +943,7 @@ if (!hello_run && Dubtrack.session.id) {
                 hello.updateChatInput(new_text);
             });
 
-            $(document.body).on('keyup', '.ac-show', hello.prewiewListKeyUp);
+            $(document.body).on('keydown', '.ac-show', hello.previewListKeyUp);
         },
         /**************************************************************************
          * A bunch of utility helpers for the emoji preview
