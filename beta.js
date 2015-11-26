@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
-    var our_version = '03.01.50 - UI Section Icons';
+    var our_version = '03.01.51 - Autocomplete Fixes';
 
     //Ref 1: Variables
     var options = {
