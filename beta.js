@@ -1192,15 +1192,35 @@ if (!hello_run && Dubtrack.session.id) {
 
             $.getJSON("https://api.dubtrack.fm/room/" + Dubtrack.room.model.id + "/playlist/active/dubs", function(response){
                 response.data.upDubs.forEach(function(e){
+                    var username;
+                    if(!Dubtrack.room.users.collection.findWhere({userid: e.userid}) || !Dubtrack.room.users.collection.findWhere({userid: e.userid}).attributes) {
+                        $.getJSON("https://api.dubtrack.fm/user/" + e.userid, function(response){
+                            username = response.userinfo.username;
+                        });
+                    }
+                    else{
+                        username = Dubtrack.room.users.collection.findWhere({userid: e.userid}).attributes._user.username;
+                    }
+
                     hello.dubs.upDubs.push({
                         userid: e.userid,
-                        username: Dubtrack.room.users.collection.findWhere({userid: e.userid}).attributes._user.username
+                        username: username
                     })
                 });
 
                 //Only let mods or higher access down dubs
                 if(hello.userIsAtLeastMod(Dubtrack.session.id)){
                     response.data.downDubs.forEach(function(e){
+                        var username;
+                        if(!Dubtrack.room.users.collection.findWhere({userid: e.userid}) || !Dubtrack.room.users.collection.findWhere({userid: e.userid}).attributes) {
+                            $.getJSON("https://api.dubtrack.fm/user/" + e.userid, function(response){
+                                username = response.userinfo.username;
+                            });
+                        }
+                        else{
+                            username = Dubtrack.room.users.collection.findWhere({userid: e.userid}).attributes._user.username;
+                        }
+
                         hello.dubs.downDubs.push({
                             userid: e.userid,
                             username: Dubtrack.room.users.collection.findWhere({userid: e.userid}).attributes._user.username
@@ -1271,7 +1291,7 @@ if (!hello_run && Dubtrack.session.id) {
                     $(this).addClass('dubx-updubs-hover');
 
                     $(document.body).on('click', '.preview-dubinfo-item', function(e){
-                        var new_text = $(this).find('.dubinfo-text')[0].innerHTML;
+                        var new_text = $(this).find('.dubinfo-text')[0].innerHTML + ' ' ;
                         hello.updateChatInputWithString(new_text);
                     });
 
@@ -1292,19 +1312,19 @@ if (!hello_run && Dubtrack.session.id) {
                     var html;
 
                     if(hello.userIsAtLeastMod(Dubtrack.session.id)){
-                        html = '<ul id="dubinfo-preview" class="dubinfo-show dubx-downdubs-hover" style="position: relative; overflow: inherit; bottom: 0; height: 150px; border: 1px solid '+dubdownBackground+'">';
+                        html = '<ul id="dubinfo-preview" class="dubinfo-show dubx-downdubs-hover" style="border-color: '+dubdownBackground+'">';
                         hello.dubs.downDubs.forEach(function(val){
-                            html += '<li class="preview-item users-previews dubx-downdubs-hover" style="cursor: pointer">' +
-                                '<div class="dubinfo-image">' +
-                                '<img src="https://api.dubtrack.fm/user/' + val.userid + '/image">' +
-                                '</div>' +
-                                '<span class="dubinfo-text">@' + val.username + '</span>' +
+                            html += '<li class="preview-dubinfo-item users-previews dubx-downdubs-hover">' +
+                                    '<div class="dubinfo-image">' +
+                                        '<img src="https://api.dubtrack.fm/user/' + val.userid + '/image">' +
+                                    '</div>' +
+                                    '<span class="dubinfo-text">@' + val.username + '</span>' +
                                 '</li>'
                         });
                         html += '</ul>';
                     }
                     else{
-                        html = '<div id="dubinfo-preview" class="dubinfo-show dubx-downdubs-hover dubx-downdubs-unauthorized" style="padding: 10px; position: relative; overflow: inherit; bottom: 0; height: 150px; border: 1px solid '+dubdownBackground+'">' +
+                        html = '<div id="dubinfo-preview" class="dubinfo-show dubx-downdubs-hover dubx-downdubs-unauthorized" style="border-color: '+dubdownBackground+'">' +
                                     'You must be at least a mod to view downdubs!' +
                                 '</div>';
                     }
@@ -1326,9 +1346,8 @@ if (!hello_run && Dubtrack.session.id) {
 
                     $(this).addClass('dubx-downdubs-hover');
 
-                    //onclick="hello.updateChatInputWithString(\'@'+val.username+' \')"
                     $(document.body).on('click', '.preview-dubinfo-item', function(e){
-                        var new_text = $(this).find('.dubinfo-text')[0].innerHTML;
+                        var new_text = $(this).find('.dubinfo-text')[0].innerHTML + ' ' ;
                         hello.updateChatInputWithString(new_text);
                     });
 
