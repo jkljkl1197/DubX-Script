@@ -1266,9 +1266,13 @@ if (!hello_run && Dubtrack.session.id) {
                 //Show compiled info containers when casting/changing vote
                 $(dubupEl).click(function(event){
                     $('#dubx-updubs-container').remove();
+                        var x = event.clientX, y = event.clientY;
 
-                    var x = event.clientX, y = event.clientY,
-                        elementMouseIsOver = document.elementFromPoint(x, y);
+                        if(!x || !y || isNaN(x) || isNaN(y)){
+                            return $('#dubx-downdubs-container').remove();
+                        }
+
+                        var elementMouseIsOver = document.elementFromPoint(x, y);
 
                     if($(elementMouseIsOver).hasClass('dubx-updubs-hover') || $(elementMouseIsOver).parent('.dubx-updubs-hover').length > 0){
                         setTimeout(function(){$(dubupEl).mouseenter();}, 250);
@@ -1276,9 +1280,13 @@ if (!hello_run && Dubtrack.session.id) {
                 });
                 $(dubdownEl).click(function(event){
                     $('#dubx-downdubs-container').remove();
+                        var x = event.clientX, y = event.clientY;
 
-                    var x = event.clientX, y = event.clientY,
-                        elementMouseIsOver = document.elementFromPoint(x, y);
+                        if(!x || !y || isNaN(x) || isNaN(y)){
+                            return $('#dubx-downdubs-container').remove();
+                        }
+
+                        var elementMouseIsOver = document.elementFromPoint(x, y);
 
                     if($(elementMouseIsOver).hasClass('dubx-downdubs-hover') || $(elementMouseIsOver).parent('.dubx-downdubs-hover').length > 0){
                         setTimeout(function(){$(dubdownEl).mouseenter();}, 250);
@@ -1322,9 +1330,14 @@ if (!hello_run && Dubtrack.session.id) {
                         hello.updateChatInputWithString(new_text);
                     });
 
-                    $('.dubx-updubs-hover').mouseleave(function(){
-                        var x = event.clientX, y = event.clientY,
-                            elementMouseIsOver = document.elementFromPoint(x, y);
+                    $('.dubx-updubs-hover').mouseleave(function(event){
+                        var x = event.clientX, y = event.clientY;
+
+                        if(!x || !y || isNaN(x) || isNaN(y)){
+                            return $('#dubx-downdubs-container').remove();
+                        }
+
+                        var elementMouseIsOver = document.elementFromPoint(x, y);
 
                         if(!$(elementMouseIsOver).hasClass('dubx-updubs-hover') && $(elementMouseIsOver).parent('.dubx-updubs-hover').length <= 0){
                             $('#dubx-updubs-container').remove();
@@ -1378,9 +1391,14 @@ if (!hello_run && Dubtrack.session.id) {
                         hello.updateChatInputWithString(new_text);
                     });
 
-                    $('.dubx-downdubs-hover').mouseleave(function(){
-                        var x = event.clientX, y = event.clientY,
-                            elementMouseIsOver = document.elementFromPoint(x, y);
+                    $('.dubx-downdubs-hover').mouseleave(function(event){
+                        var x = event.clientX, y = event.clientY;
+
+                        if(!x || !y || isNaN(x) || isNaN(y)){
+                            return $('#dubx-downdubs-container').remove();
+                        }
+
+                        var elementMouseIsOver = document.elementFromPoint(x, y);
 
                         if(!$(elementMouseIsOver).hasClass('dubx-downdubs-hover') && $(elementMouseIsOver).parent('.dubx-downdubs-hover').length <= 0){
                             $('#dubx-downdubs-container').remove();
