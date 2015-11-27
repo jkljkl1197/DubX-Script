@@ -18,9 +18,11 @@ Our Team
 IMPORTANT
 ---
 
-__Updates (Version 03.01.51)__
+__Updates (Version 03.01.60)__
 
-- Fixed an issue when the incomplete message was sent when pressing enter trying to select an autocomplete option for mentions and emotes
+ - Add ability to see dub vote information whenever hovering over the corresponding vote buttons
+ - Add option to see dub votes on your song as chat notifications
+ - __**NOTE*:__ All downdub vote information is only visible to mods and higher
 
 -----------------
 Usage
@@ -50,6 +52,9 @@ Features
 - Autocomplete Emoji
 - Autocomplete Mentions
 - Notification on Mentions
+- Dub Vote Information When Hovering Vote Buttons
+- Updub Chat Notification When DJ
+- Downdub Chat Notification When DJ (Mod Only)
 - Fullscreen Video
 - Split Chat
 - Hide Chat
