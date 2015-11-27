@@ -63,7 +63,7 @@ if (!hello_run && Dubtrack.session.id) {
 
     //Ref 2: Options
     var hello = {
-        gitRoot: 'https://rawgit.com/coryshaw1/DubX-Script/dub_vote_features',
+        gitRoot: 'https://rawgit.com/sinfulBA/DubX-Script/master',
         //Ref 2.1: Initialize
         personalize: function() {
             $('.isUser').text(Dubtrack.session.get('username'));
@@ -1249,13 +1249,25 @@ if (!hello_run && Dubtrack.session.id) {
                 $(dubdownEl).parent('li').addClass("dubx-downdubs-hover");
 
                 //Show compiled info containers when casting/changing vote
-                $(dubupEl).click(function(){
+                $(dubupEl).click(function(event){
                     $('#dubx-updubs-container').remove();
-                    setTimeout(function(){$(dubupEl).mouseenter()}, 250);
+
+                    var x = event.clientX, y = event.clientY,
+                        elementMouseIsOver = document.elementFromPoint(x, y);
+
+                    if($(elementMouseIsOver).hasClass('dubx-updubs-hover') || $(elementMouseIsOver).parent('.dubx-updubs-hover').length > 0){
+                        setTimeout(function(){$(dubupEl).mouseenter();}, 250);
+                    }
                 });
-                $(dubdownEl).click(function(){
+                $(dubdownEl).click(function(event){
                     $('#dubx-downdubs-container').remove();
-                    setTimeout(function(){$(dubdownEl).mouseenter()}, 250);
+
+                    var x = event.clientX, y = event.clientY,
+                        elementMouseIsOver = document.elementFromPoint(x, y);
+
+                    if($(elementMouseIsOver).hasClass('dubx-downdubs-hover') || $(elementMouseIsOver).parent('.dubx-downdubs-hover').length > 0){
+                        setTimeout(function(){$(dubdownEl).mouseenter();}, 250);
+                    }
                 });
 
                 $(dubupEl).mouseenter(function(){
