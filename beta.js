@@ -63,7 +63,7 @@ if (!hello_run && Dubtrack.session.id) {
 
     //Ref 2: Options
     var hello = {
-        gitRoot: 'https://rawgit.com/sinfulBA/DubX-Script/master',
+        gitRoot: 'https://rawgit.com/coryshaw1/DubX-Script/dub_vote_features',
         //Ref 2.1: Initialize
         personalize: function() {
             $('.isUser').text(Dubtrack.session.get('username'));
@@ -115,7 +115,7 @@ if (!hello_run && Dubtrack.session.id) {
                             '</li>',
                             '<li onclick="hello.downdubChat();" class="for_content_li for_content_feature downdub_chat">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Downdubs in Chat</p>',
+                                '<p class="for_content_p">Downdubs in Chat (Mod Only)</p>',
                             '</li>',
                             '<li onclick="hello.updubChat();" class="for_content_li for_content_feature updub_chat">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
@@ -1109,11 +1109,16 @@ if (!hello_run && Dubtrack.session.id) {
                 var n = new Notification("Message from "+e.user.username,options);
             }
         },
+        dubinfoInit: function(){
+            $('head').prepend('<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/dubinfo.css">');
+        },
         downdubChat: function(){
             if(!options.let_downdub_chat_notifications){
                 options.let_downdub_chat_notifications = true;
                 hello.option('downdub_chat', 'true');
                 hello.on('.downdub_chat');
+
+                if(!hello.userIsAtLeastMod(Dubtrack.session.id)) return;
 
                 Dubtrack.Events.bind("realtime:room_playlist-dub", this.downdubWatcher);
             }
@@ -1192,12 +1197,16 @@ if (!hello_run && Dubtrack.session.id) {
                         username: Dubtrack.room.users.collection.findWhere({userid: e.userid}).attributes._user.username
                     })
                 });
-                response.data.downDubs.forEach(function(e){
-                    hello.dubs.downDubs.push({
-                        userid: e.userid,
-                        username: Dubtrack.room.users.collection.findWhere({userid: e.userid}).attributes._user.username
-                    })
-                });
+
+                //Only let mods or higher access down dubs
+                if(hello.userIsAtLeastMod(Dubtrack.session.id)){
+                    response.data.downDubs.forEach(function(e){
+                        hello.dubs.downDubs.push({
+                            userid: e.userid,
+                            username: Dubtrack.room.users.collection.findWhere({userid: e.userid}).attributes._user.username
+                        })
+                    });
+                }
             });
         },
         showDubsOnHover: function(){
@@ -1216,16 +1225,37 @@ if (!hello_run && Dubtrack.session.id) {
                 var dubupEl = $('.dubup')[0];
                 var dubdownEl = $('.dubdown')[0];
 
+                $(dubupEl).parent('li').addClass("dubx-updubs-hover");
+                $(dubdownEl).parent('li').addClass("dubx-downdubs-hover");
+
+                //Show compiled info containers when casting/changing vote
+                $(dubupEl).click(function(){
+                    $('#dubx-updubs-container').remove();
+                    setTimeout(function(){$(dubupEl).mouseenter()}, 250);
+                });
+                $(dubdownEl).click(function(){
+                    $('#dubx-downdubs-container').remove();
+                    setTimeout(function(){$(dubdownEl).mouseenter()}, 250);
+                });
+
                 $(dubupEl).mouseenter(function(){
-                    var html = '<ul>';
+                    if($("#dubx-updubs-container").length > 0) return; //already exists
+
+                    var dubupBackground = $('.dubup').hasClass('voted') ? $('.dubup').css('background-color') : $('.dubup').find('.icon-arrow-up').css('color');
+                    var html = '<ul id="dubinfo-preview" class="dubinfo-show dubx-updubs-hover" style="border-color: '+dubupBackground+'">';
                     hello.dubs.upDubs.forEach(function(val){
-                        html += "<li>" + val.username + "</li>"
+                        html += '<li class="preview-dubinfo-item users-previews dubx-updubs-hover">' +
+                                    '<div class="dubinfo-image">' +
+                                        '<img src="https://api.dubtrack.fm/user/' + val.userid + '/image">' +
+                                    '</div>' +
+                                    '<span class="dubinfo-text">@' + val.username + '</span>' +
+                                '</li>'
                     });
                     html += '</ul>';
 
                     var newEl = document.createElement('div');
                     newEl.id = 'dubx-updubs-container';
-                    newEl.className = 'dubx-updubs-hover';
+                    newEl.className = 'dubinfo-show dubx-updubs-hover';
                     newEl.innerHTML = html;
                     newEl.style.visibility = "hidden";
                     document.body.appendChild(newEl);
@@ -1233,36 +1263,55 @@ if (!hello_run && Dubtrack.session.id) {
                     var elemRect = this.getBoundingClientRect();
 
                     newEl.style.visibility = "";
-                    newEl.style.top = (elemRect.top-100) + 'px';
+                    newEl.style.top = (elemRect.top-150) + 'px';
                     newEl.style.left = elemRect.left + 'px';
-                    newEl.style.position = 'absolute';
-                    newEl.style.overflowY = 'auto';
-                    newEl.style.overflowX = 'visible';
-                    newEl.style.height = '100px';
 
                     document.body.appendChild(newEl);
 
                     $(this).addClass('dubx-updubs-hover');
 
+                    $(document.body).on('click', '.preview-dubinfo-item', function(e){
+                        var new_text = $(this).find('.dubinfo-text')[0].innerHTML;
+                        hello.updateChatInputWithString(new_text);
+                    });
+
                     $('.dubx-updubs-hover').mouseleave(function(){
                         var x = event.clientX, y = event.clientY,
                             elementMouseIsOver = document.elementFromPoint(x, y);
 
-                        if(!$(elementMouseIsOver).hasClass('dubx-updubs-hover'))
+                        if(!$(elementMouseIsOver).hasClass('dubx-updubs-hover') && $(elementMouseIsOver).parent('.dubx-updubs-hover').length <= 0){
                             $('#dubx-updubs-container').remove();
+                        }
+
                     });
                 });
-
                 $(dubdownEl).mouseenter(function(){
-                    var html = '<ul>';
-                    hello.dubs.downDubs.forEach(function(val){
-                        html += "<li>" + val.username + "</li>"
-                    });
-                    html += '</ul>';
+                    if($("#dubx-downdubs-container").length > 0) return; //already exists
+
+                    var dubdownBackground = $('.dubdown').hasClass('voted') ? $('.dubdown').css('background-color') : $('.dubdown').find('.icon-arrow-down').css('color');
+                    var html;
+
+                    if(hello.userIsAtLeastMod(Dubtrack.session.id)){
+                        html = '<ul id="dubinfo-preview" class="dubinfo-show dubx-downdubs-hover" style="position: relative; overflow: inherit; bottom: 0; height: 150px; border: 1px solid '+dubdownBackground+'">';
+                        hello.dubs.downDubs.forEach(function(val){
+                            html += '<li class="preview-item users-previews dubx-downdubs-hover" style="cursor: pointer">' +
+                                '<div class="dubinfo-image">' +
+                                '<img src="https://api.dubtrack.fm/user/' + val.userid + '/image">' +
+                                '</div>' +
+                                '<span class="dubinfo-text">@' + val.username + '</span>' +
+                                '</li>'
+                        });
+                        html += '</ul>';
+                    }
+                    else{
+                        html = '<div id="dubinfo-preview" class="dubinfo-show dubx-downdubs-hover dubx-downdubs-unauthorized" style="padding: 10px; position: relative; overflow: inherit; bottom: 0; height: 150px; border: 1px solid '+dubdownBackground+'">' +
+                                    'You must be at least a mod to view downdubs!' +
+                                '</div>';
+                    }
 
                     var newEl = document.createElement('div');
                     newEl.id = 'dubx-downdubs-container';
-                    newEl.className = 'dubx-downdubs-hover';
+                    newEl.className = 'dubinfo-show dubx-downdubs-hover';
                     newEl.innerHTML = html;
                     newEl.style.visibility = "hidden";
                     document.body.appendChild(newEl);
@@ -1270,27 +1319,29 @@ if (!hello_run && Dubtrack.session.id) {
                     var elemRect = this.getBoundingClientRect();
 
                     newEl.style.visibility = "";
-                    newEl.style.top = (elemRect.top-100) + 'px';
-                    newEl.style.left = elemRect.left + 'px';
-                    newEl.style.position = 'absolute';
-                    newEl.style.overflowY = 'auto';
-                    newEl.style.overflowX = 'visible';
-                    newEl.style.height = '100px';
+                    newEl.style.top = (elemRect.top-150) + 'px';
+                    newEl.style.left = (elemRect.left-105) + 'px';
 
                     document.body.appendChild(newEl);
 
                     $(this).addClass('dubx-downdubs-hover');
 
+                    //onclick="hello.updateChatInputWithString(\'@'+val.username+' \')"
+                    $(document.body).on('click', '.preview-dubinfo-item', function(e){
+                        var new_text = $(this).find('.dubinfo-text')[0].innerHTML;
+                        hello.updateChatInputWithString(new_text);
+                    });
+
                     $('.dubx-downdubs-hover').mouseleave(function(){
                         var x = event.clientX, y = event.clientY,
                             elementMouseIsOver = document.elementFromPoint(x, y);
 
-                        if(!$(elementMouseIsOver).hasClass('dubx-downdubs-hover'))
+                        if(!$(elementMouseIsOver).hasClass('dubx-downdubs-hover') && $(elementMouseIsOver).parent('.dubx-downdubs-hover').length <= 0){
                             $('#dubx-downdubs-container').remove();
+                        }
+
                     });
                 });
-
-
             }
             else{
                 options.let_dubs_hover = false;
@@ -1303,18 +1354,18 @@ if (!hello_run && Dubtrack.session.id) {
         },
         dubUserLeaveWatcher: function(e){
             //Remove user from dub list
-            if($.grep(hello.dubs.downDubs, function(el){ return el.userid == e.user._id; }).length > 0){
-                $.each(hello.dubs.downDubs, function(i){
-                    if(hello.dubs.downDubs[i].userid === e.user._id) {
-                        hello.dubs.downDubs.splice(i,1);
-                        return false;
-                    }
-                });
-            }
             if($.grep(hello.dubs.upDubs, function(el){ return el.userid == e.user._id; }).length > 0){
                 $.each(hello.dubs.upDubs, function(i){
                     if(hello.dubs.upDubs[i].userid === e.user._id) {
                         hello.dubs.upDubs.splice(i,1);
+                        return false;
+                    }
+                });
+            }
+            if($.grep(hello.dubs.downDubs, function(el){ return el.userid == e.user._id; }).length > 0){
+                $.each(hello.dubs.downDubs, function(i){
+                    if(hello.dubs.downDubs[i].userid === e.user._id) {
+                        hello.dubs.downDubs.splice(i,1);
                         return false;
                     }
                 });
@@ -1337,7 +1388,7 @@ if (!hello_run && Dubtrack.session.id) {
                     });
                 }
             }
-            else{
+            else if(e.dubtype === 'downdub' && hello.userIsAtLeastMod(Dubtrack.session.id)){
                 hello.dubs.downDubs.push({
                     userid: e.user._id,
                     username: e.user.username
@@ -1355,14 +1406,21 @@ if (!hello_run && Dubtrack.session.id) {
             }
 
             var msSinceSongStart = new Date() - new Date(Dubtrack.room.player.activeSong.attributes.song.played);
-            if(msSinceSongStart >= 1000 && (hello.dubs.downDubs.length !== Dubtrack.room.player.activeSong.attributes.song.downdubs ||
-                hello.dubs.upDubs.length !== Dubtrack.room.player.activeSong.attributes.song.updubs)){
-                console.log("Dubs don't match reset! Song started ", msSinceSongStart, "ms ago!");
+            if(msSinceSongStart >= 1000 &&
+                (hello.dubs.upDubs.length !== Dubtrack.room.player.activeSong.attributes.song.updubs ||
+                (hello.userIsAtLeastMod(Dubtrack.session.id) && hello.dubs.downDubs.length !== Dubtrack.room.player.activeSong.attributes.song.downdubs))){
+                console.log("Dubs don't match, reset! Song started ", msSinceSongStart, "ms ago!");
                 hello.resetDubs();
             }
-
-            console.log(e);
-            console.log(hello.dubs);
+        },
+        userIsAtLeastMod: function(userid){
+            return Dubtrack.helpers.isDubtrackAdmin(userid) ||
+                    Dubtrack.room.users.getIfOwner(userid) ||
+                    Dubtrack.room.users.getIfManager(userid) ||
+                    Dubtrack.room.users.getIfMod(userid);
+        },
+        updateChatInputWithString: function(str){
+            $("#chat-txt-message").val(str).focus();
         },
         spacebar_mute: function() {
             if (!options.let_spacebar_mute) {
@@ -1414,6 +1472,7 @@ if (!hello_run && Dubtrack.session.id) {
     hello.personalize();
     hello.previewListInit();
     hello.userAutoComplete();
+    hello.dubinfoInit();
 
     //Ref 4:
     if (localStorage.getItem('autovote') === 'true') {
