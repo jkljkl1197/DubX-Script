@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
-    var our_version = '03.01.40 - Mention Notifications';
+    var our_version = '03.01.51 - Autocomplete Fixes';
 
     //Ref 1: Variables
     var options = {
@@ -81,8 +81,11 @@ if (!hello_run && Dubtrack.session.id) {
                     '<span class="for_content_ver">DubX Settings</span>',
                     '<span class="for_content_version" onclick="hello.drawAll();">'+our_version+'</span>',
                     '<ul class="for_content_ul">',
-                        '<li class="for_content_li" onclick="hello.drawGeneral();">',
-                            '<p class="for_content_c">General</p>',
+                        '<li class="for_content_li" onclick="hello.drawSection(this)">',
+                            '<p class="for_content_c">',
+                                'General',
+                                '<i class="fi-minus"></i>',
+                            '</p>',
                         '</li>',
                         '<ul class="for_draw draw_general">',
                             '<li onclick="hello.autovote();" class="for_content_li for_content_feature autovote">',
@@ -122,8 +125,11 @@ if (!hello_run && Dubtrack.session.id) {
                                 '<p class="for_content_p">Updubs in Chat</p>',
                             '</li>',
                         '</ul>',
-                        '<li class="for_content_li" onclick="hello.drawUserInterface();">',
-                            '<p class="for_content_c">User Interface</p>',
+                        '<li class="for_content_li" onclick="hello.drawSection(this)">',
+                            '<p class="for_content_c">',
+                                'User Interface',
+                                '<i class="fi-minus"></i>',
+                            '</p>',
                         '</li>',
                         '<ul class="draw_userinterface">',
                             '<li onclick="hello.fs();" class="for_content_li for_content_feature fs">',
@@ -151,8 +157,11 @@ if (!hello_run && Dubtrack.session.id) {
                                 '<p class="for_content_p">Hide Background</p>',
                             '</li>',
                         '</ul>',
-                        '<li class="for_content_li" onclick="hello.drawSettings();">',
-                            '<p class="for_content_c">Settings</p>',
+                        '<li class="for_content_li" onclick="hello.drawSection(this)">',
+                            '<p class="for_content_c">',
+                                'Settings',
+                                '<i class="fi-minus"></i>',
+                            '</p>',
                         '</li>',
                         '<ul class="draw_settings">',
                             '<li onclick="hello.spacebar_mute();" class="for_content_li for_content_feature spacebar_mute">',
@@ -168,8 +177,11 @@ if (!hello_run && Dubtrack.session.id) {
                                 '<p class="for_content_p">Warn On Navigation</p>',
                             '</li>',
                         '</ul>',
-                        '<li class="for_content_li" onclick="hello.drawCustomize();">',
-                            '<p class="for_content_c">Customize</p>',
+                        '<li class="for_content_li" onclick="hello.drawSection(this)">',
+                            '<p class="for_content_c">',
+                                'Customize',
+                                '<i class="fi-minus"></i>',
+                            '</p>',
                         '</li>',
                         '<ul class="draw_customize">',
                             '<li onclick="hello.nicole();" class="for_content_li for_content_feature nicole">',
@@ -189,8 +201,11 @@ if (!hello_run && Dubtrack.session.id) {
                                 '<p class="for_content_p">Custom Background</p>',
                             '</li>',
                         '</ul>',
-                        '<li class="for_content_li" onclick="hello.drawContact();">',
-                            '<p class="for_content_c">Contact</p>',
+                        '<li class="for_content_li" onclick="hello.drawSection(this)">',
+                            '<p class="for_content_c">',
+                                'Contact',
+                                '<i class="fi-minus"></i>',
+                            '</p>',
                         '</li>',
                         '<ul class="draw_contact">',
                             '<li onclick="hello.report_modal();" class="for_content_li for_content_feature report">',
@@ -198,8 +213,11 @@ if (!hello_run && Dubtrack.session.id) {
                                 '<p class="for_content_p">Bug Report</p>',
                             '</li>',
                         '</ul>',
-                        '<li class="for_content_li" onclick="hello.drawSocial();">',
-                            '<p class="for_content_c">Social</p>',
+                        '<li class="for_content_li" onclick="hello.drawSection(this)">',
+                            '<p class="for_content_c">',
+                                'Social',
+                                '<i class="fi-minus"></i>',
+                            '</p>',
                         '</li>',
                         '<ul class="draw_social">',
                             '<li class="for_content_li for_content_feature">',
@@ -227,8 +245,11 @@ if (!hello_run && Dubtrack.session.id) {
                                 '</a>',
                             '</li>',
                         '</ul>',
-                        '<li class="for_content_li" onclick="hello.drawChrome()">',
-                            '<p class="for_content_c">Chrome Extension</p>',
+                        '<li class="for_content_li" onclick="hello.drawSection(this)">',
+                            '<p class="for_content_c">',
+                                'Chrome Extension',
+                                '<i class="fi-minus"></i>',
+                            '</p>',
                         '</li>',
                         '<ul class="draw_chrome">',
                             '<li class="for_content_li for_content_feature">',
@@ -244,29 +265,22 @@ if (!hello_run && Dubtrack.session.id) {
             $('.header-right-navigation').append(li);
             $('body').prepend(html);
         },
-        drawGeneral: function() {
-            $('.draw_general').slideToggle('fast');
-        },
-        drawContact: function() {
-            $('.draw_contact').slideToggle('fast');
-        },
-        drawCustomize: function() {
-            $('.draw_customize').slideToggle('fast');
-        },
-        drawSocial: function() {
-            $('.draw_social').slideToggle('fast');
-        },
-        drawChrome: function() {
-            $('.draw_chrome').slideToggle('fast');
-        },
-        drawUserInterface: function() {
-            $('.draw_userinterface').slideToggle('fast');
-        },
-        drawSettings: function() {
-            $('.draw_settings').slideToggle('fast');
+        drawSection: function(el) {
+            $(el).next('ul').slideToggle('fast');
+
+            var clicked = $(el).find('.for_content_c i');
+
+            if(clicked.hasClass('fi-minus')){
+                clicked.removeClass('fi-minus').addClass('fi-plus');
+            }
+            else{
+                clicked.removeClass('fi-plus').addClass('fi-minus');
+            }
+
         },
         drawAll: function() {
             $('.draw_general, .draw_contact, .draw_customize, .draw_social, .draw_chrome, .draw_userinterface, .draw_settings').slideUp();
+            $('.for_content_c i').removeClass('fi-minus').addClass('fi-plus');
         },
         //Ref 2.3.1: Input
         input: function(title,content,placeholder,confirm) {
@@ -914,7 +928,7 @@ if (!hello_run && Dubtrack.session.id) {
             var cssClass = "selected";
             oBoxCollection.removeClass(cssClass).eq(self.displayBoxIndex).addClass(cssClass).focus();
         },
-        prewiewListKeyUp: function(e){
+        previewListKeyUp: function(e){
             e.preventDefault();
             switch(e.keyCode) {
                 case 38:
@@ -944,7 +958,7 @@ if (!hello_run && Dubtrack.session.id) {
                 hello.updateChatInput(new_text);
             });
 
-            $(document.body).on('keyup', '.ac-show', hello.prewiewListKeyUp);
+            $(document.body).on('keydown', '.ac-show', hello.previewListKeyUp);
         },
         /**************************************************************************
          * A bunch of utility helpers for the emoji preview
@@ -1105,8 +1119,9 @@ if (!hello_run && Dubtrack.session.id) {
                 var options = {
                     body: content,
                     icon: "http://i.imgur.com/RXJnXNJ.png"
-                }
+                };
                 var n = new Notification("Message from "+e.user.username,options);
+                setTimeout(n.close.bind(n), 5000);
             }
         },
         dubinfoInit: function(){
