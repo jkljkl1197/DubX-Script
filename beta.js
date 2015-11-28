@@ -1207,6 +1207,11 @@ if (!hello_run && Dubtrack.session.id) {
 
             $.getJSON("https://api.dubtrack.fm/room/" + Dubtrack.room.model.id + "/playlist/active/dubs", function(response){
                 response.data.upDubs.forEach(function(e){
+                    //Dub already casted (usually from autodub)
+                    if($.grep(hello.dubs.upDubs, function(el){ return el.userid == e.user._id; }).length > 0){
+                        return;
+                    }
+
                     var username;
                     if(!Dubtrack.room.users.collection.findWhere({userid: e.userid}) || !Dubtrack.room.users.collection.findWhere({userid: e.userid}).attributes) {
                         $.getJSON("https://api.dubtrack.fm/user/" + e.userid, function(response){
@@ -1226,6 +1231,11 @@ if (!hello_run && Dubtrack.session.id) {
                 //Only let mods or higher access down dubs
                 if(hello.userIsAtLeastMod(Dubtrack.session.id)){
                     response.data.downDubs.forEach(function(e){
+                        //Dub already casted
+                        if($.grep(hello.dubs.downDubs, function(el){ return el.userid == e.user._id; }).length > 0){
+                            return;
+                        }
+
                         var username;
                         if(!Dubtrack.room.users.collection.findWhere({userid: e.userid}) || !Dubtrack.room.users.collection.findWhere({userid: e.userid}).attributes) {
                             $.getJSON("https://api.dubtrack.fm/user/" + e.userid, function(response){
@@ -1297,16 +1307,25 @@ if (!hello_run && Dubtrack.session.id) {
                     if($("#dubx-updubs-container").length > 0) return; //already exists
 
                     var dubupBackground = $('.dubup').hasClass('voted') ? $('.dubup').css('background-color') : $('.dubup').find('.icon-arrow-up').css('color');
-                    var html = '<ul id="dubinfo-preview" class="dubinfo-show dubx-updubs-hover" style="border-color: '+dubupBackground+'">';
-                    hello.dubs.upDubs.forEach(function(val){
-                        html += '<li class="preview-dubinfo-item users-previews dubx-updubs-hover">' +
-                                    '<div class="dubinfo-image">' +
-                                        '<img src="https://api.dubtrack.fm/user/' + val.userid + '/image">' +
-                                    '</div>' +
-                                    '<span class="dubinfo-text">@' + val.username + '</span>' +
-                                '</li>'
-                    });
-                    html += '</ul>';
+                    var html;
+
+                    if(hello.dubs.upDubs.length > 0){
+                        html = '<ul id="dubinfo-preview" class="dubinfo-show dubx-updubs-hover" style="border-color: '+dubupBackground+'">';
+                        hello.dubs.upDubs.forEach(function(val){
+                            html += '<li class="preview-dubinfo-item users-previews dubx-updubs-hover">' +
+                                        '<div class="dubinfo-image">' +
+                                            '<img src="https://api.dubtrack.fm/user/' + val.userid + '/image">' +
+                                        '</div>' +
+                                        '<span class="dubinfo-text">@' + val.username + '</span>' +
+                                    '</li>'
+                        });
+                        html += '</ul>';                     
+                    }
+                    else{
+                        html = '<div id="dubinfo-preview" class="dubinfo-show dubx-updubs-hover dubx-no-dubs" style="border-color: '+dubupBackground+'">' +
+                                    'No updubs have been casted yet!' +
+                                '</div>';
+                    }
 
                     var newEl = document.createElement('div');
                     newEl.id = 'dubx-updubs-container';
@@ -1316,10 +1335,18 @@ if (!hello_run && Dubtrack.session.id) {
                     document.body.appendChild(newEl);
 
                     var elemRect = this.getBoundingClientRect();
+                    var bodyRect = document.body.getBoundingClientRect();
 
                     newEl.style.visibility = "";
                     newEl.style.top = (elemRect.top-150) + 'px';
-                    newEl.style.left = elemRect.left + 'px';
+
+                    //If info pane would run off screen set the position on right edge
+                    if(bodyRect.right - elemRect.left >= 200){
+                        newEl.style.left = elemRect.left + 'px';
+                    }
+                    else{
+                        newEl.style.right = 0;
+                    }
 
                     document.body.appendChild(newEl);
 
@@ -1352,16 +1379,23 @@ if (!hello_run && Dubtrack.session.id) {
                     var html;
 
                     if(hello.userIsAtLeastMod(Dubtrack.session.id)){
-                        html = '<ul id="dubinfo-preview" class="dubinfo-show dubx-downdubs-hover" style="border-color: '+dubdownBackground+'">';
-                        hello.dubs.downDubs.forEach(function(val){
-                            html += '<li class="preview-dubinfo-item users-previews dubx-downdubs-hover">' +
-                                    '<div class="dubinfo-image">' +
-                                        '<img src="https://api.dubtrack.fm/user/' + val.userid + '/image">' +
-                                    '</div>' +
-                                    '<span class="dubinfo-text">@' + val.username + '</span>' +
-                                '</li>'
-                        });
-                        html += '</ul>';
+                        if(hello.dubs.downDubs.length > 0){
+                            html = '<ul id="dubinfo-preview" class="dubinfo-show dubx-downdubs-hover" style="border-color: '+dubdownBackground+'">';
+                            hello.dubs.downDubs.forEach(function(val){
+                                html += '<li class="preview-dubinfo-item users-previews dubx-downdubs-hover">' +
+                                            '<div class="dubinfo-image">' +
+                                                '<img src="https://api.dubtrack.fm/user/' + val.userid + '/image">' +
+                                            '</div>' +
+                                            '<span class="dubinfo-text">@' + val.username + '</span>' +
+                                        '</li>'
+                            });
+                            html += '</ul>';                     
+                        }
+                        else{
+                            html = '<div id="dubinfo-preview" class="dubinfo-show dubx-downdubs-hover dubx-no-dubs" style="border-color: '+dubdownBackground+'">' +
+                                        'No downdubs have been casted yet!' +
+                                    '</div>';
+                        }
                     }
                     else{
                         html = '<div id="dubinfo-preview" class="dubinfo-show dubx-downdubs-hover dubx-downdubs-unauthorized" style="border-color: '+dubdownBackground+'">' +
@@ -1377,10 +1411,18 @@ if (!hello_run && Dubtrack.session.id) {
                     document.body.appendChild(newEl);
 
                     var elemRect = this.getBoundingClientRect();
+                    var bodyRect = document.body.getBoundingClientRect();
 
                     newEl.style.visibility = "";
                     newEl.style.top = (elemRect.top-150) + 'px';
-                    newEl.style.left = (elemRect.left-105) + 'px';
+
+                    //If info pane would run off screen set the position on right edge
+                    if(bodyRect.right - elemRect.left >= 200){
+                        newEl.style.left = elemRect.left + 'px';
+                    }
+                    else{
+                        newEl.style.right = 0;
+                    }
 
                     document.body.appendChild(newEl);
 
@@ -1437,10 +1479,13 @@ if (!hello_run && Dubtrack.session.id) {
         },
         dubWatcher: function(e){
             if(e.dubtype === 'updub'){
-                hello.dubs.upDubs.push({
-                    userid: e.user._id,
-                    username: e.user.username
-                });
+                //If dub already casted
+                if($.grep(hello.dubs.upDubs, function(el){ return el.userid == e.user._id; }).length <= 0){
+                    hello.dubs.upDubs.push({
+                        userid: e.user._id,
+                        username: e.user.username
+                    });
+                }
 
                 //Remove user from other dubtype if exists
                 if($.grep(hello.dubs.downDubs, function(el){ return el.userid == e.user._id; }).length > 0){
@@ -1453,10 +1498,13 @@ if (!hello_run && Dubtrack.session.id) {
                 }
             }
             else if(e.dubtype === 'downdub' && hello.userIsAtLeastMod(Dubtrack.session.id)){
-                hello.dubs.downDubs.push({
-                    userid: e.user._id,
-                    username: e.user.username
-                });
+                //If dub already casted
+                if($.grep(hello.dubs.downDubs, function(el){ return el.userid == e.user._id; }).length <= 0){
+                    hello.dubs.downDubs.push({
+                        userid: e.user._id,
+                        username: e.user.username
+                    });
+                }
 
                 //Remove user from other dubtype if exists
                 if($.grep(hello.dubs.upDubs, function(el){ return el.userid == e.user._id; }).length > 0){

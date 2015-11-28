@@ -23,6 +23,12 @@
     border: 1px solid white;
 }
 
+#dubinfo-preview.dubx-no-dubs {
+    text-align: center;
+    color: ##0ff;
+    padding: 50px 10px;
+}
+
 #dubinfo-preview.dubx-downdubs-unauthorized {
     text-align: center;
     color: #f0f;
