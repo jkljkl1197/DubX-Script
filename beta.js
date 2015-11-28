@@ -1208,7 +1208,7 @@ if (!hello_run && Dubtrack.session.id) {
             $.getJSON("https://api.dubtrack.fm/room/" + Dubtrack.room.model.id + "/playlist/active/dubs", function(response){
                 response.data.upDubs.forEach(function(e){
                     //Dub already casted (usually from autodub)
-                    if($.grep(hello.dubs.upDubs, function(el){ return el.userid == e.user._id; }).length > 0){
+                    if($.grep(hello.dubs.upDubs, function(el){ return el.userid == e.userid; }).length > 0){
                         return;
                     }
 
@@ -1232,7 +1232,7 @@ if (!hello_run && Dubtrack.session.id) {
                 if(hello.userIsAtLeastMod(Dubtrack.session.id)){
                     response.data.downDubs.forEach(function(e){
                         //Dub already casted
-                        if($.grep(hello.dubs.downDubs, function(el){ return el.userid == e.user._id; }).length > 0){
+                        if($.grep(hello.dubs.downDubs, function(el){ return el.userid == e.userid; }).length > 0){
                             return;
                         }
 
