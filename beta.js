@@ -1267,11 +1267,11 @@ if (!hello_run && Dubtrack.session.id) {
                 Dubtrack.Events.bind("realtime:user-leave", this.dubUserLeaveWatcher);
                 Dubtrack.Events.bind("realtime:room_playlist-update", hello.resetDubs);
 
-                var dubupEl = $('.dubup')[0];
-                var dubdownEl = $('.dubdown')[0];
+                var dubupEl = $($('.dubup')[0]).parent('li');
+                var dubdownEl = $($('.dubdown')[0]).parent('li');
 
-                $(dubupEl).parent('li').addClass("dubx-updubs-hover");
-                $(dubdownEl).parent('li').addClass("dubx-downdubs-hover");
+                $(dubupEl).addClass("dubx-updubs-hover");
+                $(dubdownEl).addClass("dubx-downdubs-hover");
 
                 //Show compiled info containers when casting/changing vote
                 $(dubupEl).click(function(event){
@@ -1284,7 +1284,7 @@ if (!hello_run && Dubtrack.session.id) {
 
                         var elementMouseIsOver = document.elementFromPoint(x, y);
 
-                    if($(elementMouseIsOver).hasClass('dubx-updubs-hover') || $(elementMouseIsOver).parent('.dubx-updubs-hover').length > 0){
+                    if($(elementMouseIsOver).hasClass('dubx-updubs-hover') || $(elementMouseIsOver).parents('.dubx-updubs-hover').length > 0){
                         setTimeout(function(){$(dubupEl).mouseenter();}, 250);
                     }
                 });
@@ -1298,7 +1298,7 @@ if (!hello_run && Dubtrack.session.id) {
 
                         var elementMouseIsOver = document.elementFromPoint(x, y);
 
-                    if($(elementMouseIsOver).hasClass('dubx-downdubs-hover') || $(elementMouseIsOver).parent('.dubx-downdubs-hover').length > 0){
+                    if($(elementMouseIsOver).hasClass('dubx-downdubs-hover') || $(elementMouseIsOver).parents('.dubx-downdubs-hover').length > 0){
                         setTimeout(function(){$(dubdownEl).mouseenter();}, 250);
                     }
                 });
@@ -1306,6 +1306,7 @@ if (!hello_run && Dubtrack.session.id) {
                 $(dubupEl).mouseenter(function(){
                     if($("#dubx-updubs-container").length > 0) return; //already exists
 
+                    var infoPaneWidth = $(dubupEl).innerWidth() + $(dubdownEl).innerWidth();
                     var dubupBackground = $('.dubup').hasClass('voted') ? $('.dubup').css('background-color') : $('.dubup').find('.icon-arrow-up').css('color');
                     var html;
 
@@ -1338,10 +1339,11 @@ if (!hello_run && Dubtrack.session.id) {
                     var bodyRect = document.body.getBoundingClientRect();
 
                     newEl.style.visibility = "";
+                    newEl.style.width = infoPaneWidth + 'px';
                     newEl.style.top = (elemRect.top-150) + 'px';
 
                     //If info pane would run off screen set the position on right edge
-                    if(bodyRect.right - elemRect.left >= 200){
+                    if(bodyRect.right - elemRect.left >= infoPaneWidth){
                         newEl.style.left = elemRect.left + 'px';
                     }
                     else{
@@ -1375,6 +1377,7 @@ if (!hello_run && Dubtrack.session.id) {
                 $(dubdownEl).mouseenter(function(){
                     if($("#dubx-downdubs-container").length > 0) return; //already exists
 
+                    var infoPaneWidth = $(dubupEl).innerWidth() + $(dubdownEl).innerWidth();
                     var dubdownBackground = $('.dubdown').hasClass('voted') ? $('.dubdown').css('background-color') : $('.dubdown').find('.icon-arrow-down').css('color');
                     var html;
 
@@ -1414,10 +1417,11 @@ if (!hello_run && Dubtrack.session.id) {
                     var bodyRect = document.body.getBoundingClientRect();
 
                     newEl.style.visibility = "";
+                    newEl.style.width = infoPaneWidth + 'px';
                     newEl.style.top = (elemRect.top-150) + 'px';
 
                     //If info pane would run off screen set the position on right edge
-                    if(bodyRect.right - elemRect.left >= 200){
+                    if(bodyRect.right - elemRect.left >= infoPaneWidth){
                         newEl.style.left = elemRect.left + 'px';
                     }
                     else{
@@ -1497,9 +1501,9 @@ if (!hello_run && Dubtrack.session.id) {
                     });
                 }
             }
-            else if(e.dubtype === 'downdub' && hello.userIsAtLeastMod(Dubtrack.session.id)){
+            else if(e.dubtype === 'downdub'){
                 //If dub already casted
-                if($.grep(hello.dubs.downDubs, function(el){ return el.userid == e.user._id; }).length <= 0){
+                if($.grep(hello.dubs.downDubs, function(el){ return el.userid == e.user._id; }).length <= 0 && hello.userIsAtLeastMod(Dubtrack.session.id)){
                     hello.dubs.downDubs.push({
                         userid: e.user._id,
                         username: e.user.username
@@ -1518,10 +1522,14 @@ if (!hello_run && Dubtrack.session.id) {
             }
 
             var msSinceSongStart = new Date() - new Date(Dubtrack.room.player.activeSong.attributes.song.played);
-            if(msSinceSongStart >= 1000 &&
-                (hello.dubs.upDubs.length !== Dubtrack.room.player.activeSong.attributes.song.updubs ||
-                (hello.userIsAtLeastMod(Dubtrack.session.id) && hello.dubs.downDubs.length !== Dubtrack.room.player.activeSong.attributes.song.downdubs))){
-                console.log("Dubs don't match, reset! Song started ", msSinceSongStart, "ms ago!");
+            if(msSinceSongStart < 1000) return;
+
+            if(hello.dubs.upDubs.length !== Dubtrack.room.player.activeSong.attributes.song.updubs){
+                console.log("Updubs don't match, reset! Song started ", msSinceSongStart, "ms ago!");
+                hello.resetDubs();
+            }
+            else if(hello.userIsAtLeastMod(Dubtrack.session.id) && hello.dubs.downDubs.length !== Dubtrack.room.player.activeSong.attributes.song.downdubs){
+                console.log("Downdubs don't match, reset! Song started ", msSinceSongStart, "ms ago!");
                 hello.resetDubs();
             }
         },
