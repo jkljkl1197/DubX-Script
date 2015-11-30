@@ -18,9 +18,9 @@ Our Team
 IMPORTANT
 ---
 
-__Updates (Version 03.01.50)__
+__Updates (Version 03.01.51)__
 
-- Add open/close icons for sections within DubX dropdown
+- Fixed an issue when the incomplete message was sent when pressing enter trying to select an autocomplete option for mentions and emotes
 
 -----------------
 Usage

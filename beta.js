@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
-    var our_version = '03.01.50 - UI Section Icons';
+    var our_version = '03.01.51 - Autocomplete Fixes';
 
     //Ref 1: Variables
     var options = {
@@ -901,7 +901,7 @@ if (!hello_run && Dubtrack.session.id) {
             var cssClass = "selected";
             oBoxCollection.removeClass(cssClass).eq(self.displayBoxIndex).addClass(cssClass).focus();
         },
-        prewiewListKeyUp: function(e){
+        previewListKeyUp: function(e){
             e.preventDefault();
             switch(e.keyCode) {
                 case 38:
@@ -910,6 +910,7 @@ if (!hello_run && Dubtrack.session.id) {
                 case 40:
                     hello.doNavigate(1);
                     break;
+                case 39:
                 case 13:
                     $('#autocomplete-preview li.selected').trigger('click');
                     break;
@@ -929,7 +930,7 @@ if (!hello_run && Dubtrack.session.id) {
                 hello.updateChatInput(new_text);
             });
 
-            $(document.body).on('keyup', '.ac-show', hello.prewiewListKeyUp);
+            $(document.body).on('keyup', '.ac-show', hello.previewListKeyUp);
         },
         /**************************************************************************
          * A bunch of utility helpers for the emoji preview
@@ -1012,11 +1013,11 @@ if (!hello_run && Dubtrack.session.id) {
             }
 
             if ($('.ac-show li').length === 1) {
-                $('.ac-show li').append('<span>press &darr; to select</span>').addClass('selected');
+                $('.ac-show li').append('<span>press enter to select</span>').addClass('selected');
             }
 
-            if ($('.ac-show li').length === 1 && e.keyCode === 40) {
-                $('#autocomplete-preview li.selected').trigger('click');
+            if ($('.ac-show li').length === 1 && e.keyCode === 13) {
+                $('#autocomplete-preview li:first').trigger('click');
                 return;
             }
 
@@ -1025,6 +1026,9 @@ if (!hello_run && Dubtrack.session.id) {
             }
             if (e.keyCode === 40) {
                 self.doNavigate(1);
+            }
+            if (e.keyCode === 13 && currentText.length > 0){
+                Dubtrack.room.chat.sendMessage();
             }
         },
         optionEmojiPreview: function(){
@@ -1130,6 +1134,9 @@ if (!hello_run && Dubtrack.session.id) {
             });
         },
         userAutoComplete: function(){
+            //Remove keydown event chat view to replace with our event
+            Dubtrack.room.chat.delegateEvents(_(Dubtrack.room.chat.events).omit('keydown input#chat-txt-message'));
+
             $(document.body).on('keyup', "#chat-txt-message", this.chatInputKeyupFunc);
             hello.whenAvailable("Dubtrack.room.users", hello.updateUsersArray);
             Dubtrack.Events.bind("realtime:user-ban", hello.updateUsersArray);
