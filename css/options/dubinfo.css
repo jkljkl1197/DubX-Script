@@ -5,6 +5,15 @@
     height: 150px;
     width: 200px;
     z-index: 100001;
+    border: 1px solid white;
+}
+
+#dubx-updubs-container {
+    border-radius: 0.4rem 0.4rem 0.4rem 0;
+}
+
+#dubx-downdubs-container {
+    border-radius: 0.4rem 0.4rem 0 0.4rem;
 }
 
 #dubinfo-preview {
@@ -20,7 +29,6 @@
     overflow: inherit; 
     bottom: 0; 
     height: 150px;
-    border: 1px solid white;
 }
 
 #dubinfo-preview.dubx-no-dubs, #dubinfo-preview.dubx-downdubs-unauthorized {
