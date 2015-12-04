@@ -1308,12 +1308,10 @@ if (!hello_run && Dubtrack.session.id) {
 
                     var infoPaneWidth = $(dubupEl).innerWidth() + $(dubdownEl).innerWidth();
                     var dubupBackground = $('.dubup').hasClass('voted') ? $('.dubup').css('background-color') : $('.dubup').find('.icon-arrow-up').css('color');
-                    $("#dubx-updubs-container").css('border-color', dubupBackground);
-
                     var html;
 
                     if(hello.dubs.upDubs.length > 0){
-                        html = '<ul id="dubinfo-preview" class="dubinfo-show dubx-updubs-hover">';
+                        html = '<ul id="dubinfo-preview" class="dubinfo-show dubx-updubs-hover" style="border-color: '+dubupBackground+'">';
                         hello.dubs.upDubs.forEach(function(val){
                             html += '<li class="preview-dubinfo-item users-previews dubx-updubs-hover">' +
                                         '<div class="dubinfo-image">' +
@@ -1381,13 +1379,11 @@ if (!hello_run && Dubtrack.session.id) {
 
                     var infoPaneWidth = $(dubupEl).innerWidth() + $(dubdownEl).innerWidth();
                     var dubdownBackground = $('.dubdown').hasClass('voted') ? $('.dubdown').css('background-color') : $('.dubdown').find('.icon-arrow-down').css('color');
-                    $("#dubx-downdubs-container").css('border-color', dubdownBackground);
-                    
                     var html;
 
                     if(hello.userIsAtLeastMod(Dubtrack.session.id)){
                         if(hello.dubs.downDubs.length > 0){
-                            html = '<ul id="dubinfo-preview" class="dubinfo-show dubx-downdubs-hover">';
+                            html = '<ul id="dubinfo-preview" class="dubinfo-show dubx-downdubs-hover" style="border-color: '+dubdownBackground+'">';
                             hello.dubs.downDubs.forEach(function(val){
                                 html += '<li class="preview-dubinfo-item users-previews dubx-downdubs-hover">' +
                                             '<div class="dubinfo-image">' +
