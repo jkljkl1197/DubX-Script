@@ -1205,7 +1205,7 @@ if (!hello_run && Dubtrack.session.id) {
                 downDubs: []
             };
 
-            $.getJSON("https://api.dubtrack.fm/room/" + Dubtrack.room.model.id + "/playlist/active/dubs", function(response){
+            $.getJSON("https://api.dubtrack.fm/room/" + Dubtrack.room.model.id + "/playlist/" + Dubtrack.room.player.activeSong.attributes.song._id + "/dubs", function(response){
                 response.data.upDubs.forEach(function(e){
                     //Dub already casted (usually from autodub)
                     if($.grep(hello.dubs.upDubs, function(el){ return el.userid == e.userid; }).length > 0){
