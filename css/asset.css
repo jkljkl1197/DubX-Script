@@ -283,9 +283,16 @@ ul.avatar-list li.currentDJ .user-sinful:after, ul.avatar-list li.currentDJ .use
 ul.avatar-list li.user-mbsurfer p.dubs:before {
     content: "DubX Team  -  ";
     font-weight: 700 !important;
-    color: #89BE6C;
+    color: #89BE6C !important;
 }
-ul.avatar-list li.co-owner.user-mbsurfer:after, ul.avatar-list li.creator.user-mbsurfer:after, ul.avatar-list li.mod.user-mbsurfer:after, ul.avatar-list li.vip.user-mbsurfer:after, ul.avatar-list li.resident-dj.user-mbsurfer:after, ul.avatar-list li.currentDJ .user-mbsurfer:after, .user-mbsurfer, .user-mbsurfer p.username {
+ul.avatar-list li.admin.user-mbsurfer:after,
+ul.avatar-list li.co-owner.user-mbsurfer:after,
+ul.avatar-list li.creator.user-mbsurfer:after,
+ul.avatar-list li.mod.user-mbsurfer:after,
+ul.avatar-list li.vip.user-mbsurfer:after,
+ul.avatar-list li.resident-dj.user-mbsurfer:after,
+ul.avatar-list li.currentDJ .user-mbsurfer:after,
+.user-mbsurfer, .user-mbsurfer p.username {
     color: #89BE6C !important;
 }
 #main_avatar_room #main-user-list-room #avatar-list li.admin.user-mbsurfer p.username, #main_avatar_room #main-user-list-room #avatar-list li.admin.user-mbsurfer p.username:after,
