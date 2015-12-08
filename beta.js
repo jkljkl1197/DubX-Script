@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
-    var our_version = '03.01.51 - Autocomplete Fixes';
+    var our_version = '03.01.55 - Winter Time!';
 
     //Ref 1: Variables
     var options = {
@@ -1074,14 +1074,14 @@ if (!hello_run && Dubtrack.session.id) {
             if (!options.let_mention_notifications) {
                 this.isActiveTab = true;
 
-                window.onfocus = function () { 
-                  hello.isActiveTab = true; 
-                }; 
-
-                window.onblur = function () { 
-                  hello.isActiveTab = false; 
+                window.onfocus = function () {
+                  hello.isActiveTab = true;
                 };
-                
+
+                window.onblur = function () {
+                  hello.isActiveTab = false;
+                };
+
                 if (!("Notification" in window)) {
                     alert("This browser does not support desktop notification");
                 }
@@ -1267,7 +1267,7 @@ if (!hello_run && Dubtrack.session.id) {
         ].join('');
         $('body').prepend(onErr);
     }
-    if (!Dubtrack.session.id) {    
+    if (!Dubtrack.session.id) {
         onErr('You\'re not logged in. Please login to use DUBX.');
     } else {
         onErr('Oh noes! We\'ve encountered a runtime error');
