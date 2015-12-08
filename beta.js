@@ -1069,6 +1069,16 @@ if (!hello_run && Dubtrack.session.id) {
         },
         mentionNotifications: function(){
             if (!options.let_mention_notifications) {
+                this.isActiveTab = true;
+
+                window.onfocus = function () { 
+                  hello.isActiveTab = true; 
+                }; 
+
+                window.onblur = function () { 
+                  hello.isActiveTab = false; 
+                };
+                
                 if (!("Notification" in window)) {
                     alert("This browser does not support desktop notification");
                 }
@@ -1104,7 +1114,7 @@ if (!hello_run && Dubtrack.session.id) {
         notifyOnMention: function(e){
             var content = e.message;
             var user = Dubtrack.session.get('username');
-            if (content.indexOf('@'+user) >-1) {
+            if (content.indexOf('@'+user) >-1 && !hello.isActiveTab) {
                 var options = {
                     body: content,
                     icon: "http://i.imgur.com/RXJnXNJ.png"
