@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
-    var our_version = '03.02.02 - Custom Afk Messages';
+    var our_version = '03.02.03 - Save Collapsed Menus';
 
     //Ref 1: Variables
     var options = {
@@ -83,7 +83,7 @@ if (!hello_run && Dubtrack.session.id) {
                 '<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/asset.css">',
                 '<div class="for_content">',
                     '<span class="for_content_ver">DubX Settings</span>',
-                    '<span class="for_content_version" onclick="hello.drawAll();">'+our_version+'</span>',
+                    '<span class="for_content_version" onclick="hello.drawAll();" title="Collapse/Expand Menus">'+our_version+'</span>',
                     '<ul class="for_content_ul">',
                         '<li class="for_content_li" onclick="hello.drawSection(this)">',
                             '<p class="for_content_c">',
