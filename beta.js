@@ -50,7 +50,14 @@ if (!hello_run && Dubtrack.session.id) {
         let_emoji_preview: false,
         let_spacebar_mute: false,
         let_autocomplete_mentions: false,
-        let_mention_notifications: false
+        let_mention_notifications: false,
+        draw_general: false,
+        draw_userinterface: false,
+        draw_settings: false,
+        draw_customize: false,
+        draw_contact: false,
+        draw_social: false,
+        draw_chrome: false
     };
 
     $('html').addClass('dubx');
@@ -84,7 +91,7 @@ if (!hello_run && Dubtrack.session.id) {
                                 '<i class="fi-minus"></i>',
                             '</p>',
                         '</li>',
-                        '<ul class="for_draw draw_general">',
+                        '<ul class="draw_general">',
                             '<li onclick="hello.autovote();" class="for_content_li for_content_feature autovote">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Autovote</p>',
@@ -252,22 +259,49 @@ if (!hello_run && Dubtrack.session.id) {
             $('body').prepend(html);
             $('.for_content').perfectScrollbar({ wheelSpeed: 30, suppressScrollX: true });
         },
+        sectionList: ['draw_general','draw_userinterface','draw_settings','draw_customize','draw_contact','draw_social','draw_chrome'],
         drawSection: function(el) {
             $(el).next('ul').slideToggle('fast');
+            var sectionClass = $(el).next('ul').attr('class');
 
             var clicked = $(el).find('.for_content_c i');
 
             if(clicked.hasClass('fi-minus')){
                 clicked.removeClass('fi-minus').addClass('fi-plus');
+                hello.option(sectionClass,'false');
+                options[sectionClass] = 'false';
             }
             else{
                 clicked.removeClass('fi-plus').addClass('fi-minus');
+                hello.option(sectionClass,'true');
+                options[sectionClass] = 'true';
             }
 
         },
         drawAll: function() {
-            $('.draw_general, .draw_contact, .draw_customize, .draw_social, .draw_chrome, .draw_userinterface, .draw_settings').slideUp();
-            $('.for_content_c i').removeClass('fi-minus').addClass('fi-plus');
+            var allClosed = true;
+            for(var i = 0; i < hello.sectionList.length; i++) {
+                if($('.'+hello.sectionList[i]).css('display') === 'block'){
+                    allClosed = false; 
+                }
+            }
+
+            if(allClosed) {
+                for(var i = 0; i < hello.sectionList.length; i++) {
+                    $('.'+hello.sectionList[i]).slideDown('fast');
+                    $('.'+hello.sectionList[i]).prev('li').find('i').removeClass('fi-plus').addClass('fi-minus');
+                    hello.option(hello.sectionList[i], 'true');
+                    options[hello.sectionList[i]] = 'true';
+                }
+            }
+            else {
+                for(var i = 0; i < hello.sectionList.length; i++) {
+                    $('.'+hello.sectionList[i]).slideUp();
+                    $('.'+hello.sectionList[i]).prev('li').find('i').removeClass('fi-minus').addClass('fi-plus');
+                    hello.option(hello.sectionList[i],'false');
+                    options[hello.sectionList[i]] = 'false';
+                }
+            }
         },
         //Ref 2.3.1: Input
         input: function(title,content,placeholder,confirm,maxlength) {
@@ -1243,6 +1277,22 @@ if (!hello_run && Dubtrack.session.id) {
     if (localStorage.getItem('spacebar_mute') === 'true') {
         hello.spacebar_mute();
     }
+    for(var i = 0; i < hello.sectionList.length; i++){
+        if (localStorage.getItem(hello.sectionList[i]) === 'false') {
+            $('.'+hello.sectionList[i]).css('display', 'none');
+            $('.'+hello.sectionList[i]).prev('li').find('i').removeClass('fi-minus').addClass('fi-plus');
+            options[hello.sectionList[i]] = 'false';
+        }
+        else if(localStorage.getItem(hello.sectionList[i]) === undefined) {
+            hello.option(hello.sectionList[i], 'true');
+            options[hello.sectionList[i]] = 'true';
+        }
+        else {
+            console.log(hello.sectionList[i]);
+            options[hello.sectionList[i]] = 'true';
+        }
+    }
+    
     $('document').ready(hello.css_run);
     $('document').ready(hello.medium_load);
 
