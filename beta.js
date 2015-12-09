@@ -89,7 +89,7 @@ if (!hello_run && Dubtrack.session.id) {
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Autovote</p>',
                             '</li>',
-                            '<li onclick="hello.afk();" class="for_content_li for_content_feature afk">',
+                            '<li onclick="hello.afk(event);" class="for_content_li for_content_feature afk">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p onclick="hello.createAfkMessage();" class="for_content_edit" style="display: inline-block;color: #878c8e;font-size: .85rem;font-weight: bold;margin: 0 1rem 0 0;float: right;"><i class="fi-pencil"></i></p>',
                                 '<p class="for_content_p">AFK Autorespond</p>',
@@ -443,7 +443,9 @@ if (!hello_run && Dubtrack.session.id) {
             hello.input('Custom AFK Message',current,'I\'m AFK at the moment','confirm-for315');
             $('.confirm-for315').click(hello.saveAfkMessage);
         },
-        afk: function() {
+        afk: function(e) {
+            if(e.target.className === 'for_content_edit' || e.target.className === 'fi-pencil') return;
+
             if (!options.let_afk) {
                 options.let_afk = true;
                 Dubtrack.Events.bind("realtime:chat-message", this.afk_chat_respond);
