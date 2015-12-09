@@ -18,7 +18,7 @@ Our Team
 IMPORTANT
 ---
 
-__Updates (Version 03.01.60)__
+__Updates (Version 03.03.00)__
 
  - Add ability to see dub vote information whenever hovering over the corresponding vote buttons
  - Add option to see dub votes on your song as chat notifications
@@ -47,7 +47,7 @@ Features
 ---
 
 - Autovote
-- AFK Autorespond
+- AFK Autorespond with Custom Message
 - Emotes
 - Autocomplete Emoji
 - Autocomplete Mentions
