@@ -1746,7 +1746,6 @@ if (!hello_run && Dubtrack.session.id) {
             options[hello.sectionList[i]] = 'true';
         }
         else {
-            console.log(hello.sectionList[i]);
             options[hello.sectionList[i]] = 'true';
         }
     }
