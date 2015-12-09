@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
-    var our_version = '03.02.01 - Custom Afk Messages';
+    var our_version = '03.02.02 - Custom Afk Messages';
 
     //Ref 1: Variables
     var options = {
@@ -250,7 +250,7 @@ if (!hello_run && Dubtrack.session.id) {
             ].join('');
             $('.header-right-navigation').append(li);
             $('body').prepend(html);
-            $('.for_content').perfectScrollbar();
+            $('.for_content').perfectScrollbar({ wheelSpeed: 30, suppressScrollX: true });
         },
         drawSection: function(el) {
             $(el).next('ul').slideToggle('fast');

@@ -11,7 +11,7 @@
     height: calc(100% - 114px);
     right: 0px;
     top: 58px;
-    overflow-y: scroll;
+    overflow-y: hidden;
     background: #222;
     background: -moz-linear-gradient(top,  rgba(26,26,26,1) 0%, rgba(68,68,68,1) 100%);
     background: -webkit-linear-gradient(top,  rgba(26,26,26,1) 0%,rgba(68,68,68,1) 100%);
