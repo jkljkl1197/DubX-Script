@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
-    var our_version = '03.01.55 - Winter Time!';
+    var our_version = '03.02.00 - Custom Afk Messages';
 
     //Ref 1: Variables
     var options = {
