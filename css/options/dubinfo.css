@@ -17,7 +17,7 @@
     list-style-type: none;
     margin: 0;
     position: relative; 
-    overflow: inherit; 
+    overflow: hidden; 
     bottom: 0; 
     height: 150px;
     border: 1px solid white;
