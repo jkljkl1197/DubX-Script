@@ -270,7 +270,7 @@ if (!hello_run && Dubtrack.session.id) {
             $('.for_content_c i').removeClass('fi-minus').addClass('fi-plus');
         },
         //Ref 2.3.1: Input
-        input: function(title,content,placeholder,confirm) {
+        input: function(title,content,placeholder,confirm,maxlength) {
             var onErr = [
                 '<div class="onErr">',
                     '<div class="container">',
@@ -279,7 +279,7 @@ if (!hello_run && Dubtrack.session.id) {
                         '</div>',
                         '<div class="content">',
                             '<p>'+content+'</p>',
-                            '<textarea class="input" type="text" placeholder="'+placeholder+'"></textarea>',
+                            '<textarea class="input" type="text" placeholder="'+placeholder+'" maxlength="'+maxlength+'"></textarea>',
                         '</div>',
                         '<div class="control">',
                             '<div class="cancel" onclick="hello.closeErr();">',
@@ -369,7 +369,7 @@ if (!hello_run && Dubtrack.session.id) {
             });
         },
         report_modal: function() {
-            hello.input('Bug Report:','Report: (Please only report bugs for DubX, not Dubtrack)','Please give a detailed description of the bug.','confirm-for36','cancel');
+            hello.input('Bug Report:','Report: (Please only report bugs for DubX, not Dubtrack)','Please give a detailed description of the bug.','confirm-for36','cancel','999');
             $('.confirm-for36').click(hello.report_content);
             $('.confirm-for36').click(hello.closeErr);
         },
@@ -441,7 +441,7 @@ if (!hello_run && Dubtrack.session.id) {
         },
         createAfkMessage: function() {
             var current = localStorage.getItem('customAfkMessage');
-            hello.input('Custom AFK Message',current,'I\'m AFK at the moment','confirm-for315');
+            hello.input('Custom AFK Message',current,'I\'m AFK at the moment','confirm-for315','255');
             $('.confirm-for315').click(hello.saveAfkMessage);
         },
         afk: function() {
@@ -470,7 +470,7 @@ if (!hello_run && Dubtrack.session.id) {
         },
         css_modal: function() {
             var current = localStorage.getItem('css');
-            hello.input('CSS',current,'https://example.com/example.css','confirm-for313');
+            hello.input('CSS',current,'https://example.com/example.css','confirm-for313','999');
             $('.confirm-for313').click(hello.css_import);
         },
         css_import: function() {
@@ -538,7 +538,7 @@ if (!hello_run && Dubtrack.session.id) {
             }
         },
         medium_modal: function() {
-            hello.input('Link an image file:','It is recommended a .jpg file is used','https://example.com/example.jpg','confirm-for314');
+            hello.input('Link an image file:','It is recommended a .jpg file is used','https://example.com/example.jpg','confirm-for314','999');
             $('.confirm-for314').click(hello.medium_import);
         },
         medium_import: function() {
