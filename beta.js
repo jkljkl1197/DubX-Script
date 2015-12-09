@@ -311,7 +311,17 @@ if (!hello_run && Dubtrack.session.id) {
         autovote: function() {
             if (!options.let_autovote) {
                 options.let_autovote = true;
-                hello.advance_vote();
+
+                var song = Dubtrack.room.player.activeSong.get('song');
+                var dubCookie = Dubtrack.helpers.cookie.get('dub-' + Dubtrack.room.model.get("_id"));
+                var dubsong = Dubtrack.helpers.cookie.get('dub-song');
+                if(song.songid !== dubsong || !Dubtrack.room || song === null) 
+                    dubCookie = false;
+
+                //Only cast the vote if user hasn't already voted
+                if(!$('.dubup, .dubdown').hasClass('voted') && !dubCookie)
+                    hello.advance_vote();
+
                 hello.option('autovote','true');
                 hello.on('.autovote');
                 Dubtrack.Events.bind("realtime:room_playlist-update", hello.advance_vote);
