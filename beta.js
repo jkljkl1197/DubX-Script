@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
-    var our_version = '03.01.55 - Winter Time!';
+    var our_version = '03.02.03 - Save Collapsed Menus';
 
     //Ref 1: Variables
     var options = {
@@ -50,7 +50,14 @@ if (!hello_run && Dubtrack.session.id) {
         let_emoji_preview: false,
         let_spacebar_mute: false,
         let_autocomplete_mentions: false,
-        let_mention_notifications: false
+        let_mention_notifications: false,
+        draw_general: false,
+        draw_userinterface: false,
+        draw_settings: false,
+        draw_customize: false,
+        draw_contact: false,
+        draw_social: false,
+        draw_chrome: false
     };
 
     $('html').addClass('dubx');
@@ -76,7 +83,7 @@ if (!hello_run && Dubtrack.session.id) {
                 '<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/asset.css">',
                 '<div class="for_content">',
                     '<span class="for_content_ver">DubX Settings</span>',
-                    '<span class="for_content_version" onclick="hello.drawAll();">'+our_version+'</span>',
+                    '<span class="for_content_version" onclick="hello.drawAll();" title="Collapse/Expand Menus">'+our_version+'</span>',
                     '<ul class="for_content_ul">',
                         '<li class="for_content_li" onclick="hello.drawSection(this)">',
                             '<p class="for_content_c">',
@@ -84,13 +91,14 @@ if (!hello_run && Dubtrack.session.id) {
                                 '<i class="fi-minus"></i>',
                             '</p>',
                         '</li>',
-                        '<ul class="for_draw draw_general">',
+                        '<ul class="draw_general">',
                             '<li onclick="hello.autovote();" class="for_content_li for_content_feature autovote">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Autovote</p>',
                             '</li>',
-                            '<li onclick="hello.afk();" class="for_content_li for_content_feature afk">',
+                            '<li onclick="hello.afk(event);" class="for_content_li for_content_feature afk">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p onclick="hello.createAfkMessage();" class="for_content_edit" style="display: inline-block;color: #878c8e;font-size: .85rem;font-weight: bold;margin: 0 1rem 0 0;float: right;"><i class="fi-pencil"></i></p>',
                                 '<p class="for_content_p">AFK Autorespond</p>',
                             '</li>',
                             '<li onclick="hello.optionTwitchEmotes();" class="for_content_li for_content_feature twitch_emotes">',
@@ -249,26 +257,54 @@ if (!hello_run && Dubtrack.session.id) {
             ].join('');
             $('.header-right-navigation').append(li);
             $('body').prepend(html);
+            $('.for_content').perfectScrollbar({ wheelSpeed: 30, suppressScrollX: true });
         },
+        sectionList: ['draw_general','draw_userinterface','draw_settings','draw_customize','draw_contact','draw_social','draw_chrome'],
         drawSection: function(el) {
             $(el).next('ul').slideToggle('fast');
+            var sectionClass = $(el).next('ul').attr('class');
 
             var clicked = $(el).find('.for_content_c i');
 
             if(clicked.hasClass('fi-minus')){
                 clicked.removeClass('fi-minus').addClass('fi-plus');
+                hello.option(sectionClass,'false');
+                options[sectionClass] = 'false';
             }
             else{
                 clicked.removeClass('fi-plus').addClass('fi-minus');
+                hello.option(sectionClass,'true');
+                options[sectionClass] = 'true';
             }
 
         },
         drawAll: function() {
-            $('.draw_general, .draw_contact, .draw_customize, .draw_social, .draw_chrome, .draw_userinterface, .draw_settings').slideUp();
-            $('.for_content_c i').removeClass('fi-minus').addClass('fi-plus');
+            var allClosed = true;
+            for(var i = 0; i < hello.sectionList.length; i++) {
+                if($('.'+hello.sectionList[i]).css('display') === 'block'){
+                    allClosed = false; 
+                }
+            }
+
+            if(allClosed) {
+                for(var i = 0; i < hello.sectionList.length; i++) {
+                    $('.'+hello.sectionList[i]).slideDown('fast');
+                    $('.'+hello.sectionList[i]).prev('li').find('i').removeClass('fi-plus').addClass('fi-minus');
+                    hello.option(hello.sectionList[i], 'true');
+                    options[hello.sectionList[i]] = 'true';
+                }
+            }
+            else {
+                for(var i = 0; i < hello.sectionList.length; i++) {
+                    $('.'+hello.sectionList[i]).slideUp();
+                    $('.'+hello.sectionList[i]).prev('li').find('i').removeClass('fi-minus').addClass('fi-plus');
+                    hello.option(hello.sectionList[i],'false');
+                    options[hello.sectionList[i]] = 'false';
+                }
+            }
         },
         //Ref 2.3.1: Input
-        input: function(title,content,placeholder,confirm) {
+        input: function(title,content,placeholder,confirm,maxlength) {
             var onErr = [
                 '<div class="onErr">',
                     '<div class="container">',
@@ -277,7 +313,7 @@ if (!hello_run && Dubtrack.session.id) {
                         '</div>',
                         '<div class="content">',
                             '<p>'+content+'</p>',
-                            placeholder  ? '<textarea class="input" type="text" placeholder="'+placeholder+'"></textarea>' : '',
+                            placeholder  ? '<textarea class="input" type="text" placeholder="'+placeholder+'" maxlength="'+maxlength || 999+'"></textarea>' : '',
                         '</div>',
                         '<div class="control">',
                             '<div class="cancel" onclick="hello.closeErr();">',
@@ -308,7 +344,17 @@ if (!hello_run && Dubtrack.session.id) {
         autovote: function() {
             if (!options.let_autovote) {
                 options.let_autovote = true;
-                hello.advance_vote();
+
+                var song = Dubtrack.room.player.activeSong.get('song');
+                var dubCookie = Dubtrack.helpers.cookie.get('dub-' + Dubtrack.room.model.get("_id"));
+                var dubsong = Dubtrack.helpers.cookie.get('dub-song');
+                if(song.songid !== dubsong || !Dubtrack.room || song === null) 
+                    dubCookie = false;
+
+                //Only cast the vote if user hasn't already voted
+                if(!$('.dubup, .dubdown').hasClass('voted') && !dubCookie)
+                    hello.advance_vote();
+
                 hello.option('autovote','true');
                 hello.on('.autovote');
                 Dubtrack.Events.bind("realtime:room_playlist-update", hello.advance_vote);
@@ -365,7 +411,7 @@ if (!hello_run && Dubtrack.session.id) {
             });
         },
         report_modal: function() {
-            hello.input('Bug Report:','Report: (Please only report bugs for DubX, not Dubtrack)','Please give a detailed description of the bug.','confirm-for36','cancel');
+            hello.input('Bug Report:','Report: (Please only report bugs for DubX, not Dubtrack)','Please give a detailed description of the bug.','confirm-for36','cancel','999');
             $('.confirm-for36').click(hello.report_content);
             $('.confirm-for36').click(hello.closeErr);
         },
@@ -416,7 +462,12 @@ if (!hello_run && Dubtrack.session.id) {
             var user = Dubtrack.session.get('username');
             if (content.indexOf('@'+user) >-1) {
                 if (options.let_active_afk) {
-                    $('#chat-txt-message').val('I am AFK at the moment.');
+                    if (localStorage.getItem('customAfkMessage')) {
+                        var customAfkMessage = localStorage.getItem('customAfkMessage');
+                        $('#chat-txt-message').val(customAfkMessage);
+                    } else {
+                        $('#chat-txt-message').val('I am AFK at the moment.');
+                    }
                     Dubtrack.room.chat.sendMessage();
                     options.let_active_afk = false;
                     setTimeout(function() {
@@ -425,7 +476,19 @@ if (!hello_run && Dubtrack.session.id) {
                 }
             }
         },
-        afk: function() {
+        saveAfkMessage: function() {
+            var customAfkMessage = $('.input').val();
+            hello.option('customAfkMessage', customAfkMessage);
+            $('.onErr').remove();
+        },
+        createAfkMessage: function() {
+            var current = localStorage.getItem('customAfkMessage');
+            hello.input('Custom AFK Message',current,'I\'m AFK at the moment','confirm-for315','255');
+            $('.confirm-for315').click(hello.saveAfkMessage);
+        },
+        afk: function(e) {
+            if(e.target.className === 'for_content_edit' || e.target.className === 'fi-pencil') return;
+
             if (!options.let_afk) {
                 options.let_afk = true;
                 Dubtrack.Events.bind("realtime:chat-message", this.afk_chat_respond);
@@ -450,8 +513,9 @@ if (!hello_run && Dubtrack.session.id) {
             }
         },
         css_modal: function() {
+
             var current = localStorage.getItem('css') || "";
-            hello.input('CSS',current,'https://example.com/example.css','confirm-for313');
+            hello.input('CSS',current,'https://example.com/example.css','confirm-for313','999');
             $('.confirm-for313').click(hello.css_import);
         },
         css_import: function() {
@@ -519,7 +583,7 @@ if (!hello_run && Dubtrack.session.id) {
             }
         },
         medium_modal: function() {
-            hello.input('Link an image file:','It is recommended a .jpg file is used','https://example.com/example.jpg','confirm-for314');
+            hello.input('Link an image file:','It is recommended a .jpg file is used','https://example.com/example.jpg','confirm-for314','999');
             $('.confirm-for314').click(hello.medium_import);
         },
         medium_import: function() {
@@ -1210,6 +1274,22 @@ if (!hello_run && Dubtrack.session.id) {
     if (localStorage.getItem('spacebar_mute') === 'true') {
         hello.spacebar_mute();
     }
+    for(var i = 0; i < hello.sectionList.length; i++){
+        if (localStorage.getItem(hello.sectionList[i]) === 'false') {
+            $('.'+hello.sectionList[i]).css('display', 'none');
+            $('.'+hello.sectionList[i]).prev('li').find('i').removeClass('fi-minus').addClass('fi-plus');
+            options[hello.sectionList[i]] = 'false';
+        }
+        else if(localStorage.getItem(hello.sectionList[i]) === undefined) {
+            hello.option(hello.sectionList[i], 'true');
+            options[hello.sectionList[i]] = 'true';
+        }
+        else {
+            console.log(hello.sectionList[i]);
+            options[hello.sectionList[i]] = 'true';
+        }
+    }
+    
     $('document').ready(hello.css_run);
     $('document').ready(hello.medium_load);
 
