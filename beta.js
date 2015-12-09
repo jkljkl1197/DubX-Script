@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
-    var our_version = '03.02.01 - Custom Afk Messages';
+    var our_version = '03.02.02 - Custom Afk Messages';
 
     //Ref 1: Variables
     var options = {
