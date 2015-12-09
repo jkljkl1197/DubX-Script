@@ -348,12 +348,14 @@ if (!hello_run && Dubtrack.session.id) {
                 var song = Dubtrack.room.player.activeSong.get('song');
                 var dubCookie = Dubtrack.helpers.cookie.get('dub-' + Dubtrack.room.model.get("_id"));
                 var dubsong = Dubtrack.helpers.cookie.get('dub-song');
-                if(song.songid !== dubsong || !Dubtrack.room || song === null) 
+                if(song === null || song.songid !== dubsong || !Dubtrack.room ) {
                     dubCookie = false;
+                }
 
                 //Only cast the vote if user hasn't already voted
-                if(!$('.dubup, .dubdown').hasClass('voted') && !dubCookie)
+                if(!$('.dubup, .dubdown').hasClass('voted') && !dubCookie) {
                     hello.advance_vote();
+                }
 
                 hello.option('autovote','true');
                 hello.on('.autovote');
@@ -949,7 +951,7 @@ if (!hello_run && Dubtrack.session.id) {
         },
         previewSearchStr : "",
         updateChatInput: function(str){
-            var _re = new RegExp("[:@][&!()\\-_a-z0-9]+:?$", "i");
+            var _re = new RegExp("[:@][&!()\\-_a-z0-9]+:?($|\\s)", "i");
             var fixed_text = $("#chat-txt-message").val().replace(_re, str) + " ";
             $('#autocomplete-preview').empty().removeClass('ac-show');
             $("#chat-txt-message").val(fixed_text).focus();
@@ -1054,7 +1056,7 @@ if (!hello_run && Dubtrack.session.id) {
             var currentText = this.value;
             var keyCharMin = 3; // when to start showing previews, default to 3 chars
 
-            var filterText = currentText.replace(/(:|@)([&!()\+\-_a-z0-9]+)$/i, function(matched, p1, p2){
+            var filterText = currentText.replace(/(:|@)([&!()\+\-_a-z0-9]+)($|\s)/i, function(matched, p1, p2){
                 hello.previewSearchStr = p2;
                 keyCharMin = (p1 === "@") ? 1 : 3;
 
