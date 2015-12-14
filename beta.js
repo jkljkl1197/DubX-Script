@@ -304,12 +304,14 @@ if (!hello_run && Dubtrack.session.id) {
             }
         },
         //Ref 2.3.1: Input
-        //hello.input('CSS',current,'https://example.com/example.css','confirm-for313','999');
         input: function(title,content,placeholder,confirm,maxlength) {
-            var textarea = '';
+            var textarea = '', confirmButton = '';
             if (placeholder) {
                 var mx = maxlength || 999;
                 textarea = '<textarea class="input" type="text" placeholder="'+placeholder+'" maxlength="'+ mx +'"></textarea>';
+            }
+            if (confirm) {
+                confirmButton = '<div class="'+confirm+' confirm"><p>Okay</p></div>';
             }
             var onErr = [
                 '<div class="onErr">',
@@ -325,7 +327,7 @@ if (!hello_run && Dubtrack.session.id) {
                             '<div class="cancel" onclick="hello.closeErr();">',
                                 '<p>Cancel</p>',
                             '</div>',
-                            confirm ? '<div class="'+confirm+' confirm"><p>Okay</p></div>' : '',
+                            confirmButton,
                         '</div>',
                     '</div>',
                 '</div>'
@@ -522,7 +524,6 @@ if (!hello_run && Dubtrack.session.id) {
             }
         },
         css_modal: function() {
-
             var current = localStorage.getItem('css') || "";
             hello.input('CSS',current,'https://example.com/example.css','confirm-for313','999');
             $('.confirm-for313').click(hello.css_import);
@@ -531,7 +532,9 @@ if (!hello_run && Dubtrack.session.id) {
             $('.css_import').remove();
             var css_to_import = $('.input').val();
             hello.option('css',css_to_import);
-            $('head').append('<link class="css_import" href="'+css_to_import+'" rel="stylesheet" type="text/css">');
+            if (css_to_import && css_to_import !== '') {
+                $('head').append('<link class="css_import" href="'+css_to_import+'" rel="stylesheet" type="text/css">');
+            }
             $('.onErr').remove();
         },
         css_run: function() {
@@ -1063,8 +1066,8 @@ if (!hello_run && Dubtrack.session.id) {
             var currentText = this.value;
             var keyCharMin = 3; // when to start showing previews, default to 3 chars
 
-            var filterText = currentText.replace(/(:|@)([&!()\+\-_a-z0-9]+)($|\s)/ig, function(matched, p1, p2, p3, pos, str){
-                console.dir( arguments ); 
+            var filterText = currentText.replace(/(:|@)([&!()\+\-_a-z0-9]+)($|\s)/i, function(matched, p1, p2, p3, pos, str){
+                // console.dir( arguments ); 
                 hello.previewSearchStr = p2;
                 keyCharMin = (p1 === "@") ? 1 : 3;
 
