@@ -304,7 +304,13 @@ if (!hello_run && Dubtrack.session.id) {
             }
         },
         //Ref 2.3.1: Input
+        //hello.input('CSS',current,'https://example.com/example.css','confirm-for313','999');
         input: function(title,content,placeholder,confirm,maxlength) {
+            var textarea = '';
+            if (placeholder) {
+                var mx = maxlength || 999;
+                textarea = '<textarea class="input" type="text" placeholder="'+placeholder+'" maxlength="'+ mx +'"></textarea>';
+            }
             var onErr = [
                 '<div class="onErr">',
                     '<div class="container">',
@@ -313,7 +319,7 @@ if (!hello_run && Dubtrack.session.id) {
                         '</div>',
                         '<div class="content">',
                             '<p>'+content+'</p>',
-                            placeholder  ? '<textarea class="input" type="text" placeholder="'+placeholder+'" maxlength="'+maxlength || 999+'"></textarea>' : '',
+                            textarea,
                         '</div>',
                         '<div class="control">',
                             '<div class="cancel" onclick="hello.closeErr();">',
