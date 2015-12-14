@@ -554,3 +554,9 @@ ul.avatar-list li.admin p {
 #main_avatar_room #main-user-list-room #avatar-list li.currentDJ p.username:after {
     content: "-  DJ" !important;
 }
+
+/* might use this one day */
+.dubx .never-hide {
+    display: block !important;
+    visibility: visible !important;
+}

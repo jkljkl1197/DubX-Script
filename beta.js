@@ -952,7 +952,7 @@ if (!hello_run && Dubtrack.session.id) {
         },
         previewSearchStr : "",
         updateChatInput: function(str){
-            var _re = new RegExp("[:@][&!()\\-_a-z0-9]+:?($|\\s)", "i");
+            var _re = new RegExp("[:@][&!()\\-_a-z0-9]+:?($|\\s)", "ig");
             var fixed_text = $("#chat-txt-message").val().replace(_re, str) + " ";
             $('#autocomplete-preview').empty().removeClass('ac-show');
             $("#chat-txt-message").val(fixed_text).focus();
@@ -1057,7 +1057,8 @@ if (!hello_run && Dubtrack.session.id) {
             var currentText = this.value;
             var keyCharMin = 3; // when to start showing previews, default to 3 chars
 
-            var filterText = currentText.replace(/(:|@)([&!()\+\-_a-z0-9]+)($|\s)/i, function(matched, p1, p2){
+            var filterText = currentText.replace(/(:|@)([&!()\+\-_a-z0-9]+)($|\s)/ig, function(matched, p1, p2, p3, pos, str){
+                console.dir( arguments ); 
                 hello.previewSearchStr = p2;
                 keyCharMin = (p1 === "@") ? 1 : 3;
 
