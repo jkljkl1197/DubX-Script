@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
-    var our_version = '03.02.03 - Save Collapsed Menus';
+    var our_version = '03.02.04 - Custom Mention Triggers';
 
     //Ref 1: Variables
     var options = {
@@ -51,6 +51,7 @@ if (!hello_run && Dubtrack.session.id) {
         let_spacebar_mute: false,
         let_autocomplete_mentions: false,
         let_mention_notifications: false,
+        let_custom_mentions: false,
         draw_general: false,
         draw_userinterface: false,
         draw_settings: false,
@@ -112,6 +113,11 @@ if (!hello_run && Dubtrack.session.id) {
                             '<li onclick="hello.optionMentions();" class="for_content_li for_content_feature autocomplete_mentions">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Autocomplete Mentions</p>',
+                            '</li>',
+                            '<li onclick="hello.customMentions(event);" class="for_content_li for_content_feature custom_mentions">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p onclick="hello.createCustomMentions();" class="for_content_edit" style="display: inline-block;color: #878c8e;font-size: .85rem;font-weight: bold;margin: 0 1rem 0 0;float: right;"><i class="fi-pencil"></i></p>',
+                                '<p class="for_content_p">Custom Mention Triggers</p>',
                             '</li>',
                             '<li onclick="hello.mentionNotifications();" class="for_content_li for_content_feature mention_notifications">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
@@ -501,6 +507,40 @@ if (!hello_run && Dubtrack.session.id) {
                 Dubtrack.Events.unbind("realtime:chat-message", this.afk_chat_respond);
                 hello.off('.afk');
             }
+        },
+        customMentions: function(e) {
+            if(e && e.target && (e.target.className === 'for_content_edit' || e.target.className === 'fi-pencil')) return;
+
+            if (!options.let_custom_mentions) {
+                options.let_custom_mentions = true;
+                Dubtrack.Events.bind("realtime:chat-message", this.customMentionCheck);
+                hello.on('.custom_mentions');
+            } else {
+                options.let_custom_mentions = false;
+                Dubtrack.Events.unbind("realtime:chat-message", this.customMentionCheck);
+                hello.off('.custom_mentions');
+            }
+        },
+        customMentionCheck: function(e) {
+            var content = e.message.toLowerCase();
+            if (options.let_custom_mentions) {
+                if (localStorage.getItem('custom_mentions')) {
+                    var customMentions = localStorage.getItem('custom_mentions').toLowerCase().split(',');
+                    if(customMentions.some(function(v) { return content.indexOf(v.trim(' ')) >= 0; })){
+                        Dubtrack.room.chat.mentionChatSound.play();
+                    }
+                }
+            }
+        },
+        createCustomMentions: function() {
+            var current = localStorage.getItem('custom_mentions');
+            hello.input('Custom Mention Triggers (separate by comma)',current,'separate, custom triggers, by, comma, :heart:','confirm-for315','255');
+            $('.confirm-for315').click(hello.saveCustomMentions);
+        },
+        saveCustomMentions: function() {
+            var customMentions = $('.input').val();
+            hello.option('custom_mentions', customMentions);
+            $('.onErr').remove();
         },
         chat_window: function() {
             if(!options.let_chat_window) {
@@ -1181,7 +1221,14 @@ if (!hello_run && Dubtrack.session.id) {
         notifyOnMention: function(e){
             var content = e.message;
             var user = Dubtrack.session.get('username');
-            if (content.indexOf('@'+user) >-1 && !hello.isActiveTab) {
+            var mentionTriggers = ['@'+user];
+
+            if (localStorage.getItem('custom_mentions')) {
+                //add custom mention triggers to array
+                mentionTriggers = mentionTriggers.concat(localStorage.getItem('custom_mentions').toLowerCase().split(','));
+            }
+            
+            if (mentionTriggers.some(function(v) { return content.indexOf(v.trim(' ')) >= 0; }) && !hello.isActiveTab) {
                 var options = {
                     body: content,
                     icon: "http://i.imgur.com/RXJnXNJ.png"
@@ -1287,6 +1334,9 @@ if (!hello_run && Dubtrack.session.id) {
     if (localStorage.getItem('mention_notifications') === 'true') {
         hello.mentionNotifications();
     }
+    if (localStorage.getItem('custom_mentions')) {
+        hello.customMentions();
+    }
     if (localStorage.getItem('spacebar_mute') === 'true') {
         hello.spacebar_mute();
     }
@@ -1301,7 +1351,6 @@ if (!hello_run && Dubtrack.session.id) {
             options[hello.sectionList[i]] = 'true';
         }
         else {
-            console.log(hello.sectionList[i]);
             options[hello.sectionList[i]] = 'true';
         }
     }
