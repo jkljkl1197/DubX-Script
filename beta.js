@@ -319,7 +319,7 @@ if (!hello_run && Dubtrack.session.id) {
                         '</div>',
                         '<div class="content">',
                             '<p>'+content+'</p>',
-                            '<textarea class="input" type="text" placeholder="'+placeholder+'" maxlength="'+maxlength+'"></textarea>',
+                            '<textarea class="input" type="text" placeholder="'+placeholder+'" maxlength="'+maxlength+'">'+content+'</textarea>',
                         '</div>',
                         '<div class="control">',
                             '<div class="cancel" onclick="hello.closeErr();">',
