@@ -1220,7 +1220,7 @@ if (!hello_run && Dubtrack.session.id) {
         },
         notifyOnMention: function(e){
             var content = e.message;
-            var user = Dubtrack.session.get('username');
+            var user = Dubtrack.session.get('username').toLowerCase();
             var mentionTriggers = ['@'+user];
 
             if (localStorage.getItem('custom_mentions')) {
@@ -1228,7 +1228,7 @@ if (!hello_run && Dubtrack.session.id) {
                 mentionTriggers = mentionTriggers.concat(localStorage.getItem('custom_mentions').toLowerCase().split(','));
             }
             
-            if (mentionTriggers.some(function(v) { return content.indexOf(v.trim(' ')) >= 0; }) && !hello.isActiveTab) {
+            if (mentionTriggers.some(function(v) { return content.toLowerCase().indexOf(v.trim(' ')) >= 0; }) && !hello.isActiveTab) {
                 var options = {
                     body: content,
                     icon: "http://i.imgur.com/RXJnXNJ.png"
