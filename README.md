@@ -18,9 +18,10 @@ Our Team
 IMPORTANT
 ---
 
-__Updates (Version 03.01.51)__
+__Updates (Version 03.02.04)__
 
-- Fixed an issue when the incomplete message was sent when pressing enter trying to select an autocomplete option for mentions and emotes
+- Added ability to set custom text phrases that trigger a mention sound
+- Notifications now check for custom mention triggers as well
 
 -----------------
 Usage
@@ -49,6 +50,7 @@ Features
 - Emotes
 - Autocomplete Emoji
 - Autocomplete Mentions
+- Custom Mention Triggers
 - Notification on Mentions
 - Fullscreen Video
 - Split Chat
