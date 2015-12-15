@@ -526,7 +526,7 @@ if (!hello_run && Dubtrack.session.id) {
             if (options.let_custom_mentions) {
                 if (localStorage.getItem('custom_mentions')) {
                     var customMentions = localStorage.getItem('custom_mentions').toLowerCase().split(',');
-                    if(customMentions.some(function(v) { return content.indexOf(v.trim(' ')) >= 0; })){
+                    if(Dubtrack.session.id !== e.user.userInfo.userid && customMentions.some(function(v) { return content.indexOf(v.trim(' ')) >= 0; })){
                         Dubtrack.room.chat.mentionChatSound.play();
                     }
                 }
