@@ -469,7 +469,7 @@ if (!hello_run && Dubtrack.session.id) {
         afk_chat_respond: function(e) {
             var content = e.message;
             var user = Dubtrack.session.get('username');
-            if (content.indexOf('@'+user) >-1) {
+            if (content.indexOf('@'+user) >-1 && Dubtrack.session.id !== e.user.userInfo.userid) {
                 if (options.let_active_afk) {
                     if (localStorage.getItem('customAfkMessage')) {
                         var customAfkMessage = localStorage.getItem('customAfkMessage');
@@ -1228,7 +1228,7 @@ if (!hello_run && Dubtrack.session.id) {
                 mentionTriggers = mentionTriggers.concat(localStorage.getItem('custom_mentions').toLowerCase().split(','));
             }
             
-            if (mentionTriggers.some(function(v) { return content.toLowerCase().indexOf(v.trim(' ')) >= 0; }) && !hello.isActiveTab) {
+            if (mentionTriggers.some(function(v) { return content.toLowerCase().indexOf(v.trim(' ')) >= 0; }) && !hello.isActiveTab && Dubtrack.session.id !== e.user.userInfo.userid) {
                 var options = {
                     body: content,
                     icon: "http://i.imgur.com/RXJnXNJ.png"
