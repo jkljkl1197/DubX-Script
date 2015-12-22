@@ -402,6 +402,9 @@ if (!hello_run && Dubtrack.session.id) {
         },
         report_content: function() {
             var content = $('.input').val();
+
+            if(!content || content.trim(' ').length === 0) return;
+
             var user = Dubtrack.session.get('username');
             var id = Dubtrack.realtime.dtPubNub.get_uuid();
             var href = location.href;
@@ -420,7 +423,7 @@ if (!hello_run && Dubtrack.session.id) {
             $('.report').replaceWith('<li onclick="" class="for_content_li for_content_feature report"><p class="for_content_off"><i class="fi-check"></i></p><p class="for_content_p">Bug Report</p></li>');
         },
         report_modal: function() {
-            hello.input('Bug Report:','','Please only report bugs for DubX, not Dubtrack.\nBe sure to give a detailed description of the bug, and a way to replicate it, if possible.','confirm-for36','999');
+            hello.input('Bug Report:','','Please only report bugs for DubX, not Dubtrack. \nBe sure to give a detailed description of the bug, and a way to replicate it, if possible.','confirm-for36','999');
             $('.confirm-for36').click(hello.report_content);
             $('.confirm-for36').click(hello.closeErr);
         },
