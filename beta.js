@@ -356,7 +356,7 @@ if (!hello_run && Dubtrack.session.id) {
                 var song = Dubtrack.room.player.activeSong.get('song');
                 var dubCookie = Dubtrack.helpers.cookie.get('dub-' + Dubtrack.room.model.get("_id"));
                 var dubsong = Dubtrack.helpers.cookie.get('dub-song');
-                if(song.songid !== dubsong || !Dubtrack.room || song === null) 
+                if(!Dubtrack.room || !song || song.songid !== dubsong) 
                     dubCookie = false;
 
                 //Only cast the vote if user hasn't already voted
