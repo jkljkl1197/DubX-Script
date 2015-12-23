@@ -1232,11 +1232,11 @@ if (!hello_run && Dubtrack.session.id) {
             }
             
             if (mentionTriggers.some(function(v) { return content.toLowerCase().indexOf(v.trim(' ')) >= 0; }) && !hello.isActiveTab && Dubtrack.session.id !== e.user.userInfo.userid) {
-                var options = {
+                var notificationOptions = {
                     body: content,
                     icon: "http://i.imgur.com/RXJnXNJ.png"
                 };
-                var n = new Notification("Message from "+e.user.username,options);
+                var n = new Notification("Message from "+e.user.username,notificationOptions);
                 setTimeout(n.close.bind(n), 5000);
             }
         },
