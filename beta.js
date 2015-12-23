@@ -99,7 +99,7 @@ if (!hello_run && Dubtrack.session.id) {
                             '</li>',
                             '<li onclick="hello.afk(event);" class="for_content_li for_content_feature afk">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p onclick="hello.createAfkMessage();" class="for_content_edit" style="display: inline-block;color: #878c8e;font-size: .85rem;font-weight: bold;margin: 0 1rem 0 0;float: right;"><i class="fi-pencil"></i></p>',
+                                '<p onclick="hello.createAfkMessage();" class="for_content_edit" style="display: inline-block;color: #878c8e;font-size: .85rem;font-weight: bold;float: right;"><i class="fi-pencil"></i></p>',
                                 '<p class="for_content_p">AFK Autorespond</p>',
                             '</li>',
                             '<li onclick="hello.optionTwitchEmotes();" class="for_content_li for_content_feature twitch_emotes">',
@@ -116,7 +116,7 @@ if (!hello_run && Dubtrack.session.id) {
                             '</li>',
                             '<li onclick="hello.customMentions(event);" class="for_content_li for_content_feature custom_mentions">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p onclick="hello.createCustomMentions();" class="for_content_edit" style="display: inline-block;color: #878c8e;font-size: .85rem;font-weight: bold;margin: 0 1rem 0 0;float: right;"><i class="fi-pencil"></i></p>',
+                                '<p onclick="hello.createCustomMentions();" class="for_content_edit" style="display: inline-block;color: #878c8e;font-size: .85rem;font-weight: bold;float: right;"><i class="fi-pencil"></i></p>',
                                 '<p class="for_content_p">Custom Mention Triggers</p>',
                             '</li>',
                             '<li onclick="hello.mentionNotifications();" class="for_content_li for_content_feature mention_notifications">',
@@ -362,7 +362,7 @@ if (!hello_run && Dubtrack.session.id) {
                 var song = Dubtrack.room.player.activeSong.get('song');
                 var dubCookie = Dubtrack.helpers.cookie.get('dub-' + Dubtrack.room.model.get("_id"));
                 var dubsong = Dubtrack.helpers.cookie.get('dub-song');
-                if(song === null || song.songid !== dubsong || !Dubtrack.room ) {
+                if(!Dubtrack.room || !song || song.songid !== dubsong) 
                     dubCookie = false;
                 }
 
@@ -410,6 +410,9 @@ if (!hello_run && Dubtrack.session.id) {
         },
         report_content: function() {
             var content = $('.input').val();
+
+            if(!content || content.trim(' ').length === 0) return;
+
             var user = Dubtrack.session.get('username');
             var id = Dubtrack.realtime.dtPubNub.get_uuid();
             var href = location.href;
@@ -428,7 +431,7 @@ if (!hello_run && Dubtrack.session.id) {
             $('.report').replaceWith('<li onclick="" class="for_content_li for_content_feature report"><p class="for_content_off"><i class="fi-check"></i></p><p class="for_content_p">Bug Report</p></li>');
         },
         report_modal: function() {
-            hello.input('Bug Report:','Report: (Please only report bugs for DubX, not Dubtrack)','Please give a detailed description of the bug.','confirm-for36','cancel','999');
+            hello.input('Bug Report:','','Please only report bugs for DubX, not Dubtrack. \nBe sure to give a detailed description of the bug, and a way to replicate it, if possible.','confirm-for36','999');
             $('.confirm-for36').click(hello.report_content);
             $('.confirm-for36').click(hello.closeErr);
         },
@@ -477,7 +480,7 @@ if (!hello_run && Dubtrack.session.id) {
         afk_chat_respond: function(e) {
             var content = e.message;
             var user = Dubtrack.session.get('username');
-            if (content.indexOf('@'+user) >-1) {
+            if (content.indexOf('@'+user) >-1 && Dubtrack.session.id !== e.user.userInfo.userid) {
                 if (options.let_active_afk) {
                     if (localStorage.getItem('customAfkMessage')) {
                         var customAfkMessage = localStorage.getItem('customAfkMessage');
@@ -1216,21 +1219,25 @@ if (!hello_run && Dubtrack.session.id) {
         },
         notifyOnMention: function(e){
             var content = e.message;
-            var user = Dubtrack.session.get('username');
+            var user = Dubtrack.session.get('username').toLowerCase();
             var mentionTriggers = ['@'+user];
 
-            if (localStorage.getItem('custom_mentions')) {
+            if (options.let_custom_mentions && localStorage.getItem('custom_mentions')) {
                 //add custom mention triggers to array
                 mentionTriggers = mentionTriggers.concat(localStorage.getItem('custom_mentions').toLowerCase().split(','));
             }
             
-            if (mentionTriggers.some(function(v) { return content.indexOf(v.trim(' ')) >= 0; }) && !hello.isActiveTab) {
-                var options = {
+            if (mentionTriggers.some(function(v) { return content.toLowerCase().indexOf(v.trim(' ')) >= 0; }) && !hello.isActiveTab && Dubtrack.session.id !== e.user.userInfo.userid) {
+                var notificationOptions = {
                     body: content,
                     icon: "https://res.cloudinary.com/hhberclba/image/upload/c_lpad,h_100,w_100/v1400351432/dubtrack_new_logo_fvpxa6.png"
                 };
+                var n = new Notification("Message from "+e.user.username,notificationOptions);
 
-                var n = new Notification("Message from "+e.user.username,options);
+                n.onclick = function(x) { 
+                    window.focus();
+                    n.close();
+                };
                 setTimeout(n.close.bind(n), 5000);
             }
         },

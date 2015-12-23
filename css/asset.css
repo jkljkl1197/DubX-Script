@@ -68,6 +68,12 @@
     position: relative;
     bottom: 1px;
 }
+.for_content_edit .fi-pencil {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
 .for {
     font-size: 1.2rem;
     line-height: 1.2;
