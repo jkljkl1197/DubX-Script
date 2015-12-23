@@ -1226,7 +1226,7 @@ if (!hello_run && Dubtrack.session.id) {
             var user = Dubtrack.session.get('username').toLowerCase();
             var mentionTriggers = ['@'+user];
 
-            if (localStorage.getItem('custom_mentions')) {
+            if (options.let_custom_mentions && localStorage.getItem('custom_mentions')) {
                 //add custom mention triggers to array
                 mentionTriggers = mentionTriggers.concat(localStorage.getItem('custom_mentions').toLowerCase().split(','));
             }
