@@ -1237,6 +1237,12 @@ if (!hello_run && Dubtrack.session.id) {
                     icon: "http://i.imgur.com/RXJnXNJ.png"
                 };
                 var n = new Notification("Message from "+e.user.username,notificationOptions);
+
+                n.onclick = function(x) { 
+                    window.focus();
+                    n.close();
+                };
+
                 setTimeout(n.close.bind(n), 5000);
             }
         },
