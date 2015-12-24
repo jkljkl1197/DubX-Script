@@ -1364,7 +1364,7 @@ if (!hello_run && Dubtrack.session.id) {
 
             if(user === currentDj){
                 $('ul.chat-main').append(
-                    '<li class="dubx-system-msg dubx-system-msg-grab" style="text-align: left">' +
+                    '<li class="dubx-system-msg-grab" style="text-align: left">' +
                         '<div class="chatDelete" onclick="hello.deleteChatMessageClientSide(this)"><span class="icon-close"></span></div>' +
                         '<div class="text">' +
                             '@' + e.user.username + ' has grabbed your song \'' + Dubtrack.room.player.activeSong.attributes.songInfo.name + ' \'' +
