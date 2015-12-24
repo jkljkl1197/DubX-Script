@@ -1674,7 +1674,7 @@ if (!hello_run && Dubtrack.session.id) {
                 $(grabEl).mouseenter(function(){
                     if($("#dubx-grabs-container").length > 0) return; //already exists
 
-                    var infoPaneWidth = $(dubdownEl).innerWidth() + $(grabEl).innerWidth();
+                    var infoPaneWidth = $(dubupEl).innerWidth() + $(grabEl).innerWidth();
                     var grabsBackground = $('.add-to-playlist-button').hasClass('grabbed') ? $('.add-to-playlist-button').css('background-color') : $('.add-to-playlist-button').find('.icon-heart').css('color');
                     var html;
 
@@ -1963,6 +1963,9 @@ if (!hello_run && Dubtrack.session.id) {
     }
     if (localStorage.getItem('updub_chat') === 'true') {
         hello.updubChat();
+    }
+    if (localStorage.getItem('grab_chat') === 'true') {
+        hello.grabChat();
     }
     if (localStorage.getItem('dubs_hover') === 'true') {
         hello.showDubsOnHover();
