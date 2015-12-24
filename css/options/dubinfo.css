@@ -45,6 +45,13 @@
     color: #0ff;
 }
 
+.dubx-system-msg {
+    padding-top: 1rem;
+    padding: 5px;    
+    font-weight: 700;
+    min-height: 1rem;
+}
+
 .dubx-grab-system-msg,
 #dubinfo-preview.dubx-no-grabs {
     color: #B3E790;
