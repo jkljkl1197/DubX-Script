@@ -1,4 +1,6 @@
-#dubx-updubs-container, #dubx-downdubs-container {
+#dubx-updubs-container, 
+#dubx-downdubs-container,
+#dubx-grabs-container {
     position: fixed;
     overflow-y: auto;
     overflow-x: visible;
@@ -27,7 +29,8 @@
     border-radius: 0.4rem 0.4rem 0.4rem 0;
 }
 
-#dubinfo-preview.dubx-downdubs-hover {
+#dubinfo-preview.dubx-downdubs-hover, 
+#dubinfo-preview.dubx-grabs-hover {
     border-radius: 0.4rem 0.4rem 0 0.4rem;
 }
 

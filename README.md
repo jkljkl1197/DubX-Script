@@ -51,6 +51,7 @@ Features
 - Emotes
 - Autocomplete Emoji
 - Autocomplete Mentions
+- Custom Mention Triggers
 - Notification on Mentions
 - Dub Vote Information When Hovering Vote Buttons
 - Updub Chat Notification When DJ

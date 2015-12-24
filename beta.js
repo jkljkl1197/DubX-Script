@@ -53,7 +53,9 @@ if (!hello_run && Dubtrack.session.id) {
         let_mention_notifications: false,
         let_downdub_chat_notifications: false,
         let_updub_chat_notifications: false,
+        let_grab_chat_notifications: false,
         let_dubs_hover: false,
+        let_custom_mentions: false,
         draw_general: false,
         draw_userinterface: false,
         draw_settings: false,
@@ -101,7 +103,7 @@ if (!hello_run && Dubtrack.session.id) {
                             '</li>',
                             '<li onclick="hello.afk(event);" class="for_content_li for_content_feature afk">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p onclick="hello.createAfkMessage();" class="for_content_edit" style="display: inline-block;color: #878c8e;font-size: .85rem;font-weight: bold;margin: 0 1rem 0 0;float: right;"><i class="fi-pencil"></i></p>',
+                                '<p onclick="hello.createAfkMessage();" class="for_content_edit" style="display: inline-block;color: #878c8e;font-size: .85rem;font-weight: bold;float: right;"><i class="fi-pencil"></i></p>',
                                 '<p class="for_content_p">AFK Autorespond</p>',
                             '</li>',
                             '<li onclick="hello.optionTwitchEmotes();" class="for_content_li for_content_feature twitch_emotes">',
@@ -115,6 +117,11 @@ if (!hello_run && Dubtrack.session.id) {
                             '<li onclick="hello.optionMentions();" class="for_content_li for_content_feature autocomplete_mentions">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Autocomplete Mentions</p>',
+                            '</li>',
+                            '<li onclick="hello.customMentions(event);" class="for_content_li for_content_feature custom_mentions">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p onclick="hello.createCustomMentions();" class="for_content_edit" style="display: inline-block;color: #878c8e;font-size: .85rem;font-weight: bold;float: right;"><i class="fi-pencil"></i></p>',
+                                '<p class="for_content_p">Custom Mention Triggers</p>',
                             '</li>',
                             '<li onclick="hello.mentionNotifications();" class="for_content_li for_content_feature mention_notifications">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
@@ -131,6 +138,10 @@ if (!hello_run && Dubtrack.session.id) {
                             '<li onclick="hello.updubChat();" class="for_content_li for_content_feature updub_chat">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Updubs in Chat</p>',
+                            '</li>',
+                            '<li onclick="hello.grabChat();" class="for_content_li for_content_feature grab_chat">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Grabs in Chat</p>',
                             '</li>',
                         '</ul>',
                         '<li class="for_content_li" onclick="hello.drawSection(this)">',
@@ -328,7 +339,7 @@ if (!hello_run && Dubtrack.session.id) {
                         '</div>',
                         '<div class="content">',
                             '<p>'+content+'</p>',
-                            '<textarea class="input" type="text" placeholder="'+placeholder+'" maxlength="'+maxlength+'"></textarea>',
+                            '<textarea class="input" type="text" placeholder="'+placeholder+'" maxlength="'+maxlength+'">'+content+'</textarea>',
                         '</div>',
                         '<div class="control">',
                             '<div class="cancel" onclick="hello.closeErr();">',
@@ -365,7 +376,7 @@ if (!hello_run && Dubtrack.session.id) {
                 var song = Dubtrack.room.player.activeSong.get('song');
                 var dubCookie = Dubtrack.helpers.cookie.get('dub-' + Dubtrack.room.model.get("_id"));
                 var dubsong = Dubtrack.helpers.cookie.get('dub-song');
-                if(song.songid !== dubsong || !Dubtrack.room || song === null) 
+                if(!Dubtrack.room || !song || song.songid !== dubsong) 
                     dubCookie = false;
 
                 //Only cast the vote if user hasn't already voted
@@ -411,6 +422,9 @@ if (!hello_run && Dubtrack.session.id) {
         },
         report_content: function() {
             var content = $('.input').val();
+
+            if(!content || content.trim(' ').length === 0) return;
+
             var user = Dubtrack.session.get('username');
             var id = Dubtrack.realtime.dtPubNub.get_uuid();
             var href = location.href;
@@ -426,9 +440,10 @@ if (!hello_run && Dubtrack.session.id) {
                 data: 'payload={"username": "Incoming Bug Report", "text": "'+woosh+'", "icon_emoji": ":bug:"}',
                 crossDomain: true
             });
+            $('.report').replaceWith('<li onclick="" class="for_content_li for_content_feature report"><p class="for_content_off"><i class="fi-check"></i></p><p class="for_content_p">Bug Report</p></li>');
         },
         report_modal: function() {
-            hello.input('Bug Report:','Report: (Please only report bugs for DubX, not Dubtrack)','Please give a detailed description of the bug.','confirm-for36','cancel','999');
+            hello.input('Bug Report:','','Please only report bugs for DubX, not Dubtrack. \nBe sure to give a detailed description of the bug, and a way to replicate it, if possible.','confirm-for36','999');
             $('.confirm-for36').click(hello.report_content);
             $('.confirm-for36').click(hello.closeErr);
         },
@@ -477,7 +492,7 @@ if (!hello_run && Dubtrack.session.id) {
         afk_chat_respond: function(e) {
             var content = e.message;
             var user = Dubtrack.session.get('username');
-            if (content.indexOf('@'+user) >-1) {
+            if (content.indexOf('@'+user) >-1 && Dubtrack.session.id !== e.user.userInfo.userid) {
                 if (options.let_active_afk) {
                     if (localStorage.getItem('customAfkMessage')) {
                         var customAfkMessage = localStorage.getItem('customAfkMessage');
@@ -515,6 +530,40 @@ if (!hello_run && Dubtrack.session.id) {
                 Dubtrack.Events.unbind("realtime:chat-message", this.afk_chat_respond);
                 hello.off('.afk');
             }
+        },
+        customMentions: function(e) {
+            if(e && e.target && (e.target.className === 'for_content_edit' || e.target.className === 'fi-pencil')) return;
+
+            if (!options.let_custom_mentions) {
+                options.let_custom_mentions = true;
+                Dubtrack.Events.bind("realtime:chat-message", this.customMentionCheck);
+                hello.on('.custom_mentions');
+            } else {
+                options.let_custom_mentions = false;
+                Dubtrack.Events.unbind("realtime:chat-message", this.customMentionCheck);
+                hello.off('.custom_mentions');
+            }
+        },
+        customMentionCheck: function(e) {
+            var content = e.message.toLowerCase();
+            if (options.let_custom_mentions) {
+                if (localStorage.getItem('custom_mentions')) {
+                    var customMentions = localStorage.getItem('custom_mentions').toLowerCase().split(',');
+                    if(Dubtrack.session.id !== e.user.userInfo.userid && customMentions.some(function(v) { return content.indexOf(v.trim(' ')) >= 0; })){
+                        Dubtrack.room.chat.mentionChatSound.play();
+                    }
+                }
+            }
+        },
+        createCustomMentions: function() {
+            var current = localStorage.getItem('custom_mentions');
+            hello.input('Custom Mention Triggers (separate by comma)',current,'separate, custom triggers, by, comma, :heart:','confirm-for315','255');
+            $('.confirm-for315').click(hello.saveCustomMentions);
+        },
+        saveCustomMentions: function() {
+            var customMentions = $('.input').val();
+            hello.option('custom_mentions', customMentions);
+            $('.onErr').remove();
         },
         chat_window: function() {
             if(!options.let_chat_window) {
@@ -1194,13 +1243,26 @@ if (!hello_run && Dubtrack.session.id) {
         },
         notifyOnMention: function(e){
             var content = e.message;
-            var user = Dubtrack.session.get('username');
-            if (content.indexOf('@'+user) >-1 && !hello.isActiveTab) {
-                var options = {
+            var user = Dubtrack.session.get('username').toLowerCase();
+            var mentionTriggers = ['@'+user];
+
+            if (options.let_custom_mentions && localStorage.getItem('custom_mentions')) {
+                //add custom mention triggers to array
+                mentionTriggers = mentionTriggers.concat(localStorage.getItem('custom_mentions').toLowerCase().split(','));
+            }
+            
+            if (mentionTriggers.some(function(v) { return content.toLowerCase().indexOf(v.trim(' ')) >= 0; }) && !hello.isActiveTab && Dubtrack.session.id !== e.user.userInfo.userid) {
+                var notificationOptions = {
                     body: content,
                     icon: "http://i.imgur.com/RXJnXNJ.png"
                 };
-                var n = new Notification("Message from "+e.user.username,options);
+                var n = new Notification("Message from "+e.user.username,notificationOptions);
+
+                n.onclick = function(x) { 
+                    window.focus();
+                    n.close();
+                };
+
                 setTimeout(n.close.bind(n), 5000);
             }
         },
@@ -1277,13 +1339,48 @@ if (!hello_run && Dubtrack.session.id) {
             }
 
         },
+        grabChat: function(){
+            if(!options.let_grab_chat_notifications){
+                options.let_grab_chat_notifications = true;
+                hello.option('grab_chat', 'true');
+                hello.on('.grab_chat');
+
+                Dubtrack.Events.bind("realtime:room_playlist-queue-update-grabs", this.grabChatWatcher);
+            }
+            else{
+                options.let_grab_chat_notifications = false;
+                hello.option('grab_chat', 'false');
+                hello.off('.grab_chat');
+
+                Dubtrack.Events.unbind("realtime:room_playlist-queue-update-grabs", this.grabChatWatcher);
+            }
+        },
+        grabChatWatcher: function(e){
+            var user = Dubtrack.session.get('username');
+            var currentDj = Dubtrack.room.users.collection.findWhere({
+                userid: Dubtrack.room.player.activeSong.attributes.song.userid
+            }).attributes._user.username;
+
+
+            if(user === currentDj){
+                $('ul.chat-main').append(
+                    '<li class="system" style="text-align: left">' +
+                        '<div class="chatDelete" onclick="hello.deleteChatMessageClientSide(this)"><span class="icon-close"></span></div>' +
+                        '<div class="text">' +
+                            '@' + e.user.username + ' has grabbed your song \'' + Dubtrack.room.player.activeSong.attributes.songInfo.name + ' \'' +
+                        '</div>' +
+                    '</li>');
+            }
+
+        },
         deleteChatMessageClientSide: function(el){
             $(el).parent('li')[0].remove();
         },
         resetDubs: function(){
             hello.dubs = {
                 upDubs: [],
-                downDubs: []
+                downDubs: [],
+                grabs: []
             };
 
             $.getJSON("https://api.dubtrack.fm/room/" + Dubtrack.room.model.id + "/playlist/active/dubs", function(response){
@@ -1308,6 +1405,28 @@ if (!hello_run && Dubtrack.session.id) {
                         username: username
                     })
                 });
+                //TODO: when grabs property is added
+                /*response.data.grabs.forEach(function(e){
+                    //Dub already casted (usually from autodub)
+                    if($.grep(hello.dubs.grabs, function(el){ return el.userid == e.userid; }).length > 0){
+                        return;
+                    }
+
+                    var username;
+                    if(!Dubtrack.room.users.collection.findWhere({userid: e.userid}) || !Dubtrack.room.users.collection.findWhere({userid: e.userid}).attributes) {
+                        $.getJSON("https://api.dubtrack.fm/user/" + e.userid, function(response){
+                            username = response.userinfo.username;
+                        });
+                    }
+                    else{
+                        username = Dubtrack.room.users.collection.findWhere({userid: e.userid}).attributes._user.username;
+                    }
+
+                    hello.dubs.grabs.push({
+                        userid: e.userid,
+                        username: username
+                    })
+                });*/
 
                 //Only let mods or higher access down dubs
                 if(hello.userIsAtLeastMod(Dubtrack.session.id)){
@@ -1345,14 +1464,17 @@ if (!hello_run && Dubtrack.session.id) {
                 this.resetDubs();
 
                 Dubtrack.Events.bind("realtime:room_playlist-dub", this.dubWatcher);
+                Dubtrack.Events.bind("realtime:room_playlist-queue-update-grabs", this.grabWatcher);
                 Dubtrack.Events.bind("realtime:user-leave", this.dubUserLeaveWatcher);
                 Dubtrack.Events.bind("realtime:room_playlist-update", hello.resetDubs);
 
                 var dubupEl = $($('.dubup')[0]).parent('li');
                 var dubdownEl = $($('.dubdown')[0]).parent('li');
+                var grabEl = $($('.add-to-playlist-button')[0]).parent('li');
 
                 $(dubupEl).addClass("dubx-updubs-hover");
                 $(dubdownEl).addClass("dubx-downdubs-hover");
+                $(grabEl).addClass("dubx-grabs-hover");
 
                 //Show compiled info containers when casting/changing vote
                 $(dubupEl).click(function(event){
@@ -1381,6 +1503,20 @@ if (!hello_run && Dubtrack.session.id) {
 
                     if($(elementMouseIsOver).hasClass('dubx-downdubs-hover') || $(elementMouseIsOver).parents('.dubx-downdubs-hover').length > 0){
                         setTimeout(function(){$(dubdownEl).mouseenter();}, 250);
+                    }
+                });
+                $(grabEl).click(function(event){
+                    $('#dubx-grabs-container').remove();
+                        var x = event.clientX, y = event.clientY;
+
+                        if(!x || !y || isNaN(x) || isNaN(y)){
+                            return $('#dubx-grabs-container').remove();
+                        }
+
+                        var elementMouseIsOver = document.elementFromPoint(x, y);
+
+                    if($(elementMouseIsOver).hasClass('dubx-grabs-hover') || $(elementMouseIsOver).parents('.dubx-grabs-hover').length > 0){
+                        setTimeout(function(){$(grabEl).mouseenter();}, 250);
                     }
                 });
 
@@ -1535,12 +1671,84 @@ if (!hello_run && Dubtrack.session.id) {
 
                     });
                 });
+                $(grabEl).mouseenter(function(){
+                    if($("#dubx-grabs-container").length > 0) return; //already exists
+
+                    var infoPaneWidth = $(dubdownEl).innerWidth() + $(grabEl).innerWidth();
+                    var grabsBackground = $('.add-to-playlist-button').hasClass('grabbed') ? $('.add-to-playlist-button').css('background-color') : $('.add-to-playlist-button').find('.icon-heart').css('color');
+                    var html;
+
+                    if(hello.dubs.grabs.length > 0){
+                        html = '<ul id="dubinfo-preview" class="dubinfo-show dubx-grabs-hover" style="border-color: '+grabsBackground+'">';
+                        hello.dubs.grabs.forEach(function(val){
+                            html += '<li class="preview-dubinfo-item users-previews dubx-grabs-hover">' +
+                                        '<div class="dubinfo-image">' +
+                                            '<img src="https://api.dubtrack.fm/user/' + val.userid + '/image">' +
+                                        '</div>' +
+                                        '<span class="dubinfo-text">@' + val.username + '</span>' +
+                                    '</li>'
+                        });
+                        html += '</ul>';                     
+                    }
+                    else{
+                        html = '<div id="dubinfo-preview" class="dubinfo-show dubx-grabs-hover dubx-no-dubs" style="border-color: '+grabsBackground+'">' +
+                                    'This song hasn\'t been grabbed yet!' +
+                                '</div>';
+                    }
+
+                    var newEl = document.createElement('div');
+                    newEl.id = 'dubx-grabs-container';
+                    newEl.className = 'dubinfo-show dubx-grabs-hover';
+                    newEl.innerHTML = html;
+                    newEl.style.visibility = "hidden";
+                    document.body.appendChild(newEl);
+
+                    var elemRect = this.getBoundingClientRect();
+                    var bodyRect = document.body.getBoundingClientRect();
+
+                    newEl.style.visibility = "";
+                    newEl.style.width = infoPaneWidth + 'px';
+                    newEl.style.top = (elemRect.top-150) + 'px';
+
+                    //If info pane would run off screen set the position on right edge
+                    if(bodyRect.right - elemRect.left >= infoPaneWidth){
+                        newEl.style.left = elemRect.left + 'px';
+                    }
+                    else{
+                        newEl.style.right = 0;
+                    }
+
+                    document.body.appendChild(newEl);
+
+                    $(this).addClass('dubx-grabs-hover');
+
+                    $(document.body).on('click', '.preview-dubinfo-item', function(e){
+                        var new_text = $(this).find('.dubinfo-text')[0].innerHTML + ' ' ;
+                        hello.updateChatInputWithString(new_text);
+                    });
+
+                    $('.dubx-grabs-hover').mouseleave(function(event){
+                        var x = event.clientX, y = event.clientY;
+
+                        if(!x || !y || isNaN(x) || isNaN(y)){
+                            return $('#dubx-grabs-container').remove();
+                        }
+
+                        var elementMouseIsOver = document.elementFromPoint(x, y);
+
+                        if(!$(elementMouseIsOver).hasClass('dubx-grabs-hover') && $(elementMouseIsOver).parent('.dubx-grabs-hover').length <= 0){
+                            $('#dubx-grabs-container').remove();
+                        }
+
+                    });
+                });
             }
             else{
                 options.let_dubs_hover = false;
                 hello.option('dubs_hover', 'false');
                 hello.off('.dubs_hover');
                 Dubtrack.Events.unbind("realtime:room_playlist-dub", this.dubWatcher);
+                Dubtrack.Events.unbind("realtime:room_playlist-queue-update-grabs", this.grabWatcher);
                 Dubtrack.Events.unbind("realtime:user-leave", this.dubUserLeaveWatcher);
                 Dubtrack.Events.unbind("realtime:room_playlist-update", hello.resetDubs);
             }
@@ -1561,6 +1769,23 @@ if (!hello_run && Dubtrack.session.id) {
                         hello.dubs.downDubs.splice(i,1);
                         return false;
                     }
+                });
+            }
+            if($.grep(hello.dubs.grabs, function(el){ return el.userid == e.user._id; }).length > 0){
+                $.each(hello.dubs.grabs, function(i){
+                    if(hello.dubs.grabs[i].userid === e.user._id) {
+                        hello.dubs.grabs.splice(i,1);
+                        return false;
+                    }
+                });
+            }
+        },
+        grabWatcher: function(e){
+            //If grab already casted
+            if($.grep(hello.dubs.grabs, function(el){ return el.userid == e.user._id; }).length <= 0){
+                hello.dubs.grabs.push({
+                    userid: e.user._id,
+                    username: e.user.username
                 });
             }
         },
@@ -1613,6 +1838,10 @@ if (!hello_run && Dubtrack.session.id) {
             }
             else if(hello.userIsAtLeastMod(Dubtrack.session.id) && hello.dubs.downDubs.length !== Dubtrack.room.player.activeSong.attributes.song.downdubs){
                 console.log("Downdubs don't match, reset! Song started ", msSinceSongStart, "ms ago!");
+                hello.resetDubs();
+            }
+            else if(hello.dubs.downDubs.length !== parseInt($('.grab-counter')[0].innerHTML)){
+                console.log("Grabs don't match, reset! Song started ", msSinceSongStart, "ms ago!");
                 hello.resetDubs();
             }
         },
@@ -1723,6 +1952,9 @@ if (!hello_run && Dubtrack.session.id) {
     if (localStorage.getItem('mention_notifications') === 'true') {
         hello.mentionNotifications();
     }
+    if (localStorage.getItem('custom_mentions')) {
+        hello.customMentions();
+    }
     if (localStorage.getItem('spacebar_mute') === 'true') {
         hello.spacebar_mute();
     }
@@ -1746,7 +1978,6 @@ if (!hello_run && Dubtrack.session.id) {
             options[hello.sectionList[i]] = 'true';
         }
         else {
-            console.log(hello.sectionList[i]);
             options[hello.sectionList[i]] = 'true';
         }
     }
