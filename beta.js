@@ -1364,7 +1364,7 @@ if (!hello_run && Dubtrack.session.id) {
 
             if(user === currentDj){
                 $('ul.chat-main').append(
-                    '<li class="system" style="text-align: left">' +
+                    '<li class="system dubx-grab-system-msg" style="text-align: left">' +
                         '<div class="chatDelete" onclick="hello.deleteChatMessageClientSide(this)"><span class="icon-close"></span></div>' +
                         '<div class="text">' +
                             '@' + e.user.username + ' has grabbed your song \'' + Dubtrack.room.player.activeSong.attributes.songInfo.name + ' \'' +
@@ -1691,7 +1691,7 @@ if (!hello_run && Dubtrack.session.id) {
                         html += '</ul>';                     
                     }
                     else{
-                        html = '<div id="dubinfo-preview" class="dubinfo-show dubx-grabs-hover dubx-no-dubs" style="border-color: '+grabsBackground+'">' +
+                        html = '<div id="dubinfo-preview" class="dubinfo-show dubx-grabs-hover dubx-no-grabs" style="border-color: '+grabsBackground+'">' +
                                     'This song hasn\'t been grabbed yet!' +
                                 '</div>';
                     }
