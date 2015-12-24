@@ -25,12 +25,12 @@
     border: 1px solid white;
 }
 
-#dubinfo-preview.dubx-updubs-hover {
+#dubinfo-preview.dubx-updubs-hover, 
+#dubinfo-preview.dubx-grabs-hover {
     border-radius: 0.4rem 0.4rem 0.4rem 0;
 }
 
-#dubinfo-preview.dubx-downdubs-hover, 
-#dubinfo-preview.dubx-grabs-hover {
+#dubinfo-preview.dubx-downdubs-hover {
     border-radius: 0.4rem 0.4rem 0 0.4rem;
 }
 
