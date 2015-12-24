@@ -34,7 +34,9 @@
     border-radius: 0.4rem 0.4rem 0 0.4rem;
 }
 
-#dubinfo-preview.dubx-no-dubs, #dubinfo-preview.dubx-downdubs-unauthorized {
+#dubinfo-preview.dubx-no-dubs, 
+#dubinfo-preview.dubx-no-grabs, 
+#dubinfo-preview.dubx-downdubs-unauthorized {
     text-align: center;
     padding: 50px 10px;
 }
