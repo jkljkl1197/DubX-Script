@@ -54,6 +54,7 @@ if (!hello_run && Dubtrack.session.id) {
         let_downdub_chat_notifications: false,
         let_updub_chat_notifications: false,
         let_dubs_hover: false,
+        let_custom_mentions: false,
         draw_general: false,
         draw_userinterface: false,
         draw_settings: false,
@@ -101,7 +102,7 @@ if (!hello_run && Dubtrack.session.id) {
                             '</li>',
                             '<li onclick="hello.afk(event);" class="for_content_li for_content_feature afk">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p onclick="hello.createAfkMessage();" class="for_content_edit" style="display: inline-block;color: #878c8e;font-size: .85rem;font-weight: bold;margin: 0 1rem 0 0;float: right;"><i class="fi-pencil"></i></p>',
+                                '<p onclick="hello.createAfkMessage();" class="for_content_edit" style="display: inline-block;color: #878c8e;font-size: .85rem;font-weight: bold;float: right;"><i class="fi-pencil"></i></p>',
                                 '<p class="for_content_p">AFK Autorespond</p>',
                             '</li>',
                             '<li onclick="hello.optionTwitchEmotes();" class="for_content_li for_content_feature twitch_emotes">',
@@ -115,6 +116,11 @@ if (!hello_run && Dubtrack.session.id) {
                             '<li onclick="hello.optionMentions();" class="for_content_li for_content_feature autocomplete_mentions">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Autocomplete Mentions</p>',
+                            '</li>',
+                            '<li onclick="hello.customMentions(event);" class="for_content_li for_content_feature custom_mentions">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p onclick="hello.createCustomMentions();" class="for_content_edit" style="display: inline-block;color: #878c8e;font-size: .85rem;font-weight: bold;float: right;"><i class="fi-pencil"></i></p>',
+                                '<p class="for_content_p">Custom Mention Triggers</p>',
                             '</li>',
                             '<li onclick="hello.mentionNotifications();" class="for_content_li for_content_feature mention_notifications">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
@@ -328,7 +334,7 @@ if (!hello_run && Dubtrack.session.id) {
                         '</div>',
                         '<div class="content">',
                             '<p>'+content+'</p>',
-                            '<textarea class="input" type="text" placeholder="'+placeholder+'" maxlength="'+maxlength+'"></textarea>',
+                            '<textarea class="input" type="text" placeholder="'+placeholder+'" maxlength="'+maxlength+'">'+content+'</textarea>',
                         '</div>',
                         '<div class="control">',
                             '<div class="cancel" onclick="hello.closeErr();">',
@@ -365,7 +371,7 @@ if (!hello_run && Dubtrack.session.id) {
                 var song = Dubtrack.room.player.activeSong.get('song');
                 var dubCookie = Dubtrack.helpers.cookie.get('dub-' + Dubtrack.room.model.get("_id"));
                 var dubsong = Dubtrack.helpers.cookie.get('dub-song');
-                if(song.songid !== dubsong || !Dubtrack.room || song === null) 
+                if(!Dubtrack.room || !song || song.songid !== dubsong) 
                     dubCookie = false;
 
                 //Only cast the vote if user hasn't already voted
@@ -411,6 +417,9 @@ if (!hello_run && Dubtrack.session.id) {
         },
         report_content: function() {
             var content = $('.input').val();
+
+            if(!content || content.trim(' ').length === 0) return;
+
             var user = Dubtrack.session.get('username');
             var id = Dubtrack.realtime.dtPubNub.get_uuid();
             var href = location.href;
@@ -426,9 +435,10 @@ if (!hello_run && Dubtrack.session.id) {
                 data: 'payload={"username": "Incoming Bug Report", "text": "'+woosh+'", "icon_emoji": ":bug:"}',
                 crossDomain: true
             });
+            $('.report').replaceWith('<li onclick="" class="for_content_li for_content_feature report"><p class="for_content_off"><i class="fi-check"></i></p><p class="for_content_p">Bug Report</p></li>');
         },
         report_modal: function() {
-            hello.input('Bug Report:','Report: (Please only report bugs for DubX, not Dubtrack)','Please give a detailed description of the bug.','confirm-for36','cancel','999');
+            hello.input('Bug Report:','','Please only report bugs for DubX, not Dubtrack. \nBe sure to give a detailed description of the bug, and a way to replicate it, if possible.','confirm-for36','999');
             $('.confirm-for36').click(hello.report_content);
             $('.confirm-for36').click(hello.closeErr);
         },
@@ -477,7 +487,7 @@ if (!hello_run && Dubtrack.session.id) {
         afk_chat_respond: function(e) {
             var content = e.message;
             var user = Dubtrack.session.get('username');
-            if (content.indexOf('@'+user) >-1) {
+            if (content.indexOf('@'+user) >-1 && Dubtrack.session.id !== e.user.userInfo.userid) {
                 if (options.let_active_afk) {
                     if (localStorage.getItem('customAfkMessage')) {
                         var customAfkMessage = localStorage.getItem('customAfkMessage');
@@ -515,6 +525,40 @@ if (!hello_run && Dubtrack.session.id) {
                 Dubtrack.Events.unbind("realtime:chat-message", this.afk_chat_respond);
                 hello.off('.afk');
             }
+        },
+        customMentions: function(e) {
+            if(e && e.target && (e.target.className === 'for_content_edit' || e.target.className === 'fi-pencil')) return;
+
+            if (!options.let_custom_mentions) {
+                options.let_custom_mentions = true;
+                Dubtrack.Events.bind("realtime:chat-message", this.customMentionCheck);
+                hello.on('.custom_mentions');
+            } else {
+                options.let_custom_mentions = false;
+                Dubtrack.Events.unbind("realtime:chat-message", this.customMentionCheck);
+                hello.off('.custom_mentions');
+            }
+        },
+        customMentionCheck: function(e) {
+            var content = e.message.toLowerCase();
+            if (options.let_custom_mentions) {
+                if (localStorage.getItem('custom_mentions')) {
+                    var customMentions = localStorage.getItem('custom_mentions').toLowerCase().split(',');
+                    if(Dubtrack.session.id !== e.user.userInfo.userid && customMentions.some(function(v) { return content.indexOf(v.trim(' ')) >= 0; })){
+                        Dubtrack.room.chat.mentionChatSound.play();
+                    }
+                }
+            }
+        },
+        createCustomMentions: function() {
+            var current = localStorage.getItem('custom_mentions');
+            hello.input('Custom Mention Triggers (separate by comma)',current,'separate, custom triggers, by, comma, :heart:','confirm-for315','255');
+            $('.confirm-for315').click(hello.saveCustomMentions);
+        },
+        saveCustomMentions: function() {
+            var customMentions = $('.input').val();
+            hello.option('custom_mentions', customMentions);
+            $('.onErr').remove();
         },
         chat_window: function() {
             if(!options.let_chat_window) {
@@ -1194,13 +1238,26 @@ if (!hello_run && Dubtrack.session.id) {
         },
         notifyOnMention: function(e){
             var content = e.message;
-            var user = Dubtrack.session.get('username');
-            if (content.indexOf('@'+user) >-1 && !hello.isActiveTab) {
-                var options = {
+            var user = Dubtrack.session.get('username').toLowerCase();
+            var mentionTriggers = ['@'+user];
+
+            if (options.let_custom_mentions && localStorage.getItem('custom_mentions')) {
+                //add custom mention triggers to array
+                mentionTriggers = mentionTriggers.concat(localStorage.getItem('custom_mentions').toLowerCase().split(','));
+            }
+            
+            if (mentionTriggers.some(function(v) { return content.toLowerCase().indexOf(v.trim(' ')) >= 0; }) && !hello.isActiveTab && Dubtrack.session.id !== e.user.userInfo.userid) {
+                var notificationOptions = {
                     body: content,
                     icon: "http://i.imgur.com/RXJnXNJ.png"
                 };
-                var n = new Notification("Message from "+e.user.username,options);
+                var n = new Notification("Message from "+e.user.username,notificationOptions);
+
+                n.onclick = function(x) { 
+                    window.focus();
+                    n.close();
+                };
+
                 setTimeout(n.close.bind(n), 5000);
             }
         },
@@ -1722,6 +1779,9 @@ if (!hello_run && Dubtrack.session.id) {
     }
     if (localStorage.getItem('mention_notifications') === 'true') {
         hello.mentionNotifications();
+    }
+    if (localStorage.getItem('custom_mentions')) {
+        hello.customMentions();
     }
     if (localStorage.getItem('spacebar_mute') === 'true') {
         hello.spacebar_mute();
