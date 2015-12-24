@@ -43,6 +43,11 @@
     color: #0ff;
 }
 
+.dubx-grab-system-msg,
+#dubinfo-preview.dubx-no-grabs {
+    color: #B3E790;
+}
+
 #dubinfo-preview.dubx-downdubs-unauthorized {
     color: #f0f;
 }
