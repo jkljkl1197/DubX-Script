@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
-    var our_version = '03.02.04 - Custom Mention Triggers';
+    var our_version = '03.03.00 - Happy Holidays';
 
     //Ref 1: Variables
     var options = {
@@ -96,7 +96,7 @@ if (!hello_run && Dubtrack.session.id) {
                         '<ul class="draw_general">',
                             '<li onclick="hello.snow();" class="for_content_li for_content_feature snow">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Let it Snow</p>',
+                                '<p class="for_content_p">Snow</p>',
                             '</li>',
                             '<li onclick="hello.autovote();" class="for_content_li for_content_feature autovote">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
