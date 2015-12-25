@@ -52,6 +52,7 @@ if (!hello_run && Dubtrack.session.id) {
         let_autocomplete_mentions: false,
         let_mention_notifications: false,
         let_custom_mentions: false,
+        let_snow: false,
         draw_general: false,
         draw_userinterface: false,
         draw_settings: false,
@@ -93,6 +94,10 @@ if (!hello_run && Dubtrack.session.id) {
                             '</p>',
                         '</li>',
                         '<ul class="draw_general">',
+                            '<li onclick="hello.snow();" class="for_content_li for_content_feature snow">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Let it Snow</p>',
+                            '</li>',
                             '<li onclick="hello.autovote();" class="for_content_li for_content_feature autovote">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Autovote</p>',
@@ -264,6 +269,7 @@ if (!hello_run && Dubtrack.session.id) {
             $('.header-right-navigation').append(li);
             $('body').prepend(html);
             $('.for_content').perfectScrollbar({ wheelSpeed: 30, suppressScrollX: true });
+            $.getScript('https://rawgit.com/loktar00/JQuery-Snowfall/master/src/snowfall.jquery.js');
         },
         sectionList: ['draw_general','draw_userinterface','draw_settings','draw_customize','draw_contact','draw_social','draw_chrome'],
         drawSection: function(el) {
@@ -348,6 +354,27 @@ if (!hello_run && Dubtrack.session.id) {
         },
         advance_vote: function() {
             $('.dubup').click();
+        },
+        snow: function() {
+            if (!options.let_snow) {
+                options.let_snow = true;
+                hello.option('snow','true');
+                hello.on('.snow');
+                $(document).snowfall({
+                    round: true,
+                    shadow: true,
+                    flakeCount: 50,
+                    minSize: 1,
+                    maxSize: 5,
+                    minSpeed: 5,
+                    maxSpeed: 5
+                });
+            } else {
+                options.let_snow = false;
+                hello.option('snow','false');
+                hello.off('.snow');
+                $(document).snowfall('clear');
+            }
         },
         autovote: function() {
             if (!options.let_autovote) {
