@@ -522,7 +522,7 @@ if (!hello_run && Dubtrack.session.id) {
         },
         createAfkMessage: function() {
             var current = localStorage.getItem('customAfkMessage');
-            hello.input('Custom AFK Message',current,'I\'m AFK at the moment','confirm-for315','255');
+            hello.input('Custom AFK Message',current,'I\'m not here right now.','confirm-for315','255');
             $('.confirm-for315').click(hello.saveAfkMessage);
         },
         afk: function(e) {
