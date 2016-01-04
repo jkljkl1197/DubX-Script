@@ -389,10 +389,10 @@ if (!hello_run && Dubtrack.session.id) {
                 var song = Dubtrack.room.player.activeSong.get('song');
                 var dubCookie = Dubtrack.helpers.cookie.get('dub-' + Dubtrack.room.model.get("_id"));
                 var dubsong = Dubtrack.helpers.cookie.get('dub-song');
-                if(!Dubtrack.room || !song || song.songid !== dubsong) 
+                if(!Dubtrack.room || !song || song.songid !== dubsong) {
                     dubCookie = false;
                 }
-
+            
                 //Only cast the vote if user hasn't already voted
                 if(!$('.dubup, .dubdown').hasClass('voted') && !dubCookie) {
                     hello.advance_vote();
