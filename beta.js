@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
-    var our_version = '03.02.04 - Custom Mention Triggers';
+    var our_version = '03.03.00 - Happy Holidays';
 
     //Ref 1: Variables
     var options = {
@@ -52,6 +52,7 @@ if (!hello_run && Dubtrack.session.id) {
         let_autocomplete_mentions: false,
         let_mention_notifications: false,
         let_custom_mentions: false,
+        let_snow: false,
         draw_general: false,
         draw_userinterface: false,
         draw_settings: false,
@@ -93,6 +94,10 @@ if (!hello_run && Dubtrack.session.id) {
                             '</p>',
                         '</li>',
                         '<ul class="draw_general">',
+                            '<li onclick="hello.snow();" class="for_content_li for_content_feature snow">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Snow</p>',
+                            '</li>',
                             '<li onclick="hello.autovote();" class="for_content_li for_content_feature autovote">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Autovote</p>',
@@ -264,6 +269,7 @@ if (!hello_run && Dubtrack.session.id) {
             $('.header-right-navigation').append(li);
             $('body').prepend(html);
             $('.for_content').perfectScrollbar({ wheelSpeed: 30, suppressScrollX: true });
+            $.getScript('https://rawgit.com/loktar00/JQuery-Snowfall/master/src/snowfall.jquery.js');
         },
         sectionList: ['draw_general','draw_userinterface','draw_settings','draw_customize','draw_contact','draw_social','draw_chrome'],
         drawSection: function(el) {
@@ -355,6 +361,27 @@ if (!hello_run && Dubtrack.session.id) {
         advance_vote: function() {
             $('.dubup').click();
         },
+        snow: function() {
+            if (!options.let_snow) {
+                options.let_snow = true;
+                hello.option('snow','true');
+                hello.on('.snow');
+                $(document).snowfall({
+                    round: true,
+                    shadow: true,
+                    flakeCount: 50,
+                    minSize: 1,
+                    maxSize: 5,
+                    minSpeed: 5,
+                    maxSpeed: 5
+                });
+            } else {
+                options.let_snow = false;
+                hello.option('snow','false');
+                hello.off('.snow');
+                $(document).snowfall('clear');
+            }
+        },
         autovote: function() {
             if (!options.let_autovote) {
                 options.let_autovote = true;
@@ -397,7 +424,7 @@ if (!hello_run && Dubtrack.session.id) {
         eta: function() {
             var time = 4;
             var current_time = parseInt($('#player-controller div.left ul li.infoContainer.display-block div.currentTime span.min').text());
-            var booth_duration = parseInt(Dubtrack.room.player.queueInfo.text());
+            var booth_duration = parseInt($('.queue-position').text());
             var booth_time = (booth_duration * time - time) + current_time;
             if (booth_time >= 0) {
                 $('.eta_tooltip_t').append('<div class="eta_tooltip" style="position: absolute;font: 1rem/1.5 proxima-nova,sans-serif;display: block;left: -33px;cursor: pointer;border-radius: 1.5rem;padding: 8px 16px;background: #fff;font-weight: 700;font-size: 13.6px;text-transform: uppercase;color: #000;opacity: .8;text-align: center;z-index: 9;">ETA: '+booth_time+' minutes.</div>');
@@ -484,9 +511,9 @@ if (!hello_run && Dubtrack.session.id) {
                 if (options.let_active_afk) {
                     if (localStorage.getItem('customAfkMessage')) {
                         var customAfkMessage = localStorage.getItem('customAfkMessage');
-                        $('#chat-txt-message').val(customAfkMessage);
+                        $('#chat-txt-message').val('[AFK] '+customAfkMessage);
                     } else {
-                        $('#chat-txt-message').val('I am AFK at the moment.');
+                        $('#chat-txt-message').val("[AFK] I'm not here right now.");
                     }
                     Dubtrack.room.chat.sendMessage();
                     options.let_active_afk = false;
@@ -503,7 +530,7 @@ if (!hello_run && Dubtrack.session.id) {
         },
         createAfkMessage: function() {
             var current = localStorage.getItem('customAfkMessage');
-            hello.input('Custom AFK Message',current,'I\'m AFK at the moment','confirm-for315','255');
+            hello.input('Custom AFK Message',current,'I\'m not here right now.','confirm-for315','255');
             $('.confirm-for315').click(hello.saveAfkMessage);
         },
         afk: function(e) {
