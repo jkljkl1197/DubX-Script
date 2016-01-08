@@ -261,7 +261,7 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
                                 '</a>',
                             '</li>',
                             '<li class="for_content_li for_content_feature">',
-                                '<a href="https://dubx.net" target="_blank" style="color: #878c8e;">',
+                                '<a href="https://dubx.net/donate.html" target="_blank" style="color: #878c8e;">',
                                     '<p class="for_content_off"><i class="fi-pricetag-multiple"></i></p>',
                                     '<p class="for_content_p">Donate</p>',
                                 '</a>',
