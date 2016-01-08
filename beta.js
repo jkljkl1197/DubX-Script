@@ -27,7 +27,19 @@
     This license is governed by the Laws of Norway. Disputes shall be settled by Oslo City Court.
 */ /* global Dubtrack, emojify */
 var hello_run;
-if (!hello_run && Dubtrack.session.id) {
+var ifUserBanned;
+$.ajax({
+    url: 'https://db.daggerling.com/',
+    method: 'GET',
+    async: false
+}).done(function(data) {
+    if (data.data.indexOf(Dubtrack.session.id) !== -1) {
+        ifUserBanned = true;
+    } else {
+        ifUserBanned = false;
+    }
+});
+if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
     hello_run = true;
     var our_version = '03.03.00 - Happy Holidays';
 
@@ -243,9 +255,15 @@ if (!hello_run && Dubtrack.session.id) {
                                 '</a>',
                             '</li>',
                             '<li class="for_content_li for_content_feature">',
-                                '<a href="https://www.dubx.net" target="_blank" style="color: #878c8e;">',
+                                '<a href="https://dubx.net" target="_blank" style="color: #878c8e;">',
                                     '<p class="for_content_off"><i class="fi-link"></i></p>',
                                     '<p class="for_content_p">Our Website</p>',
+                                '</a>',
+                            '</li>',
+                            '<li class="for_content_li for_content_feature">',
+                                '<a href="https://dubx.net/donate.html" target="_blank" style="color: #878c8e;">',
+                                    '<p class="for_content_off"><i class="fi-pricetag-multiple"></i></p>',
+                                    '<p class="for_content_p">Donate</p>',
                                 '</a>',
                             '</li>',
                         '</ul>',
@@ -294,7 +312,7 @@ if (!hello_run && Dubtrack.session.id) {
             var allClosed = true;
             for(var i = 0; i < hello.sectionList.length; i++) {
                 if($('.'+hello.sectionList[i]).css('display') === 'block'){
-                    allClosed = false; 
+                    allClosed = false;
                 }
             }
 
@@ -389,10 +407,11 @@ if (!hello_run && Dubtrack.session.id) {
                 var song = Dubtrack.room.player.activeSong.get('song');
                 var dubCookie = Dubtrack.helpers.cookie.get('dub-' + Dubtrack.room.model.get("_id"));
                 var dubsong = Dubtrack.helpers.cookie.get('dub-song');
+
                 if(!Dubtrack.room || !song || song.songid !== dubsong) {
                     dubCookie = false;
                 }
-            
+
                 //Only cast the vote if user hasn't already voted
                 if(!$('.dubup, .dubdown').hasClass('voted') && !dubCookie) {
                     hello.advance_vote();
@@ -1253,7 +1272,7 @@ if (!hello_run && Dubtrack.session.id) {
                 //add custom mention triggers to array
                 mentionTriggers = mentionTriggers.concat(localStorage.getItem('custom_mentions').toLowerCase().split(','));
             }
-            
+
             if (mentionTriggers.some(function(v) { return content.toLowerCase().indexOf(v.trim(' ')) >= 0; }) && !hello.isActiveTab && Dubtrack.session.id !== e.user.userInfo.userid) {
                 var notificationOptions = {
                     body: content,
@@ -1261,7 +1280,7 @@ if (!hello_run && Dubtrack.session.id) {
                 };
                 var n = new Notification("Message from "+e.user.username,notificationOptions);
 
-                n.onclick = function(x) { 
+                n.onclick = function(x) {
                     window.focus();
                     n.close();
                 };
@@ -1385,7 +1404,7 @@ if (!hello_run && Dubtrack.session.id) {
             options[hello.sectionList[i]] = 'true';
         }
     }
-    
+
     $('document').ready(hello.css_run);
     $('document').ready(hello.medium_load);
 
@@ -1429,6 +1448,8 @@ if (!hello_run && Dubtrack.session.id) {
     }
     if (!Dubtrack.session.id) {
         onErr('You\'re not logged in. Please login to use DUBX.');
+    } else if (ifUserBanned) {
+        onErr('You\'ve been banned from using DUBX. If you believe this to be a mistake please contact us on Github');
     } else {
         onErr('Oh noes! We\'ve encountered a runtime error');
     };
