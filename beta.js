@@ -373,6 +373,11 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
         advance_vote: function() {
             $('.dubup').click();
         },
+        voteCheck: function (obj) {
+            if (obj.startTime == -1) {
+                hello.advance_vote();
+            }
+        },
         snow: function() {
             if (!options.let_snow) {
                 options.let_snow = true;
@@ -410,12 +415,12 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
 
                 hello.option('autovote','true');
                 hello.on('.autovote');
-                Dubtrack.Events.bind("realtime:room_playlist-update", hello.advance_vote);
+                Dubtrack.Events.bind("realtime:room_playlist-update", hello.voteCheck);
             } else {
                 options.let_autovote = false;
                 hello.option('autovote','false');
                 hello.off('.autovote');
-                Dubtrack.Events.unbind("realtime:room_playlist-update", hello.advance_vote);
+                Dubtrack.Events.unbind("realtime:room_playlist-update", hello.voteCheck);
             }
         },
         split_chat: function() {
