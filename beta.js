@@ -374,7 +374,7 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
             $('.dubup').click();
         },
         voteCheck: function (obj) {
-            if (obj.startTime == -1) {
+            if (obj.startTime < 2) {
                 hello.advance_vote();
             }
         },
