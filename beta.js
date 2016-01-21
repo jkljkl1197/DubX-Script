@@ -1165,10 +1165,9 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
             var strEnd;
 
             var filterText = currentText.replace(/(:|@)([&!()\+\-_a-z0-9]+)($|\s)/i, function(matched, p1, p2, p3, pos, str){
-                console.dir( arguments );
+                // console.dir( arguments );
                 strStart = pos;
                 strEnd = pos + matched.length;
-                console.log("strStart", strStart,"strEnd",strEnd);
 
                 hello.previewSearchStr = p2;
                 keyCharMin = (p1 === "@") ? 1 : 3;
