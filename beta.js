@@ -335,6 +335,14 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
         },
         //Ref 2.3.1: Input
         input: function(title,content,placeholder,confirm,maxlength) {
+            var textarea = '', confirmButton = '';
+            if (placeholder) {
+                var mx = maxlength || 999;
+                textarea = '<textarea class="input" type="text" placeholder="'+placeholder+'" maxlength="'+ mx +'">'+content+'</textarea>';
+            }
+            if (confirm) {
+                confirmButton = '<div class="'+confirm+' confirm"><p>Okay</p></div>';
+            }
             var onErr = [
                 '<div class="onErr">',
                     '<div class="container">',
@@ -343,15 +351,13 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
                         '</div>',
                         '<div class="content">',
                             '<p>'+content+'</p>',
-                            '<textarea class="input" type="text" placeholder="'+placeholder+'" maxlength="'+maxlength+'">'+content+'</textarea>',
+                            textarea,
                         '</div>',
                         '<div class="control">',
                             '<div class="cancel" onclick="hello.closeErr();">',
                                 '<p>Cancel</p>',
                             '</div>',
-                            '<div class="'+confirm+' confirm">',
-                                '<p>Okay</p>',
-                            '</div>',
+                            confirmButton,
                         '</div>',
                     '</div>',
                 '</div>'
@@ -406,12 +412,15 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
                 var song = Dubtrack.room.player.activeSong.get('song');
                 var dubCookie = Dubtrack.helpers.cookie.get('dub-' + Dubtrack.room.model.get("_id"));
                 var dubsong = Dubtrack.helpers.cookie.get('dub-song');
-                if(!Dubtrack.room || !song || song.songid !== dubsong)
+
+                if(!Dubtrack.room || !song || song.songid !== dubsong) {
                     dubCookie = false;
+                }
 
                 //Only cast the vote if user hasn't already voted
-                if(!$('.dubup, .dubdown').hasClass('voted') && !dubCookie)
+                if(!$('.dubup, .dubdown').hasClass('voted') && !dubCookie) {
                     hello.advance_vote();
+                }
 
                 hello.option('autovote','true');
                 hello.on('.autovote');
@@ -609,7 +618,7 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
             }
         },
         css_modal: function() {
-            var current = localStorage.getItem('css');
+            var current = localStorage.getItem('css') || "";
             hello.input('CSS',current,'https://example.com/example.css','confirm-for313','999');
             $('.confirm-for313').click(hello.css_import);
         },
@@ -617,7 +626,9 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
             $('.css_import').remove();
             var css_to_import = $('.input').val();
             hello.option('css',css_to_import);
-            $('head').append('<link class="css_import" href="'+css_to_import+'" rel="stylesheet" type="text/css">');
+            if (css_to_import && css_to_import !== '') {
+                $('head').append('<link class="css_import" href="'+css_to_import+'" rel="stylesheet" type="text/css">');
+            }
             $('.onErr').remove();
         },
         css_run: function() {
@@ -779,8 +790,7 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
             chatRegex : new RegExp(":([&!()\\-_a-z0-9]+):", "ig")
         },
         tasty : {
-            url: "",
-            template: function(id) { return hello.tasty.url + hello.tasty.emotes[id]; },
+            template: function(id) { return hello.tasty.emotes[id].url; },
             emotes: {}
         },
         shouldUpdateAPIs : function(apiName){
@@ -844,24 +854,13 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
         loadTastyEmotes: function(){
             var self = hello;
             var savedData;
-            // if it doesn't exist in localStorage or it's older than 5 days
-            // grab it from the bttv API
-            if (self.shouldUpdateAPIs('tasty')) {
-                console.log('Dubx','tasty','loading from api');
-                var tastyApi = new self.getJSON(hello.gitRoot + '/emotes/tastyemotes.json', 'tasty:loaded');
-                tastyApi.done(function(data){
-                    localStorage.setItem('tasty_api_timestamp', Date.now().toString());
-                    localStorage.setItem('tasty_api', data);
-                    self.processTastyEmotes(JSON.parse(data));
-                });
-            } else {
-                console.log('Dubx','tasty','loading from localstorage');
-                savedData = JSON.parse(localStorage.getItem('tasty_api'));
-                self.processTastyEmotes(savedData);
-                savedData = null; // clear the var from memory
-                var twEvent = new Event('tasty:loaded');
-                document.body.dispatchEvent(twEvent);
-            }
+            console.log('Dubx','tasty','loading from api');
+            // since we control this API we should always have it load from remote
+            var tastyApi = new self.getJSON(hello.gitRoot + '/emotes/tastyemotes.json', 'tasty:loaded');
+            tastyApi.done(function(data){
+                localStorage.setItem('tasty_api', data);
+                self.processTastyEmotes(JSON.parse(data));
+            });
         },
         processTwitchEmotes: function(data) {
             var self = hello;
@@ -915,7 +914,6 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
         },
         processTastyEmotes: function(data) {
             var self = hello;
-            self.tasty.url = data.template;
             self.tasty.emotes = data.emotes;
             self.tastyJSONLoaded = true;
             self.emojiEmotes = self.emojiEmotes.concat(Object.keys(self.tasty.emotes));
@@ -930,48 +928,52 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
 
             if (!self.twitchJSONSLoaded) { return; } // can't do anything until jsons are loaded
 
-            function makeImage(src, name){
-                return '<img class="emoji twitch-emoji" title="'+name+'" alt="'+name+'" src="'+src+'" />';
+            function makeImage(type, src, name, w, h){
+                return '<img class="emoji '+type+'-emote" '+
+                    (w ? 'width="'+w+'" ' : '') +
+                    (h ? 'height="'+h+'" ' : '') +
+                     'title="'+name+'" alt="'+name+'" src="'+src+'" />';
             }
 
-            var $last = $('.chat-main .text').last();
-            if (!$last.html()) { return; } // nothing to do
+            var $chatTarget = $('.chat-main .text').last();
+            
+            if (!$chatTarget.html()) { return; } // nothing to do
 
             if (self.bttvJSONSLoaded) { _regex = self.bttv.chatRegex; }
 
-            var emoted = $last.html().replace(_regex, function(matched, p1){
+            var emoted = $chatTarget.html().replace(_regex, function(matched, p1){
                 var _id, _src, _desc, key = p1.toLowerCase();
 
                 if (typeof self.twitch.emotes[key] !== 'undefined'){
                     _id = self.twitch.emotes[key];
                     _src = self.twitch.template(_id);
-                    return makeImage(_src, key);
+                    return makeImage("twitch", _src, key);
                 } else if (typeof self.bttv.emotes[key] !== 'undefined') {
                     _id = self.bttv.emotes[key];
                     _src = self.bttv.template(_id);
-                    return makeImage(_src, key);
+                    return makeImage("bttv", _src, key);
                 } else if (typeof self.tasty.emotes[key] !== 'undefined') {
                     _src = self.tasty.template(key);
-                    return makeImage(_src, key);
+                    return makeImage("tasty", _src, key, self.tasty.emotes[key].width, self.tasty.emotes[key].height);
                 } else {
                     return matched;
                 }
 
             });
 
-            $last.html(emoted);
+            $chatTarget.html(emoted);
+            // TODO : Convert existing :emotes: in chat on plugin load
         },
         /**************************************************************************
          * Turn on/off the twitch emoji in chat
          */
         optionTwitchEmotes: function(){
+            document.body.addEventListener('twitch:loaded', this.loadBTTVEmotes);
+            document.body.addEventListener('bttv:loaded', this.loadTastyEmotes);
+            
             if (!options.let_twitch_emotes) {
-                document.body.addEventListener('twitch:loaded', this.loadBTTVEmotes);
-                document.body.addEventListener('bttv:loaded', this.loadTastyEmotes);
-
                 if (!hello.twitchJSONSLoaded) {
                     hello.loadTwitchEmotes();
-                    document.body.addEventListener('tasty:loaded', this.replaceTextWithEmote);
                 } else {
                     this.replaceTextWithEmote();
                 }
@@ -1053,9 +1055,8 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
         },
         previewSearchStr : "",
         updateChatInput: function(str){
-            var regexString = hello.previewSearchStr.replace(/([()])/, "\\$1");
-            var _re = new RegExp("(:|@)"+regexString + "$");
-            var fixed_text = $("#chat-txt-message").val().replace(_re, str) + " ";
+            var _re = new RegExp("[:@][&!()\\-_a-z0-9]+:?($|\\s)", "ig");
+            var fixed_text = $("#chat-txt-message").val().replace(_re, str  + " ");
             $('#autocomplete-preview').empty().removeClass('ac-show');
             $("#chat-txt-message").val(fixed_text).focus();
         },
@@ -1092,9 +1093,7 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
             }
         },
         previewListInit: function(){
-            // bind the keyup and click functions here
-
-            $('head').prepend('<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/autocomplete.css">');
+             $('head').prepend('<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/autocomplete.css">');
             var acUL = document.createElement('ul');
             acUL.id = "autocomplete-preview";
             $('.pusher-chat-widget-input').prepend(acUL);
@@ -1160,20 +1159,32 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
             var self = hello;
             var currentText = this.value;
             var keyCharMin = 3; // when to start showing previews, default to 3 chars
+            var cursorPos = $(this).get(0).selectionStart;
+            console.log("cursorPos", cursorPos);
+            var strStart;
+            var strEnd;
 
-            var filterText = currentText.replace(/(:|@)([&!()\+\-_a-z0-9]+)$/i, function(matched, p1, p2){
+            var filterText = currentText.replace(/(:|@)([&!()\+\-_a-z0-9]+)($|\s)/i, function(matched, p1, p2, p3, pos, str){
+                console.dir( arguments );
+                strStart = pos;
+                strEnd = pos + matched.length;
+                console.log("strStart", strStart,"strEnd",strEnd);
+
                 hello.previewSearchStr = p2;
                 keyCharMin = (p1 === "@") ? 1 : 3;
 
-                // twitch and emoji
-                if (p2 && p2.length >= keyCharMin && p1 === ":" && options.let_emoji_preview) {
-                    self.emojiUtils.addToPreviewList( self.emojiUtils.filterEmoji(p2) );
-                }
+                if (cursorPos >= strStart && cursorPos <= strEnd) {
+                    // twitch and emoji
+                    if (p2 && p2.length >= keyCharMin && p1 === ":" && options.let_emoji_preview) {
+                        self.emojiUtils.addToPreviewList( self.emojiUtils.filterEmoji(p2) );
+                    }
 
-                // users
-                if (p2 && p2.length >= keyCharMin && p1 === "@" && options.let_autocomplete_mentions) {
-                    self.previewList( self.filterUsers(p2) );
+                    // users
+                    if (p2 && p2.length >= keyCharMin && p1 === "@" && options.let_autocomplete_mentions) {
+                        self.previewList( self.filterUsers(p2) );
+                    }
                 }
+                
             });
 
             var lastChar = currentText.charAt(currentText.length - 1);
@@ -1228,6 +1239,17 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
             }
         },
         mentionNotifications: function(){
+            var self = this;
+
+            function startNotifications(permission) {
+                if (permission === "granted") {
+                    Dubtrack.Events.bind("realtime:chat-message", self.notifyOnMention);
+                    options.let_mention_notifications = true;
+                    hello.option('mention_notifications', 'true');
+                    hello.on('.mention_notifications');
+                }
+            }
+
             if (!options.let_mention_notifications) {
                 this.isActiveTab = true;
 
@@ -1240,28 +1262,14 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
                 };
 
                 if (!("Notification" in window)) {
-                    alert("This browser does not support desktop notification");
-                }
-                else{
+                    hello.input("Mention Notifications", "Sorry this browser does not support desktop notifications.  Please use the latest version of Chrome or FireFox");
+                } else {
                     if (Notification.permission === "granted") {
-                        Dubtrack.Events.bind("realtime:chat-message", this.notifyOnMention);
-                        options.let_mention_notifications = true;
-                        hello.option('mention_notifications', 'true');
-                        hello.on('.mention_notifications');
-                    }
-                    else if (Notification.permission !== 'denied') {
-                        var parent = this;
-                        Notification.requestPermission(function (permission) {
-                            if (permission === "granted") {
-                                Dubtrack.Events.bind("realtime:chat-message", parent.notifyOnMention);
-                                options.let_mention_notifications = true;
-                                hello.option('mention_notifications', 'true');
-                                hello.on('.mention_notifications');
-                            }
-                        });
-                    }
-                    else{
-                        alert("You have chosen to block notifications. Reset this choice by clearing your cache for the site.");
+                        startNotifications("granted");
+                    } else if (Notification.permission !== 'denied') {
+                        Notification.requestPermission(startNotifications);
+                    } else {
+                        hello.input("Mention Notifications", "You have chosen to block notifications. Reset this choice by clearing your cache for the site.");
                     }
                 }
             } else {
@@ -1284,7 +1292,7 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
             if (mentionTriggers.some(function(v) { return content.toLowerCase().indexOf(v.trim(' ')) >= 0; }) && !hello.isActiveTab && Dubtrack.session.id !== e.user.userInfo.userid) {
                 var notificationOptions = {
                     body: content,
-                    icon: "http://i.imgur.com/RXJnXNJ.png"
+                    icon: "https://res.cloudinary.com/hhberclba/image/upload/c_lpad,h_100,w_100/v1400351432/dubtrack_new_logo_fvpxa6.png"
                 };
                 var n = new Notification("Message from "+e.user.username,notificationOptions);
 
@@ -1292,7 +1300,6 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
                     window.focus();
                     n.close();
                 };
-
                 setTimeout(n.close.bind(n), 5000);
             }
         },
@@ -1301,7 +1308,7 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
                 options.let_spacebar_mute = true;
                 $(document).bind('keypress.key32', function() {
                     var tag = event.target.tagName.toLowerCase();
-                    if (event.which === 32 && tag != 'input' && tag != 'textarea') {
+                    if (event.which === 32 && tag !== 'input' && tag !== 'textarea') {
                         $('#main_player .player_sharing .player-controller-container .mute').click();
                     }
                 });
@@ -1433,7 +1440,7 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
 } else {
     function onErr(error) {
         var onErr = [
-            '<link rel="stylesheet" type="text/css" href="https://rawgit.com/sinfulBA/DubX-Script/master/css/asset.css">',
+            '<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/asset.css">',
             '<div class="onErr">',
                 '<div class="container">',
                     '<div class="title">',

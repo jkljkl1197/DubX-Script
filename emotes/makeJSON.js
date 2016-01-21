@@ -1,9 +1,6 @@
 /*
-  this is meant to run locally with NODE and it just creates a JSON file with
-  all the emotes data from the subfolders 
-
-  we might want to use rawgit but it seems to be working fine with their own raw. 
-  https://rawgit.com/sinfulBA/DubX-Script/master
+   make changes to the tastyemotes.json here, just run:
+   node makeJSON.js    
  */
 
 var fs = require('fs');
@@ -22,7 +19,7 @@ var sets = [
 ];
 
 var tastyJSON = {
-  template: '//raw.githubusercontent.com/sinfulBA/DubX-Script/master/emotes/',
+  lastUpdated : Date.now(),
   emotes: { }
 };
 
@@ -32,7 +29,7 @@ function getEmotes(set) {
     if (emote.indexOf('amp;') >= 0){ 
       emote = emote.replace("amp;", ""); 
     }
-    tastyJSON.emotes[emote.toLowerCase()] = set + "/" + url[url.length - 1];
+    tastyJSON.emotes[emote.toLowerCase()] = jsonContent[set][emote];
   }
 }
 
@@ -40,7 +37,7 @@ sets.forEach(function(val,i,r){
   getEmotes(val);
 });
 
-console.log(tastyJSON);
+// console.log(tastyJSON);
 
 fs.writeFile(__dirname + "/tastyemotes.json", JSON.stringify(tastyJSON), function(err) {
     if(err) {
