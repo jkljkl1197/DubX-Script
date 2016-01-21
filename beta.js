@@ -1160,7 +1160,7 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
             var currentText = this.value;
             var keyCharMin = 3; // when to start showing previews, default to 3 chars
             var cursorPos = $(this).get(0).selectionStart;
-            console.log("cursorPos", cursorPos);
+            // console.log("cursorPos", cursorPos);
             var strStart;
             var strEnd;
 
