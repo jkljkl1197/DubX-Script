@@ -5,7 +5,7 @@
    "name": "DubX",
    "short_name": "DubX",
    "author": "Al3366",
-   "description": "Automatically loads DubX on dubtrack.fm",
+   "description": "DubX - a small collection of enhancements for Dubtrack.fm",
    "homepage_url": "https://dubx.net/",
    "version": "4.0",
    "browser_action": {
@@ -13,7 +13,12 @@
    },
 
    "content_scripts": [{
-      "matches": ["*://www.dubtrack.fm/*"],
+      "matches": [
+        "http://dubtrack.fm/*",
+        "https://dubtrack.fm/*",
+        "http://*.dubtrack.fm/*",
+        "https://*.dubtrack.fm/*"
+      ],
       "js": ["jquery.js","loader.js"],
       "run_at": "document_end"
    }],
@@ -26,6 +31,13 @@
         "128": "icons/128.png"
     },
     
+    "permissions": [
+      "http://dubtrack.fm/*",
+      "https://dubtrack.fm/*",
+      "http://*.dubtrack.fm/*",
+      "https://*.dubtrack.fm/*"
+    ],
+
     "web_accessible_resources": [
         "dubx.js"
     ]
