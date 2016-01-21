@@ -81,7 +81,7 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
 
     //Ref 2: Options
     var hello = {
-        gitRoot: 'https://rawgit.com/sinfulBA/DubX-Script/master',
+        gitRoot: 'https://rawgit.com/FranciscoG/DubX-Script/dev',
         //Ref 2.1: Initialize
         personalize: function() {
             $('.isUser').text(Dubtrack.session.get('username'));
@@ -1165,10 +1165,9 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
             var strEnd;
 
             var filterText = currentText.replace(/(:|@)([&!()\+\-_a-z0-9]+)($|\s)/i, function(matched, p1, p2, p3, pos, str){
-                console.dir( arguments );
+                // console.dir( arguments );
                 strStart = pos;
                 strEnd = pos + matched.length;
-                console.log("strStart", strStart,"strEnd",strEnd);
 
                 hello.previewSearchStr = p2;
                 keyCharMin = (p1 === "@") ? 1 : 3;
