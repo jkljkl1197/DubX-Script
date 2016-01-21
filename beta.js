@@ -1056,7 +1056,7 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
         previewSearchStr : "",
         updateChatInput: function(str){
             var _re = new RegExp("[:@][&!()\\-_a-z0-9]+:?($|\\s)", "ig");
-            var fixed_text = $("#chat-txt-message").val().replace(_re, str) + " ";
+            var fixed_text = $("#chat-txt-message").val().replace(_re, str  + " ");
             $('#autocomplete-preview').empty().removeClass('ac-show');
             $("#chat-txt-message").val(fixed_text).focus();
         },
@@ -1159,21 +1159,32 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
             var self = hello;
             var currentText = this.value;
             var keyCharMin = 3; // when to start showing previews, default to 3 chars
+            var cursorPos = $(this).get(0).selectionStart;
+            console.log("cursorPos", cursorPos);
+            var strStart;
+            var strEnd;
 
             var filterText = currentText.replace(/(:|@)([&!()\+\-_a-z0-9]+)($|\s)/i, function(matched, p1, p2, p3, pos, str){
-                // console.dir( arguments ); 
+                console.dir( arguments );
+                strStart = pos;
+                strEnd = pos + matched.length;
+                console.log("strStart", strStart,"strEnd",strEnd);
+
                 hello.previewSearchStr = p2;
                 keyCharMin = (p1 === "@") ? 1 : 3;
 
-                // twitch and emoji
-                if (p2 && p2.length >= keyCharMin && p1 === ":" && options.let_emoji_preview) {
-                    self.emojiUtils.addToPreviewList( self.emojiUtils.filterEmoji(p2) );
-                }
+                if (cursorPos >= strStart && cursorPos <= strEnd) {
+                    // twitch and emoji
+                    if (p2 && p2.length >= keyCharMin && p1 === ":" && options.let_emoji_preview) {
+                        self.emojiUtils.addToPreviewList( self.emojiUtils.filterEmoji(p2) );
+                    }
 
-                // users
-                if (p2 && p2.length >= keyCharMin && p1 === "@" && options.let_autocomplete_mentions) {
-                    self.previewList( self.filterUsers(p2) );
+                    // users
+                    if (p2 && p2.length >= keyCharMin && p1 === "@" && options.let_autocomplete_mentions) {
+                        self.previewList( self.filterUsers(p2) );
+                    }
                 }
+                
             });
 
             var lastChar = currentText.charAt(currentText.length - 1);
