@@ -1057,7 +1057,9 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
         updateChatInput: function(str){
             var inputText = $("#chat-txt-message").val();
             var updatedText = inputText.split(' ').map(function(c,i,r){
-                if (str.indexOf(c) === 0) { 
+                var fullStr = str.toLowerCase();
+                var partialStr = c.toLowerCase();
+                if (fullStr.indexOf(partialStr) === 0) { 
                     return str;
                 } else {
                     return c;
