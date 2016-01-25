@@ -566,3 +566,8 @@ ul.avatar-list li.admin p {
     display: block !important;
     visibility: visible !important;
 }
+
+/* Make the volume controller visible all the time */
+.dubx #main_player .player_sharing .player-controller-container .volume-controller-container {
+    display: block;
+}

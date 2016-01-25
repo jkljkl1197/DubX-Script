@@ -1055,7 +1055,9 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
         },
         previewSearchStr : "",
         updateChatInput: function(str){
-            var _re = new RegExp("[:@][&!()\\-_a-z0-9]+:?($|\\s)", "ig");
+            var regStart = "@";
+            if (str.indexOf(":") === 0) { regStart = ":";}
+            var _re = new RegExp(regStart+"[&!()\\-_a-z0-9]+?($|\\s)", "ig");
             var fixed_text = $("#chat-txt-message").val().replace(_re, str  + " ");
             $('#autocomplete-preview').empty().removeClass('ac-show');
             $("#chat-txt-message").val(fixed_text).focus();
@@ -1093,7 +1095,7 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
             }
         },
         previewListInit: function(){
-             $('head').prepend('<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/autocomplete.css">');
+            $('head').prepend('<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/options/autocomplete.css">');
             var acUL = document.createElement('ul');
             acUL.id = "autocomplete-preview";
             $('.pusher-chat-widget-input').prepend(acUL);
@@ -1163,8 +1165,8 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
             // console.log("cursorPos", cursorPos);
             var strStart;
             var strEnd;
-
-            var filterText = currentText.replace(/(:|@)([&!()\+\-_a-z0-9]+)($|\s)/i, function(matched, p1, p2, p3, pos, str){
+            var inputRegex = new RegExp('(:|@)([&!()\+\-_a-z0-9]+)($|\s)', 'ig');
+            var filterText = currentText.replace(inputRegex, function(matched, p1, p2, p3, pos, str){
                 // console.dir( arguments );
                 strStart = pos;
                 strEnd = pos + matched.length;
