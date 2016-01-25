@@ -81,7 +81,7 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
 
     //Ref 2: Options
     var hello = {
-        gitRoot: 'https://rawgit.com/sinfulBA/DubX-Script/master',
+        gitRoot: 'https://rawgit.com/FranciscoG/DubX-Script/master',
         //Ref 2.1: Initialize
         personalize: function() {
             $('.isUser').text(Dubtrack.session.get('username'));
@@ -1055,18 +1055,26 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
         },
         previewSearchStr : "",
         updateChatInput: function(str){
-            var regStart = "@";
-            if (str.indexOf(":") === 0) { regStart = ":";}
-            var _re = new RegExp(regStart+"[&!()\\-_a-z0-9]+?($|\\s)", "ig");
-            var fixed_text = $("#chat-txt-message").val().replace(_re, str  + " ");
+            var inputText = $("#chat-txt-message").val();
+            var updatedText = inputText.split(' ').map(function(c,i,r){
+                if (str.indexOf(c) === 0) { 
+                    return str;
+                } else {
+                    return c;
+                }
+            });
             $('#autocomplete-preview').empty().removeClass('ac-show');
-            $("#chat-txt-message").val(fixed_text).focus();
+            $("#chat-txt-message").val(updatedText.join(' ') + ' ').focus();
         },
         displayBoxIndex : -1,
         doNavigate : function(diff) {
             var self = hello;
             self.displayBoxIndex += diff;
             var oBoxCollection = $(".ac-show li");
+            
+            // remove "press enter to select" span
+            $('.ac-list-press-enter').remove();
+
             if (self.displayBoxIndex >= oBoxCollection.length){
                 hello.displayBoxIndex = 0;
             }
@@ -1074,7 +1082,8 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
                  self.displayBoxIndex = oBoxCollection.length - 1;
              }
             var cssClass = "selected";
-            oBoxCollection.removeClass(cssClass).eq(self.displayBoxIndex).addClass(cssClass).focus();
+            var enterToSelectSpan = '<span class="ac-list-press-enter">press enter to select</span>';
+            oBoxCollection.removeClass(cssClass).eq(self.displayBoxIndex).addClass(cssClass).append(enterToSelectSpan).focus();
         },
         previewListKeyUp: function(e){
             e.preventDefault();
@@ -1087,7 +1096,8 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
                     break;
                 case 39:
                 case 13:
-                    $('#autocomplete-preview li.selected').trigger('click');
+                    var new_text = $('#autocomplete-preview li.selected').find('.ac-text')[0].textContent;
+                    hello.updateChatInput(new_text);
                     break;
                 default:
                     $("#chat-txt-message").focus();
@@ -1165,7 +1175,7 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
             // console.log("cursorPos", cursorPos);
             var strStart;
             var strEnd;
-            var inputRegex = new RegExp('(:|@)([&!()\+\-_a-z0-9]+)($|\s)', 'ig');
+            var inputRegex = new RegExp('(:|@)([&!()\\+\\-_a-z0-9]+)($|\\s)', 'ig');
             var filterText = currentText.replace(inputRegex, function(matched, p1, p2, p3, pos, str){
                 // console.dir( arguments );
                 strStart = pos;
@@ -1198,12 +1208,15 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
                 $('#autocomplete-preview').empty().removeClass('ac-show');
             }
 
-            if ($('.ac-show li').length === 1) {
-                $('.ac-show li').append('<span>press enter to select</span>').addClass('selected');
+            // automatically make first item selectable if not already
+            if (!$('.ac-show li:first-child').find(".ac-list-press-enter").length) {
+                var spanToEnter = '<span class="ac-list-press-enter">press enter to select</span>';
+                $('.ac-show li:first-child').append(spanToEnter).addClass('selected');
             }
 
-            if ($('.ac-show li').length === 1 && e.keyCode === 13) {
-                $('#autocomplete-preview li:first').trigger('click');
+            if (e.keyCode === 13 && $('#autocomplete-preview li').length > 0) {
+                var new_text = $('#autocomplete-preview li.selected').find('.ac-text')[0].textContent;
+                hello.updateChatInput(new_text);
                 return;
             }
 
