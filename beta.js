@@ -543,7 +543,7 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
                     options.let_active_afk = false;
                     setTimeout(function() {
                         options.let_active_afk = true;
-                    }, 300000);
+                    }, 180000);
                 }
             }
         },
