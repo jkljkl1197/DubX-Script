@@ -241,7 +241,6 @@ ul.avatar-list li.user-swordling p.dubs:hover:before {
     color: #89BE6C !important;
 }
 ul.avatar-list .user-sinful:after, ul.avatar-list .user-swordling:after,
-
 ul.avatar-list li.currentDJ .user-sinful:after, ul.avatar-list li.currentDJ .user-swordling:after,
 .user-swordling, .user-sinful, .user-swordling p.username, .user-sinful p.username {
     color: #89BE6C !important;
@@ -319,7 +318,7 @@ ul.avatar-list .user-kris:after, ul.avatar-list .user-al3366:after, ul.avatar-li
 #main_avatar_room #main-user-list-room #avatar-list .user-kris p.username, #main_avatar_room #main-user-list-room #avatar-list .user-kris p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list .user-al3366 p.username, #main_avatar_room #main-user-list-room #avatar-list .user-al3366 p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list .user-ciscog p.username, #main_avatar_room #main-user-list-room #avatar-list .user-ciscog p.username:after {
-    color: #409fff;
+    color: #409fff!important;
 }
 
 /* Special users */
