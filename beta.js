@@ -78,6 +78,8 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
 
     //Ref 1.1
     $('.player_sharing').append('<span class="icon-history eta_tooltip_t" onmouseover="hello.eta();" onmouseout="hello.hide_eta();"></span>');
+    $('.player_sharing').append('<span class="icon-mute snooze_btn" onclick="hello.snooze();" onmouseover="hello.snooze_tooltip();" onmouseout="hello.hide_snooze_tooltip();"></span>');
+    $('.icon-mute.snooze_btn:after').css({"content": "1", "vertical-align": "top", "font-size": "0.75rem", "font-weight": "700"});
 
     //Ref 2: Options
     var hello = {
@@ -451,13 +453,19 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
             var booth_duration = parseInt($('.queue-position').text());
             var booth_time = (booth_duration * time - time) + current_time;
             if (booth_time >= 0) {
-                $('.eta_tooltip_t').append('<div class="eta_tooltip" style="position: absolute;font: 1rem/1.5 proxima-nova,sans-serif;display: block;left: -33px;cursor: pointer;border-radius: 1.5rem;padding: 8px 16px;background: #fff;font-weight: 700;font-size: 13.6px;text-transform: uppercase;color: #000;opacity: .8;text-align: center;z-index: 9;">ETA: '+booth_time+' minutes.</div>');
+                $('.eta_tooltip_t').append('<div class="eta_tooltip" style="position: absolute;font: 1rem/1.5 proxima-nova,sans-serif;display: block;left: -33px;cursor: pointer;border-radius: 1.5rem;padding: 8px 16px;background: #fff;font-weight: 700;font-size: 13.6px;text-transform: uppercase;color: #000;opacity: .8;text-align: center;z-index: 9;">ETA: '+booth_time+' minutes</div>');
             } else {
-                $('.eta_tooltip_t').append('<div class="eta_tooltip" style="position: absolute;font: 1rem/1.5 proxima-nova,sans-serif;display: block;left: -33px;cursor: pointer;border-radius: 1.5rem;padding: 8px 16px;background: #fff;font-weight: 700;font-size: 13.6px;text-transform: uppercase;color: #000;opacity: .8;text-align: center;z-index: 9;">You\'re not in the queue.</div>');
+                $('.eta_tooltip_t').append('<div class="eta_tooltip" style="position: absolute;font: 1rem/1.5 proxima-nova,sans-serif;display: block;left: -33px;cursor: pointer;border-radius: 1.5rem;padding: 8px 16px;background: #fff;font-weight: 700;font-size: 13.6px;text-transform: uppercase;color: #000;opacity: .8;text-align: center;z-index: 9;">You\'re not in the queue</div>');
             }
         },
         hide_eta: function() {
             $('.eta_tooltip').remove();
+        },
+        snooze_tooltip: function() {
+            $('.snooze_btn').append('<div class="snooze_tooltip" style="position: absolute;font: 1rem/1.5 proxima-nova,sans-serif;display: block;left: -33px;cursor: pointer;border-radius: 1.5rem;padding: 8px 16px;background: #fff;font-weight: 700;font-size: 13.6px;text-transform: uppercase;color: #000;opacity: .8;text-align: center;z-index: 9;">Mute current song</div>');
+        },
+        hide_snooze_tooltip: function() {
+            $('.snooze_tooltip').remove();
         },
         report_content: function() {
             var content = $('.input').val();
@@ -1365,6 +1373,30 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
             Dubtrack.Events.bind("realtime:user-join", hello.updateUsersArray);
             Dubtrack.Events.bind("realtime:user-kick", hello.updateUsersArray);
             Dubtrack.Events.bind("realtime:user-leave", hello.updateUsersArray);
+        },
+        snooze: function() {
+            if (!hello.eventUtils.snoozed) {
+                hello.eventUtils.currentVol = Dubtrack.room.player.player_volume_level;
+                Dubtrack.room.player.setVolume(0);
+                hello.eventUtils.snoozed = true;
+                Dubtrack.Events.bind("realtime:room_playlist-update", hello.eventSongAdvance);
+            } else {
+                Dubtrack.room.player.setVolume(hello.eventUtils.currentVol);
+                hello.eventUtils.snoozed = false;
+            }
+        },
+        eventSongAdvance: function(e) {
+            if (e.startTime < 2) {
+                if (hello.eventUtils.snoozed) {
+                    Dubtrack.room.player.setVolume(hello.eventUtils.currentVol);
+                    hello.eventUtils.snoozed = false;
+                }
+                return true;
+            }
+        },
+        eventUtils: {
+            currentVol: 50,
+            snoozed: false
         }
     };
     //Ref 3:
