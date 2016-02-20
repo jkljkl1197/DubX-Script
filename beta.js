@@ -1375,12 +1375,12 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
             Dubtrack.Events.bind("realtime:user-leave", hello.updateUsersArray);
         },
         snooze: function() {
-            if (!hello.eventUtils.snoozed) {
+            if (!hello.eventUtils.snoozed && Dubtrack.room.player.player_volume_level > 2) {
                 hello.eventUtils.currentVol = Dubtrack.room.player.player_volume_level;
                 Dubtrack.room.player.setVolume(0);
                 hello.eventUtils.snoozed = true;
                 Dubtrack.Events.bind("realtime:room_playlist-update", hello.eventSongAdvance);
-            } else {
+            } else if (hello.eventUtils.snoozed) {
                 Dubtrack.room.player.setVolume(hello.eventUtils.currentVol);
                 hello.eventUtils.snoozed = false;
             }
