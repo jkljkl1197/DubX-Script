@@ -27,18 +27,6 @@
     This license is governed by the Laws of Norway. Disputes shall be settled by Oslo City Court.
 */ /* global Dubtrack, emojify */
 var hello_run;
-var ifUserBanned;
-$.ajax({
-    url: 'https://db.daggerling.com/',
-    method: 'GET',
-    async: false
-}).done(function(data) {
-    if (data.data.indexOf(Dubtrack.session.id) !== -1) {
-        ifUserBanned = true;
-    } else {
-        ifUserBanned = false;
-    }
-});
 if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
     hello_run = true;
     var our_version = '03.03.00 - Happy Holidays';
