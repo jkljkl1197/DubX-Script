@@ -27,7 +27,7 @@
     This license is governed by the Laws of Norway. Disputes shall be settled by Oslo City Court.
 */ /* global Dubtrack, emojify */
 var hello_run;
-if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
+if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
     var our_version = '03.03.00 - Happy Holidays';
 
@@ -1500,8 +1500,6 @@ if (!hello_run && Dubtrack.session.id && !ifUserBanned) {
     }
     if (!Dubtrack.session.id) {
         onErr('You\'re not logged in. Please login to use DUBX.');
-    } else if (ifUserBanned) {
-        onErr('You\'ve been banned from using DUBX. If you believe this to be a mistake please contact us on Github');
     } else {
         onErr('Oh noes! We\'ve encountered a runtime error');
     };
