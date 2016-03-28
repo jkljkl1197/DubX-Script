@@ -162,7 +162,12 @@
     font-size: 14px !important;
     margin-top: .5em !important;
 }
-
+.snooze_btn:after {
+    content: '1';
+    vertical-align: top;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
 .chat-main.splitChat li:nth-child(2n),
 .split {
     background: linear-gradient(to right, rgba(155,157,160,0.10) 0%, rgba(0,0,0,0) 100%);
