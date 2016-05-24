@@ -85,7 +85,7 @@ if (!hello_run && Dubtrack.session.id) {
             var html = [
                 '<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css">',
                 '<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/asset.css">',
-                '<div class="for_content">',
+                '<div class="for_content" style="display:none;">',
                     '<span class="for_content_ver">DubX Settings</span>',
                     '<span class="for_content_version" onclick="hello.drawAll();" title="Collapse/Expand Menus">'+our_version+'</span>',
                     '<ul class="for_content_ul">',
