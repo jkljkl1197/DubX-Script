@@ -432,39 +432,11 @@ ul.avatar-list li.admin p {
     color: #FF7E00;
 }
 
-// https://github.com/dubtrack/www-dubtrack-fm/blob/96516953ad5946bceb767e697718bcfef47f6ef1/public/assets/js/dubtrack/src/views/room/roomListBan.view.js#L161
-// looks like they are only co-owner vip resident-dj dj manager mod creator
-
 /* Fix for no separation? */
 /** Admin **/
 #main_avatar_room #main-user-list-room #avatar-list li.admin p.username:after {
     content: "-  Admin" !important;
 }
-
-// /** Moderators **/
-// #main_avatar_room #main-user-list-room #avatar-list li.co-owner p.username:after {
-//     content: "-  Co-owner";
-// }
-// #main_avatar_room #main-user-list-room #avatar-list li.creator p.username:after {
-//     content: "-  Creator" !important;
-// }
-// #main_avatar_room #main-user-list-room #avatar-list li.manager p.username:after {
-//     content: "-  Manager";
-// }
-// #main_avatar_room #main-user-list-room #avatar-list li.mod p.username:after {
-//     content: "-  Mod";
-// }
-// #main_avatar_room #main-user-list-room #avatar-list li.vip p.username:after {
-//     content: "-  VIP";
-// }
-// #main_avatar_room #main-user-list-room #avatar-list li.resident-dj p.username:after {
-//     content: "-  Resident DJ";
-// }
-
-// /** Current DJ **/
-// #main_avatar_room #main-user-list-room #avatar-list li.currentDJ p.username:after {
-//     content: "-  DJ" !important;
-// }
 
 /* might use this one day */
 .dubx .never-hide {
