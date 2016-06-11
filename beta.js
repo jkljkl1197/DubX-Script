@@ -1645,7 +1645,7 @@ if (!hello_run && Dubtrack.session.id) {
                         hello.updateChatInputWithString(new_text);
                     });
 
-                    $('#dubinfo-preview').perfectScrollbar({ wheelSpeed: 30, suppressScrollX: true });
+                    $('#dubinfo-preview').perfectScrollbar();
 
                     $('.dubx-updubs-hover').mouseleave(function(event){
                         var x = event.clientX, y = event.clientY;
