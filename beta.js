@@ -296,7 +296,7 @@ if (!hello_run && Dubtrack.session.id) {
             ].join('');
             $('.header-right-navigation').append(li);
             $('body').prepend(html);
-            $('.for_content').perfectScrollbar({ wheelSpeed: 30, suppressScrollX: true });
+            $('.for_content').perfectScrollbar();
             $.getScript('https://rawgit.com/loktar00/JQuery-Snowfall/master/src/snowfall.jquery.js');
         },
         sectionList: ['draw_general','draw_userinterface','draw_settings','draw_customize','draw_contact','draw_social','draw_chrome'],
