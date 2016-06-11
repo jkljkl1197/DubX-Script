@@ -1552,6 +1552,7 @@ if (!hello_run && Dubtrack.session.id) {
                 Dubtrack.Events.bind("realtime:room_playlist-queue-update-grabs", this.grabWatcher);
                 Dubtrack.Events.bind("realtime:user-leave", this.dubUserLeaveWatcher);
                 Dubtrack.Events.bind("realtime:room_playlist-update", hello.resetDubs);
+                Dubtrack.Events.bind("realtime:room_playlist-update", hello.resetGrabs); //TODO: Remove when we can hit the api for all grabs of current playing song
 
                 var dubupEl = $($('.dubup')[0]).parent('li');
                 var dubdownEl = $($('.dubdown')[0]).parent('li');
