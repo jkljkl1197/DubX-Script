@@ -1452,7 +1452,7 @@ if (!hello_run && Dubtrack.session.id) {
             $(el).parent('li')[0].remove();
         },
         resetGrabs: function(){
-            hello.dubs.grabs: []; //TODO: Remove when we can hit the api for all grabs of current playing song
+            hello.dubs.grabs = []; //TODO: Remove when we can hit the api for all grabs of current playing song
         }
         resetDubs: function(){
             hello.dubs.upDubs = [];
