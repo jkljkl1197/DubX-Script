@@ -1449,7 +1449,7 @@ if (!hello_run && Dubtrack.session.id) {
             hello.dubs = {
                 upDubs: [],
                 downDubs: [],
-                grabs: []
+                // grabs: [] //TODO: Uncomment this when we can hit the api for all grabs of current playing song
             };
 
             $.getJSON("https://api.dubtrack.fm/room/" + Dubtrack.room.model.id + "/playlist/active/dubs", function(response){
@@ -1474,7 +1474,7 @@ if (!hello_run && Dubtrack.session.id) {
                         username: username
                     })
                 });
-                //TODO: when grabs property is added
+                //TODO: Uncomment this when we can hit the api for all grabs of current playing song
                 /*response.data.grabs.forEach(function(e){
                     //Dub already casted (usually from autodub)
                     if($.grep(hello.dubs.grabs, function(el){ return el.userid == e.userid; }).length > 0){
@@ -1909,10 +1909,12 @@ if (!hello_run && Dubtrack.session.id) {
                 console.log("Downdubs don't match, reset! Song started ", msSinceSongStart, "ms ago!");
                 hello.resetDubs();
             }
-            else if(hello.dubs.downDubs.length !== parseInt($('.grab-counter')[0].innerHTML)){
+            // TODO: Uncomment this else if block when we can hit the api for all grabs of current playing song
+            /*
+            else if(hello.dubs.grabs.length !== parseInt($('.grab-counter')[0].innerHTML)){
                 console.log("Grabs don't match, reset! Song started ", msSinceSongStart, "ms ago!");
                 hello.resetDubs();
-            }
+            }*/
         },
         userIsAtLeastMod: function(userid){
             return Dubtrack.helpers.isDubtrackAdmin(userid) ||
