@@ -1453,7 +1453,7 @@ if (!hello_run && Dubtrack.session.id) {
         },
         resetGrabs: function(){
             hello.dubs.grabs = []; //TODO: Remove when we can hit the api for all grabs of current playing song
-        }
+        },
         resetDubs: function(){
             hello.dubs.upDubs = [];
             hello.dubs.downDubs = [];
