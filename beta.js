@@ -134,7 +134,7 @@ if (!hello_run && Dubtrack.session.id) {
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Notification on Mentions</p>',
                             '</li>',
-                            '<li onclick="hello.showDubsOnHover();" class="for_content_li for_content_feature dubs_hover">',
+                            '<li onclick="hello.grabInfoWarning(); hello.showDubsOnHover();" class="for_content_li for_content_feature dubs_hover">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Show Dub info on Hover</p>',
                             '</li>',
@@ -1462,12 +1462,15 @@ if (!hello_run && Dubtrack.session.id) {
                     var username;
                     if(!Dubtrack.room.users.collection.findWhere({userid: e.userid}) || !Dubtrack.room.users.collection.findWhere({userid: e.userid}).attributes) {
                         $.getJSON("https://api.dubtrack.fm/user/" + e.userid, function(response){
-                            username = response.userinfo.username;
+                            if(response && response.userinfo)
+                                username = response.userinfo.username;
                         });
                     }
                     else{
                         username = Dubtrack.room.users.collection.findWhere({userid: e.userid}).attributes._user.username;
                     }
+
+                    if(!username) return;
 
                     hello.dubs.upDubs.push({
                         userid: e.userid,
@@ -1522,6 +1525,12 @@ if (!hello_run && Dubtrack.session.id) {
                     });
                 }
             });
+        },
+        grabInfoWarning: function(){
+            if(!options.let_dubs_hover){
+                hello.input('Grab Vote Info', 'Please note that this feature is currently still in development. We are waiting on the ability to pull grab vote information from Dubtrack on load. Until then the only grabs you will be able to see are those you are present in the room for.', null, 'confirm-for-grab-info');
+                $('.confirm-for-grab-info').click(hello.closeErr);
+            }
         },
         showDubsOnHover: function(){
             if(!options.let_dubs_hover){
@@ -1656,7 +1665,7 @@ if (!hello_run && Dubtrack.session.id) {
 
                         var elementMouseIsOver = document.elementFromPoint(x, y);
 
-                        if(!$(elementMouseIsOver).hasClass('dubx-updubs-hover') && $(elementMouseIsOver).parent('.dubx-updubs-hover').length <= 0){
+                        if(!$(elementMouseIsOver).hasClass('dubx-updubs-hover') && !$(elementMouseIsOver).hasClass('ps-scrollbar-y') && $(elementMouseIsOver).parent('.dubx-updubs-hover').length <= 0){
                             $('#dubx-updubs-container').remove();
                         }
 
@@ -1734,7 +1743,7 @@ if (!hello_run && Dubtrack.session.id) {
 
                         var elementMouseIsOver = document.elementFromPoint(x, y);
 
-                        if(!$(elementMouseIsOver).hasClass('dubx-downdubs-hover') && $(elementMouseIsOver).parent('.dubx-downdubs-hover').length <= 0){
+                        if(!$(elementMouseIsOver).hasClass('dubx-downdubs-hover') && !$(elementMouseIsOver).hasClass('ps-scrollbar-y') && $(elementMouseIsOver).parent('.dubx-downdubs-hover').length <= 0){
                             $('#dubx-downdubs-container').remove();
                         }
 
@@ -1805,7 +1814,7 @@ if (!hello_run && Dubtrack.session.id) {
 
                         var elementMouseIsOver = document.elementFromPoint(x, y);
 
-                        if(!$(elementMouseIsOver).hasClass('dubx-grabs-hover') && $(elementMouseIsOver).parent('.dubx-grabs-hover').length <= 0){
+                        if(!$(elementMouseIsOver).hasClass('dubx-grabs-hover') && !$(elementMouseIsOver).hasClass('ps-scrollbar-y') && $(elementMouseIsOver).parent('.dubx-grabs-hover').length <= 0){
                             $('#dubx-grabs-container').remove();
                         }
 
@@ -1902,11 +1911,11 @@ if (!hello_run && Dubtrack.session.id) {
             if(msSinceSongStart < 1000) return;
 
             if(hello.dubs.upDubs.length !== Dubtrack.room.player.activeSong.attributes.song.updubs){
-                console.log("Updubs don't match, reset! Song started ", msSinceSongStart, "ms ago!");
+                // console.log("Updubs don't match, reset! Song started ", msSinceSongStart, "ms ago!");
                 hello.resetDubs();
             }
             else if(hello.userIsAtLeastMod(Dubtrack.session.id) && hello.dubs.downDubs.length !== Dubtrack.room.player.activeSong.attributes.song.downdubs){
-                console.log("Downdubs don't match, reset! Song started ", msSinceSongStart, "ms ago!");
+                // console.log("Downdubs don't match, reset! Song started ", msSinceSongStart, "ms ago!");
                 hello.resetDubs();
             }
             // TODO: Uncomment this else if block when we can hit the api for all grabs of current playing song
