@@ -1365,7 +1365,7 @@ if (!hello_run && Dubtrack.session.id) {
 
             if(user === currentDj && e.dubtype === 'downdub'){
                 $('ul.chat-main').append(
-                    '<li class="system-error">' +
+                    '<li class="dubx-chat-system dubx-chat-system-downdub">' +
                         '<div class="chatDelete" onclick="hello.deleteChatMessageClientSide(this)"><span class="icon-close"></span></div>' +
                         '<div class="text">' +
                             '@' + e.user.username + ' has downdubbed your song \'' + Dubtrack.room.player.activeSong.attributes.songInfo.name + ' \'' +
@@ -1399,7 +1399,7 @@ if (!hello_run && Dubtrack.session.id) {
 
             if(user === currentDj && e.dubtype === 'updub'){
                 $('ul.chat-main').append(
-                    '<li class="system" style="text-align: left">' +
+                    '<li class="dubx-chat-system dubx-chat-system-updub">' +
                         '<div class="chatDelete" onclick="hello.deleteChatMessageClientSide(this)"><span class="icon-close"></span></div>' +
                         '<div class="text">' +
                             '@' + e.user.username + ' has updubbed your song \'' + Dubtrack.room.player.activeSong.attributes.songInfo.name + ' \'' +
@@ -1431,9 +1431,9 @@ if (!hello_run && Dubtrack.session.id) {
             }).attributes._user.username;
 
 
-            if(user === currentDj){
+            if(user === currentDj && !Dubtrack.room.model.get('displayUserGrab')){
                 $('ul.chat-main').append(
-                    '<li class="dubx-system-msg-grab" style="text-align: left">' +
+                    '<li class="dubx-chat-system dubx-chat-system-grab">' +
                         '<div class="chatDelete" onclick="hello.deleteChatMessageClientSide(this)"><span class="icon-close"></span></div>' +
                         '<div class="text">' +
                             '@' + e.user.username + ' has grabbed your song \'' + Dubtrack.room.player.activeSong.attributes.songInfo.name + ' \'' +

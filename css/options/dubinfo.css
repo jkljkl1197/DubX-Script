@@ -45,12 +45,23 @@
     color: #0ff;
 }
 
-.dubx-system-msg-grab {
+.dubx-chat-system {
+    font-style: italic;
     padding-top: 1rem;
     padding: 5px;    
     font-weight: 700;
     min-height: 1rem;
+    text-align: left;
+}
+
+.dubx-chat-system-grab, .chat-system-grabbed {
     color: #B3E790;
+}
+.dubx-chat-system-updub {
+    color: #0ff;
+}
+.dubx-chat-system-downdub {
+    color: #f0f;
 }
 
 #dubinfo-preview.dubx-no-grabs {
