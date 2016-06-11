@@ -1451,6 +1451,9 @@ if (!hello_run && Dubtrack.session.id) {
         deleteChatMessageClientSide: function(el){
             $(el).parent('li')[0].remove();
         },
+        resetGrabs: function(){
+            hello.dubs.grabs: []; //TODO: Remove when we can hit the api for all grabs of current playing song
+        }
         resetDubs: function(){
             hello.dubs.upDubs = [];
             hello.dubs.downDubs = [];
@@ -1738,6 +1741,8 @@ if (!hello_run && Dubtrack.session.id) {
                         hello.updateChatInputWithString(new_text);
                     });
 
+                    $('#dubinfo-preview').perfectScrollbar();
+
                     $('.dubx-downdubs-hover').mouseleave(function(event){
                         var x = event.clientX, y = event.clientY;
 
@@ -1809,6 +1814,8 @@ if (!hello_run && Dubtrack.session.id) {
                         hello.updateChatInputWithString(new_text);
                     });
 
+                    $('#dubinfo-preview').perfectScrollbar();
+
                     $('.dubx-grabs-hover').mouseleave(function(event){
                         var x = event.clientX, y = event.clientY;
 
@@ -1833,6 +1840,7 @@ if (!hello_run && Dubtrack.session.id) {
                 Dubtrack.Events.unbind("realtime:room_playlist-queue-update-grabs", this.grabWatcher);
                 Dubtrack.Events.unbind("realtime:user-leave", this.dubUserLeaveWatcher);
                 Dubtrack.Events.unbind("realtime:room_playlist-update", hello.resetDubs);
+                Dubtrack.Events.unbind("realtime:room_playlist-update", hello.resetGrabs); //TODO: Remove when we can hit the api for all grabs of current playing song
             }
         },
         dubUserLeaveWatcher: function(e){
