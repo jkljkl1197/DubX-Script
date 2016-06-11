@@ -298,6 +298,12 @@ if (!hello_run && Dubtrack.session.id) {
             $('body').prepend(html);
             $('.for_content').perfectScrollbar();
             $.getScript('https://rawgit.com/loktar00/JQuery-Snowfall/master/src/snowfall.jquery.js');
+
+            hello.dubs = {
+                upDubs: [],
+                downDubs: [],
+                grabs: []
+            };
         },
         sectionList: ['draw_general','draw_userinterface','draw_settings','draw_customize','draw_contact','draw_social','draw_chrome'],
         drawSection: function(el) {
@@ -1446,11 +1452,9 @@ if (!hello_run && Dubtrack.session.id) {
             $(el).parent('li')[0].remove();
         },
         resetDubs: function(){
-            hello.dubs = {
-                upDubs: [],
-                downDubs: [],
-                // grabs: [] //TODO: Uncomment this when we can hit the api for all grabs of current playing song
-            };
+            hello.dubs.upDubs = [];
+            hello.dubs.downDubs = [];
+            // hello.dubs.grabs: [] //TODO: Uncomment this when we can hit the api for all grabs of current playing song
 
             $.getJSON("https://api.dubtrack.fm/room/" + Dubtrack.room.model.id + "/playlist/active/dubs", function(response){
                 response.data.upDubs.forEach(function(e){

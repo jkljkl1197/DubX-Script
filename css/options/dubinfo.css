@@ -55,7 +55,7 @@
 }
 
 .dubx-chat-system-grab, .chat-system-grabbed {
-    color: #B3E790;
+    color: #B3E790 !important;
 }
 .dubx-chat-system-updub {
     color: #0ff;
