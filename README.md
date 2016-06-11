@@ -18,10 +18,11 @@ Our Team
 IMPORTANT
 ---
 
-__Updates (Version 03.02.04)__
+__Updates (Version 03.03.00)__
 
-- Added ability to set custom text phrases that trigger a mention sound
-- Notifications now check for custom mention triggers as well
+ - Add ability to see dub vote information whenever hovering over the corresponding vote buttons
+ - Add option to see dub votes on your song as chat notifications
+ - __**NOTE*:__ All downdub vote information is only visible to mods and higher
 
 -----------------
 Usage
@@ -46,12 +47,15 @@ Features
 ---
 
 - Autovote
-- AFK Autorespond
+- AFK Autorespond with Custom Message
 - Emotes
 - Autocomplete Emoji
 - Autocomplete Mentions
 - Custom Mention Triggers
 - Notification on Mentions
+- Dub Vote Information When Hovering Vote Buttons
+- Updub Chat Notification When DJ
+- Downdub Chat Notification When DJ (Mod Only)
 - Fullscreen Video
 - Split Chat
 - Hide Chat
