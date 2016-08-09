@@ -487,7 +487,7 @@ if (!hello_run && Dubtrack.session.id) {
             if(!content || content.trim(' ').length === 0) return;
 
             var user = Dubtrack.session.get('username');
-            var id = Dubtrack.realtime.dtPubNub.get_uuid();
+            var id = Dubtrack.session.get("_id");
             var href = location.href;
             var woosh = [
                 ' *Username*: '+user+' | ',
