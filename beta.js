@@ -75,7 +75,7 @@ if (!hello_run && Dubtrack.session.id) {
 
     //Ref 2: Options
     var hello = {
-        gitRoot: 'https://rawgit.com/sinfulBA/DubX-Script/master',
+        gitRoot: 'https://rawgit.com/FranciscoG/DubX-Script/dev',
         //Ref 2.1: Initialize
         personalize: function() {
             $('.isUser').text(Dubtrack.session.get('username'));
@@ -487,7 +487,7 @@ if (!hello_run && Dubtrack.session.id) {
             if(!content || content.trim(' ').length === 0) return;
 
             var user = Dubtrack.session.get('username');
-            var id = Dubtrack.realtime.dtPubNub.get_uuid();
+            var id = Dubtrack.session.get("_id");
             var href = location.href;
             var woosh = [
                 ' *Username*: '+user+' | ',
