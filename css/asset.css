@@ -562,7 +562,7 @@ ul.avatar-list li.admin p {
 }
 
 #chat .chat-container ul.chat-main li.user-56d545a245f02ad6041a4317 .activity-row .text p a.username {
-    color: #E8C248 !important;
+    color: #00aeff !important;
     text-shadow: 0px 0px 1px rgba(0,0,0,.5);
 }
 
@@ -583,9 +583,9 @@ ul.avatar-list li.admin p {
 #avatar-list .user-never_pause .dubs:before {
     content: "DubX VIP  -  ";
     font-weight: 700 !important;
-    color: #E8C248 !important;
+    color: #00aeff !important;
 }
 
 #avatar-list .user-never_pause {
-    color: #E8C248 !important;
+    color: #00aeff !important;
 }
