@@ -328,7 +328,6 @@ ul.avatar-list .user-mbsurfer:after,
     margin-right: 5px;
 }
 ul.avatar-list li.user-kris p.dubs:before,
-ul.avatar-list li.user-al3366 p.dubs:before,
 ul.avatar-list li.user-ciscog p.dubs:before {
     content: "DubX Team  -  ";
     font-weight: 700 !important;
@@ -409,7 +408,6 @@ ul.avatar-list .user-ciscog:after,
     margin-right: 5px;
 }
 /* Userlist */
-ul.avatar-list li.user-fi p.dubs:before,
 ul.avatar-list li.user-jinkx p.dubs:before,
 ul.avatar-list li.user-surreal p.dubs:before,
 ul.avatar-list li.user-pikachu p.dubs:before,
@@ -419,14 +417,11 @@ ul.avatar-list li.user-law p.dubs:before {
     font-weight: 700 !important;
     color: #E8C248 !important;
 }
-ul.avatar-list .user-fi:after,
 ul.avatar-list .user-jinkx:after,
 ul.avatar-list .user-surreal:after,
 ul.avatar-list .user-pikachu:after,
 ul.avatar-list .user-rainzy:after,
 ul.avatar-list .user-law:after,
-.user-fi,
-.user-fi p.username,
 .user-jinkx,
 .user-jinkx p.username,
 .user-surreal,
@@ -437,8 +432,6 @@ ul.avatar-list .user-law:after,
 .user-rainzy p.username,
 .user-law,
 .user-law p.username,
-.user-fi p.username .user-role,
-.user-fi p.username .user-role-icon,
 .user-jinkx p.username .user-role,
 .user-jinkx p.username .user-role-icon,
 .user-surreal p.username .user-role,
@@ -452,8 +445,6 @@ ul.avatar-list .user-law:after,
 {
     color: #E8C248 !important;
 }
-#main_avatar_room #main-user-list-room #avatar-list .user-fi p.username, #main_avatar_room #main-user-list-room #avatar-list .user-fi p.username:after, 
-#main_avatar_room #main-user-list-room #avatar-list .user-fi .user-role-icon, #main_avatar_room #main-user-list-room #avatar-list .user-fi .user-role,
 #main_avatar_room #main-user-list-room #avatar-list .user-jinkx p.username, #main_avatar_room #main-user-list-room #avatar-list .user-jinkx p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list .user-jinkx .user-role-icon, #main_avatar_room #main-user-list-room #avatar-list .user-jinkx .user-role,
 #main_avatar_room #main-user-list-room #avatar-list .user-surreal p.username, #main_avatar_room #main-user-list-room #avatar-list .user-surreal p.username:after,
@@ -522,11 +513,9 @@ ul.avatar-list li.admin p {
 }
 
 /* Users
-56030f67813abe030055f4a4 al3366
 52c8efcf37e22b0200000008 alexreinhart
 52d24bff4cf9670200000515 bubbles
 56008425621a9e0300317238 ciscog
-5607c12b8c2ecf0300b4233b fi
 52c8ef6037e22b0200000005 IAmBubbles
 560a30833e735703002efb74 JinKx
 55ff52375335f703008b0d38 Kris
