@@ -1,5 +1,4 @@
 # Dub X (source)
-*DubXScript may be going offline permanently due to recent interactions with one of Dubtrack.fm's staff members*
 - A simple script/extension for Dubtrack.fm
 
 [Follow Us on Twitter](https://twitter.com/DubXScript) and [Like Us on Facebook!](https://facebook.com/DubXScript)
