@@ -1194,9 +1194,9 @@ if (!hello_run && Dubtrack.session.id) {
         },
         //Override all keydown events of Dubtrack's chat
         chatInputKeydownFunc: function(e){
-            //Manually send the keydown event to chat if it is tab (for their autocomplete)
-            if (e.keyCode === 9 && !options.let_autocomplete_mentions) {
-                return Dubtrack.room.chat.ncKeyDown({'which': 9});
+            //Manually send the keydcode to chat if it is tab (9), enter (13), up arrow (38), or down arrow (40) for their autocomplete
+            if (!options.let_autocomplete_mentions && _.includes([9, 13, 38, 40], e.keyCode)) {
+                return Dubtrack.room.chat.ncKeyDown({'which': e.keyCode});
             }
         },
         /**************************************************************************
@@ -1263,9 +1263,9 @@ if (!hello_run && Dubtrack.session.id) {
             }
             if (e.keyCode === 13 && currentText.length > 0){
 
-                //close autocomplete Dubtrack window if DubX's isn't enabled
+                //default to Dubtrack's autocomplete if DubX's isn't enabled
                 if(!options.let_autocomplete_mentions)
-                    Dubtrack.room.chat.ncAbort();
+                    return;
 
                 Dubtrack.room.chat.sendMessage();
             }
