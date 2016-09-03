@@ -1972,7 +1972,7 @@ if (!hello_run && Dubtrack.session.id) {
         spacebar_mute: function() {
             if (!options.let_spacebar_mute) {
                 options.let_spacebar_mute = true;
-                $(document).bind('keypress.key32', function() {
+                $(document).bind('keypress.key32', function(event) {
                     var tag = event.target.tagName.toLowerCase();
                     if (event.which === 32 && tag !== 'input' && tag !== 'textarea') {
                         $('#main_player .player_sharing .player-controller-container .mute').click();
