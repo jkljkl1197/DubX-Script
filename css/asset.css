@@ -357,11 +357,8 @@ ul.avatar-list .user-ciscog:after,
     color: #E8C248 !important;
 }
 /* Username Icons */
-#chat .chat-container ul.chat-main li.user-560af26e9d6ab30300404673 .stream-item-content .activity-row .username:before /* law */ {
-    content: "\f106" !important;
-}
-
 #chat .chat-container ul.chat-main li.user-560af26e9d6ab30300404673 .stream-item-content .activity-row .username:before, /* law */ {
+    content: "\f106" !important;
     font-family: "foundation-icons";
     font-style: normal;
     font-weight: normal;
@@ -387,8 +384,8 @@ ul.avatar-list .user-username:after,
 {
     color: #E8C248 !important;
 }
-#main_avatar_room #main-user-list-room #avatar-list .user-law p.username, #main_avatar_room #main-user-list-room #avatar-list .user-username_example p.username:after,
-#main_avatar_room #main-user-list-room #avatar-list .user-law .user-role-icon, #main_avatar_room #main-user-list-room #avatar-list .user-username_example .user-role {
+#main_avatar_room #main-user-list-room #avatar-list .user-law p.username, #main_avatar_room #main-user-list-room #avatar-list .user-law p.username:after,
+#main_avatar_room #main-user-list-room #avatar-list .user-law .user-role-icon, #main_avatar_room #main-user-list-room #avatar-list .user-law .user-role {
     color: #E8C248 !important;
 }
 
