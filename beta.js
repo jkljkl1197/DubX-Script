@@ -1194,8 +1194,8 @@ if (!hello_run && Dubtrack.session.id) {
         },
         //Override all keydown events of Dubtrack's chat
         chatInputKeydownFunc: function(e){
-            //Manually send the keydcode to chat if it is tab (9), enter (13), up arrow (38), or down arrow (40) for their autocomplete
-            if (!options.let_autocomplete_mentions && _.includes([9, 13, 38, 40], e.keyCode)) {
+            //Manually send the keycode to chat if it is tab (9), enter (13), up arrow (38), or down arrow (40) for their autocomplete
+            if (!options.let_autocomplete_mentions && _.includes([9, 13, 38, 40], e.keyCode) && $('.ac-show').length == 0) {
                 return Dubtrack.room.chat.ncKeyDown({'which': e.keyCode});
             }
         },
@@ -1972,7 +1972,7 @@ if (!hello_run && Dubtrack.session.id) {
         spacebar_mute: function() {
             if (!options.let_spacebar_mute) {
                 options.let_spacebar_mute = true;
-                $(document).bind('keypress.key32', function() {
+                $(document).bind('keypress.key32', function(event) {
                     var tag = event.target.tagName.toLowerCase();
                     if (event.which === 32 && tag !== 'input' && tag !== 'textarea') {
                         $('#main_player .player_sharing .player-controller-container .mute').click();
