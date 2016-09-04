@@ -203,8 +203,8 @@
 #chat .chat-container ul.chat-main li.user-551d295433cd73030089d184 .stream-item-content .activity-row .username:hover:before, /* Swordling */
 #chat .chat-container ul.chat-main li.user-53f7c199892b010200a98809 .stream-item-content .activity-row .username:hover:before, /* sinful */
 #chat .chat-container ul.chat-main li.user-55ff52375335f703008b0d38 .stream-item-content .activity-row .username:hover:before, /* Kris */
-#chat .chat-container ul.chat-main li.user-56008425621a9e0300317238 .stream-item-content .activity-row .username:hover:before /* ciscog */ 
-#chat .chat-container ul.chat-main li.user-560af26e9d6ab30300404673 .stream-item-content .activity-row .username:hover:before /* law */{
+#chat .chat-container ul.chat-main li.user-56008425621a9e0300317238 .stream-item-content .activity-row .username:hover:before, /* ciscog */ 
+#chat .chat-container ul.chat-main li.user-560af26e9d6ab30300404673 .stream-item-content .activity-row .username:hover:before /* law */ {
     content: "DubX" !important;
     font-weight: 700;
     font-family: proxima-nova,sans-serif;
