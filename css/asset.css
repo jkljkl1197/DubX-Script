@@ -381,7 +381,7 @@ ul.avatar-list li.currentDJ .user-law:after,
 .user-law, .user-law p.username {
     color: #E8C248 !important;
 }
-#chat .chat-container .chat-messages .chat-main li .stream-item-content .activity-row .text a.username .user-role,
+#chat .chat-container .chat-messages .chat-main li.user-560af26e9d6ab30300404673 .stream-item-content .activity-row .text a.username li.resident-dj .user-role,
 #main_avatar_room #main-user-list-room #avatar-list .user-law p.username, 
 #main_avatar_room #main-user-list-room #avatar-list .user-law p.username:after,
 #main_avatar_room #main-user-list-room #avatar-list .user-law .user-role {
