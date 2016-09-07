@@ -123,7 +123,7 @@ if (!hello_run && Dubtrack.session.id) {
                             '</li>',
                             '<li onclick="hello.optionMentions();" class="for_content_li for_content_feature autocomplete_mentions">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Autocomplete Mentions</p>',
+                                '<p class="for_content_p">DubX Autocomplete Mentions</p>',
                             '</li>',
                             '<li onclick="hello.customMentions(event);" class="for_content_li for_content_feature custom_mentions">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
@@ -957,7 +957,11 @@ if (!hello_run && Dubtrack.session.id) {
                      'title="'+name+'" alt="'+name+'" src="'+src+'" />';
             }
 
-            var $chatTarget = $('.chat-main .text').last();
+            var $chatTarget = $('.chat-main .text p').last();
+
+            //fix grey text problem
+            if($chatTarget.hasClass('sending'))
+                $chatTarget.removeClass('sending');
             
             if (!$chatTarget.html()) { return; } // nothing to do
 
@@ -1188,6 +1192,13 @@ if (!hello_run && Dubtrack.session.id) {
                 });
             }
         },
+        //Override all keydown events of Dubtrack's chat
+        chatInputKeydownFunc: function(e){
+            //Manually send the keycode to chat if it is tab (9), enter (13), up arrow (38), or down arrow (40) for their autocomplete
+            if (!options.let_autocomplete_mentions && _.includes([9, 13, 38, 40], e.keyCode) && $('.ac-show').length == 0) {
+                return Dubtrack.room.chat.ncKeyDown({'which': e.keyCode});
+            }
+        },
         /**************************************************************************
          * handles filtering emoji, twitch, and users preview autocomplete popup on keyup
          */
@@ -1251,6 +1262,11 @@ if (!hello_run && Dubtrack.session.id) {
                 self.doNavigate(1);
             }
             if (e.keyCode === 13 && currentText.length > 0){
+
+                //default to Dubtrack's autocomplete if DubX's isn't enabled
+                if(!options.let_autocomplete_mentions)
+                    return;
+
                 Dubtrack.room.chat.sendMessage();
             }
         },
@@ -1270,10 +1286,16 @@ if (!hello_run && Dubtrack.session.id) {
                 options.let_autocomplete_mentions = true;
                 hello.option('autocomplete_mentions', 'true');
                 hello.on('.autocomplete_mentions');
+
+                //Remove keydown and input event chat view to replace with our event
+                Dubtrack.room.chat.delegateEvents(_(Dubtrack.room.chat.events).omit('keydown #chat-txt-message', 'input #chat-txt-message'));
             } else {
                 options.let_autocomplete_mentions = false;
                 hello.option('autocomplete_mentions', 'false');
                 hello.off('.autocomplete_mentions');
+
+                //Readd dubtrack's input event chat view for their automplete
+                Dubtrack.room.chat.delegateEvents(_(Dubtrack.room.chat.events).omit('keydown #chat-txt-message'));
             }
         },
         mentionNotifications: function(){
@@ -1950,7 +1972,7 @@ if (!hello_run && Dubtrack.session.id) {
         spacebar_mute: function() {
             if (!options.let_spacebar_mute) {
                 options.let_spacebar_mute = true;
-                $(document).bind('keypress.key32', function() {
+                $(document).bind('keypress.key32', function(event) {
                     var tag = event.target.tagName.toLowerCase();
                     if (event.which === 32 && tag !== 'input' && tag !== 'textarea') {
                         $('#main_player .player_sharing .player-controller-container .mute').click();
@@ -1984,10 +2006,17 @@ if (!hello_run && Dubtrack.session.id) {
             });
         },
         userAutoComplete: function(){
-            //Remove keydown event chat view to replace with our event
-            Dubtrack.room.chat.delegateEvents(_(Dubtrack.room.chat.events).omit('keydown input#chat-txt-message'));
+            if(options.let_autocomplete_mentions) {
+                //Remove keydown and input event chat view to replace with our event
+                Dubtrack.room.chat.delegateEvents(_(Dubtrack.room.chat.events).omit('keydown #chat-txt-message', 'input #chat-txt-message'));
+            }
+            else {
+                //Only remove keydown for Dubtrack native autocomplete to work
+                Dubtrack.room.chat.delegateEvents(_(Dubtrack.room.chat.events).omit('keydown #chat-txt-message'));
+            }
 
-            $(document.body).on('keyup', "#chat-txt-message", this.chatInputKeyupFunc);
+            $(document.body).on('keydown', "#chat-txt-message", hello.chatInputKeydownFunc);
+            $(document.body).on('keyup', "#chat-txt-message", hello.chatInputKeyupFunc);
             hello.whenAvailable("Dubtrack.room.users", hello.updateUsersArray);
             Dubtrack.Events.bind("realtime:user-ban", hello.updateUsersArray);
             Dubtrack.Events.bind("realtime:user-join", hello.updateUsersArray);
