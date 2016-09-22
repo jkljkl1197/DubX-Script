@@ -764,10 +764,7 @@ if (!hello_run && Dubtrack.session.id) {
                 if(url == '//api.twitch.tv/kraken/chat/emoticon_images')
                     xhr.setRequestHeader('Client-ID', '5vhafslpr2yqal6715puzysmzrntmt8');
 
-                xhr.send();
-
-                xhr.beforeload
-
+                xhr.send()
                 xhr.onload = function() {
                     var resp = xhr.responseText;
                     if (typeof _cb === 'function') { _cb(resp); }
