@@ -761,8 +761,13 @@ if (!hello_run && Dubtrack.session.id) {
                 var xhr = new XMLHttpRequest();
                 xhr.open('GET', _url);
                 
-                if(url == '//api.twitch.tv/kraken/chat/emoticon_images')
-                    xhr.setRequestHeader('Client-ID', '5vhafslpr2yqal6715puzysmzrntmt8');
+                if(headers) {
+                    for (var property in headers) {
+                        if (headers.hasOwnProperty(property)) {
+                            xhr.setRequestHeader(property, headers[property]);
+                        }
+                    }
+                }
 
                 xhr.send()
                 xhr.onload = function() {
@@ -838,7 +843,7 @@ if (!hello_run && Dubtrack.session.id) {
             // grab it from the twitch API
             if (self.shouldUpdateAPIs('twitch')) {
                 console.log('Dubx','twitch','loading from api');
-                var twApi = new self.getJSON('//api.twitch.tv/kraken/chat/emoticon_images', 'twitch:loaded');
+                var twApi = new self.getJSON('//api.twitch.tv/kraken/chat/emoticon_images', 'twitch:loaded', {'Client-ID': '5vhafslpr2yqal6715puzysmzrntmt8'});
                 twApi.done(function(data){
                     var json = JSON.parse(data);
 
