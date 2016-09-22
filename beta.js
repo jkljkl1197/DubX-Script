@@ -755,12 +755,19 @@ if (!hello_run && Dubtrack.session.id) {
         },
         // jQuery's getJSON kept returning errors so making my own with promise-like
         // structure and added optional Event to fire when done so can hook in elsewhere
-        getJSON : (function (url, optionalEvent) {
+        getJSON : (function (url, optionalEvent, headers) {
             var doneEvent;
             function GetJ(_url, _cb){
                 var xhr = new XMLHttpRequest();
                 xhr.open('GET', _url);
+                
+                if(url == '//api.twitch.tv/kraken/chat/emoticon_images')
+                    xhr.setRequestHeader('Client-ID', '5vhafslpr2yqal6715puzysmzrntmt8');
+
                 xhr.send();
+
+                xhr.beforeload
+
                 xhr.onload = function() {
                     var resp = xhr.responseText;
                     if (typeof _cb === 'function') { _cb(resp); }
@@ -836,13 +843,28 @@ if (!hello_run && Dubtrack.session.id) {
                 console.log('Dubx','twitch','loading from api');
                 var twApi = new self.getJSON('//api.twitch.tv/kraken/chat/emoticon_images', 'twitch:loaded');
                 twApi.done(function(data){
+                    var json = JSON.parse(data);
+
+                    if(json.error && json.error.length > 0) {
+                        hello.input('Twitch Emote Error', 'There was an error loading twitch emotes. Please clear your cache and try again.', null, 'twitch-emote-info');
+                        $('.twitch-emote-info').click(hello.closeErr);
+                        localStorage.removeItem('twitch_api');
+                        return;
+                    }
+
                     localStorage.setItem('twitch_api_timestamp', Date.now().toString());
                     localStorage.setItem('twitch_api', data);
-                    self.processTwitchEmotes(JSON.parse(data));
+                    self.processTwitchEmotes(json);
                 });
             } else {
                 console.log('Dubx','twitch','loading from localstorage');
                 savedData = JSON.parse(localStorage.getItem('twitch_api'));
+
+                if(savedData.error && savedData.error.length > 0) {
+                    console.log('twitch:malformed json - reloading');
+                    return self.loadTwitchEmotes();
+                }
+
                 self.processTwitchEmotes(savedData);
                 savedData = null; // clear the var from memory
                 var twEvent = new Event('twitch:loaded');
