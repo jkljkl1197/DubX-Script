@@ -25,7 +25,7 @@
     The Software and this license document are provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
     Choice of Law
     This license is governed by the Laws of Norway. Disputes shall be settled by Oslo City Court.
-*/ /* global Dubtrack, emojify */
+*/ /* global Dubtrack, emojione, _ */
 var hello_run;
 if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
@@ -304,6 +304,8 @@ if (!hello_run && Dubtrack.session.id) {
                 downDubs: [],
                 grabs: []
             };
+
+            hello.makeEmojiArray();
         },
         sectionList: ['draw_general','draw_userinterface','draw_settings','draw_customize','draw_contact','draw_social','draw_chrome'],
         drawSection: function(el) {
@@ -769,7 +771,7 @@ if (!hello_run && Dubtrack.session.id) {
                     }
                 }
 
-                xhr.send()
+                xhr.send();
                 xhr.onload = function() {
                     var resp = xhr.responseText;
                     if (typeof _cb === 'function') { _cb(resp); }
@@ -807,7 +809,14 @@ if (!hello_run && Dubtrack.session.id) {
             window.setTimeout(check, interval);
         },
         emoji : {
-            template: function(id) { return emojify.defaultConfig.img_dir+'/'+encodeURI(id)+'.png'; },
+            // example of the new emojione url
+            // https://www.dubtrack.fm/assets/emoji/emojione/1f44d.svg?v=2.2.6.1
+            template: function(id) {
+                if (!/^:/.test(id)) {
+                    id = ":"+id+":";
+                }
+                return emojione.shortnameToImage(id).replace(/(.+src=")((?!").+)(".*)/, '$2'); 
+            }
         },
         twitch : {
             template: function(id) { return "//static-cdn.jtvnw.net/emoticons/v1/" + id + "/3.0"; },
@@ -831,6 +840,12 @@ if (!hello_run && Dubtrack.session.id) {
             var today = Date.now();
             var lastSaved = parseInt(localStorage.getItem(apiName+'_api_timestamp'));
             return isNaN(lastSaved) || today - lastSaved > day * 5 || !localStorage[apiName +'_api'];
+        },
+        makeEmojiArray: function(){
+            var emokiKeys = Object.keys(emojione.emojioneList);
+            hello.emojiNames = emokiKeys.map(function(val){
+                return  val.replace(/^:(.*):$/g,'$1');
+            });
         },
         /**************************************************************************
          * Loads the twitch emotes from the api.
@@ -919,7 +934,7 @@ if (!hello_run && Dubtrack.session.id) {
                     return;
                 }
 
-                if (emojify.emojiNames.indexOf(_key) >= 0) {
+                if (hello.emojiNames.indexOf(_key) > 0) {
                     return; // do nothing so we don't override emoji
                 }
 
@@ -933,7 +948,7 @@ if (!hello_run && Dubtrack.session.id) {
 
             });
             self.twitchJSONSLoaded = true;
-            self.emojiEmotes = emojify.emojiNames.concat(Object.keys(self.twitch.emotes));
+            self.emojiEmotes = hello.emojiNames.concat(Object.keys(self.twitch.emotes));
         },
         processBTTVEmotes: function(data){
             var self = hello;
@@ -944,7 +959,7 @@ if (!hello_run && Dubtrack.session.id) {
                     return; // don't want any emotes with smileys and stuff
                 }
 
-                if (emojify.emojiNames.indexOf(_key) >= 0) {
+                if (hello.emojiNames.indexOf(_key) > 0) {
                     return; // do nothing so we don't override emoji
                 }
 
@@ -984,8 +999,9 @@ if (!hello_run && Dubtrack.session.id) {
             var $chatTarget = $('.chat-main .text p').last();
 
             //fix grey text problem
-            if($chatTarget.hasClass('sending'))
+            if($chatTarget.hasClass('sending')) {
                 $chatTarget.removeClass('sending');
+            }
             
             if (!$chatTarget.html()) { return; } // nothing to do
 
@@ -1197,29 +1213,29 @@ if (!hello_run && Dubtrack.session.id) {
                     if (typeof hello.tasty.emotes[_key] !== 'undefined') {
                         listArray.push(self.createPreviewObj("tasty", _key, val));
                     }
-                    if (emojify.emojiNames.indexOf(_key) >= 0) {
+                    if (hello.emojiNames.indexOf(_key) >= 0) {
                         listArray.push(self.createPreviewObj("emoji", val, val));
                     }
                 });
-
                 hello.previewList(listArray);
             },
             filterEmoji : function(str){
                 var finalStr = str.replace(/([+()])/,"\\$1");
                 var re = new RegExp('^' + finalStr, "i");
-                var arrayToUse = emojify.emojiNames;
+                var arrayToUse = hello.emojiNames;
                 if (options.let_twitch_emotes) {
                     arrayToUse = hello.emojiEmotes; // merged array
                 }
-                return arrayToUse.filter(function(val){
+                var filtered = arrayToUse.filter(function(val){
                     return re.test(val);
                 });
+                return filtered;
             }
         },
         //Override all keydown events of Dubtrack's chat
         chatInputKeydownFunc: function(e){
             //Manually send the keycode to chat if it is tab (9), enter (13), up arrow (38), or down arrow (40) for their autocomplete
-            if (!options.let_autocomplete_mentions && _.includes([9, 13, 38, 40], e.keyCode) && $('.ac-show').length == 0) {
+            if (!options.let_autocomplete_mentions && _.includes([9, 13, 38, 40], e.keyCode) && $('.ac-show').length === 0) {
                 return Dubtrack.room.chat.ncKeyDown({'which': e.keyCode});
             }
         },
@@ -2013,9 +2029,10 @@ if (!hello_run && Dubtrack.session.id) {
         },
         filterUsers :function(str){
             var re = new RegExp('^@' + str, "i");
-            return hello.roomUsers.filter(function(val){
+            var filtered = hello.roomUsers.filter(function(val){
                 return re.test(val.text);
             });
+            return filtered;
         },
         updateUsersArray: function(){
             var self = hello;
