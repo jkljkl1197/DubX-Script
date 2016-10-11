@@ -2086,27 +2086,30 @@ if (!hello_run && Dubtrack.session.id) {
             Dubtrack.Events.bind("realtime:user-leave", hello.updateUsersArray);
         },
         snooze: function() {
-            if (!hello.eventUtils.snoozed && Dubtrack.room.player.player_volume_level > 2) {
-                hello.eventUtils.currentVol = Dubtrack.room.player.player_volume_level;
-                Dubtrack.room.player.setVolume(0);
+            // the function both mutes and unmutes
+            Dubtrack.room.player.mutePlayer();
+            
+            // we want to track the button being pressed because Dubtrack.room.player.muted_player
+            // gets set even when you press the normal volume icon
+            if (!hello.eventUtils.snoozed) {
                 hello.eventUtils.snoozed = true;
                 Dubtrack.Events.bind("realtime:room_playlist-update", hello.eventSongAdvance);
-            } else if (hello.eventUtils.snoozed) {
-                Dubtrack.room.player.setVolume(hello.eventUtils.currentVol);
+            } else {
                 hello.eventUtils.snoozed = false;
+                Dubtrack.Events.unbind("realtime:room_playlist-update", hello.eventSongAdvance);
             }
         },
         eventSongAdvance: function(e) {
-            if (e.startTime < 2) {
-                if (hello.eventUtils.snoozed) {
-                    Dubtrack.room.player.setVolume(hello.eventUtils.currentVol);
-                    hello.eventUtils.snoozed = false;
-                }
-                return true;
-            }
+          if (e.startTime < 2) {
+              if (hello.eventUtils.snoozed) {
+                  Dubtrack.room.player.mutePlayer();
+                  hello.eventUtils.snoozed = false;
+                  Dubtrack.Events.unbind("realtime:room_playlist-update", hello.eventSongAdvance);
+              }
+              return true;
+          }
         },
         eventUtils: {
-            currentVol: 50,
             snoozed: false
         }
     };
