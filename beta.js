@@ -25,7 +25,7 @@
     The Software and this license document are provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
     Choice of Law
     This license is governed by the Laws of Norway. Disputes shall be settled by Oslo City Court.
-*/ /* global Dubtrack, emojione, _ */
+*/ /* global Dubtrack, emojify, _ */
 var hello_run;
 if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
@@ -304,8 +304,6 @@ if (!hello_run && Dubtrack.session.id) {
                 downDubs: [],
                 grabs: []
             };
-
-            hello.makeEmojiArray();
         },
         sectionList: ['draw_general','draw_userinterface','draw_settings','draw_customize','draw_contact','draw_social','draw_chrome'],
         drawSection: function(el) {
@@ -809,14 +807,8 @@ if (!hello_run && Dubtrack.session.id) {
             window.setTimeout(check, interval);
         },
         emoji : {
-            // example of the new emojione url
-            // https://www.dubtrack.fm/assets/emoji/emojione/1f44d.svg?v=2.2.6.1
-            template: function(id) {
-                if (!/^:/.test(id)) {
-                    id = ":"+id+":";
-                }
-                return emojione.shortnameToImage(id).replace(/(.+src=")((?!").+)(".*)/, '$2'); 
-            }
+            // example of the new emojify url
+            template: function(id) { return emojify.defaultConfig.img_dir+'/'+encodeURI(id)+'.png'; },
         },
         twitch : {
             template: function(id) { return "//static-cdn.jtvnw.net/emoticons/v1/" + id + "/3.0"; },
@@ -840,12 +832,6 @@ if (!hello_run && Dubtrack.session.id) {
             var today = Date.now();
             var lastSaved = parseInt(localStorage.getItem(apiName+'_api_timestamp'));
             return isNaN(lastSaved) || today - lastSaved > day * 5 || !localStorage[apiName +'_api'];
-        },
-        makeEmojiArray: function(){
-            var emokiKeys = Object.keys(emojione.emojioneList);
-            hello.emojiNames = emokiKeys.map(function(val){
-                return  val.replace(/^:(.*):$/g,'$1');
-            });
         },
         /**************************************************************************
          * Loads the twitch emotes from the api.
@@ -934,14 +920,14 @@ if (!hello_run && Dubtrack.session.id) {
                     return;
                 }
 
-                if (hello.emojiNames.indexOf(_key) >= 0) {
-                    // do not override a regular emoji
-                    // append the work 'twitch' to it
-                    self.twitch.emotes[_key + '_twitch'] = el.id;
-                    return;
+                if (emojify.emojiNames.indexOf(_key) >= 0) {
+                    return; // do nothing so we don't override emoji
                 }
 
-                if (!self.twitch.emotes[_key] || el.emoticon_set === null){
+                if (!self.twitch.emotes[_key]){
+                    // if emote doesn't exist, add it
+                    self.twitch.emotes[_key] = el.id;
+                } else if (!self.twitch.emotes[_key] || el.emoticon_set === null){
                     // if emote doesn't exist, add it
                     // OR override if it's a global emote (null set = global emote)
                     self.twitch.emotes[_key] = el.id;
@@ -949,7 +935,7 @@ if (!hello_run && Dubtrack.session.id) {
 
             });
             self.twitchJSONSLoaded = true;
-            self.emojiEmotes = hello.emojiNames.concat(Object.keys(self.twitch.emotes));
+            self.emojiEmotes = emojify.emojiNames.concat(Object.keys(self.twitch.emotes));
         },
         processBTTVEmotes: function(data){
             var self = hello;
@@ -960,11 +946,8 @@ if (!hello_run && Dubtrack.session.id) {
                     return; // don't want any emotes with smileys and stuff
                 }
 
-                if (hello.emojiNames.indexOf(_key) >= 0) {
-                    // don't want to override emojione emojis so we
-                    // append the word bttv to them
-                    self.bttv.emotes[_key + '_bttv'] = el.id;
-                    return;
+                if (emojify.emojiNames.indexOf(_key) >= 0) {
+                    return; // do nothing so we don't override emoji
                 }
 
                 if (el.code.indexOf('(') >= 0) {
@@ -984,8 +967,8 @@ if (!hello_run && Dubtrack.session.id) {
             var tastyEmotesKeys = Object.keys(self.tasty.emotes);
             tastyEmotesKeys = tastyEmotesKeys.map(function(key){
                 var keyLC = key.toLowerCase();
-                if (hello.emojiNames.indexOf(keyLC) >= 0 || hello.emojiNames.indexOf(key) >= 0) {
-                    // don't want to override emojione emojis
+                if (emojify.emojiNames.indexOf(keyLC) >= 0 || emojify.emojiNames.indexOf(key) >= 0) {
+                    // don't want to override emojify emojis
                     var newKey = keyLC + '_tasty';
                     // add new key
                     self.tasty.emotes[newKey] = self.tasty.emotes[key];
@@ -1234,7 +1217,7 @@ if (!hello_run && Dubtrack.session.id) {
                     if (typeof hello.tasty.emotes[_key] !== 'undefined') {
                         listArray.push(self.createPreviewObj("tasty", _key, val));
                     }
-                    if (hello.emojiNames.indexOf(_key) >= 0) {
+                    if (emojify.emojiNames.indexOf(_key) >= 0) {
                         listArray.push(self.createPreviewObj("emoji", val, val));
                     }
                 });
@@ -1243,7 +1226,7 @@ if (!hello_run && Dubtrack.session.id) {
             filterEmoji : function(str){
                 var finalStr = str.replace(/([+()])/,"\\$1");
                 var re = new RegExp('^' + finalStr, "i");
-                var arrayToUse = hello.emojiNames;
+                var arrayToUse = emojify.emojiNames;
                 if (options.let_twitch_emotes) {
                     arrayToUse = hello.emojiEmotes; // merged array
                 }
