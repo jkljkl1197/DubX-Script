@@ -44,7 +44,7 @@ if (!hello_run && Dubtrack.session.id) {
         let_css: false,
         let_hide_avatars: false,
         let_nicole: false,
-		let_betterDubtrack: false,
+        let_betterDubtrack: false,
         let_show_timestamps: false,
         let_video_window: false,
         let_twitch_emotes: false,
