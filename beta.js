@@ -44,6 +44,7 @@ if (!hello_run && Dubtrack.session.id) {
         let_css: false,
         let_hide_avatars: false,
         let_nicole: false,
+		let_betterDubtrack: false,
         let_show_timestamps: false,
         let_video_window: false,
         let_twitch_emotes: false,
@@ -75,7 +76,7 @@ if (!hello_run && Dubtrack.session.id) {
 
     //Ref 2: Options
     var hello = {
-        gitRoot: 'https://rawgit.com/sinfulBA/DubX-Script/master',
+        gitRoot: 'https://github.com/jkljkl1197/DubX-Script', /* https://rawgit.com/sinfulBA/DubX-Script/master */
         //Ref 2.1: Initialize
         personalize: function() {
             $('.isUser').text(Dubtrack.session.get('username'));
@@ -213,6 +214,10 @@ if (!hello_run && Dubtrack.session.id) {
                             '<li onclick="hello.nicole();" class="for_content_li for_content_feature nicole">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Plug.dj Theme</p>',
+                            '</li>',
+							'<li onclick="hello.betterDubtrack();" class="for_content_li for_content_feature betterDubtrack">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">BetterDubtrack Theme</p>',
                             '</li>',
                             '<li onclick="hello.css_for_the_world();" class="for_content_li for_content_feature css">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
@@ -708,6 +713,19 @@ if (!hello_run && Dubtrack.session.id) {
                 $('.nicole_css').remove();
                 hello.option('nicole','false');
                 hello.off('.nicole');
+            }
+        },
+		betterDubtrack: function() {
+            if (!options.let_betterDubtrack) {
+                options.let_betterDubtrack = true;
+                $('head').append('<link class="betterDubtrack_css" href="'+hello.gitRoot+'/themes/BetterDubtrack.css" rel="stylesheet" type="text/css">');
+                hello.option('betterDubtrack', 'true');
+                hello.on('.betterDubtrack');
+            } else {
+                options.let_betterDubtrack = false;
+                $('.betterDubtrack_css').remove();
+                hello.option('betterDubtrack','false');
+                hello.off('.betterDubtrack');
             }
         },
         medium_modal: function() {
@@ -2133,6 +2151,9 @@ if (!hello_run && Dubtrack.session.id) {
     }
     if (localStorage.getItem('nicole') === 'true') {
         hello.nicole();
+    }
+	if (localStorage.getItem('betterDubtrack') === 'true') {
+        hello.betterDubtrack();
     }
     if (localStorage.getItem('twitch_emotes') === 'true') {
         hello.optionTwitchEmotes();
