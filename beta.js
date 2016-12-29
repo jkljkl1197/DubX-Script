@@ -29,7 +29,7 @@
 var hello_run;
 if (!hello_run && Dubtrack.session.id) {
     hello_run = true;
-    var our_version = '03.05.00 - Dub Vote Info';
+    var our_version = '03.05.10 - New Theme BetterDubtrack';
 
     //Ref 1: Variables
     var options = {
