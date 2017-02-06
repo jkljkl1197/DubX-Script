@@ -40,6 +40,7 @@ Custom CSS
 ---
 
 * plug.dj theme made by Kris and edited by sinful. Paste `https://rawgit.com/sinfulBA/DubX-Script/master/themes/PlugTheme.css` in the Custom CSS option in Dub X, then click 'Okay'
+* BetterDubtrack theme make by shiny(Dubtrack Users) and repair by @jkljkl1197
 
 -----------------
 Features
