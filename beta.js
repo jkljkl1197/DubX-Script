@@ -33,7 +33,7 @@ if (!hello_run && Dubtrack.session.id) {
 
     //Ref 1: Variables
     var options = {
-        let_autovote: false,
+        let_autovote: true,
         let_split_chat: false,
         let_fs: false,
         let_medium_disable: false,
@@ -44,13 +44,13 @@ if (!hello_run && Dubtrack.session.id) {
         let_css: false,
         let_hide_avatars: false,
         let_nicole: false,
-        let_betterDubtrack: false,
+        let_betterDubtrack: true,
         let_show_timestamps: false,
         let_video_window: false,
-        let_twitch_emotes: false,
-        let_emoji_preview: false,
-        let_spacebar_mute: false,
-        let_autocomplete_mentions: false,
+        let_twitch_emotes: true,
+        let_emoji_preview: true,
+        let_spacebar_mute: true,
+        let_autocomplete_mentions: true,
         let_mention_notifications: false,
         let_downdub_chat_notifications: false,
         let_updub_chat_notifications: false,
