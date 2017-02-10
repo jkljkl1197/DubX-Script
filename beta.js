@@ -441,8 +441,8 @@ if (!hello_run && Dubtrack.session.id) {
                     image: 'bats.png', // Path to the image.
                     zIndex: 110, // The z-index you need.
                     amount: 5, // Bat amount.
-                    width: $(window).width(), // Image width.
-                    height: $(window).height(), // Animation frame height.
+                    width: 35, // Image width.
+                    height: 20, // Animation frame height.
                     frames: 4, // Amount of animation frames.
                     speed: 5, // Higher value = faster.
                     flickering: 15 // Higher value = slower.
