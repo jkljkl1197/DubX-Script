@@ -439,7 +439,7 @@ if (!hello_run && Dubtrack.session.id) {
                 hello.on('.bat');
                 $.fn.halloweenBats({
                     image: 'bats.png', // Path to the image.
-                    zIndex: 110, // The z-index you need.
+                    zIndex: 999999, // The z-index you need.
                     amount: 5, // Bat amount.
                     width: 35, // Image width.
                     height: 20, // Animation frame height.
