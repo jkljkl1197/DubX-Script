@@ -309,8 +309,6 @@ if (!hello_run && Dubtrack.session.id) {
             $('.for_content').perfectScrollbar();
             $.getScript('https://rawgit.com/loktar00/JQuery-Snowfall/master/src/snowfall.jquery.js');
 	    $.getScript('https://rawgit.com/Artimon/jquery-halloween-bats/master/halloween-bats.js');
-            $.fn.halloweenBats({});
-            $(document).fn.halloweenBats({});
 	    
             hello.dubs = {
                 upDubs: [],
@@ -439,7 +437,7 @@ if (!hello_run && Dubtrack.session.id) {
                 options.let_bat = true;
                 hello.option('bat','true');
                 hello.on('.bat');
-                $(document).fn.halloweenBats({
+                $.fn.halloweenBats({
                     image: 'bats.png', // Path to the image.
                     zIndex: 110, // The z-index you need.
                     amount: 5, // Bat amount.
@@ -453,7 +451,7 @@ if (!hello_run && Dubtrack.session.id) {
                 options.let_bat = false;
                 hello.option('bat','false');
                 hello.off('.bat');
-                $(document).fn.halloweenBats('clear');
+                $.fn.halloweenBats('clear');
             }
         },
         autovote: function() {
