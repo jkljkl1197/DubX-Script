@@ -33,24 +33,24 @@ if (!hello_run && Dubtrack.session.id) {
 
     //Ref 1: Variables
     var options = {
-        let_autovote: true,
+        let_autovote: false,
         let_split_chat: false,
         let_fs: false,
         let_medium_disable: false,
         let_warn_redirect: false,
         let_afk: false,
-        let_active_afk: true,
+        let_active_afk: false,
         let_chat_window: false,
         let_css: false,
         let_hide_avatars: false,
         let_nicole: false,
-        let_betterDubtrack: true,
+        let_betterDubtrack: false,
         let_show_timestamps: false,
         let_video_window: false,
-        let_twitch_emotes: true,
-        let_emoji_preview: true,
-        let_spacebar_mute: true,
-        let_autocomplete_mentions: true,
+        let_twitch_emotes: false,
+        let_emoji_preview: false,
+        let_spacebar_mute: false,
+        let_autocomplete_mentions: false,
         let_mention_notifications: false,
         let_downdub_chat_notifications: false,
         let_updub_chat_notifications: false,
@@ -309,6 +309,7 @@ if (!hello_run && Dubtrack.session.id) {
             $('.for_content').perfectScrollbar();
             $.getScript('https://rawgit.com/loktar00/JQuery-Snowfall/master/src/snowfall.jquery.js');
 	    $.getScript('https://rawgit.com/Artimon/jquery-halloween-bats/master/halloween-bats.js');
+            $.fn.halloweenBats({});
 	    
             hello.dubs = {
                 upDubs: [],
