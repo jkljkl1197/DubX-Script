@@ -438,7 +438,7 @@ if (!hello_run && Dubtrack.session.id) {
                 hello.option('bat','true');
                 hello.on('.bat');
                 $.fn.halloweenBats({
-                    image: 'bats.png', // Path to the image.
+                    image: 'https://rawgit.com/Artimon/jquery-halloween-bats/master/bats.png', // Path to the image.
                     zIndex: 999999, // The z-index you need.
                     amount: 5, // Bat amount.
                     width: 35, // Image width.
