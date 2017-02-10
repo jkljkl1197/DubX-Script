@@ -58,6 +58,7 @@ if (!hello_run && Dubtrack.session.id) {
         let_dubs_hover: false,
         let_custom_mentions: false,
         let_snow: false,
+	let_bat: false,
         draw_general: false,
         draw_userinterface: false,
         draw_settings: false,
@@ -104,6 +105,10 @@ if (!hello_run && Dubtrack.session.id) {
                             '<li onclick="hello.snow();" class="for_content_li for_content_feature snow">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Snow</p>',
+                            '</li>',
+		    	    '<li onclick="hello.bat();" class="for_content_li for_content_feature bat">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Bat</p>',
                             '</li>',
                             '<li onclick="hello.autovote();" class="for_content_li for_content_feature autovote">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
@@ -303,7 +308,8 @@ if (!hello_run && Dubtrack.session.id) {
             $('body').prepend(html);
             $('.for_content').perfectScrollbar();
             $.getScript('https://rawgit.com/loktar00/JQuery-Snowfall/master/src/snowfall.jquery.js');
-
+	    $.getScript('https://rawgit.com/Artimon/jquery-halloween-bats/master/halloween-bats.js');
+	    
             hello.dubs = {
                 upDubs: [],
                 downDubs: [],
@@ -424,6 +430,28 @@ if (!hello_run && Dubtrack.session.id) {
                 hello.option('snow','false');
                 hello.off('.snow');
                 $(document).snowfall('clear');
+            }
+        },
+	bat: function() {
+            if (!options.let_bat) {
+                options.let_bat = true;
+                hello.option('bat','true');
+                hello.on('.bat');
+                $(document).fn.halloweenBats({
+                    image: 'bats.png', // Path to the image.
+		    zIndex: 110, // The z-index you need.
+		    amount: 5, // Bat amount.
+		    width: 35, // Image width.
+		    height: 20, // Animation frame height.
+		    frames: 4, // Amount of animation frames.
+		    speed: 5, // Higher value = faster.
+		    flickering: 15 // Higher value = slower.
+                });
+            } else {
+                options.let_bat = false;
+                hello.option('bat','false');
+                hello.off('.bat');
+                $(document).fn.halloweenBats('clear');
             }
         },
         autovote: function() {
