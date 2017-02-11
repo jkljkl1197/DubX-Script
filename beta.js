@@ -58,7 +58,8 @@ if (!hello_run && Dubtrack.session.id) {
         let_dubs_hover: false,
         let_custom_mentions: false,
         let_snow: false,
-	let_bat: false,
+        let_bat: false,
+        let_heart: false,
         draw_general: false,
         draw_userinterface: false,
         draw_settings: false,
@@ -106,9 +107,13 @@ if (!hello_run && Dubtrack.session.id) {
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Snow</p>',
                             '</li>',
-		    	    '<li onclick="hello.bat();" class="for_content_li for_content_feature bat">',
+                            '<li onclick="hello.bat();" class="for_content_li for_content_feature bat">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Bat</p>',
+                            '</li>',
+                            '<li onclick="hello.heart();" class="for_content_li for_content_feature heart">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Heart</p>',
                             '</li>',
                             '<li onclick="hello.autovote();" class="for_content_li for_content_feature autovote">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
@@ -309,6 +314,7 @@ if (!hello_run && Dubtrack.session.id) {
             $('.for_content').perfectScrollbar();
             $.getScript('https://rawgit.com/loktar00/JQuery-Snowfall/master/src/snowfall.jquery.js');
 	    $.getScript('https://rawgit.com/jkljkl1197/DubX-Script/MyVersion/js/halloween-bats.js');
+            $.getScript('https://rawgit.com/jkljkl1197/DubX-Script/MyVersion/js/falling-hearts.js');
 	    
             hello.dubs = {
                 upDubs: [],
@@ -451,7 +457,22 @@ if (!hello_run && Dubtrack.session.id) {
                 options.let_bat = false;
                 hello.option('bat','false');
                 hello.off('.bat');
-                $.fn.halloweenBats('clear');
+                //$.fn.halloweenBats('clear');
+            }
+        },
+        heart: function() {
+            if (!options.let_heart) {
+                options.let_heart = true;
+                hello.option('heart','true');
+                hello.on('.heart');
+                $(document).ready(function(){
+                     HeartsBackground.initialize();
+                });
+            } else {
+                options.let_heart = false;
+                hello.option('heart','false');
+                hello.off('.heart');
+                //$.fn.halloweenBats('clear');
             }
         },
         autovote: function() {
