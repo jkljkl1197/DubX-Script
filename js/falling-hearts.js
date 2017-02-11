@@ -37,7 +37,7 @@ var HeartsBackground = {
     this.h = this.canvas.height;
   },
   initialize: function() {
-    $('#main-section').append('<canvas id="canvas"></canvas>test');
+    $('#main-section').append('<canvas id="canvas">');
     this.canvas = $('#canvas')[0];
 
     if(!this.canvas.getContext)
@@ -56,6 +56,7 @@ var HeartsBackground = {
         width: scale * this.heartWidth,
         opacity: scale
       });
+      $('#main-section').prepend('</canvas>');
     }
 
     setInterval($.proxy(this.draw, this), 30);
