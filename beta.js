@@ -465,9 +465,7 @@ if (!hello_run && Dubtrack.session.id) {
                 options.let_heart = true;
                 hello.option('heart','true');
                 hello.on('.heart');
-                $(document).ready(function(){
-                     HeartsBackground.initialize();
-                });
+                $.HeartAnimation();
             } else {
                 options.let_heart = false;
                 hello.option('heart','false');
