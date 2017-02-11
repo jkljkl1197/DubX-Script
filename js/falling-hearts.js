@@ -4,7 +4,7 @@ var HeartsBackground = {
   heartHeight: 60,
   heartWidth: 64,
   hearts: [],
-  heartImage: 'http://i58.tinypic.com/ntnw5.png',
+  heartImage: 'https://puu.sh/tXG5z/0bbfe82e5e.png',
   maxHearts: 8,
   minScale: 0.4,
   draw: function() {
@@ -37,7 +37,6 @@ var HeartsBackground = {
     this.h = this.canvas.height;
   },
   initialize: function() {
-    $('#main-page-container').append('<canvas id="canvas">');
     this.canvas = $('#canvas')[0];
 
     if(!this.canvas.getContext)
@@ -56,7 +55,6 @@ var HeartsBackground = {
         width: scale * this.heartWidth,
         opacity: scale
       });
-      $('#main-section').prepend('</canvas>');
     }
 
     setInterval($.proxy(this.draw, this), 30);
