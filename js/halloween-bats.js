@@ -6,9 +6,9 @@
 	$.fn.halloweenBats = function (options) {
 		var Bat,
 			bats = [],
-			$body= $('main-section'),
-			innerWidth = $body.innerWidth(),
-			innerHeight = $body.innerHeight(),
+			$body= $('body'),
+			innerWidth = window.innerWidth,
+			innerHeight = window.innerHeight,
 			counter,
 			defaults = {
 				image: 'bats.png', // Path to the image.
