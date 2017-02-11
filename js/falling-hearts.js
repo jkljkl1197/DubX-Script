@@ -37,6 +37,7 @@ var HeartsBackground = {
     this.h = this.canvas.height;
   },
   initialize: function() {
+    document.getElementById('main-section').innerHTML = '<canvas id="canvas"></canvas>test';
     this.canvas = $('#canvas')[0];
 
     if(!this.canvas.getContext)
