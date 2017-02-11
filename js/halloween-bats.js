@@ -13,7 +13,7 @@
 			defaults = {
 				image: 'bats.png', // Path to the image.
 				zIndex: 10000, // The z-index you need.
-				amount: 5, // Bat amount.
+				amount: 25, // Bat amount.
 				width: 35, // Image width.
 				height: 20, // Animation frame height.
 				frames: 4, // Amount of animation frames.
