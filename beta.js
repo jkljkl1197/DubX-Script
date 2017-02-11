@@ -76,7 +76,7 @@ if (!hello_run && Dubtrack.session.id) {
     $('.player_sharing').append('<span class="icon-mute snooze_btn" onclick="hello.snooze();" onmouseover="hello.snooze_tooltip();" onmouseout="hello.hide_snooze_tooltip();"></span>');
     $('.icon-mute.snooze_btn:after').css({"content": "1", "vertical-align": "top", "font-size": "0.75rem", "font-weight": "700"});
 	
-    $('#main-section').append('<canvas id="canvas"></canvas>');
+    $('#main-section').append('<canvas id="canvas" style="position:fixed;"></canvas>');
 
     //Ref 2: Options
     var hello = {
