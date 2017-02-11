@@ -308,7 +308,7 @@ if (!hello_run && Dubtrack.session.id) {
             $('body').prepend(html);
             $('.for_content').perfectScrollbar();
             $.getScript('https://rawgit.com/loktar00/JQuery-Snowfall/master/src/snowfall.jquery.js');
-	    $.getScript('https://rawgit.com/Artimon/jquery-halloween-bats/master/halloween-bats.js');
+	    $.getScript('https://rawgit.com/jkljkl1197/DubX-Script/MyVersion/js/halloween-bats.js');
 	    
             hello.dubs = {
                 upDubs: [],
