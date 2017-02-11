@@ -144,8 +144,8 @@
 		}
 
 		$(window).resize(function() {
-			innerWidth = $body.innerWidth();
-			innerHeight = $body.innerHeight();
+			innerWidth = window.innerWidth;
+			innerHeight = window.innerHeight;
 		});
 	};
 }(jQuery));
