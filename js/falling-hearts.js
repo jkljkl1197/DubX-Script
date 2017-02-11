@@ -60,7 +60,3 @@ var HeartsBackground = {
     setInterval($.proxy(this.draw, this), 30);
   }
 };
-
-$(document).ready(function(){
-  HeartsBackground.initialize();
-});
