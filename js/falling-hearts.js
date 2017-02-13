@@ -1,113 +1,151 @@
-jQuery(function($){
-    // notre code ici
-    $.HeartAnimation = function(){
-        // Set the number of snowflakes (more than 30 - 40 not recommended)
-        var snowmax=12
+// From https://github.com/Artimon/jquery-halloween-bats/
 
-        // Set the colors for the snow. Add as many colors as you like
-        var snowcolor=new Array("#aaaacc","#ddddFF","#ccccDD","#ffffff","#ffc0cb")
+(function ($) {
+	"use strict";
 
-        // Set the fonts, that create the snowflakes. Add as many fonts as you like
-        var snowtype=new Array("Arial Black","Arial Narrow","Times","Comic Sans MS")
+	$.fn.heartAnimation = function (options) {
+		var Bat,
+			bats = [],
+			$body= $('body'),
+			innerWidth = window.innerWidth,
+			innerHeight = window.innerHeight,
+			counter,
+			defaults = {
+				image: 'https://rawgit.com/jkljkl1197/DubX-Script/MyVersion/js/heart9.gif', // Path to the image.
+				zIndex: 10000, // The z-index you need.
+				amount: 25, // Bat amount.
+				width: 35, // Image width.
+				height: 20, // Animation frame height.
+				frames: 4, // Amount of animation frames.
+				speed: 20, // Higher value = faster.
+				flickering: 15 // Higher value = slower.
+			};
 
-        // **** CHANGE YOUR IMAGE HERE ****
+		options = $.extend({}, defaults, options);
 
-        // Set the letter that creates your snowflake (recommended: * )
-        var snowletter=" <img src=https://rawgit.com/Artimon/jquery-halloween-bats/master/bats.png> "
+		Bat = function () {
+			var self = this,
+				$bat = $('<div class="heartAnimation"/>'),
+				x,
+				y,
+				tx,
+				ty,
+				dx,
+				dy,
+				frame;
 
-        // Set the speed of sinking (recommended values range from 0.3 to 2)
-        var sinkspeed=0.6
+			/**
+			 * @param {string} direction
+			 * @returns {number}
+			 */
+			self.randomPosition = function (direction) {
+				var screenLength,
+					imageLength;
 
-        // Set the maximal-size of your snowflaxes
-        var snowmaxsize=40
+				if (direction === 'horizontal') {
+					screenLength = innerWidth;
+					imageLength = options.width;
+				}
+				else {
+					screenLength = innerHeight;
+					imageLength = options.height;
+				}
 
-        // Set the minimal-size of your snowflaxes
-        var snowminsize=20
+				return Math.random() * (screenLength - imageLength);
+			};
 
-        // Set the snowing-zone
-        // Set 1 for all-over-snowing, set 2 for left-side-snowing
-        // Set 3 for center-snowing, set 4 for right-side-snowing
-        var snowingzone=1
+			self.applyPosition = function () {
+				$bat.css({
+					left: x + 'px',
+					top: y + 'px'
+				});
+			};
 
-        ///////////////////////////////////////////////////////////////////////////
-        // CONFIGURATION ENDS HERE
-        ///////////////////////////////////////////////////////////////////////////
+			self.move = function () {
+				var left,
+					top,
+					length,
+					dLeft,
+					dTop,
+					ddLeft,
+					ddTop;
+
+				left = tx - x;
+				top = ty - y;
+
+				length = Math.sqrt(left * left + top * top);
+				length = Math.max(1, length);
+
+				dLeft = options.speed * (left / length);
+				dTop = options.speed * (top / length);
+
+				ddLeft = (dLeft - dx) / options.flickering;
+				ddTop = (dTop - dy) / options.flickering;
+
+				dx += ddLeft;
+				dy += ddTop;
+
+				x += dx;
+				y += dy;
+
+				x = Math.max(0, Math.min(x, innerWidth - options.width));
+				y = Math.max(0, Math.min(y, innerHeight - options.height));
+
+				self.applyPosition();
+
+				if (Math.random() > 0.95 ) {
+					tx = self.randomPosition('horizontal');
+					ty = self.randomPosition('vertical');
+				}
+			};
+
+			self.animate = function () {
+				frame += 1;
+
+				if (frame >= options.frames) {
+					frame -= options.frames;
+				}
+
+				$bat.css(
+					'backgroundPosition',
+					'0 ' + (frame * -options.height) + 'px'
+				);
+			};
 
 
-        // Do not edit below this line
-        var snow=new Array()
-        var marginbottom
-        var marginright
-        var timer
-        var i_snow=0
-        var x_mv=new Array();
-        var crds=new Array();
-        var lftrght=new Array();
-        var browserinfos=navigator.userAgent
-        var ie5=document.all&&document.getElementById&&!browserinfos.match(/Opera/)
-        var ns6=document.getElementById&&!document.all
-        var opera=browserinfos.match(/Opera/)
-        var browserok=ie5||ns6||opera
+			x = self.randomPosition('horizontal');
+			y = self.randomPosition('vertical');
+			tx = self.randomPosition('horizontal');
+			ty = self.randomPosition('vertical');
+			dx = -5 + Math.random() * 10;
+			dy = -5 + Math.random() * 10;
 
-        function randommaker(range) {
-            rand=Math.floor(range*Math.random())
-            return rand
-        }
+			frame = Math.random() * options.frames;
+			frame = Math.round(frame);
 
-        function initsnow() {
-            if (ie5 || opera) {
-              marginbottom = document.body.clientHeight
-              marginright = document.body.clientWidth
-           }
-           else if (ns6) {
-              marginbottom = window.innerHeight
-              marginright = window.innerWidth
-           }
-            var snowsizerange=snowmaxsize-snowminsize
-            for (i=0;i<=snowmax;i++) {
-                crds[i] = 0;
-                lftrght[i] = Math.random()*15;
-                x_mv[i] = 0.03 + Math.random()/10;
-                snow[i]=document.getElementById("s"+i)
-                snow[i].style.fontFamily=snowtype[randommaker(snowtype.length)]
-                snow[i].size=randommaker(snowsizerange)+snowminsize
-                snow[i].style.fontSize=snow[i].size
-                snow[i].style.color=snowcolor[randommaker(snowcolor.length)]
-                snow[i].sink=sinkspeed*snow[i].size/5
-                if (snowingzone==1) {snow[i].posx=randommaker(marginright-snow[i].size)}
-                if (snowingzone==2) {snow[i].posx=randommaker(marginright/2-snow[i].size)}
-                if (snowingzone==3) {snow[i].posx=randommaker(marginright/2-snow[i].size)+marginright/4}
-                if (snowingzone==4) {snow[i].posx=randommaker(marginright/2-snow[i].size)+marginright/2}
-                snow[i].posy=randommaker(2*marginbottom-marginbottom-2*snow[i].size)
-                snow[i].style.left=snow[i].posx
-                snow[i].style.top=snow[i].posy
-            }
-            movesnow()
-        }
+			$body.append($bat);
+			$bat.css({
+				position: 'absolute',
+				left: x + 'px',
+				top: y + 'px',
+				zIndex: options.zIndex,
+				width: options.width + 'px',
+				height: options.height + 'px',
+				backgroundImage: 'url(' + options.image + ')',
+				backgroundRepeat: 'no-repeat'
+			});
 
-        function movesnow() {
-            for (i=0;i<=snowmax;i++) {
-                crds[i] += x_mv[i];
-                snow[i].posy+=snow[i].sink
-                snow[i].style.left=snow[i].posx+lftrght[i]*Math.sin(crds[i]);
-                snow[i].style.top=snow[i].posy
+			window.setInterval(self.move, 40);
+			window.setInterval(self.animate, 200);
+		};
 
-                if (snow[i].posy>=marginbottom-2*snow[i].size || parseInt(snow[i].style.left)>(marginright-3*lftrght[i])){
-                    if (snowingzone==1) {snow[i].posx=randommaker(marginright-snow[i].size)}
-                    if (snowingzone==2) {snow[i].posx=randommaker(marginright/2-snow[i].size)}
-                    if (snowingzone==3) {snow[i].posx=randommaker(marginright/2-snow[i].size)+marginright/4}
-                    if (snowingzone==4) {snow[i].posx=randommaker(marginright/2-snow[i].size)+marginright/2}
-                    snow[i].posy=0
-                }
-            }
-            var timer=setTimeout("movesnow()",50)
-        }
+		for (counter = 0; counter < options.amount; ++counter) {
+			bats.push(new Bat());
+		}
 
-        for (i=0;i<=snowmax;i++) {
-            document.write("<span id='s"+i+"' style='position:absolute;top:-"+snowmaxsize+"'>"+snowletter+"</span>")
-        }
-        if (browserok) {
-            window.onload=initsnow
-        }
-    }
-});
+		$(window).resize(function() {
+			innerWidth = window.innerWidth;
+			innerHeight = window.innerHeight;
+		});
+	};
+}(jQuery));
