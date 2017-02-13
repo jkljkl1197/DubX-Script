@@ -458,8 +458,6 @@ if (!hello_run && Dubtrack.session.id) {
                 hello.option('bat','false');
                 hello.off('.bat');
                 $('.halloweenBat').remove();
-                // $(element).children('.halloweenBat').remove();
-                cancelAnimationFrame(snowTimeout);
             }
         },
         heart: function() {
@@ -482,8 +480,6 @@ if (!hello_run && Dubtrack.session.id) {
                 hello.option('heart','false');
                 hello.off('.heart');
                 $('.heartAnimation').remove();
-                $(element).children('.heartAnimation').remove();
-                cancelAnimationFrame(snowTimeout);
             }
         },
         autovote: function() {
