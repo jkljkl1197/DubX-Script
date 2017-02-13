@@ -467,12 +467,23 @@ if (!hello_run && Dubtrack.session.id) {
                 options.let_heart = true;
                 hello.option('heart','true');
                 hello.on('.heart');
-                $.HeartAnimation();
+                $.fn.halloweenBats({
+                    image: 'https://rawgit.com/jkljkl1197/DubX-Script/MyVersion/js/heart9.gif', // Path to the image.
+                    zIndex: 999999, // The z-index you need.
+                    amount: 25, // Bat amount.
+                    width: 35, // Image width.
+                    height: 20, // Animation frame height.
+                    frames: 4, // Amount of animation frames.
+                    speed: 5, // Higher value = faster.
+                    flickering: 15 // Higher value = slower.
+		    });
             } else {
                 options.let_heart = false;
                 hello.option('heart','false');
                 hello.off('.heart');
-                //$.fn.halloweenBats('clear');
+                $('.heartAnimation').remove();
+                $(element).children('.heartAnimation').remove();
+                cancelAnimationFrame(snowTimeout);
             }
         },
         autovote: function() {
