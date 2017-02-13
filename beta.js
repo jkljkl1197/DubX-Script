@@ -117,7 +117,7 @@ if (!hello_run && Dubtrack.session.id) {
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Heart</p>',
                             '</li>',
-		            '<li onclick="hello.sakura();" class="for_content_li for_content_feature sakura">',
+		            '<li onclick="hello.Sakura();" class="for_content_li for_content_feature Sakura">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Sakura</p>',
                             '</li>',
@@ -489,13 +489,13 @@ if (!hello_run && Dubtrack.session.id) {
                 $('.heartAnimation').remove();
             }
         },
-	sakura: function() {
+	Sakura: function() {
             if (!options.let_sakura) {
                 options.let_sakura = true;
-                hello.option('sakura','true');
-                hello.on('.sakura');
+                hello.option('Sakura','true');
+                hello.on('.Sakura');
                 $.fn.sakura({
-		className: 'Sakura', // Class name to use
+		className: 'sakura', // Class name to use
 		fallSpeed: 1,        // Factor for petal fall speed
 		maxSize: 14,         // Maximum petal size
 		minSize: 9,          // Minimum petal size
@@ -503,9 +503,9 @@ if (!hello_run && Dubtrack.session.id) {
 	        });
             } else {
                 options.let_sakura = false;
-                hello.option('sakura','false');
-                hello.off('.sakura');
-                $('.Sakura').remove();
+                hello.option('Sakura','false');
+                hello.off('.Sakura');
+                $('.sakura').remove();
             }
         },
         autovote: function() {
