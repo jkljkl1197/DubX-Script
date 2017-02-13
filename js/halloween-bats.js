@@ -16,7 +16,7 @@
 				amount: 25, // Bat amount.
 				width: 35, // Image width.
 				height: 20, // Animation frame height.
-				frames: 0, // Amount of animation frames.
+				frames: 4, // Amount of animation frames.
 				speed: 20, // Higher value = faster.
 				flickering: 15 // Higher value = slower.
 			};
