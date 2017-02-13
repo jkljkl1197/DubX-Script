@@ -471,7 +471,7 @@ if (!hello_run && Dubtrack.session.id) {
                     amount: 25, // Bat amount.
                     width: 35, // Image width.
                     height: 20, // Animation frame height.
-                    frames: 4, // Amount of animation frames.
+                    frames: 1, // Amount of animation frames.
                     speed: 5, // Higher value = faster.
                     flickering: 15 // Higher value = slower.
 		    });
