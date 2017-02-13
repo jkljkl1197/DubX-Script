@@ -147,5 +147,12 @@
 			innerWidth = window.innerWidth;
 			innerHeight = window.innerHeight;
 		});
+		
+		this.clear = function(){
+                $('.snowfall-canvas').remove();
+                $(element).children('.snowfall-flakes').remove();
+                cancelAnimationFrame(snowTimeout);
+		}
+		
 	};
 }(jQuery));
