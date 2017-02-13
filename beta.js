@@ -498,7 +498,7 @@ if (!hello_run && Dubtrack.session.id) {
                 options.let_heart = false;
                 hello.option('sakura','false');
                 hello.off('.sakura');
-                $('.sakura').remove();
+                // $('.sakura').remove();
             }
         },
         autovote: function() {
