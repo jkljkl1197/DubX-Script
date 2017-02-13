@@ -22,6 +22,12 @@
 			};
 
 		options = $.extend({}, defaults, options);
+		
+		this.clear = function(){
+                $('.halloweenBat').remove();
+                $(element).children('.halloweenBat').remove();
+                cancelAnimationFrame(snowTimeout);
+		}
 
 		Bat = function () {
 			var self = this,
@@ -147,12 +153,5 @@
 			innerWidth = window.innerWidth;
 			innerHeight = window.innerHeight;
 		});
-		
-		this.clear = function(){
-                $('.halloweenBat').remove();
-                $(element).children('.halloweenBat').remove();
-                cancelAnimationFrame(snowTimeout);
-		}
-		
 	};
 }(jQuery));
