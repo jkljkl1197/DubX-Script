@@ -149,8 +149,8 @@
 		});
 		
 		this.clear = function(){
-                $('.snowfall-canvas').remove();
-                $(element).children('.snowfall-flakes').remove();
+                $('.halloweenBat').remove();
+                $(element).children('.halloweenBat').remove();
                 cancelAnimationFrame(snowTimeout);
 		}
 		
