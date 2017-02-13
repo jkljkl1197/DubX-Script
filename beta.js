@@ -116,7 +116,7 @@ if (!hello_run && Dubtrack.session.id) {
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Heart</p>',
                             '</li>',
-		            '<li onclick="hello.sakura();" class="for_content_li for_content_feature Sakura">',
+		            '<li onclick="hello.sakura();" class="for_content_li for_content_feature sakura">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Sakura</p>',
                             '</li>',
@@ -493,12 +493,18 @@ if (!hello_run && Dubtrack.session.id) {
                 options.let_sakura = true;
                 hello.option('sakura','true');
                 hello.on('.sakura');
-                $('body').sakura();
+                $.fn.sakura({
+		className: 'Sakura', // Class name to use
+		fallSpeed: 1,        // Factor for petal fall speed
+		maxSize: 14,         // Maximum petal size
+		minSize: 9,          // Minimum petal size
+		newOn: 300,          // Interval after which a new petal is added
+	        });
             } else {
                 options.let_heart = false;
                 hello.option('sakura','false');
                 hello.off('.sakura');
-                // $('.sakura').remove();
+                $('.Sakura').remove();
             }
         },
         autovote: function() {
