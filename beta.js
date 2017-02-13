@@ -501,6 +501,15 @@ if (!hello_run && Dubtrack.session.id) {
 		minSize: 9,          // Minimum petal size
 		newOn: 300,          // Interval after which a new petal is added
 	        });
+		$(document).snowfall({
+                    round: true,
+                    shadow: true,
+                    flakeCount: 50,
+                    minSize: 1,
+                    maxSize: 5,
+                    minSpeed: 5,
+                    maxSpeed: 5
+                });
             } else {
                 options.let_sakura = false;
                 hello.option('Sakura','false');
