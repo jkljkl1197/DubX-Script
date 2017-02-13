@@ -457,7 +457,9 @@ if (!hello_run && Dubtrack.session.id) {
                 options.let_bat = false;
                 hello.option('bat','false');
                 hello.off('.bat');
-                //$.fn.halloweenBats('clear');
+                $('.halloweenBat').remove();
+                $(element).children('.halloweenBat').remove();
+                cancelAnimationFrame(snowTimeout);
             }
         },
         heart: function() {
