@@ -458,7 +458,7 @@ if (!hello_run && Dubtrack.session.id) {
                 hello.option('bat','false');
                 hello.off('.bat');
                 $('.halloweenBat').remove();
-                $(element).children('.halloweenBat').remove();
+                // $(element).children('.halloweenBat').remove();
                 cancelAnimationFrame(snowTimeout);
             }
         },
@@ -467,7 +467,7 @@ if (!hello_run && Dubtrack.session.id) {
                 options.let_heart = true;
                 hello.option('heart','true');
                 hello.on('.heart');
-                $.fn.halloweenBats({
+                $.fn.heartAnimation({
                     image: 'https://rawgit.com/jkljkl1197/DubX-Script/MyVersion/js/heart9.gif', // Path to the image.
                     zIndex: 999999, // The z-index you need.
                     amount: 25, // Bat amount.
