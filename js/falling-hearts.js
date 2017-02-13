@@ -13,7 +13,7 @@ jQuery(function($){
         // **** CHANGE YOUR IMAGE HERE ****
 
         // Set the letter that creates your snowflake (recommended: * )
-        var snowletter=" <img src=http://rainbow.arch.scriptmania.com/scripts/bg/heart9.gif> "
+        var snowletter=" <img src=https://rawgit.com/Artimon/jquery-halloween-bats/master/bats.png> "
 
         // Set the speed of sinking (recommended values range from 0.3 to 2)
         var sinkspeed=0.6
