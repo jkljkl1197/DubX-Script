@@ -11,7 +11,7 @@
 			innerHeight = window.innerHeight,
 			counter,
 			defaults = {
-				image: 'bats.png', // Path to the image.
+				image: 'https://rawgit.com/Artimon/jquery-halloween-bats/master/bats.png', // Path to the image.
 				zIndex: 10000, // The z-index you need.
 				amount: 25, // Bat amount.
 				width: 35, // Image width.
