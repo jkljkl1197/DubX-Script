@@ -501,7 +501,7 @@ if (!hello_run && Dubtrack.session.id) {
 		newOn: 300,          // Interval after which a new petal is added
 	        });
             } else {
-                options.let_heart = false;
+                options.let_sakura = false;
                 hello.option('sakura','false');
                 hello.off('.sakura');
                 $('.Sakura').remove();
