@@ -495,14 +495,14 @@ if (!hello_run && Dubtrack.session.id) {
                 hello.option('sakura','true');
                 hello.on('.sakura');
                 $(function() {
-        	$('body').sakura();
+        	$('backstretch').sakura();
     		});
             } else {
                 options.let_sakura = false;
                 hello.option('sakura','false');
                 hello.off('.sakura');
                 $(function() {
-        	$('body').sakura('stop');
+        	$('backstretch').sakura('stop');
     		});
             }
         },
