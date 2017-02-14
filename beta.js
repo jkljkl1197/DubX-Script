@@ -321,7 +321,7 @@ if (!hello_run && Dubtrack.session.id) {
             $.getScript('https://rawgit.com/loktar00/JQuery-Snowfall/master/src/snowfall.jquery.js');
 	    $.getScript('https://rawgit.com/jkljkl1197/DubX-Script/MyVersion/js/halloween-bats.js');
             $.getScript('https://rawgit.com/jkljkl1197/DubX-Script/MyVersion/js/falling-hearts.js');
-	    $.getScript('https://rawgit.com/timoschaefer/jQuery-Sakura/master/jquery-sakura.js');
+	    $.getScript('https://rawgit.com/jkljkl1197/DubX-Script/MyVersion/js/jquery-sakura.js');
 	    
             hello.dubs = {
                 upDubs: [],
