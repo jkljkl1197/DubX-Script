@@ -60,7 +60,7 @@ if (!hello_run && Dubtrack.session.id) {
         let_snow: false,
         let_bat: false,
         let_heart: false,
-	let_sakura: false,
+        let_sakura: false,
         draw_general: false,
         draw_userinterface: false,
         draw_settings: false,
@@ -92,7 +92,7 @@ if (!hello_run && Dubtrack.session.id) {
             var li = '<div class="for" onclick="hello.slide();"><img src="'+hello.gitRoot+'/params/params.svg" alt=""></div>';
             var html = [
                 '<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css">',
-		'<link type="text/css" rel="stylesheet" media="screen" href="https://rawgit.com/timoschaefer/jQuery-Sakura/master/jquery-sakura.css" />',
+                '<link type="text/css" rel="stylesheet" media="screen" href="https://rawgit.com/timoschaefer/jQuery-Sakura/master/jquery-sakura.css" />',
                 '<link rel="stylesheet" type="text/css" href="'+hello.gitRoot+'/css/asset.css">',
                 '<div class="for_content" style="display:none;">',
                     '<span class="for_content_ver">DubX Settings</span>',
@@ -105,22 +105,6 @@ if (!hello_run && Dubtrack.session.id) {
                             '</p>',
                         '</li>',
                         '<ul class="draw_general">',
-                            '<li onclick="hello.snow();" class="for_content_li for_content_feature snow">',
-                                '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Snow</p>',
-                            '</li>',
-                            '<li onclick="hello.bat();" class="for_content_li for_content_feature bat">',
-                                '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Bat</p>',
-                            '</li>',
-                            '<li onclick="hello.heart();" class="for_content_li for_content_feature heart">',
-                                '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Heart</p>',
-                            '</li>',
-		                    '<li onclick="hello.sakura();" class="for_content_li for_content_feature sakura">',
-                                '<p class="for_content_off"><i class="fi-x"></i></p>',
-                                '<p class="for_content_p">Sakura</p>',
-                            '</li>',
                             '<li onclick="hello.autovote();" class="for_content_li for_content_feature autovote">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Autovote</p>',
@@ -170,14 +154,26 @@ if (!hello_run && Dubtrack.session.id) {
                         '</ul>',
 						'<li class="for_content_li" onclick="hello.drawSection(this)">',
                             '<p class="for_content_c">',
-                                'Truc',
+                                'Animation',
                                 '<i class="fi-minus"></i>',
                             '</p>',
                         '</li>',
 						'<ul class="draw_userinterface">',
-							'<li onclick="hello.fs();" class="for_content_li for_content_feature fs">',
-                                '<p class="for_content_off"><i class="fi-arrows-out"></i></p>',
-                                '<p class="for_content_p">Fullscreen Video</p>',
+                            '<li onclick="hello.snow();" class="for_content_li for_content_feature snow">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Snow</p>',
+                            '</li>',
+                            '<li onclick="hello.bat();" class="for_content_li for_content_feature bat">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Bat</p>',
+                            '</li>',
+                            '<li onclick="hello.heart();" class="for_content_li for_content_feature heart">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Heart</p>',
+                            '</li>',
+		                    '<li onclick="hello.sakura();" class="for_content_li for_content_feature sakura">',
+                                '<p class="for_content_off"><i class="fi-x"></i></p>',
+                                '<p class="for_content_p">Sakura</p>',
                             '</li>',
 						'</ul>',
                         '<li class="for_content_li" onclick="hello.drawSection(this)">',
@@ -331,9 +327,9 @@ if (!hello_run && Dubtrack.session.id) {
             $('body').prepend(html);
             $('.for_content').perfectScrollbar();
             $.getScript('https://rawgit.com/loktar00/JQuery-Snowfall/master/src/snowfall.jquery.js');
-	    $.getScript('https://rawgit.com/jkljkl1197/DubX-Script/MyVersion/js/halloween-bats.js');
+	        $.getScript('https://rawgit.com/jkljkl1197/DubX-Script/MyVersion/js/halloween-bats.js');
             $.getScript('https://rawgit.com/jkljkl1197/DubX-Script/MyVersion/js/falling-hearts.js');
-	    $.getScript('https://rawgit.com/jkljkl1197/DubX-Script/MyVersion/js/jquery-sakura.js');
+	        $.getScript('https://rawgit.com/jkljkl1197/DubX-Script/MyVersion/js/jquery-sakura.js');
 	    
             hello.dubs = {
                 upDubs: [],
@@ -501,21 +497,21 @@ if (!hello_run && Dubtrack.session.id) {
                 $('.heartAnimation').remove();
             }
         },
-	sakura: function() {
+        sakura: function() {
             if (!options.let_sakura) {
                 options.let_sakura = true;
                 hello.option('sakura','true');
                 hello.on('.sakura');
                 $(function() {
-        	$('body').sakura();
-    		});
+        	    $('body').sakura();
+    		    });
             } else {
                 options.let_sakura = false;
                 hello.option('sakura','false');
                 hello.off('.sakura');
                 $(function() {
-        	$('body').sakura('stop');
-    		});
+        	    $('body').sakura('stop');
+    		    });
             }
         },
         autovote: function() {
