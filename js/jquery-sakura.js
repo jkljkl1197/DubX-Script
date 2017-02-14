@@ -139,6 +139,7 @@
                     }
                 })
                 .css({
+                    'z-index': 999999,
                     '-webkit-animation': animations,
                     animation: animations,
                     'border-radius': randomInt(options.maxSize, (options.maxSize + Math.floor(Math.random() * 10))) + 'px ' + randomInt(1, Math.floor(width / 4)) + 'px',
