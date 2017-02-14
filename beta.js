@@ -117,7 +117,7 @@ if (!hello_run && Dubtrack.session.id) {
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Heart</p>',
                             '</li>',
-		                    '<li onclick="hello.sakura();" class="for_content_li for_content_feature Sakura">',
+		                    '<li onclick="hello.sakura();" class="for_content_li for_content_feature sakura">',
                                 '<p class="for_content_off"><i class="fi-x"></i></p>',
                                 '<p class="for_content_p">Sakura</p>',
                             '</li>',
