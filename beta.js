@@ -496,7 +496,6 @@ if (!hello_run && Dubtrack.session.id) {
                 hello.on('.sakura');
                 $(function() {
         	$('body').sakura();
-		$(".sakura").css("z-index","10000");
     		});
             } else {
                 options.let_sakura = false;
