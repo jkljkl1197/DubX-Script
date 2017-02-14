@@ -80,7 +80,7 @@
         // Defaults for the option object, which gets extended below
         var defaults = {
             blowAnimations: ['blow-soft-left', 'blow-medium-left', 'blow-soft-right', 'blow-medium-right'],
-            className: 'sakura',
+            className: 'sakuraAnimation',
             fallSpeed: 2,
             maxSize: 14,
             minSize: 10,
