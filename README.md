@@ -2,7 +2,7 @@
 - added a theme: BetterDubtrack
 - added a menu Name: Animation and change the place of Snow in the menu to it whit sakura, bat ...
 
-* would to add Timed event whit the added effect(animation)
+- would to add Timed event whit the added effect(animation)
 
 # Dub X (source)
 - A simple script/extension for Dubtrack.fm
