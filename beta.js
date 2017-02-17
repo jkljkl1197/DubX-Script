@@ -79,7 +79,7 @@ if (!hello_run && Dubtrack.session.id) {
 
     //Ref 2: Options
     var hello = {
-        gitRoot: 'https://rawgit.com/jkljkl1197/DubX-Script/master',
+        gitRoot: 'https://rawgit.com/jkljkl1197/DubX-Script/MyVersion',
         //Ref 2.1: Initialize
         personalize: function() {
             $('.isUser').text(Dubtrack.session.get('username'));
