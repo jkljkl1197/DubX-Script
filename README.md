@@ -1,7 +1,7 @@
 - added some effect: Bat, Heart, Sakura Fall
 - added a theme: BetterDubtrack
 - added a menu Name: Animation and change the place of Snow in the menu to it whit sakura, bat ...
-- would like to add Timed event whit the added effect(animation)
+- would like to add Timed event for holidays whit the added effect(animation)
 
 # Dub X (source)
 - A simple script/extension for Dubtrack.fm
