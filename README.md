@@ -1,4 +1,4 @@
-To get My Edited Version click on the link: https://github.com/jkljkl1197/DubX-Script/tree/MyVersion
+To get My Personnal Version click on the link: https://github.com/jkljkl1197/DubX-Script/tree/MyVersion
 
 # Dub X (source)
 - A simple script/extension for Dubtrack.fm
