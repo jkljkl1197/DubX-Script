@@ -3,6 +3,7 @@
 - added a theme: BetterDubtrack
 - added a menu Name: Animation and change the place of Snow in the menu to it whit sakura, bat ...
 - would like to add Timed event for holidays whit the added effect(animation)
+- would like to add command in chat
 
 # Dub X (source)
 - A simple script/extension for Dubtrack.fm
