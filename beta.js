@@ -276,18 +276,6 @@ if (!hello_run && Dubtrack.session.id) {
                         '</li>',
                         '<ul class="draw_social">',
                             '<li class="for_content_li for_content_feature">',
-                                '<a href="https://www.facebook.com/DubXScript" target="_blank" style="color: #878c8e;">',
-                                    '<p class="for_content_off"><i class="fi-social-facebook"></i></p>',
-                                    '<p class="for_content_p">Like Us on Facebook</p>',
-                                '</a>',
-                            '</li>',
-                            '<li class="for_content_li for_content_feature">',
-                                '<a href="https://twitter.com/DubXScript" target="_blank" style="color: #878c8e;">',
-                                    '<p class="for_content_off"><i class="fi-social-twitter"></i></p>',
-                                    '<p class="for_content_p">Follow Us on Twitter</p>',
-                                '</a>',
-                            '</li>',
-                            '<li class="for_content_li for_content_feature">',
                                 '<a href="https://github.com/jkljkl1197/DubX-Script" target="_blank" style="color: #878c8e;">',
                                     '<p class="for_content_off"><i class="fi-social-github"></i></p>',
                                     '<p class="for_content_p">Fork Us on Github</p>',
@@ -313,9 +301,9 @@ if (!hello_run && Dubtrack.session.id) {
             $('body').prepend(html);
             $('.for_content').perfectScrollbar();
             $.getScript('https://rawgit.com/loktar00/JQuery-Snowfall/master/src/snowfall.jquery.js');
-	        $.getScript('https://rawgit.com/jkljkl1197/DubX-Script/MyVersion/js/halloween-bats.js');
-            $.getScript('https://rawgit.com/jkljkl1197/DubX-Script/MyVersion/js/falling-hearts.js');
-	        $.getScript('https://rawgit.com/jkljkl1197/DubX-Script/MyVersion/js/jquery-sakura.js');
+	        $.getScript(''+hello.gitRoot+'/js/halloween-bats.js');
+            $.getScript(''+hello.gitRoot+'/js/falling-hearts.js');
+	        $.getScript(''+hello.gitRoot+'/js/jquery-sakura.js');
 	    
             hello.dubs = {
                 upDubs: [],
