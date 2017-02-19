@@ -9,6 +9,8 @@
 - would like to add the Translation system
 - would like to add a system to manage theme, add a .css in the theme directory add it to the menu automatically
 
+2017-02-19: Dubx project as been deleted by the owner, the website is unreachable and the chrome app as been deleted.
+
 # Dub X (source)
 - A simple script/extension for Dubtrack.fm
 
