@@ -4,7 +4,7 @@
 - added some effect: Bat, Heart, Sakura Fall
 - added a theme: BetterDubtrack
 - added a menu Name: Animation and change the place of Snow in the menu to it whit sakura, bat ...
-- would like to add Timed event for holidays whit the added effect(animation)
+- would like to add Timed event for holidays whit the added effect (animation)
 - would like to add command in chat
 - would like to add the Translation system
 - would like to add a system to manage theme, add a .css in the theme directory add it to the menu automatically
