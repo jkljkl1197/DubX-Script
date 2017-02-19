@@ -1,4 +1,4 @@
-- added a menu on the extension
+- added a menu on click to the chrome extension
 - added some effect: Bat, Heart, Sakura Fall
 - added a theme: BetterDubtrack
 - added a menu Name: Animation and change the place of Snow in the menu to it whit sakura, bat ...
