@@ -288,7 +288,7 @@ if (!hello_run && Dubtrack.session.id) {
                                 '</a>',
                             '</li>',
 		            '<li class="for_content_li for_content_feature report">',
-		    		'<a href="" target="_blank" style="color: #878c8e;">',
+		    		'<a href="https://github.com/jkljkl1197/DubX-Script/issues" target="_blank" style="color: #878c8e;">',
                                 	'<p class="for_content_off"><i class="fi-comments"></i></p>',
                                 	'<p class="for_content_p">Bug Report</p>',
 		    		'</a>',
