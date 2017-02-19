@@ -40,6 +40,9 @@
 .for_content_li {
     cursor: pointer;
 }
+.for_content_li:hover p {
+    color: #FFF;
+}
 .for_content_c {
     border-bottom: 1px solid white;
 }
