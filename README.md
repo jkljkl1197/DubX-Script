@@ -15,8 +15,6 @@ But This version still work.
 # Dub X (source)
 - A simple script/extension for Dubtrack.fm
 
-[Follow Us on Twitter](https://twitter.com/DubXScript) and [Like Us on Facebook!](https://facebook.com/DubXScript)
-
 
 -------------
 Our Team
