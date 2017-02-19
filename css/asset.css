@@ -14,7 +14,7 @@
     opacity: 0.90;
     overflow-y: hidden;
     background: #1a1a1a;
-    z-index: 9;
+    z-index: 99;
 }
 .for_content_ver {
     display: block;
