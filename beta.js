@@ -89,7 +89,7 @@ if (!hello_run && Dubtrack.session.id) {
         },
         //Ref 2.2: Initialize
         initialize: function() {
-            var li = '<div class="for" onclick="hello.slide();"><img src="'+hello.gitRoot+'/params/params.svg" alt=""></div>';
+            var li = '<div class="for" onclick="hello.slide();"><img src="'+hello.gitRoot+'/images/menu-icon.svg" alt=""></div>';
             var html = [
                 '<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css">',
 		    '<link rel="stylesheet" type="text/css" href="https://rawgit.com/jkljkl1197/DubX-Script/MyVersion/js/sakura.css">',
