@@ -96,7 +96,7 @@ if (!hello_run && Dubtrack.session.id) {
                 '<div class="for_content" style="display:none;">',
                     '<span class="for_content_ver">DubX Settings</span>',
                     '<span class="for_content_version" onclick="hello.drawAll();" title="Collapse/Expand Menus">'+our_version+'</span>',
-                    '<ul class="for_content_ul">',
+                    '<ul class="for_content_ul unselectable">',
                         '<li class="for_content_li" onclick="hello.drawSection(this)">',
                             '<p class="for_content_c">',
                                 'Main',
