@@ -262,12 +262,6 @@ if (!hello_run && Dubtrack.session.id) {
                                 '<i class="fi-minus"></i>',
                             '</p>',
                         '</li>',
-                        '<ul class="draw_contact">',
-                            '<li onclick="hello.report_modal();" class="for_content_li for_content_feature report">',
-                                '<p class="for_content_off"><i class="fi-comments"></i></p>',
-                                '<p class="for_content_p">Bug Report</p>',
-                            '</li>',
-                        '</ul>',
                         '<li class="for_content_li" onclick="hello.drawSection(this)">',
                             '<p class="for_content_c">',
                                 'Social',
@@ -292,6 +286,12 @@ if (!hello_run && Dubtrack.session.id) {
                                     '<p class="for_content_off"><i class="fi-pricetag-multiple"></i></p>',
                                     '<p class="for_content_p">Donate</p>',
                                 '</a>',
+                            '</li>',
+		            '<li class="for_content_li for_content_feature report">',
+		    		'<a href="" target="_blank" style="color: #878c8e;">',
+                                	'<p class="for_content_off"><i class="fi-comments"></i></p>',
+                                	'<p class="for_content_p">Bug Report</p>',
+		    		'</a>',
                             '</li>',
                         '</ul>',
                     '</ul>',
@@ -569,11 +569,6 @@ if (!hello_run && Dubtrack.session.id) {
                 crossDomain: true
             });
             $('.report').replaceWith('<li onclick="" class="for_content_li for_content_feature report"><p class="for_content_off"><i class="fi-check"></i></p><p class="for_content_p">Bug Report</p></li>');
-        },
-        report_modal: function() {
-            hello.input('Bug Report:','','Please only report bugs for DubX, not Dubtrack. \nBe sure to give a detailed description of the bug, and a way to replicate it, if possible.','confirm-for36','999');
-            $('.confirm-for36').click(hello.report_content);
-            $('.confirm-for36').click(hello.closeErr);
         },
         fs: function() {
             var elem = document.querySelector('.playerElement iframe');
