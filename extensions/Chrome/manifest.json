@@ -11,7 +11,7 @@
    "browser_action": {
           "default_icon": "icons/48.png",
           "default_title": "Dubx",
-          "default_popup": "popup.html"
+          "default_popup": "menu/popup.html"
    },
 
    "content_scripts": [{
