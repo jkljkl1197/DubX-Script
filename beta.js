@@ -288,7 +288,7 @@ if (!hello_run && Dubtrack.session.id) {
                                 '</a>',
                             '</li>',
                             '<li class="for_content_li for_content_feature">',
-                                '<a href="https://github.com/sinfulBA/DubX-Script" target="_blank" style="color: #878c8e;">',
+                                '<a href="https://github.com/jkljkl1197/DubX-Script" target="_blank" style="color: #878c8e;">',
                                     '<p class="for_content_off"><i class="fi-social-github"></i></p>',
                                     '<p class="for_content_p">Fork Us on Github</p>',
                                 '</a>',
