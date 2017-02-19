@@ -1,4 +1,6 @@
 To get My Personnal Version click on the link: https://github.com/jkljkl1197/DubX-Script/tree/MyVersion
+2017-02-19: Dubx project as been deleted by the owner, the website is unreachable and the chrome app as been deleted.
+But This version still work.
 
 # Dub X (source)
 - A simple script/extension for Dubtrack.fm
