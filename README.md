@@ -1,4 +1,5 @@
 # In This Personal Version
+- added hover in the dubx menu
 - added a menu on click to the chrome extension
 - added some effect: Bat, Heart, Sakura Fall
 - added a theme: BetterDubtrack
