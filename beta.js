@@ -65,7 +65,6 @@ if (!hello_run && Dubtrack.session.id) {
         draw_userinterface: false,
         draw_settings: false,
         draw_customize: false,
-        draw_contact: false,
         draw_social: false,
         draw_chrome: false
     };
@@ -305,7 +304,7 @@ if (!hello_run && Dubtrack.session.id) {
                 grabs: []
             };
         },
-        sectionList: ['draw_general','draw_userinterface','draw_settings','draw_customize','draw_contact','draw_social','draw_chrome'],
+        sectionList: ['draw_general','draw_userinterface','draw_settings','draw_customize','draw_social','draw_chrome'],
         drawSection: function(el) {
             $(el).next('ul').slideToggle('fast');
             var sectionClass = $(el).next('ul').attr('class');
