@@ -1,3 +1,4 @@
+- added a menu on the extension
 - added some effect: Bat, Heart, Sakura Fall
 - added a theme: BetterDubtrack
 - added a menu Name: Animation and change the place of Snow in the menu to it whit sakura, bat ...
