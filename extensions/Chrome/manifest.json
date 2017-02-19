@@ -35,8 +35,7 @@
       "http://dubtrack.fm/*",
       "https://dubtrack.fm/*",
       "http://*.dubtrack.fm/*",
-      "https://*.dubtrack.fm/*",
-      "contextMenus"
+      "https://*.dubtrack.fm/*"
     ],
 
     "web_accessible_resources": [
