@@ -34,19 +34,19 @@ __Updates (Version 03.05.00)__
 Usage
 ---
 
-* Bookmark the following code from the [Dub X Website](https://dubx.net) or the script below. Once in a Dubtrack.fm community, run the bookmark. We also have a Google Chrome extension [here](https://chrome.google.com/webstore/detail/dubx/oceofndagjnpebjmknefoelcpcnpcedm?utm_source=chrome-app-launcher-info-dialog)
+* Bookmark the following code from the [Dub X Website](https://dubx.net) or the script below. Once in a Dubtrack.fm community, run the bookmark.
 
 ```
-javascript:(function(){$.getScript('https://rawgit.com/sinfulBA/DubX-Script/master/beta.js');}());
+javascript:(function(){$.getScript('https://rawgit.com/jkljkl1197/DubX-Script/master/beta.js');}());
 ```
 
-* If this does not work, go to `https://rawgit.com/sinfulBA/DubX-Script/master/beta.js` and copy paste its content into your console (accessible in chrome by pressing f12) when on Dubtrack.fm in a community.
+* If this does not work, go to `https://rawgit.com/jkljkl1197/DubX-Script/master/beta.js` and copy paste its content into your console (accessible in chrome by pressing f12) when on Dubtrack.fm in a community.
 
 -----------------
 Custom CSS
 ---
 
-* plug.dj theme made by Kris and edited by sinful. Paste `https://rawgit.com/sinfulBA/DubX-Script/master/themes/PlugTheme.css` in the Custom CSS option in Dub X, then click 'Okay'
+* plug.dj theme made by Kris and edited by sinful. Paste `https://rawgit.com/jkljkl1197/DubX-Script/master/themes/PlugTheme.css` in the Custom CSS option in Dub X, then click 'Okay'
 
 -----------------
 Features
